@@ -83,10 +83,10 @@ endif
 #
 
 # Define project name here
-PROJECT = ch
+PROJECT = chibiesc
 
 # Imported source files and paths
-CHIBIOS = ../../..
+CHIBIOS = ChibiOS
 # Startup files.
 include $(CHIBIOS)/os/common/ports/ARMCMx/compilers/GCC/mk/startup_stm32f4xx.mk
 # HAL-OSAL files (optional).
