@@ -1,0 +1,12 @@
+(fp_lib_table
+  (lib (name CRF1)(type Legacy)(uri "$(KIPRJMOD)/Libraries/crf_1.mod")(options "")(descr ""))
+  (lib (name w_smd_inductors)(type Legacy)(uri "$(KIPRJMOD)/Libraries/w_smd_inductors.mod")(options "")(descr ""))
+  (lib (name w_smd_cap)(type Legacy)(uri "$(KIPRJMOD)/Libraries/w_smd_cap.mod")(options "")(descr ""))
+  (lib (name "JST conn")(type Legacy)(uri "$(KIPRJMOD)/Libraries/w_conn_jst-ph.mod")(options "")(descr ""))
+  (lib (name w_smd_diode)(type Legacy)(uri "$(KIPRJMOD)/Libraries/w_smd_diode.mod")(options "")(descr ""))
+  (lib (name FootprintsBLDC)(type KiCad)(uri "$(KIPRJMOD)/FootprintsBLDC.pretty")(options "")(descr ""))
+  (lib (name Allegro)(type KiCad)(uri "$(KIPRJMOD)/Libraries/pkl_allegro.pretty")(options "")(descr ""))
+  (lib (name DrMOS)(type KiCad)(uri "$(KIPRJMOD)/Libraries/pkl_drmos.pretty")(options "")(descr ""))
+  (lib (name Pads)(type KiCad)(uri "$(KIPRJMOD)/Libraries/pkl_pads.pretty")(options "")(descr ""))
+  (lib (name Housings_SOT_User)(type KiCad)(uri "$(KIPRJMOD)/Libraries/pkl_housings_sot.pretty")(options "")(descr ""))
+)
