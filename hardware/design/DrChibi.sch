@@ -40,11 +40,11 @@ EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
 Sheet 1 12
-Title "3-Phase Universal Driver"
-Date "2015-08-27"
+Title "Long-Strip"
+Date "2016-02-15"
 Rev "0.1"
 Comp "Jörg Wangemann"
-Comment1 ""
+Comment1 "6-Phase Motor Controller"
 Comment2 ""
 Comment3 ""
 Comment4 "Top level"
