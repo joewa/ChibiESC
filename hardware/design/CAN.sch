@@ -39,7 +39,7 @@ EELAYER 25 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 2 12
+Sheet 2 11
 Title "CAN BUS transceiver"
 Date "2015-08-27"
 Rev ""
