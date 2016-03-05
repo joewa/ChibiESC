@@ -344,7 +344,7 @@ Text HLabel 4500 4250 0    60   Output ~ 0
 ENABLEB
 Text HLabel 4500 4350 0    60   Output ~ 0
 ENABLEA
-Text HLabel 4500 5050 0    60   Input ~ 0
+Text HLabel 4500 4950 0    60   Input ~ 0
 SENSCD
 Text HLabel 4500 5150 0    60   Output ~ 0
 USART6_TX
@@ -360,9 +360,9 @@ Text HLabel 4500 1750 0    60   Input ~ 0
 SENSVC
 Text HLabel 4500 1950 0    60   Input ~ 0
 SENSVA
-Text HLabel 4500 2350 0    60   Input ~ 0
+Text HLabel 4500 3250 0    60   Input ~ 0
 SENSCA
-Text HLabel 4500 2250 0    60   Input ~ 0
+Text HLabel 4500 3150 0    60   Input ~ 0
 SENSCB
 Text HLabel 4500 4850 0    60   Input ~ 0
 AN_IN
@@ -4228,7 +4228,7 @@ Text HLabel 4500 3650 0    60   Input ~ 0
 CAN_RX
 Text HLabel 4500 3750 0    60   Output ~ 0
 CAN_TX
-Text HLabel 4500 4950 0    60   Input ~ 0
+Text HLabel 4500 2450 0    60   Input ~ 0
 SENSCE
 $Comp
 L CRYSTAL_SMD X2
@@ -4253,11 +4253,11 @@ F 3 "" H 7750 2150 60  0001 C CNN
 	1    7750 2150
 	1    0    0    -1  
 $EndComp
-Text HLabel 4500 4650 0    60   Input ~ 0
+Text HLabel 4500 2350 0    60   Input ~ 0
 SENSCF
-Text HLabel 4500 2050 0    60   Input ~ 0
+Text HLabel 4500 4650 0    60   Input ~ 0
 SENSVY1
-Text HLabel 4500 2150 0    60   Input ~ 0
+Text HLabel 4500 5050 0    60   Input ~ 0
 SENSCC
 Text HLabel 4500 3450 0    60   3State ~ 0
 I2C_SCL
@@ -4338,11 +4338,11 @@ Wire Wire Line
 	8500 5150 8400 5150
 Text Notes 10500 3450 0    60   ~ 0
 Lisa/S Connector\nPin1: TMS/SWDIO\nPin2: GND\nPin3: TCK/SWCLK\nPin4: TDO/TRACESWO\nPin5: NRST\nStecker\n5-Pin 0.05" Pitch Pin Header
-Text HLabel 4500 3150 0    60   Input ~ 0
+Text HLabel 4500 2150 0    60   Input ~ 0
 SENSVE
-Text HLabel 4500 3250 0    60   Input ~ 0
+Text HLabel 4500 2050 0    60   Input ~ 0
 SENSVD
-Text HLabel 4500 2450 0    60   Input ~ 0
+Text HLabel 4500 2250 0    60   Input ~ 0
 SENSVF
 Text Notes 2100 2150 0    60   ~ 0
 SENSVY1 multi-purpose machen:\n1. Virtueller Sternpunkt.\n2. Pad fuer richtigen Sternpunkt machen.\n3. V_Batt-Messung
