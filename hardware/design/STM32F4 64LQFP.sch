@@ -4326,7 +4326,7 @@ U 1 1 55E738BB
 P 8250 5150
 F 0 "R4" V 8330 5150 50  0000 C CNN
 F 1 "0R" V 8250 5150 50  0000 C CNN
-F 2 "Resistors_SMD:R_0603_HandSoldering" V 8180 5150 30  0001 C CNN
+F 2 "Resistors_SMD:R_0805" V 8180 5150 30  0001 C CNN
 F 3 "" H 8250 5150 30  0000 C CNN
 	1    8250 5150
 	0    1    1    0   
@@ -4336,8 +4336,6 @@ Wire Wire Line
 	8500 5050 8500 5150
 Wire Wire Line
 	8500 5150 8400 5150
-Text Notes 10500 3450 0    60   ~ 0
-Lisa/S Connector\nPin1: TMS/SWDIO\nPin2: GND\nPin3: TCK/SWCLK\nPin4: TDO/TRACESWO\nPin5: NRST\nStecker\n5-Pin 0.05" Pitch Pin Header
 Text HLabel 4500 2150 0    60   Input ~ 0
 SENSVE
 Text HLabel 4500 2050 0    60   Input ~ 0
@@ -4348,7 +4346,7 @@ Text Notes 2100 2150 0    60   ~ 0
 SENSVY1 multi-purpose machen:\n1. Virtueller Sternpunkt.\n2. Pad fuer richtigen Sternpunkt machen.\n3. V_Batt-Messung
 Text HLabel 8750 2450 2    60   3State ~ 0
 THWn
-Text HLabel 7500 3200 2    60   3State ~ 0
+Text HLabel 7000 1850 2    60   3State ~ 0
 FAULTC
 Text HLabel 4500 4050 0    60   Output ~ 0
 ZCD_EN
@@ -4455,7 +4453,7 @@ F 3 "" H 5750 3900 60  0001 C CNN
 $EndComp
 Text HLabel 7000 1750 2    60   Output ~ 0
 LED2
-Text HLabel 7000 1850 2    60   Output ~ 0
+Text HLabel 7500 3200 2    60   Output ~ 0
 LED3
 Text HLabel 4500 6050 0    60   Output ~ 0
 ENABLED
