@@ -54,22 +54,22 @@ int main(void) {
    * Activates the serial driver 2 using the driver default configuration.
    * PA2(TX) and PA3(RX) are routed to USART2.
    */
-  sdStart(&SD2, NULL);
-  palSetPadMode(GPIOA, 2, PAL_MODE_ALTERNATE(7));
-  palSetPadMode(GPIOA, 3, PAL_MODE_ALTERNATE(7));
+  //sdStart(&SD2, NULL);
+  //palSetPadMode(GPIOA, 2, PAL_MODE_ALTERNATE(7));
+  //palSetPadMode(GPIOA, 3, PAL_MODE_ALTERNATE(7));
 
   /*
    * Creates the example thread.
    */
-  chThdCreateStatic(waThread1, sizeof(waThread1), NORMALPRIO, Thread1, NULL);
+  //chThdCreateStatic(waThread1, sizeof(waThread1), NORMALPRIO, Thread1, NULL);
 
   /*
    * Normal main() thread activity, in this demo it does nothing except
    * sleeping in a loop and check the button state.
    */
   while (true) {
-    if (palReadPad(GPIOA, GPIOA_BUTTON))
-      TestThread(&SD2);
+    //if (palReadPad(GPIOA, GPIOA_BUTTON))
+    //  TestThread(&SD2);
     chThdSleepMilliseconds(500);
   }
 }
