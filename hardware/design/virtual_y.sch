@@ -39,7 +39,7 @@ EELAYER 25 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 6 11
+Sheet 5 11
 Title ""
 Date ""
 Rev ""
@@ -111,35 +111,7 @@ Wire Wire Line
 Connection ~ 4800 3350
 Wire Wire Line
 	4800 3600 4650 3600
-$Comp
-L PAD_SMD PY1
-U 1 1 56A8F597
-P 5400 3050
-AR Path="/55DFCB16/56A8F597" Ref="PY1"  Part="1" 
-AR Path="/56BBABF4/56A8F597" Ref="PY2"  Part="1" 
-F 0 "PY1" H 5527 3156 60  0000 L CNN
-F 1 "PAD_SMD" H 5527 3050 60  0000 L CNN
-F 2 "Pads:PAD_SMD_1.2x2.5" H 5527 2944 60  0000 L CNN
-F 3 "" H 5400 2900 60  0000 C CNN
-	1    5400 3050
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	5200 3050 5050 3050
-Wire Wire Line
-	5050 3050 5050 3500
 Connection ~ 5050 3350
-$Comp
-L PAD_SMD PY2
-U 1 1 56CBA2A8
-P 5400 3950
-F 0 "PY2" H 5528 4003 60  0000 L CNN
-F 1 "PAD_SMD" H 5528 3897 60  0000 L CNN
-F 2 "Pads:PAD_SMD_1.2x2.5" H 5400 3700 60  0001 C CNN
-F 3 "" H 5400 3800 60  0000 C CNN
-	1    5400 3950
-	1    0    0    -1  
-$EndComp
 $Comp
 L R RY4
 U 1 1 56CBA2E3
@@ -205,14 +177,13 @@ Wire Wire Line
 Wire Wire Line
 	4800 4650 4650 4650
 Connection ~ 4800 4350
-Wire Wire Line
-	5200 3950 5050 3950
-Wire Wire Line
-	5050 3800 5050 4350
 Text HLabel 5200 4350 2    60   Output ~ 0
 SENSY2
 Connection ~ 5050 4350
-Connection ~ 5050 3950
 Text Notes 5500 3700 0    60   ~ 0
 Do not populate for\ntwo-motor mode.
+Wire Wire Line
+	5050 3500 5050 3350
+Wire Wire Line
+	5050 3800 5050 4350
 $EndSCHEMATC
