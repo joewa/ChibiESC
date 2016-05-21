@@ -1,0 +1,9 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP LTM8020
+D 200mA, 36V DC/DC, Adjustable 1.25V-5V, LGA
+K 200mA DC/DC Converter Adjustable Positive
+F http://cds.linear.com/docs/en/datasheet/8020fd.pdf
+$ENDCMP
+#
+#End Doc Library

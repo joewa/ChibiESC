@@ -11,4 +11,5 @@
   (lib (name Housings_SOT_User)(type KiCad)(uri "$(KIPRJMOD)/Libraries/pkl_housings_sot.pretty")(options "")(descr ""))
   (lib (name open-project)(type Legacy)(uri "$(KIPRJMOD)/Libraries/open-project.mod")(options "")(descr ""))
   (lib (name Symbols_User)(type KiCad)(uri "$(KIPRJMOD)/Libraries/pkl_logos.pretty")(options "")(descr ""))
+  (lib (name Regulators_User)(type KiCad)(uri "$(KIPRJMOD)/Libraries/pkl_regulators_user.pretty")(options "")(descr ""))
 )

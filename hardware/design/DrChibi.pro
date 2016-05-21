@@ -1,4 +1,4 @@
-update=Fr 22 Jan 2016 23:49:42 CET
+update=Sa 21 Mai 2016 01:48:58 CEST
 version=1
 last_client=kicad
 [cvpcb]
@@ -67,3 +67,4 @@ LibName32=crf_1
 LibName33=Libraries/pkl_sensor
 LibName34=Libraries/pkl_drmos
 LibName35=Libraries/pkl_misc
+LibName36=Libraries/pkl_regulator
