@@ -24,7 +24,8 @@
 /*
  * Board identifier.
  */
-#define BOARD_ST_STM32F4_DISCOVERY
+//#define BOARD_ST_STM32F4_DISCOVERY
+#define BOARD_DRCHIBI_DISCO
 // #define BOARD_NAME                  "STMicroelectronics STM32F4-Discovery"
 // #define BOARD_NAME					"BOARD_DRCHIBI"
 #define BOARD_NAME					"BOARD_DRCHIBI_DISCO"
@@ -348,7 +349,7 @@
 #define PIN_USB_DP					GPIOA_PIN12
 #define PIN_SWDIO					GPIOA_PIN13
 #define PIN_SWDCLK					GPIOA_PIN14
-#define PIN_FAULTC					GPIOA_PIN15
+#define PIN_LED3					GPIOA_PIN15
 
 #define PIN_CSENS_B					GPIOB_PIN0
 #define PIN_CSENS_A					GPIOB_PIN1
@@ -416,9 +417,9 @@
 #define PIN_PE8						GPIOE_PIN8
 #define PIN_PWM_C_HS				GPIOE_PIN9
 #define PIN_PE10					GPIOE_PIN10
-#define PIN_PWM_C_HS				GPIOE_PIN11
+#define PIN_PWM_B_HS				GPIOE_PIN11
 #define PIN_PE12					GPIOE_PIN12
-#define PIN_PWM_C_HS				GPIOE_PIN13
+#define PIN_PWM_A_HS				GPIOE_PIN13
 #define PIN_PE14					GPIOE_PIN14
 #define PIN_PE15					GPIOE_PIN15
 
@@ -2123,12 +2124,9 @@
                                      PIN_MODE_ALTERNATE(PIN_PWM_E) |        \
                                      PIN_MODE_ALTERNATE(PIN_PWM_D) |        \
                                      PIN_MODE_OUTPUT(PIN_ZCD) |             \
-                                     PIN_MODE_ALTERNATE(PIN_PWM_C_LS) |     \
-									 /*PIN_MODE_OUTPUT(PIN_ENABLE_C) |        \*/
-                                     PIN_MODE_ALTERNATE(PIN_PWM_B_LS) |     \
-									 /*PIN_MODE_OUTPUT(PIN_ENABLE_B) |        \*/
-									 PIN_MODE_ALTERNATE(PIN_PWM_A_LS))
-		                             /*PIN_MODE_OUTPUT(PIN_ENABLE_A))*/
+                                     PIN_MODE_ALTERNATE(PIN_PWM_C_LS) | /*PIN_MODE_OUTPUT(PIN_ENABLE_C)*/ \
+                                     PIN_MODE_ALTERNATE(PIN_PWM_B_LS) | /*PIN_MODE_OUTPUT(PIN_ENABLE_B)*/ \
+									 PIN_MODE_ALTERNATE(PIN_PWM_A_LS)) /*PIN_MODE_OUTPUT(PIN_ENABLE_A))*/
 #define VAL_GPIOB_OTYPER            (PIN_OTYPE_PUSHPULL(PIN_CSENS_B) |      \
                                      PIN_OTYPE_PUSHPULL(PIN_CSENS_A) |      \
                                      PIN_OTYPE_PUSHPULL(PIN_THWN) |         \
@@ -2206,7 +2204,7 @@
                                      PIN_AFIO_AF(PIN_PWM_E, 1) |            \
                                      PIN_AFIO_AF(PIN_PWM_D, 1) |            \
                                      PIN_AFIO_AF(PIN_ZCD, 0) |              \
-                                     PIN_AFIO_AF(PIN_PWM_C_LS, 1) |         \ // TODO: make sure that AF setting is ignored when pin is in GPIO mode
+                                     PIN_AFIO_AF(PIN_PWM_C_LS, 1) | /* TODO: make sure that AF setting is ignored when pin is in GPIO mode */ \
 									 PIN_AFIO_AF(PIN_PWM_B_LS, 1) |         \
 									 PIN_AFIO_AF(PIN_PWM_A_LS, 1))
 
@@ -2242,7 +2240,7 @@
                                      PIN_MODE_ALTERNATE(PIN_PWM_IN1) |      \
                                      PIN_MODE_ALTERNATE(PIN_SPI_SCK) |      \
                                      PIN_MODE_ALTERNATE(PIN_SPI_MISO) |     \
-                                     PIN_MODE_ALTERNATE(IN_SPI_MOSI) |      \
+                                     PIN_MODE_ALTERNATE(PIN_SPI_MOSI) |      \
                                      PIN_MODE_INPUT(PIN_PC13) |            \
                                      PIN_MODE_INPUT(PIN_PC14) |            \
 									 PIN_MODE_INPUT(PIN_PC15))
@@ -2257,8 +2255,7 @@
                                      PIN_OTYPE_PUSHPULL(PIN_USART_CK) |     \
                                      PIN_OTYPE_PUSHPULL(PIN_PWM_IN1) |      \
                                      PIN_OTYPE_PUSHPULL(PIN_SPI_SCK) |      \
-                                     PIN_OTYPE_PUSHPULL(PIN_SPI_MISO) |     \ // for SPI master or point-to-point slave
-		                             /*PIN_OTYPE_OPENDRAIN(PIN_SPI_MISO) |    \ // for SPI multi-slave slave*/
+                                     PIN_OTYPE_PUSHPULL(PIN_SPI_MISO) | /* PUSHPULL for SPI master or point-to-point slave, OPENDRAIN for SPI multi-slave slave */ \
                                      PIN_OTYPE_PUSHPULL(PIN_SPI_MOSI) |     \
                                      PIN_OTYPE_PUSHPULL(PIN_PC13) |        \
                                      PIN_OTYPE_PUSHPULL(PIN_PC14) |        \
@@ -2321,7 +2318,7 @@
                                      PIN_AFIO_AF(PIN_USART_RX, 8))
 #define VAL_GPIOC_AFRH              (PIN_AFIO_AF(PIN_USART_CK, 8) |         \
                                      PIN_AFIO_AF(PIN_PWM_IN1, 2) |          \
-                                     PIN_AFIO_AF(PIN_SPI_SCK, 5) |          \ // TODO: check whether AF5 is correct. Could be AF6
+                                     PIN_AFIO_AF(PIN_SPI_SCK, 5) | /* TODO: check whether AF5 is correct. Could be AF6 */ \
                                      PIN_AFIO_AF(PIN_SPI_MISO, 5) |         \
                                      PIN_AFIO_AF(PIN_SPI_MOSI, 5) |         \
                                      PIN_AFIO_AF(PIN_PC13, 0) |             \
@@ -2430,7 +2427,7 @@
                                      PIN_ODR_HIGH(PIN_PD15))
 #define VAL_GPIOD_AFRL              (PIN_AFIO_AF(PIN_CAN_RX, 9) |           \
                                      PIN_AFIO_AF(PIN_CAN_TX, 9) |           \
-                                     PIN_AFIO_AF(PIN_ENABLE_D, 0)
+                                     PIN_AFIO_AF(PIN_ENABLE_D, 0) |       \
                                      PIN_AFIO_AF(PIN_PD3, 0) |             \
                                      PIN_AFIO_AF(PIN_RESET, 0) |          \
                                      PIN_AFIO_AF(PIN_OVER_CURRENT, 0) |   \
@@ -2799,25 +2796,6 @@
 /*
  * GPIOH setup:
  *
- * PH0  - OSC_IN                    (input floating).
- * PH1  - OSC_OUT                   (input floating).
- */
-#define VAL_GPIOH_MODER             (PIN_MODE_INPUT(GPIOH_OSC_IN) |         \
-                                     PIN_MODE_INPUT(GPIOH_OSC_OUT))
-#define VAL_GPIOH_OTYPER            (PIN_OTYPE_PUSHPULL(GPIOH_OSC_IN) |     \
-                                     PIN_OTYPE_PUSHPULL(GPIOH_OSC_OUT))
-#define VAL_GPIOH_OSPEEDR           (PIN_OSPEED_100M(GPIOH_OSC_IN) |        \
-                                     PIN_OSPEED_100M(GPIOH_OSC_OUT))
-#define VAL_GPIOH_PUPDR             (PIN_PUPDR_FLOATING(GPIOH_OSC_IN) |     \
-                                     PIN_PUPDR_FLOATING(GPIOH_OSC_OUT))
-#define VAL_GPIOH_ODR               (PIN_ODR_HIGH(GPIOH_OSC_IN) |           \
-                                     PIN_ODR_HIGH(GPIOH_OSC_OUT))
-#define VAL_GPIOH_AFRL              (PIN_AFIO_AF(GPIOH_OSC_IN, 0) |         \
-                                     PIN_AFIO_AF(GPIOH_OSC_OUT, 0))
-
-/*
- * GPIOH setup:
- *
  * PH0  - PIN_OSC_IN                (input floating).
  * PH1  - PIN_OSC_OUT               (input floating).
  * PH2  - PIN_PH2                   (input floating).
@@ -3040,7 +3018,7 @@
                                      PIN_AFIO_AF(PIN_PI5, 0) |           \
                                      PIN_AFIO_AF(PIN_PI6, 0) |           \
                                      PIN_AFIO_AF(PIN_PI7, 0))
-#define VAL_GPIOG_AFRH              (PIN_AFIO_AF(PIN_PI8, 0) |           \
+#define VAL_GPIOI_AFRH              (PIN_AFIO_AF(PIN_PI8, 0) |           \
                                      PIN_AFIO_AF(PIN_PI9, 0) |           \
                                      PIN_AFIO_AF(PIN_PI10, 0) |          \
                                      PIN_AFIO_AF(PIN_PI11, 0) |          \

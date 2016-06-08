@@ -66,6 +66,41 @@
 #define STM32_BKPRAM_ENABLE                 FALSE // backup RAM regulator is OFF
 
 #endif
+
+#if defined(BOARD_DRCHIBI_DISCO)
+/*
+ * HAL driver system settings.
+ */
+#define STM32_NO_INIT                       FALSE
+#define STM32_HSI_ENABLED                   TRUE
+#define STM32_LSI_ENABLED                   TRUE
+#define STM32_HSE_ENABLED                   TRUE // HSE 8MHz
+#define STM32_LSE_ENABLED                   FALSE
+#define STM32_CLOCK48_REQUIRED              TRUE
+#define STM32_SW                            STM32_SW_PLL
+#define STM32_PLLSRC                        STM32_PLLSRC_HSE
+#define STM32_PLLM_VALUE                    6
+#define STM32_PLLN_VALUE                    216
+#define STM32_PLLP_VALUE                    2 // SYSCLK 144MHz
+#define STM32_PLLQ_VALUE                    6 // 48MHz
+#define STM32_HPRE                          STM32_HPRE_DIV1 // AHB prescaler -> HCLK 144MHz
+#define STM32_PPRE1                         STM32_PPRE1_DIV4 // APB1 prescaler -> PCLK1 36MHz (72MHz for TIM2, TIM3, TIM4, TIM5, TIM6, TIM7 and TIM12)
+#define STM32_PPRE2                         STM32_PPRE2_DIV2 // APB2 prescaler -> PCLK2 72MHz (144MHz for TIM1, TIM8, TIM9, TIM10 and TIM11)
+#define STM32_RTCSEL                        STM32_RTCSEL_LSI
+#define STM32_RTCPRE_VALUE                  2
+#define STM32_MCO1SEL                       STM32_MCO1SEL_HSI
+#define STM32_MCO1PRE                       STM32_MCO1PRE_DIV1
+#define STM32_MCO2SEL                       STM32_MCO2SEL_SYSCLK
+#define STM32_MCO2PRE                       STM32_MCO2PRE_DIV1
+#define STM32_I2SSRC                        STM32_I2SSRC_PLLI2S
+#define STM32_PLLI2SN_VALUE                 192
+#define STM32_PLLI2SR_VALUE                 2
+#define STM32_PVD_ENABLE                    FALSE // programmable voltage detector is OFF
+#define STM32_PLS                           STM32_PLS_LEV0 // level for programmable voltage detector
+#define STM32_BKPRAM_ENABLE                 FALSE // backup RAM regulator is OFF
+
+#endif
+
 /*
  * ADC driver system settings.
  */

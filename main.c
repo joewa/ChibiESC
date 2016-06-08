@@ -28,9 +28,9 @@ static THD_FUNCTION(Thread1, arg) {
   (void)arg;
   chRegSetThreadName("blinker");
   while (true) {
-    palSetPad(GPIOD, GPIOD_LED3);       /* Orange.  */
+    palSetPad(GPIOD, PIN_LED1);       /* Orange.  */
     chThdSleepMilliseconds(500);
-    palClearPad(GPIOD, GPIOD_LED3);     /* Orange.  */
+    palClearPad(GPIOD, PIN_LED1);     /* Orange.  */
     chThdSleepMilliseconds(500);
   }
 }
@@ -49,6 +49,7 @@ int main(void) {
    */
   halInit();
   chSysInit();
+  osalSysEnable(); // just copied here from example to test why LED blinking doesn't work
 
   /*
    * Activates the serial driver 2 using the driver default configuration.
@@ -70,6 +71,9 @@ int main(void) {
   while (true) {
     //if (palReadPad(GPIOA, GPIOA_BUTTON))
     //  TestThread(&SD2);
-    chThdSleepMilliseconds(500);
+	palSetPad(GPIOD, PIN_LED1);       /* Orange.  */
+	chThdSleepMilliseconds(500);
+	palClearPad(GPIOD, PIN_LED1);     /* Orange.  */
+	chThdSleepMilliseconds(500);
   }
 }
