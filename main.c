@@ -72,8 +72,12 @@ int main(void) {
     //if (palReadPad(GPIOA, GPIOA_BUTTON))
     //  TestThread(&SD2);
 	palSetPad(GPIOD, PIN_LED1);       /* Orange.  */
+	palSetPad(GPIOD, PIN_LED2);
+	palSetPad(GPIOD, PIN_LED3);
 	chThdSleepMilliseconds(500);
 	palClearPad(GPIOD, PIN_LED1);     /* Orange.  */
+	palClearPad(GPIOD, PIN_LED2);
+	palClearPad(GPIOD, PIN_LED3);
 	chThdSleepMilliseconds(500);
   }
 }

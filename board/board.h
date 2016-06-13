@@ -1599,7 +1599,7 @@
  * PA12 - PIN_USB_DP                (alternate 10 (USB), controlled automatically).
  * PA13 - PIN_SWDIO                 (alternate 0 (system)).
  * PA14 - PIN_SWDCLK                (alternate 0 (system)).
- * PA15 - PIN_LED3                  (output open drain 2MHz).
+ * PA15 - PIN_LED3                  (output pushpull 2MHz).
  */
 #define VAL_GPIOA_MODER             (PIN_MODE_ANALOG(PIN_VSENS_C) |         \
                                      PIN_MODE_ALTERNATE(PIN_PWM_F) |        \
@@ -1632,7 +1632,7 @@
                                      PIN_OTYPE_PUSHPULL(PIN_USB_DP) |       \
                                      PIN_OTYPE_PUSHPULL(PIN_SWDIO) |        \
                                      PIN_OTYPE_PUSHPULL(PIN_SWDCLK) |       \
-                                     PIN_OTYPE_OPENDRAIN(PIN_LED3))
+                                     PIN_OTYPE_PUSHPULL(PIN_LED3))
 #define VAL_GPIOA_OSPEEDR           (PIN_OSPEED_100M(PIN_VSENS_C) |         \
                                      PIN_OSPEED_50M(PIN_PWM_F) |            \
                                      PIN_OSPEED_100M(PIN_VSENS_A) |         \
@@ -1834,8 +1834,8 @@
  * PC10 - PIN_SPI_SCK               (alternate 6 (SPI3) Master: push-pull 100MHz, Slave: input floating). TODO: check SPI_SCK pin frequency
  * PC11 - PIN_SPI_MISO              (alternate 6 (SPI3) Master: input floating/pull-up, Slave point-to-point: push-pull 100MHz, Slave multi-slave: open drain 100MHz). TODO: check SPI_MISO pin frequency and whether input should be floating or pull-up
  * PC12 - PIN_SPI_MOSI              (alternate 6 (SPI3) Master: push-pull 100MHz, Slave: input floating/pull-up). TODO: check whether SPI_MOSI pin in slave mode should be floating or pull-up
- * PC13 - PIN_LED1                  (output open drain 2MHz).
- * PC14 - PIN_LED2                  (output open drain 2MHz).
+ * PC13 - PIN_LED1                  (output pushpull 2MHz).
+ * PC14 - PIN_LED2                  (output pushpull 2MHz).
  * PC15 - PIN_FAULTC                (input pullup).
  */
 #define VAL_GPIOC_MODER             (PIN_MODE_ANALOG(PIN_VSENS_Y2) |        \
@@ -1868,8 +1868,8 @@
                                      PIN_OTYPE_PUSHPULL(PIN_SPI_MISO) |     \ // for SPI master or point-to-point slave
 		                             /*PIN_OTYPE_OPENDRAIN(PIN_SPI_MISO) |    \ // for SPI multi-slave slave*/
                                      PIN_OTYPE_PUSHPULL(PIN_SPI_MOSI) |     \
-                                     PIN_OTYPE_OPENDRAIN(PIN_LED1) |        \
-                                     PIN_OTYPE_OPENDRAIN(PIN_LED2) |        \
+                                     PIN_OTYPE_PUSHPULL(PIN_LED1) |        \
+                                     PIN_OTYPE_PUSHPULL(PIN_LED2) |        \
 									 PIN_OTYPE_PUSHPULL(PIN_FAULTC))
 #define VAL_GPIOC_OSPEEDR           (PIN_OSPEED_100M(PIN_VSENS_Y2) |        \
                                      PIN_OSPEED_100M(PIN_VSENS_Y1) |        \
@@ -1992,7 +1992,7 @@
  * PA12 - PIN_USB_DP                (alternate 10 (USB), controlled automatically).
  * PA13 - PIN_SWDIO                 (alternate 0 (system)).
  * PA14 - PIN_SWDCLK                (alternate 0 (system)).
- * PA15 - PIN_LED3                  (output open drain 2MHz).
+ * PA15 - PIN_PD15 / UNUSED         (input pullup).
  */
 #define VAL_GPIOA_MODER             (PIN_MODE_ANALOG(PIN_VSENS_C) |         \
                                      PIN_MODE_ALTERNATE(PIN_PWM_F) |        \
@@ -2009,7 +2009,7 @@
                                      PIN_MODE_ALTERNATE(PIN_USB_DP) |       \
                                      PIN_MODE_ALTERNATE(PIN_SWDIO) |        \
                                      PIN_MODE_ALTERNATE(PIN_SWDCLK) |       \
-                                     PIN_MODE_OUTPUT(PIN_LED3))
+									 PIN_MODE_INPUT(PIN_PD15))
 #define VAL_GPIOA_OTYPER            (PIN_OTYPE_PUSHPULL(PIN_VSENS_C) |      \
                                      PIN_OTYPE_PUSHPULL(PIN_PWM_F) |        \
                                      PIN_OTYPE_PUSHPULL(PIN_VSENS_A) |      \
@@ -2025,7 +2025,7 @@
                                      PIN_OTYPE_PUSHPULL(PIN_USB_DP) |       \
                                      PIN_OTYPE_PUSHPULL(PIN_SWDIO) |        \
                                      PIN_OTYPE_PUSHPULL(PIN_SWDCLK) |       \
-                                     PIN_OTYPE_OPENDRAIN(PIN_LED3))
+									 PIN_OTYPE_PUSHPULL(PIN_PD15))
 #define VAL_GPIOA_OSPEEDR           (PIN_OSPEED_100M(PIN_VSENS_C) |         \
                                      PIN_OSPEED_50M(PIN_PWM_F) |            \
                                      PIN_OSPEED_100M(PIN_VSENS_A) |         \
@@ -2041,7 +2041,7 @@
                                      PIN_OSPEED_100M(PIN_USB_DP) |          \
                                      PIN_OSPEED_100M(PIN_SWDIO) |           \
                                      PIN_OSPEED_100M(PIN_SWDCLK) |          \
-                                     PIN_PUPDR_PULLUP(PIN_FAULTC))
+									 PIN_OSPEED_100M(PIN_PD15))
 #define VAL_GPIOA_PUPDR             (PIN_PUPDR_FLOATING(PIN_VSENS_C) |      \
                                      PIN_PUPDR_FLOATING(PIN_PWM_F) |        \
                                      PIN_PUPDR_FLOATING(PIN_VSENS_A) |      \
@@ -2057,7 +2057,7 @@
                                      PIN_PUPDR_FLOATING(PIN_USB_DP) |       \
                                      PIN_PUPDR_FLOATING(PIN_SWDIO) |        \
                                      PIN_PUPDR_FLOATING(PIN_SWDCLK) |       \
-                                     PIN_PUPDR_FLOATING(PIN_LED3))
+									 PIN_PUPDR_PULLUP(PIN_PD15))
 #define VAL_GPIOA_ODR               (PIN_ODR_HIGH(PIN_VSENS_C) |            \
                                      PIN_ODR_LOW(PIN_PWM_F) |               \
                                      PIN_ODR_HIGH(PIN_VSENS_A) |            \
@@ -2073,7 +2073,7 @@
                                      PIN_ODR_HIGH(PIN_USB_DP) |             \
                                      PIN_ODR_HIGH(PIN_SWDIO) |              \
                                      PIN_ODR_HIGH(PIN_SWDCLK) |             \
-                                     PIN_ODR_LOW(PIN_LED3))
+									 PIN_ODR_HIGH(PIN_PD15))
 #define VAL_GPIOA_AFRL              (PIN_AFIO_AF(PIN_VSENS_C, 0) |          \
                                      PIN_AFIO_AF(PIN_PWM_F, 1) |            \
                                      PIN_AFIO_AF(PIN_VSENS_A, 0) |          \
@@ -2089,7 +2089,7 @@
                                      PIN_AFIO_AF(PIN_USB_DP, 10) |          \
                                      PIN_AFIO_AF(PIN_SWDIO, 0) |            \
                                      PIN_AFIO_AF(PIN_SWDCLK, 0) |           \
-                                     PIN_AFIO_AF(PIN_LED3, 0))
+									 PIN_AFIO_AF(PIN_PD15, 0))
 
 /*
  * GPIOB setup:
@@ -2340,10 +2340,10 @@
  * PD9  - PIN_PD9 / UNUSED          (input pullup).
  * PD10 - PIN_PD10 / UNUSED         (input pullup).
  * PD11 - PIN_PD11 / UNUSED         (input pullup).
- * PD12 - PIN_LED1                  (output open drain 2MHz).
- * PD13 - PIN_LED2                  (output open drain 2MHz).
+ * PD12 - PIN_LED1                  (output pushpull 2MHz).
+ * PD13 - PIN_LED2                  (output pushpull 2MHz).
  * PD14 - PIN_FAULTC                (input pullup).
- * PD15 - PIN_PD15 / UNUSED         (input pullup).
+ * PD15 - PIN_LED3                  (output pushpull 2MHz).
  */
 #define VAL_GPIOD_MODER             (PIN_MODE_ALTERNATE(PIN_CAN_RX) |       \
                                      PIN_MODE_ALTERNATE(PIN_CAN_TX) |       \
@@ -2360,7 +2360,7 @@
                                      PIN_MODE_OUTPUT(PIN_LED1) |            \
                                      PIN_MODE_OUTPUT(PIN_LED2) |            \
 									 PIN_MODE_INPUT(PIN_FAULTC) |            \
-                                     PIN_MODE_INPUT(PIN_PD15))
+									 PIN_MODE_OUTPUT(PIN_LED3))
 #define VAL_GPIOD_OTYPER            (PIN_OTYPE_PUSHPULL(PIN_CAN_RX) |       \
                                      PIN_OTYPE_PUSHPULL(PIN_CAN_TX) |       \
                                      PIN_OTYPE_PUSHPULL(PIN_ENABLE_D) |     \
@@ -2373,10 +2373,10 @@
                                      PIN_OTYPE_PUSHPULL(PIN_PD9) |        \
                                      PIN_OTYPE_PUSHPULL(PIN_PD10) |        \
                                      PIN_OTYPE_PUSHPULL(PIN_PD11) |        \
-                                     PIN_OTYPE_OPENDRAIN(PIN_LED1) |        \
-                                     PIN_OTYPE_OPENDRAIN(PIN_LED2) |        \
+                                     PIN_OTYPE_PUSHPULL(PIN_LED1) |        \
+                                     PIN_OTYPE_PUSHPULL(PIN_LED2) |        \
 									 PIN_OTYPE_PUSHPULL(PIN_FAULTC) |        \
-                                     PIN_OTYPE_PUSHPULL(PIN_PD15))
+									 PIN_OTYPE_PUSHPULL(PIN_LED3))
 #define VAL_GPIOD_OSPEEDR           (PIN_OSPEED_50M(PIN_CAN_RX) |           \
 									 PIN_OSPEED_50M(PIN_CAN_TX) |           \
                                      PIN_OSPEED_50M(PIN_ENABLE_D) |        \
@@ -2392,7 +2392,7 @@
 									 PIN_OSPEED_2M(PIN_LED1) |              \
 									 PIN_OSPEED_2M(PIN_LED2) |              \
 									 PIN_OSPEED_100M(PIN_FAULTC) |              \
-									 PIN_OSPEED_100M(PIN_PD15))
+									 PIN_OSPEED_2M(PIN_LED3))
 #define VAL_GPIOD_PUPDR             (PIN_PUPDR_PULLUP(PIN_CAN_RX) |         \
 									 PIN_PUPDR_PULLUP(PIN_CAN_TX) |         \
                                      PIN_PUPDR_FLOATING(PIN_ENABLE_D) |     \
@@ -2408,7 +2408,7 @@
 									 PIN_PUPDR_FLOATING(PIN_LED1) |         \
 									 PIN_PUPDR_FLOATING(PIN_LED2) |         \
 									 PIN_PUPDR_PULLUP(PIN_FAULTC) |         \
-									 PIN_PUPDR_PULLUP(PIN_PD15))
+									 PIN_PUPDR_FLOATING(PIN_LED3))
 #define VAL_GPIOD_ODR               (PIN_ODR_HIGH(PIN_CAN_RX) |             \
 									 PIN_ODR_HIGH(PIN_CAN_TX) |             \
                                      PIN_ODR_LOW(PIN_ENABLE_D) |           \
@@ -2421,10 +2421,10 @@
                                      PIN_ODR_HIGH(PIN_PD9) |               \
                                      PIN_ODR_HIGH(PIN_PD10) |               \
                                      PIN_ODR_HIGH(PIN_PD11) |               \
-                                     PIN_ODR_HIGH(PIN_LED1) |               \
+                                     PIN_ODR_LOW(PIN_LED1) |               \
                                      PIN_ODR_LOW(PIN_LED2) |                \
 									 PIN_ODR_HIGH(PIN_FAULTC) |               \
-                                     PIN_ODR_HIGH(PIN_PD15))
+									 PIN_ODR_LOW(PIN_LED3))
 #define VAL_GPIOD_AFRL              (PIN_AFIO_AF(PIN_CAN_RX, 9) |           \
                                      PIN_AFIO_AF(PIN_CAN_TX, 9) |           \
                                      PIN_AFIO_AF(PIN_ENABLE_D, 0) |       \
@@ -2440,7 +2440,7 @@
                                      PIN_AFIO_AF(PIN_LED1, 0) |             \
                                      PIN_AFIO_AF(PIN_LED2, 0) |             \
 									 PIN_AFIO_AF(PIN_FAULTC, 0) |             \
-                                     PIN_AFIO_AF(PIN_PD15, 0))
+									 PIN_AFIO_AF(PIN_LED3, 0))
 
 /*
  * GPIOE setup:
