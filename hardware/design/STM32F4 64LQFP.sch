@@ -34,6 +34,7 @@ LIBS:crf_1
 LIBS:pkl_sensor
 LIBS:pkl_drmos
 LIBS:pkl_misc
+LIBS:pkl_regulator
 LIBS:DrChibi-cache
 EELAYER 25 0
 EELAYER END
