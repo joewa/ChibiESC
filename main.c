@@ -17,6 +17,8 @@
 #include "ch.h"
 #include "hal.h"
 #include "test.h"
+#include "chprintf.h"
+#include "subsystems/serial/chibiesc_usb.h"
 
 /*
  * This is a periodic thread that does absolutely nothing except flashing
@@ -49,7 +51,7 @@ int main(void) {
    */
   halInit();
   chSysInit();
-  osalSysEnable(); // just copied here from example to test why LED blinking doesn't work
+  //osalSysEnable(); // just copied here from example to test why LED blinking doesn't work
 
   /*
    * Activates the serial driver 2 using the driver default configuration.
@@ -64,6 +66,7 @@ int main(void) {
    */
   //chThdCreateStatic(waThread1, sizeof(waThread1), NORMALPRIO, Thread1, NULL);
 
+  usb_init(); // Serial over USB initialization
   /*
    * Normal main() thread activity, in this demo it does nothing except
    * sleeping in a loop and check the button state.
