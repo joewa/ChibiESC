@@ -18,7 +18,7 @@
 #include "hal.h"
 #include "test.h"
 #include "chprintf.h"
-#include "subsystems/serial/chibiesc_usb.h"
+#include "subsystems/serial/chibiesc_serial.h"
 
 /*
  * This is a periodic thread that does absolutely nothing except flashing
@@ -66,7 +66,8 @@ int main(void) {
    */
   //chThdCreateStatic(waThread1, sizeof(waThread1), NORMALPRIO, Thread1, NULL);
 
-  usb_init(); // Serial over USB initialization
+  //usb_init(); // Serial over USB initialization
+  ce_serial_init();
   /*
    * Normal main() thread activity, in this demo it does nothing except
    * sleeping in a loop and check the button state.
@@ -76,11 +77,11 @@ int main(void) {
     //  TestThread(&SD2);
 	palSetPad(GPIOD, PIN_LED1);       /* Orange.  */
 	palSetPad(GPIOD, PIN_LED2);
-	palSetPad(GPIOD, PIN_LED3_DISCO);
+	//palSetPad(GPIOD, PIN_LED3_DISCO);
 	chThdSleepMilliseconds(500);
 	palClearPad(GPIOD, PIN_LED1);     /* Orange.  */
 	palClearPad(GPIOD, PIN_LED2);
-	palClearPad(GPIOD, PIN_LED3_DISCO);
+	//palClearPad(GPIOD, PIN_LED3_DISCO);
 	chThdSleepMilliseconds(500);
   }
 }

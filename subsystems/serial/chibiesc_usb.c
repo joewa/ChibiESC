@@ -324,27 +324,10 @@ const SerialUSBConfig serusbcfg = {
 };
 
 /**
- * @brief   Static USBTestThread working area allocation.
- * @details This macro is used to allocate a static thread working area
- *          aligned as both position and size.
- *
- * @param[in] s         the name to be assigned to the stack array
- * @param[in] n         the stack size to be assigned to the thread
- *
- * @todo	Define reasonable stack size
+ * @brief	Serial over USB driver
  */
-static THD_WORKING_AREA(waUSBTestThread, 128);
-/**
- * @brief	USBTestThread declaration
- */
-static THD_FUNCTION(USBTestThread, arg) {
-	(void)arg;
-	chRegSetThreadName("USBTestThread");
-	while (true) {
-		chThdSleepMilliseconds(500);
-		chprintf(&SDU1, "Test\r\n");
-	}
-}
+SerialUSBDriver SDU1;
+
 
 /**
  * @brief	Initializes a serial over USB CDC driver
@@ -362,11 +345,6 @@ void usb_init(void) {
 	chThdSleepMilliseconds(1500);
 	usbStart(serusbcfg.usbp, &usbcfg);
 	usbConnectBus(serusbcfg.usbp);
-
-	/*
-	 * Creates the test thread.
-	 */
-	chThdCreateStatic(waUSBTestThread, sizeof(waUSBTestThread), NORMALPRIO, USBTestThread, NULL);
 }
 
 /** @} */

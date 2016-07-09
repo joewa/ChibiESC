@@ -12,7 +12,7 @@
 
 extern const USBConfig usbcfg;		///< USB driver configuration structure
 extern const SerialUSBConfig serusbcfg;	///< Serial over USB configuration structure
-static SerialUSBDriver SDU1;		///< Full duplex serial driver class
+extern SerialUSBDriver SDU1;		///< Full duplex serial driver class
 
 void usb_init(void);				// Serial over USB initialization
 
