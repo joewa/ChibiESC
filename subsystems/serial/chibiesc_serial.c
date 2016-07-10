@@ -24,6 +24,9 @@ static THD_WORKING_AREA(waSerialTestThread, 128);
 static THD_FUNCTION(SerialTestThread, arg) {
 	(void)arg;
 	chRegSetThreadName("SerialTestThread");
+
+	int pprzlink_test_loop = 0;
+
 	while (true) {
 		chThdSleepMilliseconds(500);
 
@@ -32,9 +35,12 @@ static THD_FUNCTION(SerialTestThread, arg) {
 
 		// send a telemetry message
 		uint8_t chibiesc_mode = 1;
-		float chibiesc_bat_volts = 1.34;
+		float chibiesc_bat_volts = sin(pprzlink_test_loop/10.0*3.14159265);
 		float chibiesc_rpm = 500.4;
 		pprz_msg_send_CHIBIESC(&pprz_tp.trans_tx, &link_dev, PPRZLINK_SENDER_AC_ID, &chibiesc_mode, &chibiesc_bat_volts, &chibiesc_rpm);
+
+		pprzlink_test_loop++;
+		if (pprzlink_test_loop > 19) pprzlink_test_loop = 0;
 
 		palTogglePad(GPIOD, PIN_LED3_DISCO);
 	}

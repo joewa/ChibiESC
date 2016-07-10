@@ -20,6 +20,8 @@
 
 #include <unistd.h>
 
+#include <math.h> // for testing (sin)
+
 // PPRZLink message sender aircraft ID
 #define PPRZLINK_SENDER_AC_ID 19
 // PPRZLink alive message checksum, must match the checksum in the paparazzi-generated var/aircrafts/.../ap/generated/airframe.h file for the PPRZLINK_SENDER_AC_ID
