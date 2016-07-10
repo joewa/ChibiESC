@@ -118,7 +118,9 @@ CSRC = $(STARTUPSRC) \
        $(CHIBIOS)/os/hal/lib/streams/chprintf.c \
        main.c \
        subsystems/serial/chibiesc_usb.c \
-       subsystems/serial/chibiesc_serial.c
+       subsystems/serial/chibiesc_serial.c \
+       subsystems/serial/chibiesc_pprz_transport_usb.c \
+       subsystems/pprzlink/src/pprz_transport.c
 
 # C++ sources that can be compiled in ARM or THUMB mode depending on the global
 # setting.
@@ -150,7 +152,8 @@ ASMSRC = $(STARTUPASM) $(PORTASM) $(OSALASM)
 INCDIR = $(STARTUPINC) $(KERNINC) $(PORTINC) $(OSALINC) \
          $(HALINC) $(PLATFORMINC) $(BOARDINC) $(TESTINC) \
          $(CHIBIOS)/os/hal/lib/streams \
-         $(CHIBIOS)/os/various
+         $(CHIBIOS)/os/various \
+         pprzlink/var/include
 
 #
 # Project, sources and paths
@@ -217,6 +220,16 @@ ULIBS =
 #
 # End of user defines
 ##############################################################################
+
+##############################################################################
+# Generate PPRZLink C files
+#
+
+#.PHONY: pprzlink
+#.NOTPARALLEL: pprzlink
+#pprzlink:
+#	cd pprzlink && git pull
+#	make -C pprzlink/ pymessages
 
 RULESPATH = $(CHIBIOS)/os/common/startup/ARMCMx/compilers/GCC
 include $(RULESPATH)/rules.mk

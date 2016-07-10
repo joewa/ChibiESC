@@ -2,3 +2,7 @@
 	path = ChibiOS
 	url = https://github.com/heiko-r/ChibiOS.git
 	branch = ChibiESC_fixes
+[submodule "pprzlink"]
+	path = pprzlink
+	url = https://github.com/heiko-r/pprzlink.git
+	branch = master

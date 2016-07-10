@@ -287,7 +287,7 @@
  *          default configuration.
  */
 #if !defined(SERIAL_DEFAULT_BITRATE) || defined(__DOXYGEN__)
-#define SERIAL_DEFAULT_BITRATE      38400
+#define SERIAL_DEFAULT_BITRATE      57600 // todo: check if correct. was 38400. changed for pprzlink-test
 #endif
 
 /**
