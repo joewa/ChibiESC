@@ -39,7 +39,7 @@ EELAYER 25 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 3 11
+Sheet 10 11
 Title "DrMOS power stage"
 Date "2016-01-22"
 Rev "0.1"
@@ -151,21 +151,13 @@ AR Path="/56B8347B/56A2AE4F" Ref="#PWR050"  Part="1"
 AR Path="/56BC308A/56A2AE4F" Ref="#PWR063"  Part="1" 
 AR Path="/56BA2E2B/56A2AE4F" Ref="#PWR076"  Part="1" 
 AR Path="/56BA5F82/56A2AE4F" Ref="#PWR089"  Part="1" 
-F 0 "#PWR089" H 5750 4850 50  0001 C CNN
+F 0 "#PWR014" H 5750 4850 50  0001 C CNN
 F 1 "GNDPWR" H 5750 4900 50  0000 C CNN
 F 2 "" H 5750 5000 50  0000 C CNN
 F 3 "" H 5750 5000 50  0000 C CNN
 	1    5750 5050
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	5750 4800 6050 4800
-Connection ~ 5850 4800
-Connection ~ 5900 4800
-Connection ~ 5950 4800
-Connection ~ 6000 4800
-Wire Wire Line
-	5750 5050 5750 4800
 $Comp
 L GND #PWR015
 U 1 1 56A2B769
@@ -177,17 +169,13 @@ AR Path="/56B8347B/56A2B769" Ref="#PWR051"  Part="1"
 AR Path="/56BC308A/56A2B769" Ref="#PWR064"  Part="1" 
 AR Path="/56BA2E2B/56A2B769" Ref="#PWR077"  Part="1" 
 AR Path="/56BA5F82/56A2B769" Ref="#PWR090"  Part="1" 
-F 0 "#PWR090" H 5200 4750 50  0001 C CNN
+F 0 "#PWR015" H 5200 4750 50  0001 C CNN
 F 1 "GND" H 5208 4826 50  0000 C CNN
 F 2 "" H 5200 5000 50  0000 C CNN
 F 3 "" H 5200 5000 50  0000 C CNN
 	1    5200 5000
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	5200 5000 5200 4800
-Wire Wire Line
-	5200 4800 5300 4800
 $Comp
 L GNDPWR #PWR016
 U 1 1 56A2BBEE
@@ -199,19 +187,13 @@ AR Path="/56B8347B/56A2BBEE" Ref="#PWR052"  Part="1"
 AR Path="/56BC308A/56A2BBEE" Ref="#PWR065"  Part="1" 
 AR Path="/56BA2E2B/56A2BBEE" Ref="#PWR078"  Part="1" 
 AR Path="/56BA5F82/56A2BBEE" Ref="#PWR091"  Part="1" 
-F 0 "#PWR091" H 4950 3000 50  0001 C CNN
+F 0 "#PWR016" H 4950 3000 50  0001 C CNN
 F 1 "GNDPWR" H 4957 3275 50  0000 C CNN
 F 2 "" H 4950 3150 50  0000 C CNN
 F 3 "" H 4950 3150 50  0000 C CNN
 	1    4950 3200
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	4950 3200 4950 3050
-Wire Wire Line
-	4300 2750 5300 2750
-Wire Wire Line
-	5300 2750 5300 3200
 $Comp
 L C CDrLogic1
 U 1 1 56A2CDC4
@@ -244,7 +226,7 @@ AR Path="/56B8347B/56A2CDEC" Ref="#PWR053"  Part="1"
 AR Path="/56BC308A/56A2CDEC" Ref="#PWR066"  Part="1" 
 AR Path="/56BA2E2B/56A2CDEC" Ref="#PWR079"  Part="1" 
 AR Path="/56BA5F82/56A2CDEC" Ref="#PWR092"  Part="1" 
-F 0 "#PWR092" H 4300 3300 50  0001 C CNN
+F 0 "#PWR017" H 4300 3300 50  0001 C CNN
 F 1 "GND" H 4308 3376 50  0000 C CNN
 F 2 "" H 4300 3550 50  0000 C CNN
 F 3 "" H 4300 3550 50  0000 C CNN
@@ -262,7 +244,7 @@ AR Path="/56B8347B/56A2CF9B" Ref="#PWR054"  Part="1"
 AR Path="/56BC308A/56A2CF9B" Ref="#PWR067"  Part="1" 
 AR Path="/56BA2E2B/56A2CF9B" Ref="#PWR080"  Part="1" 
 AR Path="/56BA5F82/56A2CF9B" Ref="#PWR093"  Part="1" 
-F 0 "#PWR093" H 4300 2500 50  0001 C CNN
+F 0 "#PWR018" H 4300 2500 50  0001 C CNN
 F 1 "+5V" H 4318 2824 50  0000 C CNN
 F 2 "" H 4300 2650 50  0000 C CNN
 F 3 "" H 4300 2650 50  0000 C CNN
@@ -287,27 +269,8 @@ F 3 "" H 4300 2900 50  0000 C CNN
 	1    4300 2900
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	4300 2650 4300 2750
-Connection ~ 4950 2750
-Wire Wire Line
-	4300 3050 4300 3250
 Text HLabel 4100 4200 0    60   BiDi ~ 0
 THWn
-Wire Wire Line
-	4100 4000 4650 4000
-Wire Wire Line
-	4100 4100 4650 4100
-Wire Wire Line
-	4100 4200 4650 4200
-Wire Wire Line
-	6650 3700 6750 3700
-Wire Wire Line
-	7050 3700 7050 3850
-Wire Wire Line
-	7050 3850 6650 3850
-Wire Wire Line
-	7350 3150 7350 2650
 $Comp
 L GND #PWR019
 U 1 1 56A2EFF6
@@ -319,34 +282,15 @@ AR Path="/56B8347B/56A2EFF6" Ref="#PWR055"  Part="1"
 AR Path="/56BC308A/56A2EFF6" Ref="#PWR068"  Part="1" 
 AR Path="/56BA2E2B/56A2EFF6" Ref="#PWR081"  Part="1" 
 AR Path="/56BA5F82/56A2EFF6" Ref="#PWR094"  Part="1" 
-F 0 "#PWR094" H 8550 2800 50  0001 C CNN
+F 0 "#PWR019" H 8550 2800 50  0001 C CNN
 F 1 "GND" H 8558 2876 50  0000 C CNN
 F 2 "" H 8550 3050 50  0000 C CNN
 F 3 "" H 8550 3050 50  0000 C CNN
 	1    8550 3050
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	8350 2950 8350 3150
-Connection ~ 8350 3050
 Text HLabel 7850 2500 2    60   BiDi ~ 0
 FAULTC
-Wire Wire Line
-	6650 4000 7550 4000
-Wire Wire Line
-	7550 4000 7550 3950
-Connection ~ 7450 4000
-Wire Wire Line
-	6650 4000 6650 4500
-Connection ~ 6650 4050
-Connection ~ 6650 4100
-Connection ~ 6650 4150
-Connection ~ 6650 4200
-Connection ~ 6650 4250
-Connection ~ 6650 4300
-Connection ~ 6650 4350
-Connection ~ 6650 4400
-Connection ~ 6650 4450
 $Comp
 L R Rhsens1
 U 1 1 56A2FD69
@@ -394,27 +338,13 @@ AR Path="/56B8347B/56A30067" Ref="#PWR056"  Part="1"
 AR Path="/56BC308A/56A30067" Ref="#PWR069"  Part="1" 
 AR Path="/56BA2E2B/56A30067" Ref="#PWR082"  Part="1" 
 AR Path="/56BA5F82/56A30067" Ref="#PWR095"  Part="1" 
-F 0 "#PWR095" H 7450 4700 50  0001 C CNN
+F 0 "#PWR020" H 7450 4700 50  0001 C CNN
 F 1 "GND" H 7458 4776 50  0000 C CNN
 F 2 "" H 7450 4950 50  0000 C CNN
 F 3 "" H 7450 4950 50  0000 C CNN
 	1    7450 4950
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	7450 4950 7450 4850
-Wire Wire Line
-	7450 4550 7450 4450
-Wire Wire Line
-	7800 4500 7450 4500
-Connection ~ 7450 4500
-Wire Wire Line
-	8150 4000 8850 4000
-Wire Wire Line
-	8250 3950 8250 4150
-Wire Wire Line
-	8150 3950 8150 4000
-Connection ~ 8250 4000
 $Comp
 L +24V #PWR021
 U 1 1 56A31D68
@@ -426,20 +356,13 @@ AR Path="/56B8347B/56A31D68" Ref="#PWR057"  Part="1"
 AR Path="/56BC308A/56A31D68" Ref="#PWR070"  Part="1" 
 AR Path="/56BA2E2B/56A31D68" Ref="#PWR083"  Part="1" 
 AR Path="/56BA5F82/56A31D68" Ref="#PWR096"  Part="1" 
-F 0 "#PWR096" H 6050 2850 50  0001 C CNN
+F 0 "#PWR021" H 6050 2850 50  0001 C CNN
 F 1 "+24V" H 6068 3174 50  0000 C CNN
 F 2 "" H 6050 3000 50  0000 C CNN
 F 3 "" H 6050 3000 50  0000 C CNN
 	1    6050 3000
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	6050 3200 6050 3000
-Wire Wire Line
-	5850 3200 6050 3200
-Connection ~ 6000 3200
-Connection ~ 5950 3200
-Connection ~ 5900 3200
 $Comp
 L +3.3V #PWR022
 U 1 1 56A32138
@@ -451,7 +374,7 @@ AR Path="/56B8347B/56A32138" Ref="#PWR058"  Part="1"
 AR Path="/56BC308A/56A32138" Ref="#PWR071"  Part="1" 
 AR Path="/56BA2E2B/56A32138" Ref="#PWR084"  Part="1" 
 AR Path="/56BA5F82/56A32138" Ref="#PWR097"  Part="1" 
-F 0 "#PWR097" H 7350 2500 50  0001 C CNN
+F 0 "#PWR022" H 7350 2500 50  0001 C CNN
 F 1 "+3.3V" H 7368 2824 50  0000 C CNN
 F 2 "" H 7350 2650 50  0000 C CNN
 F 3 "" H 7350 2650 50  0000 C CNN
@@ -496,24 +419,8 @@ F 3 "" H 8050 2800 50  0000 C CNN
 	1    8050 2800
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	7750 3150 7750 2650
-Wire Wire Line
-	7750 2650 8750 2650
-Connection ~ 8050 2650
-Connection ~ 8350 2650
-Wire Wire Line
-	7550 3150 7550 2500
-Wire Wire Line
-	7550 2500 7850 2500
-Wire Wire Line
-	4650 3800 4650 3250
-Wire Wire Line
-	4650 3250 4300 3250
 Text HLabel 4100 3900 0    60   Input ~ 0
 ZCD_EN
-Wire Wire Line
-	4100 3900 4650 3900
 $Comp
 L +24V #PWR023
 U 1 1 56A69AD2
@@ -525,7 +432,7 @@ AR Path="/56B8347B/56A69AD2" Ref="#PWR059"  Part="1"
 AR Path="/56BC308A/56A69AD2" Ref="#PWR072"  Part="1" 
 AR Path="/56BA2E2B/56A69AD2" Ref="#PWR085"  Part="1" 
 AR Path="/56BA5F82/56A69AD2" Ref="#PWR098"  Part="1" 
-F 0 "#PWR098" H 5750 800 50  0001 C CNN
+F 0 "#PWR023" H 5750 800 50  0001 C CNN
 F 1 "+24V" H 5768 1124 50  0000 C CNN
 F 2 "" H 5750 950 50  0000 C CNN
 F 3 "" H 5750 950 50  0000 C CNN
@@ -561,15 +468,13 @@ AR Path="/56B8347B/56A69BA7" Ref="#PWR060"  Part="1"
 AR Path="/56BC308A/56A69BA7" Ref="#PWR073"  Part="1" 
 AR Path="/56BA2E2B/56A69BA7" Ref="#PWR086"  Part="1" 
 AR Path="/56BA5F82/56A69BA7" Ref="#PWR099"  Part="1" 
-F 0 "#PWR099" H 5750 1300 50  0001 C CNN
+F 0 "#PWR024" H 5750 1300 50  0001 C CNN
 F 1 "GNDPWR" H 5757 1575 50  0000 C CNN
 F 2 "" H 5750 1450 50  0000 C CNN
 F 3 "" H 5750 1450 50  0000 C CNN
 	1    5750 1500
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	5750 1500 5750 1350
 Text Notes 6250 3250 0    60   ~ 0
 Rboot can be used to\nslow down high side\nFET. (1-5ohm)
 Text Notes 7850 4900 0    60   ~ 0
@@ -596,26 +501,6 @@ F 3 "" H 5200 1200 50  0000 C CNN
 	1    5200 1200
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	5750 1050 5750 950 
-Wire Wire Line
-	5200 1050 5200 1000
-Wire Wire Line
-	5200 1000 5750 1000
-Connection ~ 5750 1000
-Wire Wire Line
-	5200 1350 5200 1400
-Wire Wire Line
-	5200 1400 5750 1400
-Connection ~ 5750 1400
-Wire Wire Line
-	8050 3050 8550 3050
-Wire Wire Line
-	8050 2950 8050 3050
-Wire Wire Line
-	7450 3950 7450 4000
-Wire Wire Line
-	8250 4150 7450 4150
 $Comp
 L PAD_SMD PMotor1
 U 1 1 56B30AD6
@@ -634,14 +519,6 @@ F 3 "" H 9050 3850 60  0000 C CNN
 	1    9050 4000
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	8250 3150 8250 3100
-Wire Wire Line
-	8250 3100 7350 3100
-Connection ~ 7350 3100
-Wire Wire Line
-	8150 3150 8150 3100
-Connection ~ 8150 3100
 NoConn ~ 5500 4800
 NoConn ~ 5550 4800
 $Comp
@@ -672,7 +549,7 @@ AR Path="/56B8347B/56B89931" Ref="#PWR061"  Part="1"
 AR Path="/56BC308A/56B89931" Ref="#PWR074"  Part="1" 
 AR Path="/56BA2E2B/56B89931" Ref="#PWR087"  Part="1" 
 AR Path="/56BA5F82/56B89931" Ref="#PWR0100"  Part="1" 
-F 0 "#PWR0100" H 6850 1950 50  0001 C CNN
+F 0 "#PWR025" H 6850 1950 50  0001 C CNN
 F 1 "GND" H 6858 2026 50  0000 C CNN
 F 2 "" H 6850 2200 50  0000 C CNN
 F 3 "" H 6850 2200 50  0000 C CNN
@@ -689,7 +566,7 @@ AR Path="/56B8347B/56B89961" Ref="#PWR062"  Part="1"
 AR Path="/56BC308A/56B89961" Ref="#PWR075"  Part="1" 
 AR Path="/56BA2E2B/56B89961" Ref="#PWR088"  Part="1" 
 AR Path="/56BA5F82/56B89961" Ref="#PWR0101"  Part="1" 
-F 0 "#PWR0101" H 6850 1750 50  0001 C CNN
+F 0 "#PWR026" H 6850 1750 50  0001 C CNN
 F 1 "+3.3V" H 6868 2074 50  0000 C CNN
 F 2 "" H 6850 1900 50  0000 C CNN
 F 3 "" H 6850 1900 50  0000 C CNN
@@ -698,4 +575,171 @@ F 3 "" H 6850 1900 50  0000 C CNN
 $EndComp
 Text Notes 7450 1900 0    60   ~ 0
 Csens is the bypass capacitor for ACS711
+$Comp
+L C CDrHV1back1
+U 1 1 578D654C
+P 6300 1200
+AR Path="/55DB7E47/578D654C" Ref="CDrHV1back1"  Part="1" 
+AR Path="/56B809CA/578D654C" Ref="CDrHV1back2"  Part="1" 
+AR Path="/56B8347B/578D654C" Ref="CDrHV1back3"  Part="1" 
+AR Path="/56BC308A/578D654C" Ref="CDrHV1back4"  Part="1" 
+AR Path="/56BA2E2B/578D654C" Ref="CDrHV1back5"  Part="1" 
+AR Path="/56BA5F82/578D654C" Ref="CDrHV1back6"  Part="1" 
+F 0 "CDrHV1back1" H 6415 1246 50  0000 L CNN
+F 1 "4.7u" H 6415 1155 50  0000 L CNN
+F 2 "Capacitors_SMD:C_1206" H 6338 1050 50  0001 C CNN
+F 3 "" H 6300 1200 50  0000 C CNN
+	1    6300 1200
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5750 4800 6050 4800
+Connection ~ 5850 4800
+Connection ~ 5900 4800
+Connection ~ 5950 4800
+Connection ~ 6000 4800
+Wire Wire Line
+	5750 5050 5750 4800
+Wire Wire Line
+	5200 5000 5200 4800
+Wire Wire Line
+	5200 4800 5300 4800
+Wire Wire Line
+	4950 3200 4950 3050
+Wire Wire Line
+	4300 2750 5300 2750
+Wire Wire Line
+	5300 2750 5300 3200
+Wire Wire Line
+	4300 2650 4300 2750
+Connection ~ 4950 2750
+Wire Wire Line
+	4300 3050 4300 3250
+Wire Wire Line
+	4100 4000 4650 4000
+Wire Wire Line
+	4100 4100 4650 4100
+Wire Wire Line
+	4100 4200 4650 4200
+Wire Wire Line
+	6650 3700 6750 3700
+Wire Wire Line
+	7050 3700 7050 3850
+Wire Wire Line
+	7050 3850 6650 3850
+Wire Wire Line
+	7350 3150 7350 2650
+Wire Wire Line
+	8350 2950 8350 3150
+Connection ~ 8350 3050
+Wire Wire Line
+	6650 4000 7550 4000
+Wire Wire Line
+	7550 4000 7550 3950
+Connection ~ 7450 4000
+Wire Wire Line
+	6650 4000 6650 4500
+Connection ~ 6650 4050
+Connection ~ 6650 4100
+Connection ~ 6650 4150
+Connection ~ 6650 4200
+Connection ~ 6650 4250
+Connection ~ 6650 4300
+Connection ~ 6650 4350
+Connection ~ 6650 4400
+Connection ~ 6650 4450
+Wire Wire Line
+	7450 4950 7450 4850
+Wire Wire Line
+	7450 4550 7450 4450
+Wire Wire Line
+	7800 4500 7450 4500
+Connection ~ 7450 4500
+Wire Wire Line
+	8150 4000 8850 4000
+Wire Wire Line
+	8250 3950 8250 4150
+Wire Wire Line
+	8150 3950 8150 4000
+Connection ~ 8250 4000
+Wire Wire Line
+	6050 3200 6050 3000
+Wire Wire Line
+	5850 3200 6050 3200
+Connection ~ 6000 3200
+Connection ~ 5950 3200
+Connection ~ 5900 3200
+Wire Wire Line
+	7750 3150 7750 2650
+Wire Wire Line
+	7750 2650 8750 2650
+Connection ~ 8050 2650
+Connection ~ 8350 2650
+Wire Wire Line
+	7550 3150 7550 2500
+Wire Wire Line
+	7550 2500 7850 2500
+Wire Wire Line
+	4650 3800 4650 3250
+Wire Wire Line
+	4650 3250 4300 3250
+Wire Wire Line
+	4100 3900 4650 3900
+Wire Wire Line
+	5750 1500 5750 1350
+Wire Wire Line
+	5750 1050 5750 950 
+Wire Wire Line
+	5200 1050 5200 1000
+Wire Wire Line
+	5200 1000 7050 1000
+Connection ~ 5750 1000
+Wire Wire Line
+	5200 1350 5200 1400
+Wire Wire Line
+	5200 1400 7050 1400
+Connection ~ 5750 1400
+Wire Wire Line
+	8050 3050 8550 3050
+Wire Wire Line
+	8050 2950 8050 3050
+Wire Wire Line
+	7450 3950 7450 4000
+Wire Wire Line
+	8250 4150 7450 4150
+Wire Wire Line
+	8250 3150 8250 3100
+Wire Wire Line
+	8250 3100 7350 3100
+Connection ~ 7350 3100
+Wire Wire Line
+	8150 3150 8150 3100
+Connection ~ 8150 3100
+Wire Wire Line
+	6300 1000 6300 1050
+Wire Wire Line
+	6300 1400 6300 1350
+$Comp
+L C CDrHV2back1
+U 1 1 578D76CB
+P 7050 1200
+AR Path="/55DB7E47/578D76CB" Ref="CDrHV2back1"  Part="1" 
+AR Path="/56B809CA/578D76CB" Ref="CDrHV2back2"  Part="1" 
+AR Path="/56B8347B/578D76CB" Ref="CDrHV2back3"  Part="1" 
+AR Path="/56BC308A/578D76CB" Ref="CDrHV2back4"  Part="1" 
+AR Path="/56BA2E2B/578D76CB" Ref="CDrHV2back5"  Part="1" 
+AR Path="/56BA5F82/578D76CB" Ref="CDrHV2back6"  Part="1" 
+F 0 "CDrHV2back1" H 7165 1246 50  0000 L CNN
+F 1 "4.7u" H 7165 1155 50  0000 L CNN
+F 2 "Capacitors_SMD:C_1206_HandSoldering" H 7088 1050 50  0001 C CNN
+F 3 "" H 7050 1200 50  0000 C CNN
+	1    7050 1200
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7050 1000 7050 1050
+Connection ~ 6300 1000
+Wire Wire Line
+	7050 1400 7050 1350
+Connection ~ 6300 1400
 $EndSCHEMATC
