@@ -1,9 +1,9 @@
-(kicad_pcb (version 4) (host pcbnew 4.1.0-alpha+201607160317+6981~46~ubuntu16.04.1-product)
+(kicad_pcb (version 4) (host pcbnew 4.1.0-alpha+201607200716+6988~46~ubuntu16.04.1-product)
 
   (general
     (links 637)
     (no_connects 11)
-    (area 34.424999 92.939999 178.075001 107.060001)
+    (area 23.501026 88.629166 180.752095 124.92358)
     (thickness 1.6)
     (drawings 31)
     (tracks 3632)
@@ -67,6 +67,7 @@
     (pad_size 2 1.6)
     (pad_drill 0)
     (pad_to_mask_clearance 0)
+    (pad_to_paste_clearance_ratio -0.1)
     (aux_axis_origin 54.75 130.48)
     (grid_origin 54.75 130.48)
     (visible_elements FFFCFF7F)
