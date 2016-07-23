@@ -186,4 +186,35 @@ Wire Wire Line
 	5050 3500 5050 3350
 Wire Wire Line
 	5050 3800 5050 4350
+$Comp
+L R RYSGND1
+U 1 1 57935AF7
+P 5400 4100
+F 0 "RYSGND1" V 5193 4100 50  0000 C CNN
+F 1 "0R/DNP" V 5284 4100 50  0000 C CNN
+F 2 "Resistors_SMD:R_0402" V 5330 4100 50  0001 C CNN
+F 3 "" H 5400 4100 50  0000 C CNN
+	1    5400 4100
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	5250 4100 5050 4100
+Connection ~ 5050 4100
+$Comp
+L GND #PWR037
+U 1 1 57935C8D
+P 5850 4150
+F 0 "#PWR037" H 5850 3900 50  0001 C CNN
+F 1 "GND" H 5855 3977 50  0000 C CNN
+F 2 "" H 5850 4150 50  0000 C CNN
+F 3 "" H 5850 4150 50  0000 C CNN
+	1    5850 4150
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5550 4100 5850 4100
+Wire Wire Line
+	5850 4100 5850 4150
+Text Notes 6050 4150 0    60   ~ 0
+In case RYX are populated with small caps\nfor EMC reasons, put a bridge to RYSGND.
 $EndSCHEMATC
