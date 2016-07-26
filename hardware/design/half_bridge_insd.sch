@@ -39,14 +39,14 @@ EELAYER 25 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 10 11
+Sheet 3 11
 Title "DrMOS power stage"
 Date "2016-01-22"
 Rev "0.1"
-Comp ""
+Comp "Jörg Wangemann"
 Comment1 "DrMOS power stage"
 Comment2 ""
-Comment3 ""
+Comment3 "CC-BY-SA 4.0"
 Comment4 ""
 $EndDescr
 Text HLabel 4100 4100 0    60   Input ~ 0
@@ -146,11 +146,11 @@ U 1 1 56A2AE4F
 P 5750 5050
 AR Path="/55DB7E47/56A2AE4F" Ref="#PWR014"  Part="1" 
 AR Path="/56B7FDE9/56A2AE4F" Ref="#PWR54"  Part="1" 
-AR Path="/56B809CA/56A2AE4F" Ref="#PWR037"  Part="1" 
-AR Path="/56B8347B/56A2AE4F" Ref="#PWR050"  Part="1" 
-AR Path="/56BC308A/56A2AE4F" Ref="#PWR063"  Part="1" 
-AR Path="/56BA2E2B/56A2AE4F" Ref="#PWR076"  Part="1" 
-AR Path="/56BA5F82/56A2AE4F" Ref="#PWR089"  Part="1" 
+AR Path="/56B809CA/56A2AE4F" Ref="#PWR038"  Part="1" 
+AR Path="/56B8347B/56A2AE4F" Ref="#PWR051"  Part="1" 
+AR Path="/56BC308A/56A2AE4F" Ref="#PWR064"  Part="1" 
+AR Path="/56BA2E2B/56A2AE4F" Ref="#PWR077"  Part="1" 
+AR Path="/56BA5F82/56A2AE4F" Ref="#PWR090"  Part="1" 
 F 0 "#PWR014" H 5750 4850 50  0001 C CNN
 F 1 "GNDPWR" H 5750 4900 50  0000 C CNN
 F 2 "" H 5750 5000 50  0000 C CNN
@@ -164,11 +164,11 @@ U 1 1 56A2B769
 P 5200 5000
 AR Path="/55DB7E47/56A2B769" Ref="#PWR015"  Part="1" 
 AR Path="/56B7FDE9/56A2B769" Ref="#PWR51"  Part="1" 
-AR Path="/56B809CA/56A2B769" Ref="#PWR038"  Part="1" 
-AR Path="/56B8347B/56A2B769" Ref="#PWR051"  Part="1" 
-AR Path="/56BC308A/56A2B769" Ref="#PWR064"  Part="1" 
-AR Path="/56BA2E2B/56A2B769" Ref="#PWR077"  Part="1" 
-AR Path="/56BA5F82/56A2B769" Ref="#PWR090"  Part="1" 
+AR Path="/56B809CA/56A2B769" Ref="#PWR039"  Part="1" 
+AR Path="/56B8347B/56A2B769" Ref="#PWR052"  Part="1" 
+AR Path="/56BC308A/56A2B769" Ref="#PWR065"  Part="1" 
+AR Path="/56BA2E2B/56A2B769" Ref="#PWR078"  Part="1" 
+AR Path="/56BA5F82/56A2B769" Ref="#PWR091"  Part="1" 
 F 0 "#PWR015" H 5200 4750 50  0001 C CNN
 F 1 "GND" H 5208 4826 50  0000 C CNN
 F 2 "" H 5200 5000 50  0000 C CNN
@@ -182,11 +182,11 @@ U 1 1 56A2BBEE
 P 4950 3200
 AR Path="/55DB7E47/56A2BBEE" Ref="#PWR016"  Part="1" 
 AR Path="/56B7FDE9/56A2BBEE" Ref="#PWR50"  Part="1" 
-AR Path="/56B809CA/56A2BBEE" Ref="#PWR039"  Part="1" 
-AR Path="/56B8347B/56A2BBEE" Ref="#PWR052"  Part="1" 
-AR Path="/56BC308A/56A2BBEE" Ref="#PWR065"  Part="1" 
-AR Path="/56BA2E2B/56A2BBEE" Ref="#PWR078"  Part="1" 
-AR Path="/56BA5F82/56A2BBEE" Ref="#PWR091"  Part="1" 
+AR Path="/56B809CA/56A2BBEE" Ref="#PWR040"  Part="1" 
+AR Path="/56B8347B/56A2BBEE" Ref="#PWR053"  Part="1" 
+AR Path="/56BC308A/56A2BBEE" Ref="#PWR066"  Part="1" 
+AR Path="/56BA2E2B/56A2BBEE" Ref="#PWR079"  Part="1" 
+AR Path="/56BA5F82/56A2BBEE" Ref="#PWR092"  Part="1" 
 F 0 "#PWR016" H 4950 3000 50  0001 C CNN
 F 1 "GNDPWR" H 4957 3275 50  0000 C CNN
 F 2 "" H 4950 3150 50  0000 C CNN
@@ -221,11 +221,11 @@ U 1 1 56A2CDEC
 P 4300 3550
 AR Path="/55DB7E47/56A2CDEC" Ref="#PWR017"  Part="1" 
 AR Path="/56B7FDE9/56A2CDEC" Ref="#PWR49"  Part="1" 
-AR Path="/56B809CA/56A2CDEC" Ref="#PWR040"  Part="1" 
-AR Path="/56B8347B/56A2CDEC" Ref="#PWR053"  Part="1" 
-AR Path="/56BC308A/56A2CDEC" Ref="#PWR066"  Part="1" 
-AR Path="/56BA2E2B/56A2CDEC" Ref="#PWR079"  Part="1" 
-AR Path="/56BA5F82/56A2CDEC" Ref="#PWR092"  Part="1" 
+AR Path="/56B809CA/56A2CDEC" Ref="#PWR041"  Part="1" 
+AR Path="/56B8347B/56A2CDEC" Ref="#PWR054"  Part="1" 
+AR Path="/56BC308A/56A2CDEC" Ref="#PWR067"  Part="1" 
+AR Path="/56BA2E2B/56A2CDEC" Ref="#PWR080"  Part="1" 
+AR Path="/56BA5F82/56A2CDEC" Ref="#PWR093"  Part="1" 
 F 0 "#PWR017" H 4300 3300 50  0001 C CNN
 F 1 "GND" H 4308 3376 50  0000 C CNN
 F 2 "" H 4300 3550 50  0000 C CNN
@@ -239,11 +239,11 @@ U 1 1 56A2CF9B
 P 4300 2650
 AR Path="/55DB7E47/56A2CF9B" Ref="#PWR018"  Part="1" 
 AR Path="/56B7FDE9/56A2CF9B" Ref="#PWR48"  Part="1" 
-AR Path="/56B809CA/56A2CF9B" Ref="#PWR041"  Part="1" 
-AR Path="/56B8347B/56A2CF9B" Ref="#PWR054"  Part="1" 
-AR Path="/56BC308A/56A2CF9B" Ref="#PWR067"  Part="1" 
-AR Path="/56BA2E2B/56A2CF9B" Ref="#PWR080"  Part="1" 
-AR Path="/56BA5F82/56A2CF9B" Ref="#PWR093"  Part="1" 
+AR Path="/56B809CA/56A2CF9B" Ref="#PWR042"  Part="1" 
+AR Path="/56B8347B/56A2CF9B" Ref="#PWR055"  Part="1" 
+AR Path="/56BC308A/56A2CF9B" Ref="#PWR068"  Part="1" 
+AR Path="/56BA2E2B/56A2CF9B" Ref="#PWR081"  Part="1" 
+AR Path="/56BA5F82/56A2CF9B" Ref="#PWR094"  Part="1" 
 F 0 "#PWR018" H 4300 2500 50  0001 C CNN
 F 1 "+5V" H 4318 2824 50  0000 C CNN
 F 2 "" H 4300 2650 50  0000 C CNN
@@ -277,11 +277,11 @@ U 1 1 56A2EFF6
 P 8550 3050
 AR Path="/55DB7E47/56A2EFF6" Ref="#PWR019"  Part="1" 
 AR Path="/56B7FDE9/56A2EFF6" Ref="#PWR58"  Part="1" 
-AR Path="/56B809CA/56A2EFF6" Ref="#PWR042"  Part="1" 
-AR Path="/56B8347B/56A2EFF6" Ref="#PWR055"  Part="1" 
-AR Path="/56BC308A/56A2EFF6" Ref="#PWR068"  Part="1" 
-AR Path="/56BA2E2B/56A2EFF6" Ref="#PWR081"  Part="1" 
-AR Path="/56BA5F82/56A2EFF6" Ref="#PWR094"  Part="1" 
+AR Path="/56B809CA/56A2EFF6" Ref="#PWR043"  Part="1" 
+AR Path="/56B8347B/56A2EFF6" Ref="#PWR056"  Part="1" 
+AR Path="/56BC308A/56A2EFF6" Ref="#PWR069"  Part="1" 
+AR Path="/56BA2E2B/56A2EFF6" Ref="#PWR082"  Part="1" 
+AR Path="/56BA5F82/56A2EFF6" Ref="#PWR095"  Part="1" 
 F 0 "#PWR019" H 8550 2800 50  0001 C CNN
 F 1 "GND" H 8558 2876 50  0000 C CNN
 F 2 "" H 8550 3050 50  0000 C CNN
@@ -333,11 +333,11 @@ U 1 1 56A30067
 P 7450 4950
 AR Path="/55DB7E47/56A30067" Ref="#PWR020"  Part="1" 
 AR Path="/56B7FDE9/56A30067" Ref="#PWR57"  Part="1" 
-AR Path="/56B809CA/56A30067" Ref="#PWR043"  Part="1" 
-AR Path="/56B8347B/56A30067" Ref="#PWR056"  Part="1" 
-AR Path="/56BC308A/56A30067" Ref="#PWR069"  Part="1" 
-AR Path="/56BA2E2B/56A30067" Ref="#PWR082"  Part="1" 
-AR Path="/56BA5F82/56A30067" Ref="#PWR095"  Part="1" 
+AR Path="/56B809CA/56A30067" Ref="#PWR044"  Part="1" 
+AR Path="/56B8347B/56A30067" Ref="#PWR057"  Part="1" 
+AR Path="/56BC308A/56A30067" Ref="#PWR070"  Part="1" 
+AR Path="/56BA2E2B/56A30067" Ref="#PWR083"  Part="1" 
+AR Path="/56BA5F82/56A30067" Ref="#PWR096"  Part="1" 
 F 0 "#PWR020" H 7450 4700 50  0001 C CNN
 F 1 "GND" H 7458 4776 50  0000 C CNN
 F 2 "" H 7450 4950 50  0000 C CNN
@@ -351,11 +351,11 @@ U 1 1 56A31D68
 P 6050 3000
 AR Path="/55DB7E47/56A31D68" Ref="#PWR021"  Part="1" 
 AR Path="/56B7FDE9/56A31D68" Ref="#PWR55"  Part="1" 
-AR Path="/56B809CA/56A31D68" Ref="#PWR044"  Part="1" 
-AR Path="/56B8347B/56A31D68" Ref="#PWR057"  Part="1" 
-AR Path="/56BC308A/56A31D68" Ref="#PWR070"  Part="1" 
-AR Path="/56BA2E2B/56A31D68" Ref="#PWR083"  Part="1" 
-AR Path="/56BA5F82/56A31D68" Ref="#PWR096"  Part="1" 
+AR Path="/56B809CA/56A31D68" Ref="#PWR045"  Part="1" 
+AR Path="/56B8347B/56A31D68" Ref="#PWR058"  Part="1" 
+AR Path="/56BC308A/56A31D68" Ref="#PWR071"  Part="1" 
+AR Path="/56BA2E2B/56A31D68" Ref="#PWR084"  Part="1" 
+AR Path="/56BA5F82/56A31D68" Ref="#PWR097"  Part="1" 
 F 0 "#PWR021" H 6050 2850 50  0001 C CNN
 F 1 "+24V" H 6068 3174 50  0000 C CNN
 F 2 "" H 6050 3000 50  0000 C CNN
@@ -369,11 +369,11 @@ U 1 1 56A32138
 P 7350 2650
 AR Path="/55DB7E47/56A32138" Ref="#PWR022"  Part="1" 
 AR Path="/56B7FDE9/56A32138" Ref="#PWR56"  Part="1" 
-AR Path="/56B809CA/56A32138" Ref="#PWR045"  Part="1" 
-AR Path="/56B8347B/56A32138" Ref="#PWR058"  Part="1" 
-AR Path="/56BC308A/56A32138" Ref="#PWR071"  Part="1" 
-AR Path="/56BA2E2B/56A32138" Ref="#PWR084"  Part="1" 
-AR Path="/56BA5F82/56A32138" Ref="#PWR097"  Part="1" 
+AR Path="/56B809CA/56A32138" Ref="#PWR046"  Part="1" 
+AR Path="/56B8347B/56A32138" Ref="#PWR059"  Part="1" 
+AR Path="/56BC308A/56A32138" Ref="#PWR072"  Part="1" 
+AR Path="/56BA2E2B/56A32138" Ref="#PWR085"  Part="1" 
+AR Path="/56BA5F82/56A32138" Ref="#PWR098"  Part="1" 
 F 0 "#PWR022" H 7350 2500 50  0001 C CNN
 F 1 "+3.3V" H 7368 2824 50  0000 C CNN
 F 2 "" H 7350 2650 50  0000 C CNN
@@ -427,11 +427,11 @@ U 1 1 56A69AD2
 P 5750 950
 AR Path="/55DB7E47/56A69AD2" Ref="#PWR023"  Part="1" 
 AR Path="/56B7FDE9/56A69AD2" Ref="#PWR52"  Part="1" 
-AR Path="/56B809CA/56A69AD2" Ref="#PWR046"  Part="1" 
-AR Path="/56B8347B/56A69AD2" Ref="#PWR059"  Part="1" 
-AR Path="/56BC308A/56A69AD2" Ref="#PWR072"  Part="1" 
-AR Path="/56BA2E2B/56A69AD2" Ref="#PWR085"  Part="1" 
-AR Path="/56BA5F82/56A69AD2" Ref="#PWR098"  Part="1" 
+AR Path="/56B809CA/56A69AD2" Ref="#PWR047"  Part="1" 
+AR Path="/56B8347B/56A69AD2" Ref="#PWR060"  Part="1" 
+AR Path="/56BC308A/56A69AD2" Ref="#PWR073"  Part="1" 
+AR Path="/56BA2E2B/56A69AD2" Ref="#PWR086"  Part="1" 
+AR Path="/56BA5F82/56A69AD2" Ref="#PWR099"  Part="1" 
 F 0 "#PWR023" H 5750 800 50  0001 C CNN
 F 1 "+24V" H 5768 1124 50  0000 C CNN
 F 2 "" H 5750 950 50  0000 C CNN
@@ -463,11 +463,11 @@ U 1 1 56A69BA7
 P 5750 1500
 AR Path="/55DB7E47/56A69BA7" Ref="#PWR024"  Part="1" 
 AR Path="/56B7FDE9/56A69BA7" Ref="#PWR53"  Part="1" 
-AR Path="/56B809CA/56A69BA7" Ref="#PWR047"  Part="1" 
-AR Path="/56B8347B/56A69BA7" Ref="#PWR060"  Part="1" 
-AR Path="/56BC308A/56A69BA7" Ref="#PWR073"  Part="1" 
-AR Path="/56BA2E2B/56A69BA7" Ref="#PWR086"  Part="1" 
-AR Path="/56BA5F82/56A69BA7" Ref="#PWR099"  Part="1" 
+AR Path="/56B809CA/56A69BA7" Ref="#PWR048"  Part="1" 
+AR Path="/56B8347B/56A69BA7" Ref="#PWR061"  Part="1" 
+AR Path="/56BC308A/56A69BA7" Ref="#PWR074"  Part="1" 
+AR Path="/56BA2E2B/56A69BA7" Ref="#PWR087"  Part="1" 
+AR Path="/56BA5F82/56A69BA7" Ref="#PWR0100"  Part="1" 
 F 0 "#PWR024" H 5750 1300 50  0001 C CNN
 F 1 "GNDPWR" H 5757 1575 50  0000 C CNN
 F 2 "" H 5750 1450 50  0000 C CNN
@@ -477,8 +477,8 @@ F 3 "" H 5750 1450 50  0000 C CNN
 $EndComp
 Text Notes 6250 3250 0    60   ~ 0
 Rboot can be used to\nslow down high side\nFET. (1-5ohm)
-Text Notes 7850 4900 0    60   ~ 0
-SENSV = Rlsens / (Rlsens+Rhsens)\nMust be below 4V to protect the input pin of STM32F4.\nIs 3.8V for Rl=2k2 and Rh=10k\n\nNote:\nThink about placing Rlsens close to the controller and\nRhsens at the pad. Having load at the wire would make\nit less susceptible to noise.
+Text Notes 8300 5250 0    60   ~ 0
+SENSV = Rlsens / (Rlsens+Rhsens)\nMust be below 4V to protect the input pin of STM32F4.\nIs 3.8V for Rl=2k2 and Rh=10k\n\nNote:\nRlsens is placed close to the controller and\nRhsens at the pad. Having load at the wire would make\nit less susceptible to noise.\n\nPad PVSens is for alternate motor voltage sensing\nthan the actual phase
 Text Label 5750 4950 0    60   ~ 0
 PWRGND
 Text Label 5000 4950 0    60   ~ 0
@@ -544,11 +544,11 @@ L GND #PWR025
 U 1 1 56B89931
 P 6850 2200
 AR Path="/55DB7E47/56B89931" Ref="#PWR025"  Part="1" 
-AR Path="/56B809CA/56B89931" Ref="#PWR048"  Part="1" 
-AR Path="/56B8347B/56B89931" Ref="#PWR061"  Part="1" 
-AR Path="/56BC308A/56B89931" Ref="#PWR074"  Part="1" 
-AR Path="/56BA2E2B/56B89931" Ref="#PWR087"  Part="1" 
-AR Path="/56BA5F82/56B89931" Ref="#PWR0100"  Part="1" 
+AR Path="/56B809CA/56B89931" Ref="#PWR049"  Part="1" 
+AR Path="/56B8347B/56B89931" Ref="#PWR062"  Part="1" 
+AR Path="/56BC308A/56B89931" Ref="#PWR075"  Part="1" 
+AR Path="/56BA2E2B/56B89931" Ref="#PWR088"  Part="1" 
+AR Path="/56BA5F82/56B89931" Ref="#PWR0101"  Part="1" 
 F 0 "#PWR025" H 6850 1950 50  0001 C CNN
 F 1 "GND" H 6858 2026 50  0000 C CNN
 F 2 "" H 6850 2200 50  0000 C CNN
@@ -561,11 +561,11 @@ L +3.3V #PWR026
 U 1 1 56B89961
 P 6850 1900
 AR Path="/55DB7E47/56B89961" Ref="#PWR026"  Part="1" 
-AR Path="/56B809CA/56B89961" Ref="#PWR049"  Part="1" 
-AR Path="/56B8347B/56B89961" Ref="#PWR062"  Part="1" 
-AR Path="/56BC308A/56B89961" Ref="#PWR075"  Part="1" 
-AR Path="/56BA2E2B/56B89961" Ref="#PWR088"  Part="1" 
-AR Path="/56BA5F82/56B89961" Ref="#PWR0101"  Part="1" 
+AR Path="/56B809CA/56B89961" Ref="#PWR050"  Part="1" 
+AR Path="/56B8347B/56B89961" Ref="#PWR063"  Part="1" 
+AR Path="/56BC308A/56B89961" Ref="#PWR076"  Part="1" 
+AR Path="/56BA2E2B/56B89961" Ref="#PWR089"  Part="1" 
+AR Path="/56BA5F82/56B89961" Ref="#PWR0102"  Part="1" 
 F 0 "#PWR026" H 6850 1750 50  0001 C CNN
 F 1 "+3.3V" H 6868 2074 50  0000 C CNN
 F 2 "" H 6850 1900 50  0000 C CNN
@@ -742,4 +742,21 @@ Connection ~ 6300 1000
 Wire Wire Line
 	7050 1400 7050 1350
 Connection ~ 6300 1400
+$Comp
+L PAD_SMD PVSens1
+U 1 1 57981B05
+P 7250 4150
+AR Path="/55DB7E47/57981B05" Ref="PVSens1"  Part="1" 
+AR Path="/56B809CA/57981B05" Ref="PVSens2"  Part="1" 
+AR Path="/56B8347B/57981B05" Ref="PVSens3"  Part="1" 
+AR Path="/56BC308A/57981B05" Ref="PVSens4"  Part="1" 
+AR Path="/56BA2E2B/57981B05" Ref="PVSens5"  Part="1" 
+AR Path="/56BA5F82/57981B05" Ref="PVSens6"  Part="1" 
+F 0 "PVSens1" H 7378 4203 60  0000 L CNN
+F 1 "PAD_SMD" H 7378 4097 60  0000 L CNN
+F 2 "Pads:PAD_SMD_1x1" H 7250 3900 60  0001 C CNN
+F 3 "" H 7250 4000 60  0000 C CNN
+	1    7250 4150
+	-1   0    0    -1  
+$EndComp
 $EndSCHEMATC

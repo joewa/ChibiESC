@@ -42,11 +42,11 @@ encoding utf-8
 Sheet 5 11
 Title ""
 Date ""
-Rev ""
-Comp ""
+Rev "0.1"
+Comp "Jörg Wangemann"
 Comment1 ""
 Comment2 ""
-Comment3 ""
+Comment3 "CC-BY-SA 4.0"
 Comment4 ""
 $EndDescr
 Text HLabel 4000 3100 0    60   Input ~ 0

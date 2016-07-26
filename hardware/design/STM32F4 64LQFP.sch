@@ -46,7 +46,7 @@ Rev "0.1"
 Comp "Jörg Wangemann"
 Comment1 ""
 Comment2 ""
-Comment3 ""
+Comment3 "CC-BY-SA 4.0"
 Comment4 ""
 $EndDescr
 $Comp

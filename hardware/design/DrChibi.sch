@@ -40,13 +40,13 @@ EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
 Sheet 1 11
-Title "Long-Strip"
+Title "DrChibi, Looong-Strip"
 Date "2016-02-15"
 Rev "0.1"
 Comp "Jörg Wangemann"
-Comment1 "6-Phase Motor Controller"
+Comment1 "6-Phase Motor Controller / Inverter"
 Comment2 ""
-Comment3 ""
+Comment3 "CC-BY-SA 4.0"
 Comment4 "Top level"
 $EndDescr
 $Comp
