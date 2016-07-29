@@ -15,7 +15,7 @@
  * @param[in] s         the name to be assigned to the stack array
  * @param[in] n         the stack size to be assigned to the thread
  *
- * @todo	Define reasonable stack size
+ * @todo	Define reasonable stack size (http://www.chibios.org/dokuwiki/doku.php?id=chibios:kb:stacks)
  */
 static THD_WORKING_AREA(waSerialTestThread, 128);
 /**

@@ -11,6 +11,10 @@
 struct pprz_transport pprz_tp;
 struct link_device link_dev;
 
+#define USB_RX_BUFFER_SIZE	2048
+static uint8_t usb_rx_buffer[USB_RX_BUFFER_SIZE];
+static int usb_rx_read_pos = 0;
+static int usb_rx_write_pos = 0;
 
 void put_byte(void *p, long fd __attribute__((unused)), uint8_t data);
 bool check_free_space(void *p, long *fd __attribute__((unused)), uint16_t len);
@@ -18,6 +22,46 @@ void put_buffer(void *p, long fd, const uint8_t *data, uint16_t len);
 void send_message(void *p __attribute__((unused)), long fd __attribute__((unused)));
 uint8_t get_byte(void *p);
 uint16_t char_available(void *p);
+
+
+/**
+ * @brief   Static USBRXThread working area allocation.
+ * @details This macro is used to allocate a static thread working area
+ *          aligned as both position and size.
+ *
+ * @param[in] s         the name to be assigned to the stack array
+ * @param[in] n         the stack size to be assigned to the thread
+ *
+ * @todo	Define reasonable stack size (http://www.chibios.org/dokuwiki/doku.php?id=chibios:kb:stacks)
+ */
+static THD_WORKING_AREA(waUSBRXThread, 256);
+/**
+ * @brief	USBRXThread declaration
+ */
+static THD_FUNCTION(USBRXThread, arg) {
+	(void)arg;
+	chRegSetThreadName("USBRXThread");
+
+	uint8_t buffer[128];
+	int i;
+	int len;
+
+	while (true) {
+		// read (1 byte?) from SDU1 into buffer
+		// returns number pf bytes transferred
+		len = chSequentialStreamRead(&SDU1, (uint8_t*) buffer, 1);
+
+		for (i = 0; i < len; i++) {
+			usb_rx_buffer[usb_rx_write_pos++] = buffer[i];
+
+			if(usb_rx_write_pos == USB_RX_BUFFER_SIZE) {
+				usb_rx_write_pos = 0;
+			}
+			palTogglePad(GPIOD, PIN_LED2);
+		}
+	}
+}
+
 
 /**
  * @brief	Write one byte to USB
@@ -80,20 +124,32 @@ void send_message(void *p __attribute__((unused)), long fd __attribute__((unused
  * @brief	Read one char from the USB
  *
  * @todo	Add description of parameters
- * @todo	Implement function for reading, not needed for sending only
  */
 uint8_t get_byte(void *p) {
-	return 0; // No reading. Further implementation not needed for sending only
+	uint8_t got_byte;
+	got_byte = usb_rx_buffer[usb_rx_read_pos++];
+	if(usb_rx_read_pos == USB_RX_BUFFER_SIZE) {
+		usb_rx_read_pos = 0;
+	}
+	return got_byte; // No reading. Further implementation not needed for sending only
 }
 
 /**
  * @brief	Return number of chars that are available for reading
  *
  * @todo	Add description of parameters
- * @todo	Implement function for reading, not needed for sending only
  */
 uint16_t char_available(void *p) {
-	return 0; // No reading. Further implementation not needed for sending only
+	uint16_t available_bytes = 0;
+
+	if (usb_rx_write_pos >= usb_rx_read_pos) {
+		// i.e. write_pos = 5, read_pos = 2 -> bytes 2,3,4 available -> 3 bytes
+		available_bytes = usb_rx_write_pos - usb_rx_read_pos;
+	} else {
+		// i.e. write_pos = 2, read_pos = 2046 -> bytes 2046,2047,0,1 available -> 4 bytes
+		available_bytes = USB_RX_BUFFER_SIZE - usb_rx_read_pos + usb_rx_write_pos;
+	}
+	return available_bytes;
 }
 
 void pprz_link_init(void) {
@@ -107,6 +163,9 @@ void pprz_link_init(void) {
 	link_dev.send_message = (send_message_t) send_message;
 	link_dev.char_available = (char_available_t) char_available;
 	link_dev.get_byte = (get_byte_t) get_byte;
+
+	// Create thread for receiving
+	chThdCreateStatic(waUSBRXThread, sizeof(waUSBRXThread), NORMALPRIO, USBRXThread, NULL);
 }
 
 /** @} */
