@@ -39,7 +39,7 @@ EELAYER 25 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 6 11
+Sheet 3 11
 Title "DrMOS power stage"
 Date "2016-01-22"
 Rev "0.1"
@@ -413,7 +413,7 @@ AR Path="/56BC308A/56A3233B" Ref="Ccfilt4"  Part="1"
 AR Path="/56BA2E2B/56A3233B" Ref="Ccfilt5"  Part="1" 
 AR Path="/56BA5F82/56A3233B" Ref="Ccfilt6"  Part="1" 
 F 0 "Ccfilt6" H 8165 2846 50  0000 L CNN
-F 1 "0.5n" H 8165 2754 50  0000 L CNN
+F 1 "0.47n" H 8165 2754 50  0000 L CNN
 F 2 "Capacitors_SMD:C_0402" H 8088 2650 50  0001 C CNN
 F 3 "" H 8050 2800 50  0000 C CNN
 	1    8050 2800
