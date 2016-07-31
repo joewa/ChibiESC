@@ -27,6 +27,12 @@
 // PPRZLink alive message checksum, must match the checksum in the paparazzi-generated var/aircrafts/.../ap/generated/airframe.h file for the PPRZLINK_SENDER_AC_ID
 #define PPRZLINK_MD5SUM ((uint8_t*)"\274\002\046\311\007\062\244\056\315\375\327\330\040\232\343\274")
 
+// for receiving PPRZLink messages
+#define PPRZ_MSG_BUFFER_SIZE	2048
+static uint8_t usb_pprz_msg_buffer[PPRZ_MSG_BUFFER_SIZE];
+static bool usb_pprz_msg_available = false;
+#define IdOfPprzMsg(x) (x[1])
+
 extern void ce_serial_init(void);
 
 #endif /* _CHIBIESC_SERIAL_H_ */

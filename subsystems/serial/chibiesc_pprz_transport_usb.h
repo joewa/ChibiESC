@@ -14,10 +14,10 @@
 
 #define DOWNLINK TRUE // send PPRZLink messages 'from aircraft to ground'
 
-extern struct pprz_transport pprz_tp;
-extern struct link_device link_dev;
+extern struct pprz_transport usb_pprz_tp;
+extern struct link_device usb_link_dev;
 
-extern void pprz_link_init(void);
+extern void usb_pprz_link_init(void);
 
 #endif /* _CHIBIESC_PPRZ_TRANSPORT_USB_H_ */
 
