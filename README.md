@@ -11,4 +11,4 @@ Before committing, please install the pre-commit hook: `ln -s ../../pre-commit .
 
 It automatically adds a file containing the current branch and commit hash of the pprzlink repo when committing to ChibiESC.
 
-If you want to place your pprzlink clone elsewhere, you need to fix your symlinks in the subsystems/pprzlink directory and the above-mentioned pre-commit hook.
+If you want to place your pprzlink clone elsewhere, you need to fix your symlinks in the subsystems/pprzlink directory, the above-mentioned pre-commit hook and the INCDIR variable in the Makefile.

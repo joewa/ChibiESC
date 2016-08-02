@@ -149,11 +149,12 @@ TCPPSRC =
 # List ASM source files here
 ASMSRC = $(STARTUPASM) $(PORTASM) $(OSALASM)
 
+# Update the pprzlink path if you move the pprzlink clone to another directory
 INCDIR = $(STARTUPINC) $(KERNINC) $(PORTINC) $(OSALINC) \
          $(HALINC) $(PLATFORMINC) $(BOARDINC) $(TESTINC) \
          $(CHIBIOS)/os/hal/lib/streams \
          $(CHIBIOS)/os/various \
-         pprzlink/var/include
+         ../pprzlink/var/include
 
 #
 # Project, sources and paths
