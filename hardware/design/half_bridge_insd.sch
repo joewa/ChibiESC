@@ -416,6 +416,7 @@ F 0 "Ccfilt1" H 8165 2846 50  0000 L CNN
 F 1 "0.47n" H 8165 2754 50  0000 L CNN
 F 2 "Capacitors_SMD:C_0402" H 8088 2650 50  0001 C CNN
 F 3 "" H 8050 2800 50  0000 C CNN
+F 4 "Use COG or NPO ceramic. Or poly- propylene or carbonate" H 8050 2800 60  0001 C CNN "Comment"
 	1    8050 2800
 	1    0    0    -1  
 $EndComp

@@ -40,7 +40,7 @@ EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
 Sheet 5 11
-Title ""
+Title "Alternate voltage sensing options"
 Date ""
 Rev "0.1"
 Comp "Jörg Wangemann"
@@ -248,7 +248,7 @@ L C CHFAC1
 U 1 1 579D1951
 P 5800 5650
 F 0 "CHFAC1" V 5548 5650 50  0000 C CNN
-F 1 "10n" V 5639 5650 50  0000 C CNN
+F 1 "10n,35V" V 5639 5650 50  0000 C CNN
 F 2 "Capacitors_SMD:C_0603_HandSoldering" H 5838 5500 50  0001 C CNN
 F 3 "" H 5800 5650 50  0000 C CNN
 F 4 "Use COG or NPO ceramic. Or poly- propylene or carbonate" V 5800 5650 60  0001 C CNN "Comment"
@@ -279,7 +279,7 @@ Wire Wire Line
 	5500 5650 5650 5650
 Wire Wire Line
 	5950 5650 6050 5650
-Text Notes 6900 5100 0    60   ~ 0
+Text Notes 5100 6250 0    60   ~ 0
 PHFAC - High Frequency AC sensing on SENSY2\n- voltage divider RYSGND/(RYOFFS+RYSGND) sets the offset for SENSY2\n- the gain is set by RHFAC/(RHFAC+RYOFFS||RYSGND)\n- DZLIM limits the ADC input to 3.3V
 $Comp
 L D_Schottky_x2_Serial_AKC Dclamp1
