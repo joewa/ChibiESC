@@ -1,9 +1,9 @@
-(kicad_pcb (version 4) (host pcbnew 4.1.0-alpha+201608050946+7006~46~ubuntu16.04.1-product)
+(kicad_pcb (version 20160815) (host pcbnew 4.1.0-alpha+201608161231+7059~46~ubuntu16.04.1-product)
 
   (general
     (links 657)
     (no_connects 0)
-    (area 34.424999 92.939999 178.075001 107.060001)
+    (area 17.887762 85.370143 194.736238 113.328971)
     (thickness 1.6)
     (drawings 43)
     (tracks 3765)
@@ -14,9 +14,12 @@
 
   (page A4)
   (title_block
-    (title DrChibi)
-    (date 2016-01-31)
-    (rev 0)
+    (title "DrChibi, Looong-Strip")
+    (date 2016-08-17)
+    (rev 1.0)
+    (company "Jörg Wangemann")
+    (comment 1 "6-Phase Motor Controller / Inverter")
+    (comment 4 "CC-BY-SA 4.0")
   )
 
   (layers
@@ -211,6 +214,8 @@
     (via_drill 0.3)
     (uvia_dia 0.6)
     (uvia_drill 0.3)
+    (diff_pair_gap 0.25)
+    (diff_pair_width 0.2)
     (add_net "/CAN bus transceiver/CANH")
     (add_net "/CAN bus transceiver/CANL")
     (add_net "/CAN bus transceiver/CAN_RX")
@@ -322,6 +327,8 @@
     (via_drill 0.3)
     (uvia_dia 0.6)
     (uvia_drill 0.3)
+    (diff_pair_gap 0.25)
+    (diff_pair_width 0.2)
     (add_net +5V)
   )
 
@@ -332,6 +339,8 @@
     (via_drill 0.3)
     (uvia_dia 0.6)
     (uvia_drill 0.3)
+    (diff_pair_gap 0.25)
+    (diff_pair_width 0.2)
     (add_net +24V)
   )
 
@@ -342,6 +351,8 @@
     (via_drill 0.3)
     (uvia_dia 0.6)
     (uvia_drill 0.3)
+    (diff_pair_gap 0.25)
+    (diff_pair_width 0.2)
     (add_net +3V3)
   )
 
@@ -7808,10 +7819,10 @@
   (gr_text "F R E E\nhardware design" (at 73.4444 95.5804) (layer B.SilkS)
     (effects (font (size 1 1) (thickness 0.25)) (justify mirror))
   )
-  (gr_text stronger (at 137.808 105.334) (layer B.SilkS)
+  (gr_text Stronger (at 137.7064 103.937) (layer B.SilkS)
     (effects (font (size 0.9 0.9) (thickness 0.2)) (justify mirror))
   )
-  (gr_text Stepper (at 137.808 103.937) (layer B.SilkS)
+  (gr_text Stepper (at 137.7826 105.3848) (layer B.SilkS)
     (effects (font (size 0.9 1) (thickness 0.2)) (justify mirror))
   )
   (gr_text "no cry" (at 145.1486 105.2832) (layer B.SilkS)
