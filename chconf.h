@@ -30,6 +30,9 @@
 
 #define _CHIBIOS_RT_CONF_
 
+#define CHPRINTF_USE_FLOAT TRUE
+
+
 /*===========================================================================*/
 /**
  * @name System timers settings

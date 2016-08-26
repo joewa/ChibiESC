@@ -14,11 +14,14 @@
     limitations under the License.
 */
 
+
 #include "ch.h"
 #include "hal.h"
 #include "test.h"
 #include "chprintf.h"
 #include "subsystems/serial/chibiesc_serial.h"
+
+#include "misc.h"
 
 /*
  * This is a periodic thread that does absolutely nothing except flashing
@@ -40,7 +43,77 @@ static THD_FUNCTION(Thread1, arg) {
 /*
  * Application entry point.
  */
+char testtext[8] = "Hallo\n";
+
+float testfloat = 3.14;
+
+
+
+// BEGIN copy&paste
+
+#include "ringbuf.h"
+#include "bal.h"
+#include "bal_term.h"
+
+#define RX_QUEUE_SIZE  512
+uint8_t usb_rx_buf_raw[RX_QUEUE_SIZE];
+uint8_t usb_rx_string[RX_QUEUE_SIZE];
+//uint8_t usb_rx_buf[RX_QUEUE_SIZE];
+
+struct ringbuf usb_rx_buf = { .buf = (char[RX_QUEUE_SIZE]) {0}, .bufsize = RX_QUEUE_SIZE };
+
+uint16_t cr_count = 0;
+
+static uint16_t VCP_DataRx(uint8_t *buf, uint32_t len)
+{
+    for (uint32_t i = 0; i < len; i++) {
+    	if (buf[i] == 0x0A)
+    	    cr_count++;
+        rb_putc(&usb_rx_buf, buf[i]);
+    }
+    return 1; //USBD_OK;
+}
+
+
+#define USB_CDC_FIRST_ASCII 32    // erstes Ascii-Zeichen
+#define USB_CDC_LAST_ASCII  255   // letztes Ascii-Zeichen
+uint16_t USB_VCP_get_string(char *ptr)
+{
+    uint16_t akt_pos = 0;
+    char wert;
+
+    // test ob eine Endekennung empfangen wurde
+    if (cr_count == 0) return 0;
+
+    if (usb_rx_buf.len == 0) return 0;
+
+    // kompletten String bis zur Endekennung auslesen
+    // (oder bis Puffer leer ist)
+    // es werden nur Ascii-Zeichen übergeben
+    do {
+        rb_getc(&usb_rx_buf, &wert);
+        if ((wert >= USB_CDC_FIRST_ASCII) && (wert <= USB_CDC_LAST_ASCII)) {
+            *(ptr + akt_pos) = wert;
+            akt_pos++;
+        }
+    } while ((usb_rx_buf.len != 0) && (wert != 0x0A)); // 0x0A = '\n'
+
+    // Stringende anhängen
+    *(ptr + akt_pos) = 0x00;
+
+    // eine Endekennung wurde bearbeitet
+    cr_count--;
+
+    return akt_pos;
+}
+
+//END copy&paste
+
+
+
+
 int main(void) {
+	int len;
 
   /*
    * System initializations.
@@ -72,13 +145,32 @@ int main(void) {
    * Normal main() thread activity, in this demo it does nothing except
    * sleeping in a loop and check the button state.
    */
+
+  hal_init();
+
+  hal_set_comp_type("foo"); // default pin for mem errors
+  HAL_PIN(bar) = 0.0;
+
+  //feedback comps
+  #include "comps/term.comp"
+  hal_comp_init();
+
   while (true) {
     //if (palReadPad(GPIOA, GPIOA_BUTTON))
     //  TestThread(&SD2);
 	//palSetPad(GPIOD, PIN_LED1);       /* Orange.  */
 	//palSetPad(GPIOD, PIN_LED2);
 	//palSetPad(GPIOD, PIN_LED3_DISCO);
+	len = chSequentialStreamRead(&SDU1, (uint8_t*)usb_rx_buf_raw, 1);
+	VCP_DataRx(usb_rx_buf_raw, len);
+	//if( USB_VCP_get_string(usb_rx_buf_raw) ) palTogglePad(GPIOD, PIN_LED2);
+	if( USB_VCP_get_string(usb_rx_string) ) palTogglePad(GPIOD, PIN_LED2); // usb_rx_string holds the result of "getln"
+
 	chThdSleepMilliseconds(500);
+
+	//usb_put_buffer(0, 0, testtext, 5);
+	//printf("Hallo\n");
+	chprintf(&SDU1,"Hallo %f\n", testfloat);
 	//palClearPad(GPIOD, PIN_LED1);     /* Orange.  */
 	//palClearPad(GPIOD, PIN_LED2);
 	//palClearPad(GPIOD, PIN_LED3_DISCO);
