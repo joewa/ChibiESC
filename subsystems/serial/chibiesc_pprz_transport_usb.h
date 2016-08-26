@@ -8,7 +8,7 @@
 #ifndef _CHIBIESC_PPRZ_TRANSPORT_USB_H_
 #define _CHIBIESC_PPRZ_TRANSPORT_USB_H_
 
-#include <subsystems/pprzlink/include/pprz_transport.h>
+//#include <subsystems/pprzlink/include/pprz_transport.h>
 
 #include <subsystems/serial/chibiesc_usb.h> // required in order to use SDU1
 

@@ -1,7 +1,7 @@
 ##############################################################################
 # Build global options
 # NOTE: Can be overridden externally.
-#
+# TODO "flto" aktivieren --> siehe STMBL
 
 # Compiler options here.
 ifeq ($(USE_OPT),)
@@ -10,7 +10,7 @@ endif
 
 # C specific options here (added to USE_OPT).
 ifeq ($(USE_COPT),)
-  USE_COPT = 
+  USE_COPT = -fno-builtin -Wfatal-errors -std=gnu11 #-nostartfiles
 endif
 
 # C++ specific options here (added to USE_OPT).
@@ -117,10 +117,19 @@ CSRC = $(STARTUPSRC) \
        $(CHIBIOS)/os/hal/lib/streams/memstreams.c \
        $(CHIBIOS)/os/hal/lib/streams/chprintf.c \
        main.c \
+       syscalls.c \
+       bal.c \
+       bal_term.c \
+       bal_interface.c \
+       scanf.c \
+       misc.c \
        subsystems/serial/chibiesc_usb.c \
        subsystems/serial/chibiesc_serial.c \
-       subsystems/serial/chibiesc_pprz_transport_usb.c \
-       subsystems/pprzlink/src/pprz_transport.c
+       subsystems/serial/chibiesc_pprz_transport_usb.c 
+       #syscalls.c
+       #subsystems/pprzlink/src/pprz_transport.c \
+       
+
 
 # C++ sources that can be compiled in ARM or THUMB mode depending on the global
 # setting.

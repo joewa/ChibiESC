@@ -8,8 +8,9 @@
 #include <subsystems/serial/chibiesc_pprz_transport_usb.h>
 
 
-struct pprz_transport usb_pprz_tp;
-struct link_device usb_link_dev;
+
+//struct pprz_transport usb_pprz_tp;
+//struct link_device usb_link_dev;
 
 #define USB_RX_BUFFER_SIZE	2048
 static uint8_t usb_rx_buffer[USB_RX_BUFFER_SIZE];
@@ -22,6 +23,8 @@ void usb_put_buffer(void *p, long fd, const uint8_t *data, uint16_t len);
 void usb_send_message(void *p __attribute__((unused)), long fd __attribute__((unused)));
 uint8_t usb_get_byte(void *p);
 uint16_t usb_char_available(void *p);
+
+
 
 
 /**
@@ -133,7 +136,6 @@ uint8_t usb_get_byte(void *p) {
  */
 uint16_t usb_char_available(void *p) {
 	uint16_t available_bytes = 0;
-
 	if (usb_rx_write_pos >= usb_rx_read_pos) {
 		// i.e. write_pos = 5, read_pos = 2 -> bytes 2,3,4 available -> 3 bytes
 		available_bytes = usb_rx_write_pos - usb_rx_read_pos;
@@ -144,20 +146,10 @@ uint16_t usb_char_available(void *p) {
 	return available_bytes;
 }
 
+
 void usb_pprz_link_init(void) {
-	pprz_transport_init(&usb_pprz_tp); // initialize the PPRZ transport
-
-	// setup the link device
-	usb_link_dev.periph = NULL; // if you want to pass a pointer to the other functions, set it here
-	usb_link_dev.check_free_space = (check_free_space_t) usb_check_free_space;
-	usb_link_dev.put_byte = (put_byte_t) usb_put_byte;
-	usb_link_dev.put_buffer = (put_buffer_t) usb_put_buffer;
-	usb_link_dev.send_message = (send_message_t) usb_send_message;
-	usb_link_dev.char_available = (char_available_t) usb_char_available;
-	usb_link_dev.get_byte = (get_byte_t) usb_get_byte;
-
 	// Create thread for receiving
-	chThdCreateStatic(waUSBRXThread, sizeof(waUSBRXThread), NORMALPRIO, USBRXThread, NULL);
+	//chThdCreateStatic(waUSBRXThread, sizeof(waUSBRXThread), NORMALPRIO, USBRXThread, NULL);
 }
 
 /** @} */

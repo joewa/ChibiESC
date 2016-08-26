@@ -12,7 +12,7 @@ void print_pin(hal_pin_t* pin){
 void hal_term_listhal(){
    for(int i = 0; i < bal.hal_pin_count; i++){
       printf("%s <= %s = %f\n", bal.hal_pins[i]->name, bal.hal_pins[i]->source->name, bal.hal_pins[i]->source->source->value);
-      Wait(1);//TODO: remove wait...
+      //Wait(1);//TODO: remove wait...
    }
 }
 

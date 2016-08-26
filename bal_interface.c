@@ -33,29 +33,51 @@ term.comp:75: undefined reference to `mod'
 */
 
 
+#include <bal_interface.h>
+
+
 /*
  * Start RT-Thread
  * */
-extern void hal_enable_rt();
+void hal_enable_rt() {
+
+}
 /*
  * Start Fast-RT-Thread
  */
-void hal_enable_frt();
-void hal_disable_rt();
-void hal_disable_frt();
+void hal_enable_frt() {
+
+}
+
+void hal_disable_rt() {
+
+}
+
+void hal_disable_frt() {
+
+}
+
 /*
  * Returns (systick-) timer value, count-direction: down!
  * Systick interupt muss langsamer sein als langsamster HAL-Thread (RT)
  */
-uint32_t hal_get_systick_value();
+uint32_t hal_get_systick_value() {
+	return 0;
+}
+
 /*
  * Value with which the (24-bit) systick is reloaded when zero
  */
-uint32_t hal_get_systick_reload();
+uint32_t hal_get_systick_reload() {
+	return 1000;
+}
+
 /*
  * Systick frequency in Hz
  */
-uint32_t hal_get_systick_freq();
+uint32_t hal_get_systick_freq() {
+	return 1000;
+}
 
 /*
  * load+save Laden und speichern der Konfiguration. Load wird bei start aufgerufen.
@@ -67,4 +89,14 @@ int load() {
 
 void save() {
 
+}
+
+void hal_conf_init(){
+ //  FLASH_Unlock();
+ //  EE_Init();
+ //  FLASH_Lock();
+}
+
+int USB_CDC_is_connected() {
+	return 1;
 }

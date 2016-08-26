@@ -22,6 +22,7 @@
 #include "subsystems/serial/chibiesc_serial.h"
 
 #include "misc.h"
+#include "bal_interface.h"
 
 /*
  * This is a periodic thread that does absolutely nothing except flashing
@@ -107,6 +108,21 @@ uint16_t USB_VCP_get_string(char *ptr)
     return akt_pos;
 }
 
+void USB_VCP_send_string(unsigned char *ptr)
+{ //TODO: Joerg implementiere senden von 0-terminiertem string. Implementiere was Schnelleres als PRINTF!!!
+	chprintf("%s", ptr);
+    /*while (*ptr != 0) {
+        // send a queued byte - copy to usb stack buffer
+        APP_Rx_Buffer[APP_Rx_ptr_in++] = *ptr;
+        ptr++;
+
+            // To avoid buffer overflow
+            if (APP_Rx_ptr_in >= APP_RX_DATA_SIZE) {
+               APP_Rx_ptr_in = 0;
+            }
+    }*/
+}
+
 //END copy&paste
 
 
@@ -146,31 +162,34 @@ int main(void) {
    * sleeping in a loop and check the button state.
    */
 
-  hal_init();
+  /*hal_init();
 
   hal_set_comp_type("foo"); // default pin for mem errors
   HAL_PIN(bar) = 0.0;
 
   //feedback comps
   #include "comps/term.comp"
-  hal_comp_init();
+  hal_comp_init();*/
 
   while (true) {
+	chThdSleepMilliseconds(500);
     //if (palReadPad(GPIOA, GPIOA_BUTTON))
     //  TestThread(&SD2);
 	//palSetPad(GPIOD, PIN_LED1);       /* Orange.  */
 	//palSetPad(GPIOD, PIN_LED2);
 	//palSetPad(GPIOD, PIN_LED3_DISCO);
+	chprintf(&SDU1,"Hallo %f\n", testfloat);
+	/*
 	len = chSequentialStreamRead(&SDU1, (uint8_t*)usb_rx_buf_raw, 1);
 	VCP_DataRx(usb_rx_buf_raw, len);
 	//if( USB_VCP_get_string(usb_rx_buf_raw) ) palTogglePad(GPIOD, PIN_LED2);
 	if( USB_VCP_get_string(usb_rx_string) ) palTogglePad(GPIOD, PIN_LED2); // usb_rx_string holds the result of "getln"
+	*/
 
-	chThdSleepMilliseconds(500);
+
 
 	//usb_put_buffer(0, 0, testtext, 5);
 	//printf("Hallo\n");
-	chprintf(&SDU1,"Hallo %f\n", testfloat);
 	//palClearPad(GPIOD, PIN_LED1);     /* Orange.  */
 	//palClearPad(GPIOD, PIN_LED2);
 	//palClearPad(GPIOD, PIN_LED3_DISCO);
