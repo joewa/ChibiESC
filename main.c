@@ -22,7 +22,7 @@
 #include "subsystems/serial/chibiesc_serial.h"
 
 #include "misc.h"
-#include "bal_interface.h"
+//#include "bal_interface.h"
 
 /*
  * This is a periodic thread that does absolutely nothing except flashing
@@ -50,7 +50,7 @@ float testfloat = 3.14;
 
 
 
-// BEGIN copy&paste
+// BEGIN copy&paste from stmbl usb_cdc
 
 #include "ringbuf.h"
 #include "bal.h"
@@ -108,6 +108,8 @@ uint16_t USB_VCP_get_string(char *ptr)
     return akt_pos;
 }
 
+
+
 void USB_VCP_send_string(unsigned char *ptr)
 { //TODO: Joerg implementiere senden von 0-terminiertem string. Implementiere was Schnelleres als PRINTF!!!
 	chprintf("%s", ptr);
@@ -124,7 +126,6 @@ void USB_VCP_send_string(unsigned char *ptr)
 }
 
 //END copy&paste
-
 
 
 
@@ -162,37 +163,38 @@ int main(void) {
    * sleeping in a loop and check the button state.
    */
 
-  /*hal_init();
+  chThdSleepMilliseconds(2000);
+  hal_init();
 
   hal_set_comp_type("foo"); // default pin for mem errors
   HAL_PIN(bar) = 0.0;
 
   //feedback comps
   #include "comps/term.comp"
-  hal_comp_init();*/
+  hal_comp_init();
 
   while (true) {
-	chThdSleepMilliseconds(500);
+	chThdSleepMilliseconds(1);
     //if (palReadPad(GPIOA, GPIOA_BUTTON))
     //  TestThread(&SD2);
 	//palSetPad(GPIOD, PIN_LED1);       /* Orange.  */
 	//palSetPad(GPIOD, PIN_LED2);
 	//palSetPad(GPIOD, PIN_LED3_DISCO);
-	chprintf(&SDU1,"Hallo %f\n", testfloat);
-	/*
+	//chprintf(&SDU1,"Hallo %f\n", testfloat);
+
 	len = chSequentialStreamRead(&SDU1, (uint8_t*)usb_rx_buf_raw, 1);
 	VCP_DataRx(usb_rx_buf_raw, len);
 	//if( USB_VCP_get_string(usb_rx_buf_raw) ) palTogglePad(GPIOD, PIN_LED2);
-	if( USB_VCP_get_string(usb_rx_string) ) palTogglePad(GPIOD, PIN_LED2); // usb_rx_string holds the result of "getln"
-	*/
-
-
+	if( USB_VCP_get_string(usb_rx_string) ) {
+		palTogglePad(GPIOD, PIN_LED2); // usb_rx_string holds the result of "getln"
+		chprintf(&SDU1,"%s", usb_rx_string); // Echo recieved string.
+	}
 
 	//usb_put_buffer(0, 0, testtext, 5);
 	//printf("Hallo\n");
 	//palClearPad(GPIOD, PIN_LED1);     /* Orange.  */
 	//palClearPad(GPIOD, PIN_LED2);
 	//palClearPad(GPIOD, PIN_LED3_DISCO);
-	chThdSleepMilliseconds(500);
+	chThdSleepMilliseconds(1);
   }
 }

@@ -7,6 +7,11 @@
 
 #include <reent.h>
 
+#include "ch.h"
+#include "hal.h"
+#include "test.h"
+#include "chprintf.h"
+
 
 int _close(int file) {
 	return 0;
