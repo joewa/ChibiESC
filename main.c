@@ -50,6 +50,7 @@ float testfloat = 3.14;
 
 
 
+//#define chprintf printf
 // BEGIN copy&paste from stmbl usb_cdc
 
 #include "ringbuf.h"
@@ -184,7 +185,7 @@ int main(void) {
 
 	len = chSequentialStreamRead(&SDU1, (uint8_t*)usb_rx_buf_raw, 1);
 	VCP_DataRx(usb_rx_buf_raw, len);
-	//if( USB_VCP_get_string(usb_rx_buf_raw) ) palTogglePad(GPIOD, PIN_LED2);
+	//hal_run_nrt(1); // Calls term which calls USB_VCP_get_string. Call from own thread, NOT HERE!!!
 	if( USB_VCP_get_string(usb_rx_string) ) {
 		palTogglePad(GPIOD, PIN_LED2); // usb_rx_string holds the result of "getln"
 		chprintf(&SDU1,"%s", usb_rx_string); // Echo recieved string.
