@@ -57,10 +57,12 @@ float testfloat = 3.14;
 #include "bal.h"
 #include "bal_term.h"
 
-#define RX_QUEUE_SIZE  512
+#define RX_QUEUE_SIZE  128
 uint8_t usb_rx_buf_raw[RX_QUEUE_SIZE];
 uint8_t usb_rx_string[RX_QUEUE_SIZE];
 //uint8_t usb_rx_buf[RX_QUEUE_SIZE];
+//char rx_buf[RX_QUEUE_SIZE];
+
 
 struct ringbuf usb_rx_buf = { .buf = (char[RX_QUEUE_SIZE]) {0}, .bufsize = RX_QUEUE_SIZE };
 
@@ -113,7 +115,7 @@ uint16_t USB_VCP_get_string(char *ptr)
 
 void USB_VCP_send_string(unsigned char *ptr)
 { //TODO: Joerg implementiere senden von 0-terminiertem string. Implementiere was Schnelleres als PRINTF!!!
-	chprintf("%s", ptr);
+	//chprintf("%s", ptr);
     /*while (*ptr != 0) {
         // send a queued byte - copy to usb stack buffer
         APP_Rx_Buffer[APP_Rx_ptr_in++] = *ptr;
@@ -185,11 +187,11 @@ int main(void) {
 
 	len = chSequentialStreamRead(&SDU1, (uint8_t*)usb_rx_buf_raw, 1);
 	VCP_DataRx(usb_rx_buf_raw, len);
-	//hal_run_nrt(1); // Calls term which calls USB_VCP_get_string. Call from own thread, NOT HERE!!!
-	if( USB_VCP_get_string(usb_rx_string) ) {
+	hal_run_nrt(1); // Calls term which calls USB_VCP_get_string. Call from own thread, NOT HERE!!!
+	/*if( USB_VCP_get_string(usb_rx_string) ) {
 		palTogglePad(GPIOD, PIN_LED2); // usb_rx_string holds the result of "getln"
 		chprintf(&SDU1,"%s", usb_rx_string); // Echo recieved string.
-	}
+	}*/
 
 	//usb_put_buffer(0, 0, testtext, 5);
 	//printf("Hallo\n");

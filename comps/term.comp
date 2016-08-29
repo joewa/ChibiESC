@@ -404,9 +404,12 @@ NRT(
       }
    }
 
-   PIN(buf_use) = bc;
 
-   if (USB_CDC_is_connected() /*&& systime >= 1000*/) {
+   
+   PIN(buf_use) = bc;
+   
+
+   if (USB_CDC_is_connected() ) { //&& systime >= 1000
       char source[APP_TX_BUF_SIZE];
       char sink[APP_TX_BUF_SIZE];
 
@@ -417,9 +420,11 @@ NRT(
 
       int i = -1;
       char rx_buf[APP_TX_BUF_SIZE];
-      if (USB_VCP_get_string(rx_buf)) {
+      
+      if (USB_VCP_get_string(rx_buf)) { // Hangs here by Joerg
          i = sscanf_(rx_buf, "%N = %N", sink, source);
       }
+      /* Joerg
       if(i == 2){ // read hal pin
          if(hal_is_pin(sink)){
             print_pin(hal_find_pin(sink));
@@ -447,7 +452,9 @@ NRT(
             printf("not found: %s\n", sink);
          }
       }
+      Joerg */
    }
+   
 );
 
 ENDCOMP;
