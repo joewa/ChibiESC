@@ -1,6 +1,7 @@
 #define APP_TX_BUF_SIZE 128
 #define APP_RX_BUF_SIZE 128
 
+
 HAL_COMP(term);
 
 HAL_PIN(wave0) = 0.0;
@@ -185,7 +186,6 @@ NRT(
    }
 
    void help(){
-      chprintf(&SDU1,"######## HAL cheat sheet ########\n");
       printf("######## HAL cheat sheet ########\n");
       printf("pin name: <comp name><comp instance number>.<pin name> (e.g. pid0.enable)\n");
       printf("show pin value and source: pid0.enable (answer: pid0.enable <= fault0.enable_pid = 1.000000)\n");

@@ -10,6 +10,9 @@
 
 #include <stdint.h>
 
+#define printf(msg, ...) chprintf(&SDU1, msg, ## __VA_ARGS__)
+
+
 void hal_conf_init();
 int USB_CDC_is_connected();
 

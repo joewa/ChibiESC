@@ -22,7 +22,7 @@
 #include "subsystems/serial/chibiesc_serial.h"
 
 #include "misc.h"
-//#include "bal_interface.h"
+#include "bal_interface.h"
 
 
 
@@ -41,6 +41,8 @@ float testfloat = 3.14;
 #include "ringbuf.h"
 #include "bal.h"
 #include "bal_term.h"
+
+
 
 #define RX_QUEUE_SIZE  128
 uint8_t usb_rx_buf_raw[RX_QUEUE_SIZE];
@@ -131,8 +133,6 @@ static THD_FUNCTION(Thread1, arg) {
   chRegSetThreadName("blinker");
   int len;
   while (true) {
-		len = chSequentialStreamRead(&SDU1, (uint8_t*)usb_rx_buf_raw, 1);
-		VCP_DataRx(usb_rx_buf_raw, len);
 		hal_run_nrt(1); // Calls term which calls USB_VCP_get_string. Call from own thread, NOT HERE!!!
 	  	/*if( len = USB_VCP_get_string(usb_rx_string) ) {
 	  		palTogglePad(GPIOD, PIN_LED2); // usb_rx_string holds the result of "getln"
@@ -199,13 +199,13 @@ int main(void) {
 	//palSetPad(GPIOD, PIN_LED3_DISCO);
 	//chprintf(&SDU1,"Hallo %f\n", testfloat);
 
-
+	len = chSequentialStreamRead(&SDU1, (uint8_t*)usb_rx_buf_raw, 1);
+	VCP_DataRx(usb_rx_buf_raw, len);
 
 	//usb_put_buffer(0, 0, testtext, 5);
 	//printf("Hallo\n");
 	//palClearPad(GPIOD, PIN_LED1);     /* Orange.  */
 	//palClearPad(GPIOD, PIN_LED2);
 	//palClearPad(GPIOD, PIN_LED3_DISCO);
-	chThdSleepMilliseconds(1);
   }
 }
