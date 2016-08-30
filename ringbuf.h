@@ -26,7 +26,7 @@ static inline int rb_getc(struct ringbuf *rb, char *data)
     if (!rb->len)
         return 0;
 
-    *data = rb->buf[rb->pos++];
+    *data = rb->buf[rb->pos]; rb->pos++;
 	if (rb->pos >= rb->bufsize)
 		rb->pos -= rb->bufsize;
 	rb->len--;
@@ -47,7 +47,7 @@ static inline int rb_putc(struct ringbuf *rb, const char data)
     if (rb->len >= rb->bufsize)
         return 0;
 
-	unsigned i = rb->pos + rb->len;
+	unsigned int i = rb->pos + rb->len;
 	if (i >= rb->bufsize)
 		i -= rb->bufsize;
 

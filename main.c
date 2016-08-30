@@ -24,22 +24,7 @@
 #include "misc.h"
 //#include "bal_interface.h"
 
-/*
- * This is a periodic thread that does absolutely nothing except flashing
- * a LED.
- */
-static THD_WORKING_AREA(waThread1, 128);
-static THD_FUNCTION(Thread1, arg) {
 
-  (void)arg;
-  chRegSetThreadName("blinker");
-  while (true) {
-    palSetPad(GPIOD, PIN_LED1);       /* Orange.  */
-    chThdSleepMilliseconds(500);
-    palClearPad(GPIOD, PIN_LED1);     /* Orange.  */
-    chThdSleepMilliseconds(500);
-  }
-}
 
 /*
  * Application entry point.
@@ -64,14 +49,14 @@ uint8_t usb_rx_string[RX_QUEUE_SIZE];
 //char rx_buf[RX_QUEUE_SIZE];
 
 
-struct ringbuf usb_rx_buf = { .buf = (char[RX_QUEUE_SIZE]) {0}, .bufsize = RX_QUEUE_SIZE };
+struct ringbuf usb_rx_buf = { .buf = (char[RX_QUEUE_SIZE]) {0}, .bufsize = RX_QUEUE_SIZE, .pos = 0, .len = 0 };
 
 uint16_t cr_count = 0;
 
 static uint16_t VCP_DataRx(uint8_t *buf, uint32_t len)
 {
     for (uint32_t i = 0; i < len; i++) {
-    	if (buf[i] == 0x0A)
+    	if (buf[i] == 0x0A) // 0x0A == '\n'
     	    cr_count++;
         rb_putc(&usb_rx_buf, buf[i]);
     }
@@ -94,7 +79,7 @@ uint16_t USB_VCP_get_string(char *ptr)
     // kompletten String bis zur Endekennung auslesen
     // (oder bis Puffer leer ist)
     // es werden nur Ascii-Zeichen übergeben
-    do {
+   do {
         rb_getc(&usb_rx_buf, &wert);
         if ((wert >= USB_CDC_FIRST_ASCII) && (wert <= USB_CDC_LAST_ASCII)) {
             *(ptr + akt_pos) = wert;
@@ -130,6 +115,33 @@ void USB_VCP_send_string(unsigned char *ptr)
 
 //END copy&paste
 
+
+void testprint() {
+	chprintf(&SDU1,"Hallo %f\n", testfloat);
+}
+
+
+/*
+ * This is a periodic thread that does absolutely nothing except flashing
+ * a LED.
+ */
+static THD_WORKING_AREA(waThread1, 4096);
+static THD_FUNCTION(Thread1, arg) {
+  (void)arg;
+  chRegSetThreadName("blinker");
+  int len;
+  while (true) {
+		len = chSequentialStreamRead(&SDU1, (uint8_t*)usb_rx_buf_raw, 1);
+		VCP_DataRx(usb_rx_buf_raw, len);
+		hal_run_nrt(1); // Calls term which calls USB_VCP_get_string. Call from own thread, NOT HERE!!!
+	  	/*if( len = USB_VCP_get_string(usb_rx_string) ) {
+	  		palTogglePad(GPIOD, PIN_LED2); // usb_rx_string holds the result of "getln"
+	  		chprintf(&SDU1,"%s, %i\n", usb_rx_string, len); // Echo recieved string.
+	  		// TODO: Warum kommen am Anfang komische AT zurueck!!=
+	  		}*/
+	  chThdSleepMilliseconds(1);
+  }
+}
 
 
 int main(void) {
@@ -176,7 +188,9 @@ int main(void) {
   #include "comps/term.comp"
   hal_comp_init();
 
-  while (true) {
+  chThdCreateStatic(waThread1, sizeof(waThread1), NORMALPRIO, Thread1, NULL);
+    // Main loop
+    while (true) {
 	chThdSleepMilliseconds(1);
     //if (palReadPad(GPIOA, GPIOA_BUTTON))
     //  TestThread(&SD2);
@@ -185,13 +199,7 @@ int main(void) {
 	//palSetPad(GPIOD, PIN_LED3_DISCO);
 	//chprintf(&SDU1,"Hallo %f\n", testfloat);
 
-	len = chSequentialStreamRead(&SDU1, (uint8_t*)usb_rx_buf_raw, 1);
-	VCP_DataRx(usb_rx_buf_raw, len);
-	hal_run_nrt(1); // Calls term which calls USB_VCP_get_string. Call from own thread, NOT HERE!!!
-	/*if( USB_VCP_get_string(usb_rx_string) ) {
-		palTogglePad(GPIOD, PIN_LED2); // usb_rx_string holds the result of "getln"
-		chprintf(&SDU1,"%s", usb_rx_string); // Echo recieved string.
-	}*/
+
 
 	//usb_put_buffer(0, 0, testtext, 5);
 	//printf("Hallo\n");
