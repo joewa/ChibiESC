@@ -20,22 +20,30 @@
 #include "chprintf.h"
 #include "subsystems/serial/chibiesc_usb.h"
 
-/*
- * This is a periodic thread that does absolutely nothing except flashing
- * a LED.
- */
+
 static THD_WORKING_AREA(waThread1, 128);
 static THD_FUNCTION(Thread1, arg) {
 
   (void)arg;
-  chRegSetThreadName("blinker");
+  chRegSetThreadName("Thread1");
   while (true) {
-    palSetPad(GPIOD, PIN_LED1);       /* Orange.  */
-    chThdSleepMilliseconds(500);
-    palClearPad(GPIOD, PIN_LED1);     /* Orange.  */
-    chThdSleepMilliseconds(500);
+    palTogglePad(GPIOD, PIN_LED2);       /* LD3 (orange)  */
+    //chThdSleepMilliseconds(1);
+    chThdYield();
   }
 }
+
+static THD_WORKING_AREA(waThread2, 128);
+static THD_FUNCTION(Thread2, arg) {
+
+  (void)arg;
+  chRegSetThreadName("Thread2");
+  while (true) {
+    palTogglePad(GPIOD, PIN_LED3_DISCO);       /* LD6 (blue)  */
+    chThdSleepMilliseconds(250);
+  }
+}
+
 
 /*
  * Application entry point.
@@ -51,36 +59,18 @@ int main(void) {
    */
   halInit();
   chSysInit();
-  //osalSysEnable(); // just copied here from example to test why LED blinking doesn't work
-
-  /*
-   * Activates the serial driver 2 using the driver default configuration.
-   * PA2(TX) and PA3(RX) are routed to USART2.
-   */
-  //sdStart(&SD2, NULL);
-  //palSetPadMode(GPIOA, 2, PAL_MODE_ALTERNATE(7));
-  //palSetPadMode(GPIOA, 3, PAL_MODE_ALTERNATE(7));
-
-  /*
-   * Creates the example thread.
-   */
-  //chThdCreateStatic(waThread1, sizeof(waThread1), NORMALPRIO, Thread1, NULL);
 
   usb_init(); // Serial over USB initialization
+
+  chThdCreateStatic(waThread1, sizeof(waThread1), NORMALPRIO, Thread1, NULL);
+  chThdCreateStatic(waThread2, sizeof(waThread2), NORMALPRIO-10, Thread2, NULL);
+
   /*
    * Normal main() thread activity, in this demo it does nothing except
    * sleeping in a loop and check the button state.
    */
   while (true) {
-    //if (palReadPad(GPIOA, GPIOA_BUTTON))
-    //  TestThread(&SD2);
-	palSetPad(GPIOD, PIN_LED1);       /* Orange.  */
-	palSetPad(GPIOD, PIN_LED2);
-	palSetPad(GPIOD, PIN_LED3_DISCO);
-	chThdSleepMilliseconds(500);
-	palClearPad(GPIOD, PIN_LED1);     /* Orange.  */
-	palClearPad(GPIOD, PIN_LED2);
-	palClearPad(GPIOD, PIN_LED3_DISCO);
+    palTogglePad(GPIOD, PIN_LED1);       /* LD4 (green)  */
 	chThdSleepMilliseconds(500);
   }
 }
