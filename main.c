@@ -23,25 +23,42 @@
 
 static THD_WORKING_AREA(waThread1, 128);
 static THD_FUNCTION(Thread1, arg) {
+	// shortest time to compute, but highest frequency and highest priority
+	(void)arg;
+	chRegSetThreadName("Thread1");
 
-  (void)arg;
-  chRegSetThreadName("Thread1");
-  while (true) {
-    palTogglePad(GPIOD, PIN_LED2);       /* LD3 (orange)  */
-    //chThdSleepMilliseconds(1);
-    chThdYield();
-  }
+	systime_t time = chVTGetSystemTime();
+
+	while (true) {
+		time += US2ST(1);
+		palTogglePad(GPIOD, PIN_LED2);       /* LD3 (orange)  */
+		chThdSleepUntil(time);
+		//chThdSleepMicroseconds(1);
+		//chThdYield();
+	}
 }
 
 static THD_WORKING_AREA(waThread2, 128);
 static THD_FUNCTION(Thread2, arg) {
+	// longest time to compute (longer than Thread1 frequency, but lower frequency and lowest priority
+	// long computation in this thread is interrupted by Thread1 and the main loop
+	(void)arg;
+	chRegSetThreadName("Thread2");
 
-  (void)arg;
-  chRegSetThreadName("Thread2");
-  while (true) {
-    palTogglePad(GPIOD, PIN_LED3_DISCO);       /* LD6 (blue)  */
-    chThdSleepMilliseconds(250);
-  }
+	systime_t time = chVTGetSystemTime();
+
+	while (true) {
+		time += MS2ST(250);
+		int i;
+		for (i = 0; i<2000000; i++) {
+			int a = 5;
+			float b = 6.123;
+			float c = a / b * i;
+		}
+		palTogglePad(GPIOD, PIN_LED3_DISCO);       /* LD6 (blue)  */
+		chThdSleepUntil(time);
+    	//chThdSleepMilliseconds(250);
+	}
 }
 
 
@@ -49,6 +66,7 @@ static THD_FUNCTION(Thread2, arg) {
  * Application entry point.
  */
 int main(void) {
+	// main loop always runs at NORMALPRIO
 
   /*
    * System initializations.
@@ -62,7 +80,7 @@ int main(void) {
 
   usb_init(); // Serial over USB initialization
 
-  chThdCreateStatic(waThread1, sizeof(waThread1), NORMALPRIO, Thread1, NULL);
+  chThdCreateStatic(waThread1, sizeof(waThread1), NORMALPRIO+20, Thread1, NULL);
   chThdCreateStatic(waThread2, sizeof(waThread2), NORMALPRIO-10, Thread2, NULL);
 
   /*
@@ -71,6 +89,6 @@ int main(void) {
    */
   while (true) {
     palTogglePad(GPIOD, PIN_LED1);       /* LD4 (green)  */
-	chThdSleepMilliseconds(500);
+	chThdSleepMilliseconds(5);
   }
 }
