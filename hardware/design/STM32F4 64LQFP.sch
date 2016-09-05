@@ -4329,7 +4329,7 @@ Text HLabel 8750 2450 2    60   3State ~ 0
 THWn
 Text HLabel 7000 1850 2    60   3State ~ 0
 FAULTC
-Text HLabel 4500 4050 0    60   Output ~ 0
+Text HLabel 7500 3200 2    60   Output ~ 0
 ZCD_EN
 $Comp
 L +3.3V #PWR0112
@@ -4436,7 +4436,7 @@ F 5 "STM32F405RGTx" H 5750 3900 60  0001 C CNN "Part Number"
 $EndComp
 Text HLabel 7000 1750 2    60   Output ~ 0
 LED2
-Text HLabel 7500 3200 2    60   Output ~ 0
+Text HLabel 4500 4050 0    60   Output ~ 0
 LED3
 Text HLabel 4500 6050 0    60   Output ~ 0
 ENABLED
