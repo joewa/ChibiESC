@@ -366,7 +366,7 @@ void usb_init(void) {
 	/*
 	 * Creates the test thread.
 	 */
-	chThdCreateStatic(waUSBTestThread, sizeof(waUSBTestThread), NORMALPRIO, USBTestThread, NULL);
+	//chThdCreateStatic(waUSBTestThread, sizeof(waUSBTestThread), NORMALPRIO, USBTestThread, NULL);
 }
 
 /** @} */
