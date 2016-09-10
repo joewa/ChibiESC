@@ -240,9 +240,9 @@ static THD_FUNCTION(ThreadRT, arg) {
 			}
 		}
 		palTogglePad(GPIOD, PIN_LED3_DISCO);       /* LD6 (blue)  */
-		//chThdSleepUntil(time);
+		chThdSleepUntil(time);
 		//chThdYield();
-    	chThdSleepMilliseconds(100);
+    	//chThdSleepMilliseconds(100);
 	}
 }
 
