@@ -23,7 +23,7 @@
 
 
 #define ADC_GRP2_NUM_CHANNELS   2
-#define ADC_GRP2_BUF_DEPTH      20
+#define ADC_GRP2_BUF_DEPTH      48
 
 static adcsample_t samples2[ADC_GRP2_NUM_CHANNELS * ADC_GRP2_BUF_DEPTH];
 
@@ -73,51 +73,53 @@ static const ADCConversionGroup adcgrpcfg2 = {
 
 
 
-static THD_WORKING_AREA(waThread1, 128);
-static THD_FUNCTION(Thread1, arg) {
+static THD_WORKING_AREA(waThreadFRT, 4096);
+static THD_FUNCTION(ThreadFRT, arg) {
 	// shortest time to compute, but highest frequency and highest priority
 	(void)arg;
-	chRegSetThreadName("Thread1");
+	chRegSetThreadName("ThreadFRT");
 
 	int delta_count, last_delta_count;
 	delta_count=0; last_delta_count=0;
 	count_adc=0; count_frt=0;
 	systime_t time = chVTGetSystemTime();
-	//adcStartConversion(&ADCD1, &adcgrpcfg2, samples2, ADC_GRP2_BUF_DEPTH);
+	adcStartConversion(&ADCD1, &adcgrpcfg2, samples2, ADC_GRP2_BUF_DEPTH);
 
 	while (true) {
-		time += US2ST(1);
+		time += US2ST(20); //20
 		palTogglePad(GPIOD, PIN_LED2);       /* LD3 (orange)  */
 		delta_count = count_frt - count_adc;
 		if(delta_count != last_delta_count) palTogglePad(GPIOD, PIN_LED1);
 		last_delta_count = delta_count;
 		count_frt++;
 		chThdSleepUntil(time);
-		//chThdSleepMicroseconds(1);
 		//chThdYield();
 	}
 }
 
-static THD_WORKING_AREA(waThread2, 128);
-static THD_FUNCTION(Thread2, arg) {
-	// longest time to compute (longer than Thread1 frequency, but lower frequency and lowest priority
-	// long computation in this thread is interrupted by Thread1 and the main loop
+static THD_WORKING_AREA(waThreadRT, 4096);
+static THD_FUNCTION(ThreadRT, arg) {
+	// longest time to compute (longer than ThreadFRT frequency, but lower frequency and lowest priority
+	// long computation in this thread is interrupted by ThreadFRT and the main loop
 	(void)arg;
-	chRegSetThreadName("Thread2");
+	chRegSetThreadName("ThreadRT");
 
 	systime_t time = chVTGetSystemTime();
 
 	while (true) {
 		time += MS2ST(250);
-		int i;
-		for (i = 0; i<2000000; i++) {
-			int a = 5;
-			float b = 6.123;
-			float c = a / b * i;
+		int i,i2;
+		for (i = 0; i<200000; i++) {
+			for (i2 = 0; i2<2; i2++) {
+				int a = 5;
+				float b = 6.123;
+				float c = a / b * i2;
+			}
 		}
 		palTogglePad(GPIOD, PIN_LED3_DISCO);       /* LD6 (blue)  */
-		chThdSleepUntil(time);
-    	//chThdSleepMilliseconds(250);
+		//chThdSleepUntil(time);
+		//chThdYield();
+    	chThdSleepMilliseconds(100);
 	}
 }
 
@@ -144,14 +146,14 @@ int main(void) {
   /*
    * Activates the ADC1 driver and the temperature sensor.
    */
-  //adcStart(&ADCD1, NULL);
+  adcStart(&ADCD1, NULL);
   //adcSTM32EnableTSVREFE();
   /*
    * Starts an ADC continuous conversion.
    */
 
-  chThdCreateStatic(waThread1, sizeof(waThread1), NORMALPRIO+20, Thread1, NULL);
-  chThdCreateStatic(waThread2, sizeof(waThread2), NORMALPRIO-10, Thread2, NULL);
+  chThdCreateStatic(waThreadFRT, sizeof(waThreadFRT), NORMALPRIO+20, ThreadFRT, NULL);
+  chThdCreateStatic(waThreadRT, sizeof(waThreadRT), NORMALPRIO-10, ThreadRT, NULL);
 
   /*
    * Normal main() thread activity, in this demo it does nothing except
