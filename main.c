@@ -47,6 +47,13 @@ float testfloat = 3.14;
 #include "bal_term.h"
 
 
+GLOBAL_HAL_PIN(nrt_time);
+GLOBAL_HAL_PIN(rt_time);
+GLOBAL_HAL_PIN(frt_time);
+GLOBAL_HAL_PIN(nrt_period_time);
+GLOBAL_HAL_PIN(rt_period_time);
+GLOBAL_HAL_PIN(frt_period_time);
+
 
 #define RX_QUEUE_SIZE  128
 uint8_t usb_rx_buf_raw[RX_QUEUE_SIZE];
@@ -178,23 +185,9 @@ static const ADCConversionGroup adcgrpcfg2 = {
 };
 
 
-static THD_WORKING_AREA(waThread1, 4096);
-static THD_FUNCTION(Thread1, arg) {
-  (void)arg;
-  chRegSetThreadName("blinker");
-  int len;
-  while (true) {
-		hal_run_nrt(1); // Calls term which calls USB_VCP_get_string. Call from own thread, NOT HERE!!!
-	  	/*if( len = USB_VCP_get_string(usb_rx_string) ) {
-	  		palTogglePad(GPIOD, PIN_LED2); // usb_rx_string holds the result of "getln"
-	  		chprintf(&SDU1,"%s, %i\n", usb_rx_string, len); // Echo recieved string.
-	  		// TODO: Warum kommen am Anfang komische AT zurueck!!=
-	  		}*/
-	  chThdSleepMilliseconds(1);
-  }
-}
 
-static THD_WORKING_AREA(waThreadFRT, 4096);
+
+static THD_WORKING_AREA(waThreadFRT, 8192);
 static THD_FUNCTION(ThreadFRT, arg) {
 	// shortest time to compute, but highest frequency and highest priority
 	(void)arg;
@@ -220,7 +213,7 @@ static THD_FUNCTION(ThreadFRT, arg) {
 	}
 }
 
-static THD_WORKING_AREA(waThreadRT, 4096);
+static THD_WORKING_AREA(waThreadRT, 8192);
 static THD_FUNCTION(ThreadRT, arg) {
 	// longest time to compute (longer than ThreadFRT frequency, but lower frequency and lowest priority
 	// long computation in this thread is interrupted by ThreadFRT and the main loop
@@ -232,19 +225,70 @@ static THD_FUNCTION(ThreadRT, arg) {
 	while (true) {
 		time += MS2ST(250);
 		int i,i2;
-		for (i = 0; i<200000; i++) {
+		/*for (i = 0; i<200000; i++) {
 			for (i2 = 0; i2<2; i2++) {
 				int a = 5;
 				float b = 6.123;
 				float c = a / b * i2;
 			}
-		}
+		}*/
 		palTogglePad(GPIOD, PIN_LED3_DISCO);       /* LD6 (blue)  */
 		chThdSleepUntil(time);
 		//chThdYield();
     	//chThdSleepMilliseconds(100);
 	}
 }
+
+
+static THD_WORKING_AREA(waThreadNRT, 8192);
+static THD_FUNCTION(ThreadNRT, arg) {
+  (void)arg;
+  chRegSetThreadName("ThreadNRT");
+  int len;
+  systime_t nrt_calctime = 0;
+  systime_t nrt_starttime = chVTGetSystemTime();
+  //systime_t nrt_nexttime = nrt_starttime;
+#define nrt_Period MS2ST(2)
+  PIN(nrt_period_time) = ((float)nrt_Period) / hal_get_systick_freq();
+  while (true) {
+	  nrt_starttime = chVTGetSystemTime();
+	  hal_run_nrt(nrt_Period); // Calls term which calls USB_VCP_get_string. Call from own thread, NOT HERE!!!
+	  	/*if( len = USB_VCP_get_string(usb_rx_string) ) {
+	  		palTogglePad(GPIOD, PIN_LED2); // usb_rx_string holds the result of "getln"
+	  		chprintf(&SDU1,"%s, %i\n", usb_rx_string, len); // Echo recieved string.
+	  		// TODO: Warum kommen am Anfang komische AT zurueck!!=
+	  		}*/
+
+	  nrt_calctime = chVTTimeElapsedSinceX(nrt_starttime);
+	  PIN(nrt_time) = ((float)(nrt_calctime)) / hal_get_systick_freq();
+	  //nrt_nexttime += nrt_Period; // TODO: Check if nexttime > starttime!!!
+	  //chThdSleepUntil(nrt_nexttime);
+	  chThdSleepMilliseconds(nrt_Period);
+  }
+}
+
+
+/*
+ * Start RT-Thread
+ * */
+void hal_enable_rt() {
+	chThdCreateStatic(waThreadRT, sizeof(waThreadRT), NORMALPRIO-10, ThreadRT, NULL);
+}
+/*
+ * Start Fast-RT-Thread
+ */
+void hal_enable_frt() {
+	chThdCreateStatic(waThreadFRT, sizeof(waThreadFRT), NORMALPRIO+20, ThreadFRT, NULL);
+}
+
+void hal_disable_rt() {
+
+}
+
+void hal_disable_frt() {
+
+}
+
 
 
 int main(void) {
@@ -274,6 +318,7 @@ int main(void) {
 
 
   chThdSleepMilliseconds(2000);
+  //setup();
   hal_init(); // from stmbl bal
 
 
@@ -283,11 +328,39 @@ int main(void) {
 
   //feedback comps
   #include "comps/term.comp"
+  //command comps
+
+  //PID
+
+  hal_set_comp_type("net");
+  HAL_PIN(enable) = 0.0;
+  HAL_PIN(cmd) = 0.0;
+  HAL_PIN(rt_calc_time) = 0.0;
+  HAL_PIN(frt_calc_time) = 0.0;
+  HAL_PIN(nrt_calc_time) = 0.0;
+  HAL_PIN(rt_period) = 0.0;
+  HAL_PIN(frt_period) = 0.0;
+  HAL_PIN(nrt_period) = 0.0;
+
+  // Was macht das?
+  nrt_time_hal_pin = hal_map_pin("net0.nrt_calc_time");
+  rt_time_hal_pin = hal_map_pin("net0.rt_calc_time");
+  frt_time_hal_pin = hal_map_pin("net0.frt_calc_time");
+  nrt_period_time_hal_pin = hal_map_pin("net0.nrt_period");
+  rt_period_time_hal_pin = hal_map_pin("net0.rt_period");
+  frt_period_time_hal_pin = hal_map_pin("net0.frt_period");
+
   hal_comp_init();
 
-  chThdCreateStatic(waThread1, sizeof(waThread1), NORMALPRIO-20, Thread1, NULL);
-  chThdCreateStatic(waThreadFRT, sizeof(waThreadFRT), NORMALPRIO+20, ThreadFRT, NULL);
-  chThdCreateStatic(waThreadRT, sizeof(waThreadRT), NORMALPRIO-10, ThreadRT, NULL);
+  if(bal.pin_errors + bal.comp_errors == 0){
+     hal_start();
+  }
+  else{
+     bal.hal_state = MEM_ERROR;
+  }
+
+  chThdCreateStatic(waThreadNRT, sizeof(waThreadNRT), NORMALPRIO-20, ThreadNRT, NULL);
+
     // Main loop
     while (true) {
 	chThdSleepMilliseconds(1);

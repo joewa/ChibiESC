@@ -9,6 +9,7 @@
 #define BAL_INTERFACE_H_
 
 #include <stdint.h>
+#include "chconf.h"
 
 #define printf(msg, ...) chprintf(&SDU1, msg, ## __VA_ARGS__)
 

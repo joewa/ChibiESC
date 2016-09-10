@@ -36,26 +36,6 @@ term.comp:75: undefined reference to `mod'
 #include <bal_interface.h>
 
 
-/*
- * Start RT-Thread
- * */
-void hal_enable_rt() {
-
-}
-/*
- * Start Fast-RT-Thread
- */
-void hal_enable_frt() {
-
-}
-
-void hal_disable_rt() {
-
-}
-
-void hal_disable_frt() {
-
-}
 
 /*
  * Returns (systick-) timer value, count-direction: down!
@@ -76,7 +56,7 @@ uint32_t hal_get_systick_reload() {
  * Systick frequency in Hz
  */
 uint32_t hal_get_systick_freq() {
-	return 1000;
+	return CH_CFG_ST_FREQUENCY;
 }
 
 /*
