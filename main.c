@@ -89,7 +89,9 @@ static THD_FUNCTION(ThreadFRT, arg) {
 		time += US2ST(20); //20
 		palTogglePad(GPIOD, PIN_LED2);       /* LD3 (orange)  */
 		delta_count = count_frt - count_adc;
-		if(delta_count != last_delta_count) palTogglePad(GPIOD, PIN_LED1);
+		if(delta_count != last_delta_count) {
+			palTogglePad(GPIOD, PIN_LED1);
+		}
 		last_delta_count = delta_count;
 		count_frt++;
 		chThdSleepUntil(time);
