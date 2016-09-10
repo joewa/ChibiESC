@@ -345,6 +345,7 @@ void usb_init(void) {
 	chThdSleepMilliseconds(1500);
 	usbStart(serusbcfg.usbp, &usbcfg);
 	usbConnectBus(serusbcfg.usbp);
+
 }
 
 /** @} */

@@ -11,7 +11,6 @@ LIBS:cmos4000
 LIBS:adc-dac
 LIBS:memory
 LIBS:xilinx
-LIBS:special
 LIBS:microcontrollers
 LIBS:dsp
 LIBS:microchip
@@ -43,11 +42,11 @@ encoding utf-8
 Sheet 2 11
 Title "CAN BUS transceiver"
 Date "2015-08-27"
-Rev ""
+Rev "0.1"
 Comp "Jörg Wangemann"
 Comment1 ""
 Comment2 ""
-Comment3 ""
+Comment3 "CC-BY-SA 4.0"
 Comment4 ""
 $EndDescr
 $Comp
