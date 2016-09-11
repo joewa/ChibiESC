@@ -314,7 +314,8 @@ int main(void) {
    * Starts an ADC continuous conversion.
    */
 
-  ce_serial_init();
+  //ce_serial_init();
+  usb_init();
 
 
   chThdSleepMilliseconds(2000);
