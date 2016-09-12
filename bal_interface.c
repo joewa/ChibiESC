@@ -33,7 +33,7 @@ term.comp:75: undefined reference to `mod'
 */
 
 
-#include <bal_interface.h>
+#include "bal_interface.h"
 
 
 

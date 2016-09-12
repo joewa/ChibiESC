@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include "bal_term.h"
 
+#include "bal_interface.h"
+
 void print_pin(hal_pin_t* pin){
    if(pin == pin->source){//if pin is not linked
       printf("%s = %f\n", pin->name, pin->source->source->value);

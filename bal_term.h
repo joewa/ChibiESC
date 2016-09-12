@@ -3,6 +3,7 @@
 #include <string.h>
 #include "bal.h"
 
+
 void print_pin(hal_pin_t* pin);
 void print_hal_info();
 void hal_term_listhal();

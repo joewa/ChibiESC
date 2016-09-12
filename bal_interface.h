@@ -9,8 +9,14 @@
 #define BAL_INTERFACE_H_
 
 #include <stdint.h>
+#include "ch.h"
+#include "hal.h"
+#include "test.h"
+#include "chprintf.h"
 #include "chconf.h"
 
+
+extern SerialUSBDriver SDU1;
 #define printf(msg, ...) chprintf(&SDU1, msg, ## __VA_ARGS__)
 
 

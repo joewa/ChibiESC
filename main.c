@@ -272,7 +272,7 @@ static THD_FUNCTION(ThreadNRT, arg) {
  * Start RT-Thread
  * */
 void hal_enable_rt() {
-	chThdCreateStatic(waThreadRT, sizeof(waThreadRT), NORMALPRIO-10, ThreadRT, NULL);
+	chThdCreateStatic(waThreadRT, sizeof(waThreadRT), NORMALPRIO+10, ThreadRT, NULL);
 }
 /*
  * Start Fast-RT-Thread
@@ -329,6 +329,7 @@ int main(void) {
 
   //feedback comps
   #include "comps/term.comp"
+  #include "comps/sim.comp"
   //command comps
 
   //PID
