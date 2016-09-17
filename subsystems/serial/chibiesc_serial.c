@@ -42,7 +42,7 @@ static THD_FUNCTION(SerialTestThread, arg) {
 		pprzlink_test_loop++;
 		if (pprzlink_test_loop > 19) pprzlink_test_loop = 0;
 
-		palTogglePad(GPIOD, PIN_LED3_DISCO);
+		palTogglePad(BANK_LED3_DISCO, PIN_LED3_DISCO);
 	}
 }
 
@@ -74,7 +74,7 @@ static THD_FUNCTION(SerialRXThread, arg) {
 		} else {
 			uint8_t msg_id = IdOfPprzMsg(usb_pprz_msg_buffer);
 			if (msg_id == DL_PING) {
-				palTogglePad(GPIOD, PIN_LED1);
+				palTogglePad(BANK_LED1, PIN_LED1);
 			}
 		}*/
 	}

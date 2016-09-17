@@ -201,10 +201,10 @@ static THD_FUNCTION(ThreadFRT, arg) {
 
 	while (true) {
 		time += US2ST(20); //20
-		palTogglePad(GPIOD, PIN_LED2);       /* LD3 (orange)  */
+		palTogglePad(BANK_LED2, PIN_LED2);
 		delta_count = count_frt - count_adc;
 		if(delta_count != last_delta_count) {
-			palTogglePad(GPIOD, PIN_LED_RED);
+			palTogglePad(BANK_LED_RED, PIN_LED_RED);
 		}
 		last_delta_count = delta_count;
 		count_frt++;
@@ -232,7 +232,7 @@ static THD_FUNCTION(ThreadRT, arg) {
 				float c = a / b * i2;
 			}
 		}*/
-		palTogglePad(GPIOD, PIN_LED_ORANGE_DISCO);       /* LD6 (blue)  */
+		palTogglePad(BANK_LED_ORANGE_DISCO, PIN_LED_ORANGE_DISCO);
 		chThdSleepUntil(time);
 		//chThdYield();
     	//chThdSleepMilliseconds(100);
@@ -254,7 +254,7 @@ static THD_FUNCTION(ThreadNRT, arg) {
 	  nrt_starttime = chVTGetSystemTime();
 	  hal_run_nrt(nrt_Period); // Calls term which calls USB_VCP_get_string. Call from own thread, NOT HERE!!!
 	  	/*if( len = USB_VCP_get_string(usb_rx_string) ) {
-	  		palTogglePad(GPIOD, PIN_LED_GREEN); // usb_rx_string holds the result of "getln"
+	  		palTogglePad(BANK_LED_GREEN, PIN_LED_GREEN); // usb_rx_string holds the result of "getln"
 	  		chprintf(&SDU1,"%s, %i\n", usb_rx_string, len); // Echo recieved string.
 	  		// TODO: Warum kommen am Anfang komische AT zurueck!!=
 	  		}*/
@@ -368,9 +368,9 @@ int main(void) {
 	chThdSleepMilliseconds(1);
     //if (palReadPad(GPIOA, GPIOA_BUTTON))
     //  TestThread(&SD2);
-	//palSetPad(GPIOD, PIN_LED_RED);       /* Orange.  */
-	//palSetPad(GPIOD, PIN_LED_GREEN);
-	//palSetPad(GPIOD, PIN_LED_ORANGE_DISCO);
+	//palSetPad(BANK_LED_RED, PIN_LED_RED);       /* Orange.  */
+	//palSetPad(BANK_LED_GREEN, PIN_LED_GREEN);
+	//palSetPad(BANK_LED_ORANGE_DISCO, PIN_LED_ORANGE_DISCO);
 	//chprintf(&SDU1,"Hallo %f\n", testfloat);
 
 	len = chSequentialStreamRead(&SDU1, (uint8_t*)usb_rx_buf_raw, 1);
@@ -378,8 +378,8 @@ int main(void) {
 
 	//usb_put_buffer(0, 0, testtext, 5);
 	//printf("Hallo\n");
-	//palClearPad(GPIOD, PIN_LED_RED);     /* Orange.  */
-	//palClearPad(GPIOD, PIN_LED_GREEN);
-	//palClearPad(GPIOD, PIN_LED_ORANGE_DISCO);
+	//palClearPad(BANK_LED_RED, PIN_LED_RED);     /* Orange.  */
+	//palClearPad(BANK_LED_GREEN, PIN_LED_GREEN);
+	//palClearPad(BANK_LED_ORANGE_DISCO, PIN_LED_ORANGE_DISCO);
   }
 }

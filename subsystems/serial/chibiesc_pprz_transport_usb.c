@@ -60,7 +60,7 @@ static THD_FUNCTION(USBRXThread, arg) {
 			if(usb_rx_write_pos == USB_RX_BUFFER_SIZE) {
 				usb_rx_write_pos = 0;
 			}
-			palTogglePad(GPIOD, PIN_LED2);
+			palTogglePad(BANK_LED2, PIN_LED2);
 		}
 		// TODO: call function to check_and_parse PPRZ-Messages here?
 	}
