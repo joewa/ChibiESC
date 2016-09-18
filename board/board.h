@@ -535,14 +535,14 @@
 #define BANK_LED2					GPIOD
 #define PIN_LED_GREEN				GPIOD_PIN12
 #define BANK_LED_GREEN				GPIOD
-#define PIN_LED1					GPIOD_PIN13
-#define BANK_LED1					GPIOD
-#define PIN_LED_RED					GPIOD_PIN13
-#define BANK_LED_RED				GPIOD
-#define PIN_LED3_DISCO				GPIOD_PIN14
+#define PIN_LED3_DISCO				GPIOD_PIN13
 #define BANK_LED3_DISCO				GPIOD
-#define PIN_LED_ORANGE_DISCO		GPIOD_PIN14
+#define PIN_LED_ORANGE_DISCO		GPIOD_PIN13
 #define BANK_LED_ORANGE_DISCO		GPIOD
+#define PIN_LED1					GPIOD_PIN14
+#define BANK_LED1					GPIOD
+#define PIN_LED_RED					GPIOD_PIN14
+#define BANK_LED_RED				GPIOD
 #define PIN_FAULTC					GPIOD_PIN15
 #define BANK_FAULTC					GPIOD
 
@@ -2578,8 +2578,8 @@
                                      PIN_MODE_INPUT(PIN_PD10) |             \
                                      PIN_MODE_INPUT(PIN_PD11) |             \
                                      PIN_MODE_OUTPUT(PIN_LED2) |            \
-                                     PIN_MODE_OUTPUT(PIN_LED1) |            \
-									 PIN_MODE_OUTPUT(PIN_LED3_DISCO) |      \
+                                     PIN_MODE_OUTPUT(PIN_LED3_DISCO) |      \
+									 PIN_MODE_OUTPUT(PIN_LED1) |            \
 									 PIN_MODE_INPUT(PIN_FAULTC))
 #define VAL_GPIOD_OTYPER            (PIN_OTYPE_PUSHPULL(PIN_CAN_RX) |       \
                                      PIN_OTYPE_PUSHPULL(PIN_CAN_TX) |       \
@@ -2594,8 +2594,8 @@
                                      PIN_OTYPE_PUSHPULL(PIN_PD10) |         \
                                      PIN_OTYPE_PUSHPULL(PIN_PD11) |         \
                                      PIN_OTYPE_PUSHPULL(PIN_LED2) |         \
-                                     PIN_OTYPE_PUSHPULL(PIN_LED1) |         \
-									 PIN_OTYPE_PUSHPULL(PIN_LED3_DISCO) |   \
+                                     PIN_OTYPE_PUSHPULL(PIN_LED3_DISCO) |   \
+									 PIN_OTYPE_PUSHPULL(PIN_LED1) |         \
 									 PIN_OTYPE_PUSHPULL(PIN_FAULTC))
 #define VAL_GPIOD_OSPEEDR           (PIN_OSPEED_50M(PIN_CAN_RX) |           \
 									 PIN_OSPEED_50M(PIN_CAN_TX) |           \
@@ -2610,8 +2610,8 @@
 									 PIN_OSPEED_100M(PIN_PD10) |            \
 									 PIN_OSPEED_100M(PIN_PD11) |            \
 									 PIN_OSPEED_2M(PIN_LED2) |              \
-									 PIN_OSPEED_2M(PIN_LED1) |              \
 									 PIN_OSPEED_2M(PIN_LED3_DISCO) |        \
+									 PIN_OSPEED_2M(PIN_LED1) |              \
 									 PIN_OSPEED_100M(PIN_FAULTC))
 #define VAL_GPIOD_PUPDR             (PIN_PUPDR_PULLUP(PIN_CAN_RX) |         \
 									 PIN_PUPDR_PULLUP(PIN_CAN_TX) |         \
@@ -2626,8 +2626,8 @@
 									 PIN_PUPDR_PULLUP(PIN_PD10) |           \
 									 PIN_PUPDR_PULLUP(PIN_PD11) |           \
 									 PIN_PUPDR_FLOATING(PIN_LED2) |         \
-									 PIN_PUPDR_FLOATING(PIN_LED1) |         \
 									 PIN_PUPDR_FLOATING(PIN_LED3_DISCO) |   \
+									 PIN_PUPDR_FLOATING(PIN_LED1) |   \
 									 PIN_PUPDR_PULLUP(PIN_FAULTC))
 #define VAL_GPIOD_ODR               (PIN_ODR_HIGH(PIN_CAN_RX) |             \
 									 PIN_ODR_HIGH(PIN_CAN_TX) |             \
@@ -2642,8 +2642,8 @@
                                      PIN_ODR_HIGH(PIN_PD10) |               \
                                      PIN_ODR_HIGH(PIN_PD11) |               \
                                      PIN_ODR_LOW(PIN_LED2) |                \
-                                     PIN_ODR_LOW(PIN_LED1) |                \
-									 PIN_ODR_LOW(PIN_LED3_DISCO) |          \
+                                     PIN_ODR_LOW(PIN_LED3_DISCO) |          \
+									 PIN_ODR_LOW(PIN_LED1) |                \
 									 PIN_ODR_HIGH(PIN_FAULTC))
 #define VAL_GPIOD_AFRL              (PIN_AFIO_AF(PIN_CAN_RX, 9) |           \
                                      PIN_AFIO_AF(PIN_CAN_TX, 9) |           \
@@ -2658,8 +2658,8 @@
                                      PIN_AFIO_AF(PIN_PD10, 0) |             \
                                      PIN_AFIO_AF(PIN_PD11, 0) |             \
                                      PIN_AFIO_AF(PIN_LED2, 0) |             \
-                                     PIN_AFIO_AF(PIN_LED1, 0) |             \
-									 PIN_AFIO_AF(PIN_LED3_DISCO, 0) |       \
+                                     PIN_AFIO_AF(PIN_LED3_DISCO, 0) |       \
+									 PIN_AFIO_AF(PIN_LED1, 0) |             \
 									 PIN_AFIO_AF(PIN_FAULTC, 0))
 
 /*
