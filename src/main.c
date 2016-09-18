@@ -114,16 +114,19 @@ uint16_t USB_VCP_get_string(char *ptr)
 void USB_VCP_send_string(unsigned char *ptr)
 { //TODO: Joerg implementiere senden von 0-terminiertem string. Implementiere was Schnelleres als PRINTF!!!
 	//chprintf("%s", ptr);
-    /*while (*ptr != 0) {
+
+    while (*ptr != 0) {
         // send a queued byte - copy to usb stack buffer
-        APP_Rx_Buffer[APP_Rx_ptr_in++] = *ptr;
+        //APP_Rx_Buffer[APP_Rx_ptr_in++] = *ptr;
+
+        chSequentialStreamPut(&SDU1, *ptr);
         ptr++;
 
             // To avoid buffer overflow
-            if (APP_Rx_ptr_in >= APP_RX_DATA_SIZE) {
-               APP_Rx_ptr_in = 0;
-            }
-    }*/
+            //if (APP_Rx_ptr_in >= APP_RX_DATA_SIZE) {
+            //   APP_Rx_ptr_in = 0;
+            //}
+    }
 }
 
 //END copy&paste
@@ -281,6 +284,7 @@ static THD_FUNCTION(ThreadNRT, arg) {
 #define nrt_Period MS2ST(2)
   PIN(nrt_period_time) = ((float)nrt_Period) / hal_get_systick_freq();
   while (true) {
+	  palTogglePad(BANK_LED_RED, PIN_LED_RED);
 	  nrt_starttime = chVTGetSystemTime();
 	  hal_run_nrt(nrt_Period); // Calls term which calls USB_VCP_get_string. Call from own thread, NOT HERE!!!
 
