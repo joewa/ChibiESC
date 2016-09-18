@@ -5,7 +5,7 @@
  * 	@{
  */
 
-#include <subsystems/serial/chibiesc_pprz_transport_usb.h>
+#include <src/subsystems/serial/chibiesc_pprz_transport_usb.h>
 
 
 

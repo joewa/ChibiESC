@@ -9,14 +9,14 @@
 #define _CHIBIESC_SERIAL_H_
 
 #include "hal.h"
-#include <subsystems/serial/chibiesc_usb.h>
+#include <src/subsystems/serial/chibiesc_usb.h>
 
-#include <subsystems/serial/chibiesc_pprz_transport_usb.h>
+#include <src/subsystems/serial/chibiesc_pprz_transport_usb.h>
 
 // for telemetry messages
-#include <subsystems/pprzlink/include/messages.h>
+#include <src/subsystems/pprzlink/include/messages.h>
 // for datalink messages
-#include <subsystems/pprzlink/include/dl_protocol.h>
+#include <src/subsystems/pprzlink/include/dl_protocol.h>
 
 #include <unistd.h>
 

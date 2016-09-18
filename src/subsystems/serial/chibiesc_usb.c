@@ -5,7 +5,7 @@
  * @{
  */
 
-#include "subsystems/serial/chibiesc_usb.h"
+#include "src/subsystems/serial/chibiesc_usb.h"
 
 // ####################### Endpoints config #############################
 /*

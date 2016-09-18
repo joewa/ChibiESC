@@ -5,7 +5,7 @@
  * 	@{
  */
 
-#include <subsystems/serial/chibiesc_serial.h>
+#include <src/subsystems/serial/chibiesc_serial.h>
 
 /**
  * @brief   Static SerialTestThread working area allocation.

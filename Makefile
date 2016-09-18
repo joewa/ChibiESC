@@ -116,16 +116,16 @@ CSRC = $(STARTUPSRC) \
        $(TESTSRC) \
        $(CHIBIOS)/os/hal/lib/streams/memstreams.c \
        $(CHIBIOS)/os/hal/lib/streams/chprintf.c \
-       main.c \
-       subsystems/serial/chibiesc_usb.c \
-       subsystems/serial/chibiesc_serial.c \
-       subsystems/serial/chibiesc_pprz_transport_usb.c \
-       syscalls.c \
-       bal.c \
-       bal_term.c \
-       bal_interface.c \
-       scanf.c \
-       misc.c
+       src/main.c \
+       src/subsystems/serial/chibiesc_usb.c \
+       src/subsystems/serial/chibiesc_serial.c \
+       src/subsystems/serial/chibiesc_pprz_transport_usb.c \
+       src/syscalls.c \
+       src/bal.c \
+       src/bal_term.c \
+       src/bal_interface.c \
+       src/scanf.c \
+       src/misc.c
 
        
        #subsystems/pprzlink/src/pprz_transport.c \

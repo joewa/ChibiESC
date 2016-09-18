@@ -10,7 +10,7 @@
 
 //#include <subsystems/pprzlink/include/pprz_transport.h>
 
-#include <subsystems/serial/chibiesc_usb.h> // required in order to use SDU1
+#include <src/subsystems/serial/chibiesc_usb.h> // required in order to use SDU1
 
 #define DOWNLINK TRUE // send PPRZLink messages 'from aircraft to ground'
 

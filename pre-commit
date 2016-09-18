@@ -11,7 +11,7 @@ HEADREF=$(<../pprzlink/.git/HEAD)
 REFFILE=${HEADREF:5}
 BRANCHNAME=`basename ../pprzlink/.git/$REFFILE`
 COMMITHASH=$(<../pprzlink/.git/$REFFILE)
-FILENAME=subsystems/pprzlink/pprzlink_commit
+FILENAME=src/subsystems/pprzlink/pprzlink_commit
 
 rm -f $FILENAME
 echo "Branch: $BRANCHNAME" >> $FILENAME
