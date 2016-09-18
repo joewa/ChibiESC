@@ -5,7 +5,7 @@ Free electric speed controller software using ChibiOS
 
 ## Repository setup
 
-You need to clone [our fork of pprzlink](https://github.com/heiko-r/pprzlink) into a directory next to this repo.
+You need to clone [our fork of pprzlink](https://github.com/heiko-r/pprzlink) into a directory next to this repo and run `make pymessages` generate the pprzlink message code before you can compile ChibiESC.
 
 Before committing, please install the pre-commit hook: `ln -s ../../pre-commit .git/hooks/pre-commit`
 
