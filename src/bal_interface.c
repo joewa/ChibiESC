@@ -42,7 +42,7 @@ term.comp:75: undefined reference to `mod'
  * Systick interupt muss langsamer sein als langsamster HAL-Thread (RT)
  */
 uint32_t hal_get_systick_value() {
-	return 0;
+	return chVTGetSystemTimeX();
 }
 
 /*

@@ -213,10 +213,7 @@ extern uint32_t hal_get_systick_freq();
    uint32_t __start_time__ = hal_get_systick_value(); \
    func \
    uint32_t __end_time__ = hal_get_systick_value(); \
-   if(__start_time__ < __end_time__){ \
-     __start_time__ += hal_get_systick_reload(); \
-   } \
-   PIN(rt_calc_time) = ((float)(__start_time__ - __end_time__)) / hal_get_systick_freq(); \
+   PIN(rt_calc_time) = ((float)(__end_time__ - __start_time__)) / hal_get_systick_freq(); \
    } function;});
 
 #define FRT(func)                    \
@@ -224,10 +221,7 @@ extern uint32_t hal_get_systick_freq();
    uint32_t __start_time__ = hal_get_systick_value(); \
    func \
    uint32_t __end_time__ = hal_get_systick_value(); \
-   if(__start_time__ < __end_time__){ \
-     __start_time__ += hal_get_systick_reload(); \
-   } \
-   PIN(frt_calc_time) = ((float)(__start_time__ - __end_time__)) / hal_get_systick_freq(); \
+   PIN(frt_calc_time) = ((float)(__end_time__ - __start_time__)) / hal_get_systick_freq(); \
    } function;});
 
 #define NRT(func)                    \

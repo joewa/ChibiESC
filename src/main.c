@@ -204,7 +204,7 @@ static THD_FUNCTION(ThreadFRT, arg) {
 		palTogglePad(BANK_LED2, PIN_LED2);
 		delta_count = count_frt - count_adc;
 		if(delta_count != last_delta_count) {
-			palTogglePad(BANK_LED_RED, PIN_LED_RED);
+			//palTogglePad(BANK_LED_RED, PIN_LED_RED);
 		}
 		last_delta_count = delta_count;
 		count_frt++;
@@ -223,19 +223,49 @@ static THD_FUNCTION(ThreadRT, arg) {
 	systime_t time = chVTGetSystemTime();
 
 	while (true) {
-		time += MS2ST(250);
-		int i,i2;
-		/*for (i = 0; i<200000; i++) {
-			for (i2 = 0; i2<2; i2++) {
-				int a = 5;
-				float b = 6.123;
-				float c = a / b * i2;
-			}
-		}*/
-		palTogglePad(BANK_LED_ORANGE_DISCO, PIN_LED_ORANGE_DISCO);
-		chThdSleepUntil(time);
+
 		//chThdYield();
     	//chThdSleepMilliseconds(100);
+
+		   switch(bal.rt_state){
+		      case RT_STOP:
+		         return;
+		      case RT_CALC:
+		         bal.rt_state = RT_STOP;
+		         bal.hal_state = RT_TOO_LONG;
+		         bal.frt_state = FRT_STOP;
+		         return;
+		      case RT_SLEEP:
+		         if(bal.active_rt_func > -1){
+		            bal.rt_state = RT_STOP;
+		            bal.hal_state = MISC_ERROR;
+		            bal.frt_state = FRT_STOP;
+		            return;
+		         }
+		         bal.rt_state = RT_CALC;
+		   }
+
+		   static unsigned int last_start = 0;
+		   unsigned int start = hal_get_systick_value();
+
+		   float period = ((float)(start - last_start)) / hal_get_systick_freq();
+		   last_start = start;
+
+		   hal_run_rt(period);
+
+		   unsigned int end = hal_get_systick_value();
+
+		   PIN(rt_time) = ((float)(end - start)) / hal_get_systick_freq();
+		   PIN(rt_period_time) = period;
+
+		   bal.rt_state = RT_SLEEP;
+
+		   // TODO: Implement proper overrun check
+		   time += MS2ST(1); chThdSleepUntil(time);
+		   //chThdSleep(MS2ST(1));
+
+		   //palTogglePad(BANK_LED_ORANGE_DISCO, PIN_LED_ORANGE_DISCO);
+
 	}
 }
 
@@ -253,11 +283,6 @@ static THD_FUNCTION(ThreadNRT, arg) {
   while (true) {
 	  nrt_starttime = chVTGetSystemTime();
 	  hal_run_nrt(nrt_Period); // Calls term which calls USB_VCP_get_string. Call from own thread, NOT HERE!!!
-	  	/*if( len = USB_VCP_get_string(usb_rx_string) ) {
-	  		palTogglePad(BANK_LED_GREEN, PIN_LED_GREEN); // usb_rx_string holds the result of "getln"
-	  		chprintf(&SDU1,"%s, %i\n", usb_rx_string, len); // Echo recieved string.
-	  		// TODO: Warum kommen am Anfang komische AT zurueck!!=
-	  		}*/
 
 	  nrt_calctime = chVTTimeElapsedSinceX(nrt_starttime);
 	  PIN(nrt_time) = ((float)(nrt_calctime)) / hal_get_systick_freq();
@@ -330,6 +355,8 @@ int main(void) {
   //feedback comps
   #include "comps/term.comp"
   #include "comps/sim.comp"
+  #include "comps/simbla.comp"
+
   //command comps
 
   //PID

@@ -422,7 +422,7 @@ NRT(
       char rx_buf[APP_TX_BUF_SIZE];
       
       
-      if (USB_VCP_get_string(rx_buf)) { // Hangs here by Joerg
+      if (USB_VCP_get_string(rx_buf)) {
          i = sscanf_(rx_buf, "%N = %N", sink, source);
       }
       // /* Joerg
