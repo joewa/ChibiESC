@@ -292,7 +292,7 @@ static THD_FUNCTION(ThreadNRT, arg) {
 	  PIN(nrt_time) = ((float)(nrt_calctime)) / hal_get_systick_freq();
 	  //nrt_nexttime += nrt_Period; // TODO: Check if nexttime > starttime!!!
 	  //chThdSleepUntil(nrt_nexttime);
-	  chThdSleepMilliseconds(nrt_Period);
+	  chThdSleep(nrt_Period);
   }
 }
 
