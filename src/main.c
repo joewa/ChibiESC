@@ -264,7 +264,7 @@ static THD_FUNCTION(ThreadRT, arg) {
 		   bal.rt_state = RT_SLEEP;
 
 		   // TODO: Implement proper overrun check
-		   time += MS2ST(1); chThdSleepUntil(time);
+		   time += US2ST(200); chThdSleepUntil(time);
 		   //chThdSleep(MS2ST(1));
 
 		   //palTogglePad(BANK_LED_ORANGE_DISCO, PIN_LED_ORANGE_DISCO);
@@ -281,7 +281,7 @@ static THD_FUNCTION(ThreadNRT, arg) {
   systime_t nrt_calctime = 0;
   systime_t nrt_starttime = chVTGetSystemTime();
   //systime_t nrt_nexttime = nrt_starttime;
-#define nrt_Period MS2ST(2)
+#define nrt_Period MS2ST(1)
   PIN(nrt_period_time) = ((float)nrt_Period) / hal_get_systick_freq();
   while (true) {
 	  palTogglePad(BANK_LED_RED, PIN_LED_RED);
@@ -359,7 +359,6 @@ int main(void) {
   //feedback comps
   #include "comps/term.comp"
   #include "comps/sim.comp"
-  #include "comps/simbla.comp"
 
   //command comps
 
@@ -384,6 +383,11 @@ int main(void) {
   frt_period_time_hal_pin = hal_map_pin("net0.frt_period");
 
   hal_comp_init();
+
+  // Make some inits
+  hal_set_pin("term0.rt_prio", 15.0);
+  hal_set_pin("sim0.rt_prio", 14.0);
+ //hal_link_pins("conf0.cmd_rev", "rev0.rev");
 
   if(bal.pin_errors + bal.comp_errors == 0){
      hal_start();
