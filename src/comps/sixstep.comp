@@ -1,0 +1,22 @@
+HAL_COMP(sixstep);
+
+HAL_PIN(d_ref) = 0.0; // duty cycle TODO: PWM frequency or period
+
+RT_INIT(
+  HAL_PIN(d_ref) = 0.0; // duty cycle TODO: PWM frequency or period
+);
+
+RT_DEINIT(
+  HAL_PIN(d_ref) = 0.0; // duty cycle TODO: PWM frequency or period
+);
+
+FRT(
+
+  //PIN(pos) = mod(TIM_GetCounter(ENC1_TIM) * 2.0f * M_PI / (float)e_res);
+);
+
+RT(
+
+);
+
+ENDCOMP;

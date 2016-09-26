@@ -132,11 +132,6 @@ void USB_VCP_send_string(unsigned char *ptr)
 //END copy&paste
 
 
-void testprint() {
-	chprintf(&SDU1,"Hallo %f\n", testfloat);
-}
-
-
 
 #define ADC_GRP2_NUM_CHANNELS   2
 #define ADC_GRP2_BUF_DEPTH      48
@@ -204,7 +199,8 @@ static THD_FUNCTION(ThreadFRT, arg) {
 
 	while (true) {
 		time += US2ST(20); //20
-		palTogglePad(BANK_LED2, PIN_LED2);
+		//palTogglePad(BANK_LED_GREEN, PIN_LED_GREEN);
+		palTogglePad(BANK_LED_RED, PIN_LED_RED);
 		delta_count = count_frt - count_adc;
 		if(delta_count != last_delta_count) {
 			//palTogglePad(BANK_LED_RED, PIN_LED_RED);
@@ -284,7 +280,7 @@ static THD_FUNCTION(ThreadNRT, arg) {
 #define nrt_Period MS2ST(1)
   PIN(nrt_period_time) = ((float)nrt_Period) / hal_get_systick_freq();
   while (true) {
-	  palTogglePad(BANK_LED_RED, PIN_LED_RED);
+	  //palTogglePad(BANK_LED_RED, PIN_LED_RED);
 	  nrt_starttime = chVTGetSystemTime();
 	  hal_run_nrt(nrt_Period); // Calls term which calls USB_VCP_get_string. Call from own thread, NOT HERE!!!
 
@@ -359,6 +355,7 @@ int main(void) {
   //feedback comps
   #include "comps/term.comp"
   #include "comps/sim.comp"
+  #include "comps/sixstep.comp"
 
   //command comps
 
@@ -387,6 +384,7 @@ int main(void) {
   // Make some inits
   hal_set_pin("term0.rt_prio", 15.0);
   hal_set_pin("sim0.rt_prio", 14.0);
+  //hal_set_pin("sixstep0.rt_prio", 13.0);
  //hal_link_pins("conf0.cmd_rev", "rev0.rev");
 
   if(bal.pin_errors + bal.comp_errors == 0){
