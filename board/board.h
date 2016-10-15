@@ -25,13 +25,26 @@
  * Board identifier.
  */
 //#define BOARD_ST_STM32F4_DISCOVERY
+//#define BOARD_DRCHIBI
 #define BOARD_DRCHIBI_DISCO
-// #define BOARD_NAME                  "STMicroelectronics STM32F4-Discovery"
-// #define BOARD_NAME					"BOARD_DRCHIBI"
+//#define BOARD_NUCLEO
+//#define BOARD_VESC
+
+#if defined(BOARD_ST_STM32F4_DISCOVERY)
+#define BOARD_NAME                  "STMicroelectronics STM32F4-Discovery"
+#endif
+#if defined(BOARD_DRCHIBI)
+#define BOARD_NAME					"BOARD_DRCHIBI"
+#endif
+#if defined(BOARD_DRCHIBI_DISCO)
 #define BOARD_NAME					"BOARD_DRCHIBI_DISCO"
-/* TODO:
- * Change board identifier to BOARD_DRCHIBI and adapt board name
- */
+#endif
+#if defined(BOARD_NUCLEO)
+#define BOARD_NAME					"BOARD_NUCLEO"
+#endif
+#if defined(BOARD_VESC)
+#define BOARD_NAME					"BOARD_VESC"
+#endif
 
 /*
  * Board oscillators-related settings.
@@ -54,10 +67,17 @@
 /*
  * MCU type as defined in the ST header.
  */
+#if defined(BOARD_ST_STM32F4_DISCOVERY) || defined(BOARD_DRCHIBI_DISCO)
 #define STM32F407xx
-/* TODO:
- * Change to STM32F405xx for DrChibi/ChibiESC
- */
+#endif
+
+#if defined(BOARD_DRCHIBI) || defined(BOARD_VESC)
+#define STM32F405xx
+#endif
+
+#if defined(BOARD_NUCLEO)
+#define STM32F446xx
+#endif
 
 /*
  * IO pins assignments.
@@ -713,6 +733,13 @@
 
 #endif
 
+#if defined(BOARD_NUCLEO)
+
+#endif
+
+#if defined(BOARD_VESC)
+
+#endif
 
 /*
  * I/O ports initial setup, this configuration is established soon after reset
@@ -3248,6 +3275,13 @@
                                      PIN_AFIO_AF(PIN_PI15, 0))
 #endif
 
+#if defined(BOARD_NUCLEO)
+
+#endif
+
+#if defined(BOARD_VESC)
+
+#endif
 
 #if !defined(_FROM_ASM_)
 #ifdef __cplusplus
