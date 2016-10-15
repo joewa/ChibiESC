@@ -67,7 +67,7 @@
 
 #endif
 
-#if defined(BOARD_DRCHIBI_DISCO)
+#if defined(BOARD_DRCHIBI_DISCO) || defined(BOARD_VESC) || defined(BOARD_DRCHIBI)
 /*
  * HAL driver system settings.
  */

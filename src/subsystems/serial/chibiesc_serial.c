@@ -42,7 +42,9 @@ static THD_FUNCTION(SerialTestThread, arg) {
 		pprzlink_test_loop++;
 		if (pprzlink_test_loop > 19) pprzlink_test_loop = 0;
 
+#if defined(BOARD_DRCHIBI_DISCO) || defined(BOARD_ST_STM32F4_DISCOVERY)
 		palTogglePad(BANK_LED3_DISCO, PIN_LED3_DISCO);
+#endif
 	}
 }
 
