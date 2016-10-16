@@ -277,10 +277,15 @@ static THD_FUNCTION(ThreadNRT, arg) {
   systime_t nrt_calctime = 0;
   systime_t nrt_starttime = chVTGetSystemTime();
   //systime_t nrt_nexttime = nrt_starttime;
+  int nrt_blink_count = 1000;
 #define nrt_Period MS2ST(1)
   PIN(nrt_period_time) = ((float)nrt_Period) / hal_get_systick_freq();
   while (true) {
-	  //palTogglePad(BANK_LED_RED, PIN_LED_RED);
+	  if(nrt_blink_count-- <= 0) {
+		  nrt_blink_count = 1000;
+		  //palTogglePad(BANK_LED_RED, PIN_LED_RED);
+		  palTogglePad(BANK_LED_GREEN, PIN_LED_GREEN);
+	  }
 	  nrt_starttime = chVTGetSystemTime();
 	  hal_run_nrt(nrt_Period); // Calls term which calls USB_VCP_get_string. Call from own thread, NOT HERE!!!
 
