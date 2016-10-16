@@ -77,8 +77,8 @@
 #define STM32_CLOCK48_REQUIRED              TRUE
 #define STM32_SW                            STM32_SW_PLL
 #define STM32_PLLSRC                        STM32_PLLSRC_HSE
-#define STM32_PLLM_VALUE                    6
-#define STM32_PLLN_VALUE                    216
+#define STM32_PLLM_VALUE                    6 // Overclock288 4
+#define STM32_PLLN_VALUE                    216 //Overclock288 288
 #define STM32_PLLP_VALUE                    2 // SYSCLK 144MHz
 #define STM32_PLLQ_VALUE                    6 // 48MHz
 
@@ -87,14 +87,14 @@
 #define STM32_PLLI2SR_VALUE                 2
 #define STM32_PLLI2SP_VALUE                 2
 #define STM32_PLLI2SQ_VALUE                 2
-#define STM32_PLLSAIN_VALUE                 192
+#define STM32_PLLSAIN_VALUE                 192 //Overclock288 96
 #define STM32_PLLSAIM_VALUE                 4
-#define STM32_PLLSAIP_VALUE                 8
+#define STM32_PLLSAIP_VALUE                 8 //Overclock288 4
 #define STM32_PLLSAIQ_VALUE                 2
 
 #define STM32_HPRE                          STM32_HPRE_DIV1 // AHB prescaler -> HCLK 144MHz
-#define STM32_PPRE1                         STM32_PPRE1_DIV4 // APB1 prescaler -> PCLK1 36MHz (72MHz for TIM2, TIM3, TIM4, TIM5, TIM6, TIM7 and TIM12)
-#define STM32_PPRE2                         STM32_PPRE2_DIV2 // APB2 prescaler -> PCLK2 72MHz (144MHz for TIM1, TIM8, TIM9, TIM10 and TIM11)
+#define STM32_PPRE1                         STM32_PPRE1_DIV4 // APB1 prescaler -> PCLK1 36MHz (72MHz for TIM2, TIM3, TIM4, TIM5, TIM6, TIM7 and TIM12) Overclock288 STM32_PPRE1_DIV8
+#define STM32_PPRE2                         STM32_PPRE2_DIV2 // APB2 prescaler -> PCLK2 72MHz (144MHz for TIM1, TIM8, TIM9, TIM10 and TIM11) Overclock288 STM32_PPRE2_DIV4
 #define STM32_RTCSEL                        STM32_RTCSEL_LSI
 #define STM32_RTCPRE_VALUE                  2
 #define STM32_MCO1SEL                       STM32_MCO1SEL_HSI
