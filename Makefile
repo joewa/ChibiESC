@@ -1,3 +1,8 @@
+#CHIBIESC_BOARD = DRCHIBI
+CHIBIESC_BOARD = DRCHIBI_DISCO
+#CHIBIESC_BOARD = NUCLEO_F446
+#CHIBIESC_BOARD = VESC
+
 ##############################################################################
 # Build global options
 # NOTE: Can be overridden externally.
@@ -102,7 +107,22 @@ include $(CHIBIOS)/os/common/ports/ARMCMx/compilers/GCC/mk/port_v7m.mk
 include $(CHIBIOS)/test/rt/test.mk
 
 # Define linker script file here
-LDSCRIPT= $(STARTUPLD)/STM32F407xG.ld
+ifeq ($(CHIBIESC_BOARD),DRCHIBI) 
+	LDSCRIPT= $(STARTUPLD)/STM32F405xG.ld
+	USE_OPT += -DBOARD_DRCHIBI
+endif
+ifeq ($(CHIBIESC_BOARD),DRCHIBI_DISCO) 
+	LDSCRIPT= $(STARTUPLD)/STM32F407xG.ld
+	USE_OPT += -DBOARD_DRCHIBI_DISCO
+endif
+ifeq ($(CHIBIESC_BOARD),NUCLEO_F446) 
+	LDSCRIPT= $(STARTUPLD)/STM32F446xE.ld
+	USE_OPT += -DBOARD_NUCLEO_F446
+endif
+ifeq ($(CHIBIESC_BOARD),VESC) 
+	LDSCRIPT= $(STARTUPLD)/STM32F405xG.ld
+	USE_OPT += -DBOARD_VESC
+endif
 
 # C sources that can be compiled in ARM or THUMB mode depending on the global
 # setting.
