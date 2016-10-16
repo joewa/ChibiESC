@@ -17,7 +17,7 @@
 
 #include "ch.h"
 #include "hal.h"
-#include "test.h"
+#include "ch_test.h"
 #include "chprintf.h"
 
 //#include "subsystems/serial/chibiesc_usb.h"
@@ -119,7 +119,7 @@ void USB_VCP_send_string(unsigned char *ptr)
         // send a queued byte - copy to usb stack buffer
         //APP_Rx_Buffer[APP_Rx_ptr_in++] = *ptr;
 
-        chSequentialStreamPut(&SDU1, *ptr);
+        streamPut(&SDU1, *ptr);
         ptr++;
 
             // To avoid buffer overflow
@@ -411,7 +411,7 @@ int main(void) {
 	//palSetPad(BANK_LED_ORANGE_DISCO, PIN_LED_ORANGE_DISCO);
 	//chprintf(&SDU1,"Hallo %f\n", testfloat);
 
-	len = chSequentialStreamRead(&SDU1, (uint8_t*)usb_rx_buf_raw, 1);
+	len = streamRead(&SDU1, (uint8_t*)usb_rx_buf_raw, 1);
 	VCP_DataRx(usb_rx_buf_raw, len);
 
 	//usb_put_buffer(0, 0, testtext, 5);

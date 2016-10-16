@@ -11,7 +11,7 @@
 #include <stdint.h>
 #include "ch.h"
 #include "hal.h"
-#include "test.h"
+#include "ch_test.h"
 #include "chprintf.h"
 #include "chconf.h"
 
