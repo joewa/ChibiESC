@@ -38,7 +38,7 @@
  */
 
 
-#if defined(BOARD_DRCHIBI_DISCO) || defined(BOARD_VESC) || defined(BOARD_DRCHIBI)
+#if defined(BOARD_DRCHIBI_DISCO) || defined(BOARD_VESC) || defined(BOARD_LOOONG_STRIP)
 #define STM32_NO_INIT                       FALSE
 #define STM32_HSI_ENABLED                   TRUE
 #define STM32_LSI_ENABLED                   TRUE

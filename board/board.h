@@ -25,8 +25,8 @@
  * Board identifier (set in Makefile).
  */
 
-#if defined(BOARD_DRCHIBI)
-#define BOARD_NAME					"BOARD_DRCHIBI"
+#if defined(BOARD_LOOONG_STRIP)
+#define BOARD_NAME					"BOARD_DRCHIBI_LOOONG_STRIP"
 #endif
 #if defined(BOARD_DRCHIBI_DISCO)
 #define BOARD_NAME					"BOARD_DRCHIBI_DISCO"
@@ -63,7 +63,7 @@
 #define STM32F407xx
 #endif
 
-#if defined(BOARD_DRCHIBI) || defined(BOARD_VESC)
+#if defined(BOARD_LOOONG_STRIP) || defined(BOARD_VESC)
 #define STM32F405xx
 #endif
 
@@ -228,9 +228,9 @@
 #define GPIOI_PIN15                 15U
 
 /*
- * DrChibi pin mapping
+ * DrChibi Looong-Strip pin mapping
  */
-#if defined(BOARD_DRCHIBI)
+#if defined(BOARD_LOOONG_STRIP)
 
 #define PIN_VSENS_C					GPIOA_PIN0
 #define BANK_VSENS_C				GPIOA
@@ -359,7 +359,7 @@
 #define PIN_OSC_OUT					GPIOH_PIN1
 #define BANK_OSC_OUT				GPIOH
 
-#endif // BOARD_DRCHIBI
+#endif // BOARD_LOOONG_STRIP
 
 /*
  * DrChibi on F4Discovery pin mapping
@@ -941,9 +941,9 @@
 
 
 /*
- * DrChibi pin setup
+ * DrChibi Looong-Srip pin setup
  */
-#if defined(BOARD_DRCHIBI)
+#if defined(BOARD_LOOONG_STRIP)
 
 /*
  * GPIOA setup:
@@ -1362,7 +1362,7 @@
 #define VAL_GPIOI_AFRL				0
 #define VAL_GPIOI_AFRH				0
 
-#endif // BOARD_DRCHIBI
+#endif // BOARD_LOOONG_STRIP
 
 /*
  * VESC pin setup

@@ -197,20 +197,23 @@ static THD_FUNCTION(ThreadFRT, arg) {
 	systime_t time = chVTGetSystemTime();
 	adcStartConversion(&ADCD1, &adcgrpcfg2, samples2, ADC_GRP2_BUF_DEPTH);
 
-	while (true) {
+	while ( !chThdShouldTerminateX() ) {
 		time += US2ST(20); //20
 		//palTogglePad(BANK_LED_GREEN, PIN_LED_GREEN);
-		palTogglePad(BANK_LED_RED, PIN_LED_RED);
+		//palTogglePad(BANK_LED_RED, PIN_LED_RED);
 		delta_count = count_frt - count_adc;
 		if(delta_count != last_delta_count) {
 			//palTogglePad(BANK_LED_RED, PIN_LED_RED);
 		}
 		last_delta_count = delta_count;
 		count_frt++;
+		//hal_run_frt
 		chThdSleepUntil(time);
 		//chThdYield();
 	}
+	chThdExit((msg_t)0);
 }
+
 
 static THD_WORKING_AREA(waThreadRT, 8192);
 static THD_FUNCTION(ThreadRT, arg) {
@@ -221,10 +224,7 @@ static THD_FUNCTION(ThreadRT, arg) {
 
 	systime_t time = chVTGetSystemTime();
 
-	while (true) {
-
-		//chThdYield();
-    	//chThdSleepMilliseconds(100);
+	while ( !chThdShouldTerminateX() ) {
 
 		   switch(bal.rt_state){
 		      case RT_STOP:
@@ -266,6 +266,7 @@ static THD_FUNCTION(ThreadRT, arg) {
 		   //palTogglePad(BANK_LED_ORANGE_DISCO, PIN_LED_ORANGE_DISCO);
 
 	}
+	chThdExit((msg_t)0);
 }
 
 
@@ -301,22 +302,31 @@ static THD_FUNCTION(ThreadNRT, arg) {
 /*
  * Start RT-Thread
  * */
+thread_t *tp_rt = NULL;
 void hal_enable_rt() {
-	chThdCreateStatic(waThreadRT, sizeof(waThreadRT), NORMALPRIO+10, ThreadRT, NULL);
+	tp_rt = chThdCreateStatic(waThreadRT, sizeof(waThreadRT), NORMALPRIO+10, ThreadRT, NULL);
 }
 /*
  * Start Fast-RT-Thread
  */
+thread_t *tp_frt = NULL;
 void hal_enable_frt() {
-	chThdCreateStatic(waThreadFRT, sizeof(waThreadFRT), NORMALPRIO+20, ThreadFRT, NULL);
+	tp_frt = chThdCreateStatic(waThreadFRT, sizeof(waThreadFRT), NORMALPRIO+20, ThreadFRT, NULL);
 }
 
 void hal_disable_rt() {
-
+	if(tp_rt != NULL) {
+		chThdTerminate(tp_rt);
+		msg_t n = chThdWait(tp_rt);
+	}
 }
 
 void hal_disable_frt() {
-
+	if(tp_frt != NULL) {
+		chThdTerminate(tp_frt);
+		msg_t n = chThdWait(tp_frt);
+		tp_frt = NULL;
+	}
 }
 
 
