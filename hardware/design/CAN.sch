@@ -1,4 +1,5 @@
 EESchema Schematic File Version 2
+LIBS:DrChibi-rescue
 LIBS:BLDC_4-rescue
 LIBS:power
 LIBS:device
@@ -40,11 +41,11 @@ EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
 Sheet 2 11
-Title "CAN BUS transceiver"
-Date "2015-08-27"
-Rev "0.1"
+Title "DrChibi, Looong-Strip"
+Date "2016-10-24"
+Rev "1"
 Comp "Jörg Wangemann"
-Comment1 ""
+Comment1 "CAN Bus transceiver"
 Comment2 ""
 Comment3 "CC-BY-SA 4.0"
 Comment4 ""

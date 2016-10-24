@@ -1,4 +1,5 @@
 EESchema Schematic File Version 2
+LIBS:DrChibi-rescue
 LIBS:BLDC_4-rescue
 LIBS:power
 LIBS:device
@@ -39,10 +40,10 @@ EELAYER 25 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 3 11
-Title "DrMOS power stage"
-Date "2016-01-22"
-Rev "0.1"
+Sheet 10 11
+Title "DrChibi, Looong-Strip"
+Date "2016-10-24"
+Rev "1"
 Comp "Jörg Wangemann"
 Comment1 "DrMOS power stage"
 Comment2 ""

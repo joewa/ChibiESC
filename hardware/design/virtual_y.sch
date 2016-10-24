@@ -1,4 +1,5 @@
 EESchema Schematic File Version 2
+LIBS:DrChibi-rescue
 LIBS:BLDC_4-rescue
 LIBS:power
 LIBS:device
@@ -40,11 +41,11 @@ EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
 Sheet 5 11
-Title "Alternate voltage sensing options"
-Date ""
-Rev "0.1"
+Title "DrChibi, Looong-Strip"
+Date "2016-10-24"
+Rev "1"
 Comp "Jörg Wangemann"
-Comment1 ""
+Comment1 "Alternate voltage sensing options"
 Comment2 ""
 Comment3 "CC-BY-SA 4.0"
 Comment4 ""

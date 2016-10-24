@@ -1,4 +1,5 @@
 EESchema Schematic File Version 2
+LIBS:DrChibi-rescue
 LIBS:BLDC_4-rescue
 LIBS:power
 LIBS:device
@@ -41,10 +42,10 @@ $Descr A4 11693 8268
 encoding utf-8
 Sheet 1 11
 Title "DrChibi, Looong-Strip"
-Date "2016-02-15"
-Rev "0.1"
+Date "2016-10-24"
+Rev "1"
 Comp "Jörg Wangemann"
-Comment1 "6-Phase Motor Controller / Inverter"
+Comment1 "6-Phase Motor Controller / Universal Inverter"
 Comment2 ""
 Comment3 "CC-BY-SA 4.0"
 Comment4 "Top level"
@@ -3700,7 +3701,7 @@ CC ED 91 A8 19 1B A0 B4 21 08 82 20 08 C2 80 67 FA DE 56 F1 56 77 68 94 CF E1 D2
 82 20 82 34 52 F2 50 DA 10 04 41 10 04 41 42 22 94 74 2D 82 20 08 82 20 08 D2 58 E4 46 6F 00 82 
 20 08 82 20 08 12 3C 28 79 08 82 20 08 82 20 2D 08 4A 1E 82 20 08 82 20 48 0B 82 92 87 20 08 82 
 20 08 D2 82 A0 E4 21 08 82 20 08 82 B4 20 28 79 08 82 20 08 82 20 2D 08 4A 1E 82 20 08 82 20 48 
-0B F2 FF 19 12 7F 86 40 CA 02 9D 00 00 00 00 49 45 4E 44 AE 42 60 82 00 
+0B F2 FF 19 12 7F 86 40 CA 02 9D 00 00 00 00 49 45 4E 44 AE 42 60 82 FF 
 EndData
 $EndBitmap
 $Sheet

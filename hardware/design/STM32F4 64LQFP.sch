@@ -1,4 +1,5 @@
 EESchema Schematic File Version 2
+LIBS:DrChibi-rescue
 LIBS:BLDC_4-rescue
 LIBS:power
 LIBS:device
@@ -40,11 +41,11 @@ EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
 Sheet 11 11
-Title "3-Phase Universal Driver"
-Date "2015-08-27"
-Rev "0.1"
+Title "DrChibi, Looong-Strip"
+Date "2016-10-24"
+Rev "1"
 Comp "Jörg Wangemann"
-Comment1 ""
+Comment1 "Microcontroller STM32"
 Comment2 ""
 Comment3 "CC-BY-SA 4.0"
 Comment4 ""
@@ -4212,9 +4213,11 @@ CAN_TX
 Text HLabel 4500 2450 0    60   Input ~ 0
 SENSCE
 $Comp
-L CRYSTAL_SMD X2
+L CRYSTAL_SMD-RESCUE-DrChibi X2
 U 1 1 540978A3
 P 7750 2050
+AR Path="/540978A3" Ref="X2"  Part="1" 
+AR Path="/53F7501A/540978A3" Ref="X2"  Part="1" 
 F 0 "X2" H 7750 2225 30  0000 C CNN
 F 1 "8MHz 10ppm" H 7750 2164 30  0000 C CNN
 F 2 "Crystals_User:Crystal_5x3mm" H 7750 2050 60  0001 C CNN
