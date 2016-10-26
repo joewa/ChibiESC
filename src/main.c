@@ -19,6 +19,7 @@
 #include "hal.h"
 #include "ch_test.h"
 #include "chprintf.h"
+#include <stdlib.h> // Needed for strtof() in term.comp
 
 //#include "subsystems/serial/chibiesc_usb.h"
 //#include <stdint.h>
@@ -427,7 +428,7 @@ int main(void) {
 
   // Make some inits
   hal_set_pin("term0.rt_prio", 15.0);
-  hal_set_pin("sim0.rt_prio", 14.0);
+  //hal_set_pin("sim0.rt_prio", 14.0);
   //hal_set_pin("sixstep0.rt_prio", 13.0);
  //hal_link_pins("conf0.cmd_rev", "rev0.rev");
 
