@@ -28,6 +28,9 @@
 #include "misc.h"
 #include "bal_interface.h"
 
+#define PERIOD_FRT_ST	(US2ST(25))	// FRT period in TimX-Ticks or Systicks
+#define PERIOD_RT_ST	(8*PERIOD_FRT_ST)
+
 
 
 /*
@@ -194,22 +197,46 @@ static THD_FUNCTION(ThreadFRT, arg) {
 	int delta_count, last_delta_count;
 	delta_count=0; last_delta_count=0;
 	count_adc=0; count_frt=0;
+	//adcStartConversion(&ADCD1, &adcgrpcfg2, samples2, ADC_GRP2_BUF_DEPTH);
 	systime_t time = chVTGetSystemTime();
-	adcStartConversion(&ADCD1, &adcgrpcfg2, samples2, ADC_GRP2_BUF_DEPTH);
 
-	while ( !chThdShouldTerminateX() ) {
-		time += US2ST(20); //20
-		//palTogglePad(BANK_LED_GREEN, PIN_LED_GREEN);
-		//palTogglePad(BANK_LED_RED, PIN_LED_RED);
-		delta_count = count_frt - count_adc;
-		if(delta_count != last_delta_count) {
-			//palTogglePad(BANK_LED_RED, PIN_LED_RED);
+	while ( !chThdShouldTerminateX() ) { // TODO GPIO setzen und ruecksetzen und mit Oszi calctime messen.
+		if(bal.frt_state == FRT_SLEEP) {
+	         if(bal.active_frt_func > -1){
+	            bal.frt_state = FRT_STOP;
+	            bal.hal_state = MISC_ERROR;
+	            bal.rt_state = RT_STOP;
+	            break; 	//--> Terminate frt-thread
+	         }
+	         bal.frt_state = FRT_CALC;
 		}
-		last_delta_count = delta_count;
-		count_frt++;
-		//hal_run_frt
-		chThdSleepUntil(time);
-		//chThdYield();
+		else {//bal.frt_state == RT_STOP
+			break;		//--> Terminate frt-thread
+		}
+
+		   static unsigned int last_start = 0;
+		   unsigned int start = hal_get_systick_value();
+
+		   float period = ((float)(start - last_start)) / hal_get_systick_freq();
+		   last_start = start;
+
+		   hal_run_frt(period);
+		   //if(rt_counter++ > 500000) chThdSleep(US2ST(20)); // Inject task overrun error
+
+		   unsigned int end = hal_get_systick_value();
+
+		   PIN(frt_time) = ((float)(end - start)) / hal_get_systick_freq();
+		   PIN(frt_period_time) = period;
+
+		   // Check if deadline is missed and chThdSleepUntil next rt-cycle
+		   time += PERIOD_FRT_ST;
+		   if( time - (end + US2ST(2)) > PERIOD_FRT_ST) { // mind uint arithmetics: cannot have negative value!
+			   bal.frt_state = FRT_STOP;
+		       bal.hal_state = FRT_TOO_LONG;
+		       bal.rt_state = RT_STOP;
+			   break;
+		   } // Note that this detection may fail in case of excessively missed deadlines and timer counter overrun
+		   bal.frt_state = FRT_SLEEP; chThdSleepUntil(time);
 	}
 	chThdExit((msg_t)0);
 }
@@ -223,26 +250,21 @@ static THD_FUNCTION(ThreadRT, arg) {
 	chRegSetThreadName("ThreadRT");
 
 	systime_t time = chVTGetSystemTime();
-
+	uint32_t rt_counter;
+	rt_counter = 0;
 	while ( !chThdShouldTerminateX() ) {
-
-		   switch(bal.rt_state){
-		      case RT_STOP:
-		         return;
-		      case RT_CALC:
-		         bal.rt_state = RT_STOP;
-		         bal.hal_state = RT_TOO_LONG;
-		         bal.frt_state = FRT_STOP;
-		         return;
-		      case RT_SLEEP:
-		         if(bal.active_rt_func > -1){
-		            bal.rt_state = RT_STOP;
-		            bal.hal_state = MISC_ERROR;
-		            bal.frt_state = FRT_STOP;
-		            return;
-		         }
-		         bal.rt_state = RT_CALC;
-		   }
+		if(bal.rt_state == RT_SLEEP) {
+	         if(bal.active_rt_func > -1){
+	            bal.rt_state = RT_STOP;
+	            bal.hal_state = MISC_ERROR;
+	            bal.frt_state = FRT_STOP;
+	            break; 	//--> Terminate rt-thread
+	         }
+	         bal.rt_state = RT_CALC;
+		}
+		else {//bal.rt_state == RT_STOP
+			break;		//--> Terminate rt-thread
+		}
 
 		   static unsigned int last_start = 0;
 		   unsigned int start = hal_get_systick_value();
@@ -251,20 +273,23 @@ static THD_FUNCTION(ThreadRT, arg) {
 		   last_start = start;
 
 		   hal_run_rt(period);
+		   //if(rt_counter++ > 500000) chThdSleep(US2ST(200)); // Inject task overrun error
 
 		   unsigned int end = hal_get_systick_value();
 
 		   PIN(rt_time) = ((float)(end - start)) / hal_get_systick_freq();
 		   PIN(rt_period_time) = period;
 
-		   bal.rt_state = RT_SLEEP;
-
-		   // TODO: Implement proper overrun check
-		   time += US2ST(200); chThdSleepUntil(time);
-		   //chThdSleep(MS2ST(1));
-
+		   // Check if deadline is missed and chThdSleepUntil next rt-cycle
+		   time += PERIOD_RT_ST;
+		   if( time - (end + US2ST(20)) > PERIOD_RT_ST) { // mind uint arithmetics: cannot have negative value!
+			   bal.rt_state = RT_STOP;
+		       bal.hal_state = RT_TOO_LONG;
+		       bal.frt_state = FRT_STOP;
+			   break;
+		   } // Note that this detection may fail in case of excessively missed deadlines and timer counter overrun
+		   bal.rt_state = RT_SLEEP; chThdSleepUntil(time);
 		   //palTogglePad(BANK_LED_ORANGE_DISCO, PIN_LED_ORANGE_DISCO);
-
 	}
 	chThdExit((msg_t)0);
 }
@@ -306,19 +331,22 @@ thread_t *tp_rt = NULL;
 void hal_enable_rt() {
 	tp_rt = chThdCreateStatic(waThreadRT, sizeof(waThreadRT), NORMALPRIO+10, ThreadRT, NULL);
 }
+
+void hal_disable_rt() {
+	if(tp_rt != NULL) {
+		chThdTerminate(tp_rt);
+		msg_t n = chThdWait(tp_rt);
+		tp_rt = NULL;
+	}
+}
+
+
 /*
  * Start Fast-RT-Thread
  */
 thread_t *tp_frt = NULL;
 void hal_enable_frt() {
 	tp_frt = chThdCreateStatic(waThreadFRT, sizeof(waThreadFRT), NORMALPRIO+20, ThreadFRT, NULL);
-}
-
-void hal_disable_rt() {
-	if(tp_rt != NULL) {
-		chThdTerminate(tp_rt);
-		msg_t n = chThdWait(tp_rt);
-	}
 }
 
 void hal_disable_frt() {
@@ -370,6 +398,7 @@ int main(void) {
   //feedback comps
   #include "comps/term.comp"
   #include "comps/sim.comp"
+  #include "comps/simfast.comp"
   #include "comps/sixstep.comp"
 
   //command comps
@@ -414,20 +443,9 @@ int main(void) {
     // Main loop
     while (true) {
 	chThdSleepMilliseconds(1);
-    //if (palReadPad(GPIOA, GPIOA_BUTTON))
-    //  TestThread(&SD2);
-	//palSetPad(BANK_LED_RED, PIN_LED_RED);       /* Orange.  */
-	//palSetPad(BANK_LED_GREEN, PIN_LED_GREEN);
-	//palSetPad(BANK_LED_ORANGE_DISCO, PIN_LED_ORANGE_DISCO);
-	//chprintf(&SDU1,"Hallo %f\n", testfloat);
 
 	len = streamRead(&SDU1, (uint8_t*)usb_rx_buf_raw, 1);
 	VCP_DataRx(usb_rx_buf_raw, len);
 
-	//usb_put_buffer(0, 0, testtext, 5);
-	//printf("Hallo\n");
-	//palClearPad(BANK_LED_RED, PIN_LED_RED);     /* Orange.  */
-	//palClearPad(BANK_LED_GREEN, PIN_LED_GREEN);
-	//palClearPad(BANK_LED_ORANGE_DISCO, PIN_LED_ORANGE_DISCO);
   }
 }
