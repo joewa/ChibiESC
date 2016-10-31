@@ -29,6 +29,9 @@
 #include "misc.h"
 #include "bal_interface.h"
 
+/*
+ * BEGIN Thread timing and clock configuration
+ */
 #define PERIOD_FRT_ST	(US2ST(25))	// FRT period in TimX-Ticks or Systicks
 #define PERIOD_RT_ST	(8*PERIOD_FRT_ST)
 
