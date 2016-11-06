@@ -51,8 +51,8 @@
  * @details Frequency of the system timer that drives the system ticks. This
  *          setting also defines the system tick time unit.
  */
-#define CH_CFG_ST_FREQUENCY                 2400000//60000//60000*2//60000*10
-// Because 2.4MHz is the ADC sampling frequency
+#define CH_CFG_ST_FREQUENCY                 2400000 // Because 2.4MHz is the ADC sampling frequency at 144MHz
+// TODO Ordentlich ueber clock tree definieren!!!
 
 /**
  * @brief   Time delta constant for the tick-less mode.
