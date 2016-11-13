@@ -194,7 +194,8 @@ INCDIR = $(CHIBIOS)/os/license \
          $(HALINC) $(PLATFORMINC) $(BOARDINC) $(TESTINC) \
          $(CHIBIOS)/os/hal/lib/streams \
          $(CHIBIOS)/os/various \
-         ../pprzlink/var/include
+         ../pprzlink/var/include \
+         .
 
 #
 # Project, sources and paths

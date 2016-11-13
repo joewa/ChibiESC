@@ -32,20 +32,15 @@
 /*
  * BEGIN Thread timing and clock configuration
  */
-#define f_HSE						8e6 	// HSE clock frequency
-#define f_STM32_SYSCLK				(f_HSE / STM32_PLLM_VALUE * STM32_PLLN_VALUE / STM32_PLLP_VALUE)
-#define Ks_ADC_samplehold  			3 		// ADC sampling (hold) cycles (see ADC_SMPRx registers)
-#define Ks_ADC_conversion  			12		// ADC resolution / ADCCLK cycles for conversion
-#define Ks_ADC  					(Ks_ADC_samplehold + Ks_ADC_conversion)
-#define STM32_ADC_ADCPRESCALER		(2 + (2 * STM32_ADC_ADCPRE))
+
 // PWM configuration
 #define ADC_PWM_DIVIDER				(Ks_ADC * STM32_ADC_ADCPRESCALER) // ADC_CCR_ADCPRE_DIV2 When f_TIM1 == f_TIM2 (*STM32_PPRE2 for f_TIM1 = f_SYSCLK)
 #define PWM_CLOCK_FREQUENCY 		(f_STM32_SYSCLK / 2)  // Low speed periph clock APB1! TIM1 connected to APB1!
 // Define cycles!
 #define ADC_COMMUTATE_NUM_CHANNELS	1		// Number of channels per ADC for (6-step mode)
-#define ADC_FRT_DEFAULT_PERIOD_CYCLES 60	// Fastest FRT cycle period in ADC cycles
+#define ADC_FRT_DEFAULT_PERIOD_CYCLES 100	// Fastest FRT cycle period in ADC cycles
 #define PWM_ADC_DEFAULT_PERIOD_CYCLES 20	// Choose a default number of ADC samples in a PWM period
-#define PWM_ADC_MAXIMUM_PERIOD_CYCLES 100 	// Choose a maximum number of ADC samples in a PWM period (determines maximum PWM period)
+#define PWM_ADC_MAXIMUM_PERIOD_CYCLES 200 	// Choose a maximum number of ADC samples in a PWM period (determines maximum PWM period)
 #define ADC_COMMUTATE_BUF_DEPTH		(ADC_COMMUTATE_NUM_CHANNELS * PWM_ADC_MAXIMUM_PERIOD_CYCLES * 2) // TODO Check if this is sufficient!
 #define PWM_FRT_DEFAULT_PERIOD_CYCLES (ADC_PWM_DIVIDER * ADC_FRT_DEFAULT_PERIOD_CYCLES)
 #define PWM_DEFAULT_PERIOD_CYCLES	(ADC_COMMUTATE_NUM_CHANNELS * ADC_PWM_DIVIDER * PWM_ADC_DEFAULT_PERIOD_CYCLES)
@@ -54,8 +49,10 @@
 //PWM_DEFAULT_FREQUENCY = PWM_CLOCK_FREQUENCY / PWM_DEFAULT_PERIOD_CYCLES
 //PWM_MINIMUM_FREQUENCY = PWM_CLOCK_FREQUENCY / PWM_MAXIMUM_PERIOD_CYCLES
 
-#define PERIOD_FRT_ST	(US2ST(25))	// FRT period in TimX-Ticks or Systicks
-#define PERIOD_RT_ST	(8*PERIOD_FRT_ST)
+#define ADC_RT_DEFAULT_PERIOD_CYCLES (5*ADC_FRT_DEFAULT_PERIOD_CYCLES)
+
+//#define PERIOD_FRT_ST	(US2ST(25))	// FRT period in TimX-Ticks or Systicks
+//#define PERIOD_RT_ST	(8*PERIOD_FRT_ST)
 /*
  * END  Thread timing and clock configuration
  */
@@ -72,9 +69,9 @@ typedef struct{
     volatile int active_rt_func;
     volatile int active_frt_func;
     volatile int active_nrt_func;
-} chibiesc_struct_t;
+} bal_extensions_struct_t;
 
-chibiesc_struct_t chibiesc;
+bal_extensions_struct_t bal_ext;
 
 /*
  * Application entry point.
@@ -180,28 +177,36 @@ void USB_VCP_send_string(unsigned char *ptr)
 //END copy&paste
 
 
-
-#define ADC_GRP2_NUM_CHANNELS   2
-#define ADC_GRP2_BUF_DEPTH      48
-
-static adcsample_t samples2[ADC_GRP2_NUM_CHANNELS * ADC_GRP2_BUF_DEPTH];
+static adcsample_t commutatesamples[ADC_COMMUTATE_BUF_DEPTH];
 
 
 systime_t count_adc, count_frt;
 /*
  * ADC streaming callback.
  */
-size_t nx = 0, ny = 0;
+static thread_reference_t trp = NULL;
+size_t nx = 0, ny = 0; int adc_blink_count = 1000;
 static void adccallback(ADCDriver *adcp, adcsample_t *buffer, size_t n) {
 
   (void)adcp;
-  if (samples2 == buffer) {
+  if (commutatesamples == buffer) {
     nx += n;
   }
   else {
     ny += n;
   }
   count_adc++;
+
+  if(adc_blink_count-- <= 0) {
+	  adc_blink_count = 1000;
+	  //palTogglePad(BANK_LED_RED, PIN_LED_RED);
+	  //palTogglePad(BANK_LED_GREEN, PIN_LED_GREEN);
+  }
+  palTogglePad(BANK_LED_GREEN, PIN_LED_GREEN);
+  /* Wakes up the thread.*/
+  chSysLockFromISR();
+  chThdResumeI(&trp, (msg_t)0x1337);  /* Resuming the thread with message.*/
+  chSysUnlockFromISR();
 }
 
 static void adcerrorcallback(ADCDriver *adcp, adcerror_t err) {
@@ -216,20 +221,19 @@ static void adcerrorcallback(ADCDriver *adcp, adcerror_t err) {
  * Mode:        Continuous, 16 samples of 8 channels, SW triggered.
  * Channels:    IN11, IN12, IN11, IN12, IN11, IN12, Sensor, VRef.
  */
-static const ADCConversionGroup adcgrpcfg2 = {
+static const ADCConversionGroup adc_commutate_group = {
   TRUE,
-  ADC_GRP2_NUM_CHANNELS,
+  ADC_COMMUTATE_NUM_CHANNELS,
   adccallback,
   adcerrorcallback,
   0,                        /* CR1 */
   ADC_CR2_SWSTART,          /* CR2 */
-  ADC_SMPR1_SMP_AN12(ADC_SAMPLE_3) | ADC_SMPR1_SMP_AN11(ADC_SAMPLE_3),
+  ADC_SMPR1_SMP_AN12(ADC_SAMPLE_3) /*| ADC_SMPR1_SMP_AN11(ADC_SAMPLE_3)*/,
   0,                        /* SMPR2 */
-  ADC_SQR1_NUM_CH(ADC_GRP2_NUM_CHANNELS),
+  ADC_SQR1_NUM_CH(ADC_COMMUTATE_NUM_CHANNELS),
   0,
-  ADC_SQR3_SQ2_N(ADC_CHANNEL_IN12)   | ADC_SQR3_SQ1_N(ADC_CHANNEL_IN11)
+  ADC_SQR3_SQ2_N(ADC_CHANNEL_IN12)   /*| ADC_SQR3_SQ1_N(ADC_CHANNEL_IN11)*/
 };
-
 
 
 
@@ -243,8 +247,8 @@ static THD_FUNCTION(ThreadFRT, arg) {
 	delta_count=0; last_delta_count=0;
 	count_adc=0; count_frt=0;
 	//adcStartConversion(&ADCD1, &adcgrpcfg2, samples2, ADC_GRP2_BUF_DEPTH);
-	chibiesc.frt_extended_state = FRT_WAITFOR_TIMEOUT;
-	systime_t time = chVTGetSystemTime();
+	bal_ext.frt_extended_state = FRT_WAITFOR_TIMEOUT;
+	systime_t time = hal_get_systick_value();// + ADC_FRT_DEFAULT_PERIOD_CYCLES;
 
 	while ( !chThdShouldTerminateX() ) { // TODO GPIO setzen und ruecksetzen und mit Oszi calctime messen.
 		if(bal.frt_state == FRT_SLEEP) {
@@ -269,12 +273,12 @@ static THD_FUNCTION(ThreadFRT, arg) {
 		   hal_run_frt(period);
 		   //if(rt_counter++ > 500000) chThdSleep(US2ST(20)); // Inject task overrun error
 
-		   unsigned int end = hal_get_systick_value();
+		   unsigned int end = hal_get_systick_value(); // TODO: Doppelt? Siehe bal.h
 
 		   PIN(frt_time) = ((float)(end - start)) / hal_get_systick_freq();
 		   PIN(frt_period_time) = period;
 
-		   if(chibiesc.frt_extended_state == FRT_WAITFOR_TIMEOUT) {
+		   if(bal_ext.frt_extended_state == FRT_WAITFOR_TIMEOUT) {
 			   // Check if deadline is missed and chThdSleepUntil next rt-cycle
 			   time += ADC_FRT_DEFAULT_PERIOD_CYCLES; //PERIOD_FRT_ST; CH_CFG_ST_TIMEDELTA
 			   if( time - (end + CH_CFG_ST_TIMEDELTA) > ADC_FRT_DEFAULT_PERIOD_CYCLES) { // mind uint arithmetics: cannot have negative value!
@@ -283,14 +287,16 @@ static THD_FUNCTION(ThreadFRT, arg) {
 			       bal.rt_state = RT_STOP;
 				   break;
 			   } // Note that this detection may fail in case of excessively missed deadlines and timer counter overrun
-			   bal.frt_state = FRT_SLEEP; chThdSleepUntil(time);
-		   } else { //chibiesc.frt_extended_state == FRT_WAITFOR_REMOTE
-			   /* Warte auf ADC-Callback: http://www.chibios.org/dokuwiki/doku.php?id=chibios:howtos:wakeup
-			    *     chSysLock();
-			    *     msg = chThdSuspendS(&trp);
-			    *     chSysUnlock();
-			    */
-			   // time =...
+			   bal.frt_state = FRT_SLEEP;
+			   chThdSleepUntil(time);
+		   } else { //bal_ext.frt_extended_state == FRT_WAITFOR_REMOTE
+			   // Warte auf ADC-Callback: http://www.chibios.org/dokuwiki/doku.php?id=chibios:howtos:wakeup
+			   bal.frt_state = FRT_SLEEP;
+			   chSysLock();
+			   //msg =
+			   chThdSuspendS(&trp);
+			   chSysUnlock();
+			   time = hal_get_systick_value();
 			   // TODO: Haben time[ADC-Ticks] und hal_get_systick_value die gleiche Einheit!?
 		   }
 	}
@@ -305,7 +311,7 @@ static THD_FUNCTION(ThreadRT, arg) {
 	(void)arg;
 	chRegSetThreadName("ThreadRT");
 
-	systime_t time = chVTGetSystemTime();
+	systime_t time = hal_get_systick_value();
 	uint32_t rt_counter;
 	rt_counter = 0;
 	while ( !chThdShouldTerminateX() ) {
@@ -337,8 +343,8 @@ static THD_FUNCTION(ThreadRT, arg) {
 		   PIN(rt_period_time) = period;
 
 		   // Check if deadline is missed and chThdSleepUntil next rt-cycle
-		   time += PERIOD_RT_ST;
-		   if( time - (end + US2ST(20)) > PERIOD_RT_ST) { // mind uint arithmetics: cannot have negative value!
+		   time += ADC_RT_DEFAULT_PERIOD_CYCLES;
+		   if( time - (end + (2*ADC_FRT_DEFAULT_PERIOD_CYCLES)) > ADC_RT_DEFAULT_PERIOD_CYCLES) { // mind uint arithmetics: cannot have negative value!
 			   bal.rt_state = RT_STOP;
 		       bal.hal_state = RT_TOO_LONG;
 		       bal.frt_state = FRT_STOP;
@@ -366,7 +372,7 @@ static THD_FUNCTION(ThreadNRT, arg) {
 	  if(nrt_blink_count-- <= 0) {
 		  nrt_blink_count = 1000;
 		  //palTogglePad(BANK_LED_RED, PIN_LED_RED);
-		  palTogglePad(BANK_LED_GREEN, PIN_LED_GREEN);
+		  //palTogglePad(BANK_LED_GREEN, PIN_LED_GREEN);
 	  }
 	  nrt_starttime = chVTGetSystemTime();
 	  hal_run_nrt(nrt_Period); // Calls term which calls USB_VCP_get_string. Call from own thread, NOT HERE!!!
@@ -419,41 +425,25 @@ int main(void) {
 	// main loop always runs at NORMALPRIO
 	int len;
 
-  /*
-   * System initializations.
-   * - HAL initialization, this also initializes the configured device drivers
-   *   and performs the board-specific initializations.
-   * - Kernel initialization, the main() function becomes a thread and the
-   *   RTOS is active.
-   */
   halInit();
   chSysInit();
-
   /*
    * Activates the ADC1 driver and the temperature sensor.
    */
   adcStart(&ADCD1, NULL);
   //adcSTM32EnableTSVREFE();
-  /*
-   * Starts an ADC continuous conversion.
-   */
 
-  //ce_serial_init();
   usb_init();
-
-
   chThdSleepMilliseconds(2000);
   //setup();
   hal_init(); // from stmbl bal
-
-
 
   hal_set_comp_type("foo"); // default pin for mem errors
   HAL_PIN(bar) = 0.0;
 
   //feedback comps
   #include "comps/term.comp"
-  #include "comps/sim.comp"
+  //#include "comps/sim.comp"
   #include "comps/simfast.comp"
   #include "comps/sixstep.comp"
 
@@ -472,7 +462,7 @@ int main(void) {
   HAL_PIN(nrt_period) = 0.0;
 
   HAL_PIN(something1) = ADC_FRT_DEFAULT_PERIOD_CYCLES;
-  HAL_PIN(something2) = PERIOD_FRT_ST;
+  HAL_PIN(something2) = ADC_RT_DEFAULT_PERIOD_CYCLES;
 
   // Was macht das?
   nrt_time_hal_pin = hal_map_pin("net0.nrt_calc_time");
@@ -486,6 +476,11 @@ int main(void) {
 
   // Make some inits
   hal_set_pin("term0.rt_prio", 15.0);
+  hal_set_pin("simfast0.rt_prio", 50.0);
+  hal_set_pin("simfast0.frt_prio", 50.0);
+  hal_set_pin("sixstep0.rt_prio", 100.0);
+  hal_set_pin("sixstep0.frt_prio", 100.0);
+  //hal_set_pin("sixstep0.frt_prio", 100.0);
   //hal_set_pin("sim0.rt_prio", 14.0);
   //hal_set_pin("sixstep0.rt_prio", 13.0);
  //hal_link_pins("conf0.cmd_rev", "rev0.rev");

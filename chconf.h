@@ -30,6 +30,8 @@
 
 #define _CHIBIOS_RT_CONF_
 
+//#include "clockconf.h" // Wird fuer F_ADCCLK gebraucht
+
 #define CHPRINTF_USE_FLOAT TRUE
 
 
@@ -51,7 +53,7 @@
  * @details Frequency of the system timer that drives the system ticks. This
  *          setting also defines the system tick time unit.
  */
-#define CH_CFG_ST_FREQUENCY                 2400000 // Because 2.4MHz is the ADC sampling frequency at 144MHz
+#define CH_CFG_ST_FREQUENCY                 2400000//F_ADCCLK//2400000 Because 2.4MHz is the ADC sampling frequency at 144MHz
 // TODO Ordentlich ueber clock tree definieren!!!
 
 /**

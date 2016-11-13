@@ -1,22 +1,63 @@
 HAL_COMP(sixstep);
 
+HAL_PIN(enable) = 0.0;//NO;
 HAL_PIN(d_ref) = 0.0; // duty cycle TODO: PWM frequency or period
 
+MEM(float time) = 0.0;
+MEM(int en) = 0;
+MEM(int d) = 0;
+MEM(int angle6) = 0;
+
+void commutate_6step_anti() {//TODO Besser ein C-File mit 6-Step-Funktionen machen
+	// Kommutieren mit aktuellem PWM und ADC starten. Nicht waehrend eines Schrittes verwenden.
+	uint8_t legp, legn, legoff; // Positive and negative PWM leg
+	adcStopConversion(&ADCD1);
+	if (angle6 == 1) { // sample W_VOLTAGE, triggered by U_PWM
+		//adc_commutate_group.cr2 = ADC_CR2_EXTTRIG | ADC_CR2_CONT; // ADC_CR2: select TIM1_CC1 event
+		//adc_commutate_group.smpr2 = ADC_SMPR2_SMP_AN2(ADC_SAMPLE_1P5);
+		//adc_commutate_group.sqr3 = ADC_SQR3_SQ1_N(ADC_CHANNEL_IN2); // W_VOLTAGE
+		legp = 0; legn = 1; legoff=2;
+	} else if (angle6 == 2) { // sample U_VOLTAGE, triggered by W_PWM
+		//adc_commutate_group.cr2 = ADC_CR2_EXTTRIG | ADC_CR2_EXTSEL_1 | ADC_CR2_CONT; //ADC_CR2: select TIM1_CC3 event
+		//adc_commutate_group.smpr2 = ADC_SMPR2_SMP_AN0(ADC_SAMPLE_1P5);
+		//adc_commutate_group.sqr3 = ADC_SQR3_SQ1_N(ADC_CHANNEL_IN0); // U_VOLTAGE
+		legp = 2; legn = 1; legoff=0;
+	}
+	//m->legoff = legoff; // this leg is used for sensing now
+	//genpwmcfg.channels[legp].mode = PWM_OUTPUT_ACTIVE_HIGH;
+	//genpwmcfg.channels[legn].mode = PWM_OUTPUT_ACTIVE_LOW;
+	//palClearPad(GPIOB, GPIOB_U_NDTS); palClearPad(GPIOB, GPIOB_V_NDTS); palClearPad(GPIOB, GPIOB_W_NDTS);
+	pwmStop(&PWMD1);
+}
+
+
 RT_INIT(
+  HAL_PIN(enable) = 0.0;//NO;
   HAL_PIN(d_ref) = 0.0; // duty cycle TODO: PWM frequency or period
 );
 
 RT_DEINIT(
+  HAL_PIN(enable) = 0.0;//NO;
   HAL_PIN(d_ref) = 0.0; // duty cycle TODO: PWM frequency or period
 );
 
 FRT(
+  // Erlaube Frequenzaenderung nur bei Kommutierung! Begrenze PWM nach oben in Abhaengigkeit der Frequenz
 
   //PIN(pos) = mod(TIM_GetCounter(ENC1_TIM) * 2.0f * M_PI / (float)e_res);
+  if(en == YES && bal_ext.frt_extended_state == FRT_WAITFOR_TIMEOUT) {
+	  bal_ext.frt_extended_state = FRT_WAITFOR_REMOTE; // Das Setzen und Ruecksetzen vielleicht lieber in einer speicher-comp machen? Diese kriegt die niedrigeste prio!
+	  commutate_6step_anti();
+	  adcStartConversion(&ADCD1, &adc_commutate_group, commutatesamples, 2*ADC_FRT_DEFAULT_PERIOD_CYCLES);
+  } else if(en == NO && bal_ext.frt_extended_state == FRT_WAITFOR_REMOTE) {
+	  bal_ext.frt_extended_state = FRT_WAITFOR_TIMEOUT;
+	  adcStopConversion(&ADCD1);
+  }
+
 );
 
 RT(
-
+  en = (int)PIN(enable);
 );
 
 ENDCOMP;

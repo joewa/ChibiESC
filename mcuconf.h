@@ -37,6 +37,7 @@
  * HAL driver system settings.
  */
 
+//#include "clockconf.h"
 
 #if defined(BOARD_DRCHIBI_DISCO) || defined(BOARD_VESC) || defined(BOARD_LOOONG_STRIP)
 #define STM32_NO_INIT                       FALSE
@@ -77,8 +78,8 @@
 #define STM32_CLOCK48_REQUIRED              TRUE
 #define STM32_SW                            STM32_SW_PLL
 #define STM32_PLLSRC                        STM32_PLLSRC_HSE
-#define STM32_PLLM_VALUE                    6 // Overclock288 4
-#define STM32_PLLN_VALUE                    216 //Overclock288 288
+#define STM32_PLLM_VALUE                    4 //144: 6 //168: 4 //Overclock288 4
+#define STM32_PLLN_VALUE                    144 //168: 168 //Overclock288 288
 #define STM32_PLLP_VALUE                    2 // SYSCLK 144MHz
 #define STM32_PLLQ_VALUE                    6 // 48MHz
 
@@ -131,6 +132,21 @@
 #define STM32_ADC_ADC1_DMA_IRQ_PRIORITY     6
 #define STM32_ADC_ADC2_DMA_IRQ_PRIORITY     6
 #define STM32_ADC_ADC3_DMA_IRQ_PRIORITY     6
+
+
+/*
+ * Additional definitions for ChibiESC Clock-Tree
+ */
+#define f_HSE						8000000 	// HSE clock frequency
+#define f_STM32_SYSCLK				(f_HSE / STM32_PLLM_VALUE * STM32_PLLN_VALUE / STM32_PLLP_VALUE)
+#define Ks_ADC_samplehold  			3 		// ADC sampling (hold) cycles (see ADC_SMPRx registers)
+#define Ks_ADC_conversion  			12		// ADC resolution / ADCCLK cycles for conversion
+#define Ks_ADC  					(Ks_ADC_samplehold + Ks_ADC_conversion)
+#define STM32_ADC_ADCPRESCALER		(2 + (2 * STM32_ADC_ADCPRE))
+
+#define F_ADCCLK 					(f_STM32_SYSCLK / 2 / STM32_ADC_ADCPRESCALER) // !!! Only when STM32_PPRE2_DIV2
+
+
 
 /*
  * CAN driver system settings.
@@ -385,9 +401,11 @@
 #define STM32_USB_OTG_THREAD_STACK_SIZE     128
 #define STM32_USB_OTGFIFO_FILL_BASEPRI      0
 
+
 /*
  * WDG driver system settings.
  */
 #define STM32_WDG_USE_IWDG                  FALSE
+
 
 #endif /* _MCUCONF_H_ */
