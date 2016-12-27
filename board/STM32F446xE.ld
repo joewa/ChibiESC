@@ -15,7 +15,7 @@
 */
 
 /*
- * STM32F407xG memory setup.
+ * ST32F446xE memory setup.
  * Note: Use of ram1 and ram2 is mutually exclusive with use of ram0.
  */
 MEMORY
@@ -23,17 +23,17 @@ MEMORY
     flash0  : org = 0x08000000, len = 16k		/* Sector 0 (16kB) */
     flash1  : org = 0x00004000, len = 16k		/* Sector 1 (16kB) */
     flash2  : org = 0x00008000, len = 16k		/* Sector 2 (16kB) */
-    flash3  : org = 0x0000C000, len = 976k		/* Sector 3 (16kB) + Sector 4 (64kB) + Sector 5-11 (7*128kB) */
+    flash3  : org = 0x0000C000, len = 464k		/* Sector 3 (16kB) + Sector 4 (64kB) + Sector 5-7 (3*128kB) */
     flash4  : org = 0x00000000, len = 0
     flash5  : org = 0x00000000, len = 0
     flash6  : org = 0x00000000, len = 0
     flash7  : org = 0x00000000, len = 0
-    ram0    : org = 0x20000000, len = 128k      /* SRAM1 + SRAM2 */
-    ram1    : org = 0x20000000, len = 112k      /* SRAM1 */
-    ram2    : org = 0x2001C000, len = 16k       /* SRAM2 */
+    ram0    : org = 0x20000000, len = 128k    /* SRAM1 + SRAM2 */
+    ram1    : org = 0x20000000, len = 112k    /* SRAM1 */
+    ram2    : org = 0x00000000, len = 16k     /* SRAM2 */
     ram3    : org = 0x00000000, len = 0
-    ram4    : org = 0x10000000, len = 64k       /* CCM SRAM */
-    ram5    : org = 0x40024000, len = 4k        /* BCKP SRAM */
+    ram4    : org = 0x00000000, len = 0
+    ram5    : org = 0x00000000, len = 0
     ram6    : org = 0x00000000, len = 0
     ram7    : org = 0x00000000, len = 0
 }
