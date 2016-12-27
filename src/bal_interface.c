@@ -59,22 +59,8 @@ uint32_t hal_get_systick_freq() {
 	return CH_CFG_ST_FREQUENCY;
 }
 
-/*
- * load+save Laden und speichern der Konfiguration. Load wird bei start aufgerufen.
- */
-
-int load() {
-	return 0;
-}
-
-void save() {
-
-}
-
 void hal_conf_init(){
- //  FLASH_Unlock();
- //  EE_Init();
- //  FLASH_Lock();
+	//
 }
 
 int USB_CDC_is_connected() {

@@ -1,6 +1,6 @@
 #CHIBIESC_BOARD = LOOONG_STRIP
-#CHIBIESC_BOARD = DRCHIBI_DISCO
-CHIBIESC_BOARD = NUCLEO_F446
+CHIBIESC_BOARD = DRCHIBI_DISCO
+#CHIBIESC_BOARD = NUCLEO_F446
 #CHIBIESC_BOARD = VESC
 
 ##############################################################################
@@ -145,7 +145,9 @@ CSRC = $(STARTUPSRC) \
        src/bal_term.c \
        src/bal_interface.c \
        src/scanf.c \
-       src/misc.c
+       src/misc.c \
+       src/stm32f4xx_flash.c \
+       src/eeprom.c
 
        
        #subsystems/pprzlink/src/pprz_transport.c \
