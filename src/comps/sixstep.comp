@@ -10,6 +10,7 @@ MEM(int angle6) = 0;
 
 void commutate_6step_anti() {//TODO Besser ein C-File mit 6-Step-Funktionen machen
 	// Kommutieren mit aktuellem PWM und ADC starten. Nicht waehrend eines Schrittes verwenden.
+	// Diese Funktion koennte man auch in eine eigene Komponente packen.
 	uint8_t legp, legn, legoff; // Positive and negative PWM leg
 	adcStopConversion(&ADCD1);
 	if (angle6 == 1) { // sample W_VOLTAGE, triggered by U_PWM
