@@ -1,6 +1,6 @@
 #CHIBIESC_BOARD = LOOONG_STRIP
-#CHIBIESC_BOARD = DRCHIBI_DISCO
-CHIBIESC_BOARD = NUCLEO_F446
+CHIBIESC_BOARD = DRCHIBI_DISCO
+#CHIBIESC_BOARD = NUCLEO_F446
 #CHIBIESC_BOARD = VESC
 
 ##############################################################################
@@ -273,6 +273,18 @@ ULIBS =
 #pprzlink:
 #	cd pprzlink && git pull
 #	make -C pprzlink/ pymessages
+
+boot:
+	$(MAKE) -f bootloader/Makefile
+
+boot_clean:
+	$(MAKE) -f bootloader/Makefile clean
+
+boot_flash: boot
+	$(MAKE) -f bootloader/Makefile flash
+
+boot_btflash: boot
+	$(MAKE) -f bootloader/Makefile btflash
 
 RULESPATH = $(CHIBIOS)/os/common/startup/ARMCMx/compilers/GCC
 include $(RULESPATH)/rules.mk

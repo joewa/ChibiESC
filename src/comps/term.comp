@@ -68,7 +68,7 @@ MEM(volatile float jog_en) = 0.0;
 
 MEM(uint16_t ee_error);
 
-int load(){
+/*int load(){
 	if(bal.rt_state != RT_STOP || bal.frt_state != FRT_STOP){
 		return(-4);
 	}
@@ -110,17 +110,17 @@ int load(){
 	//update_cmd();
 	//update_fb();
 	return 0;
-}
+}*/
 
 INIT(
 	//hal_conf_init();
-	FLASH_Unlock();
+	/*FLASH_Unlock();
 	ee_error = EE_Init();
 	FLASH_Lock();
 	int ret = load();
 	if(ret){//flash load error
 		bal.hal_state = CONFIG_LOAD_ERROR;
-	}
+	}*/
 );
 
 RT(
@@ -154,7 +154,7 @@ NRT(
     * load+save Laden und speichern der Konfiguration. Load wird bei start aufgerufen.
     */
 
-	void save(){
+	/*void save(){
 		if(ee_error != FLASH_COMPLETE){
 			printf("flash error:%i\n",ee_error);
 			return;
@@ -191,7 +191,7 @@ NRT(
 		}
 		FLASH_Lock();
 		printf("done\n");
-	}
+	}*/
 
 	void about(){
 /*      printf("######## software info ########\n");
@@ -334,10 +334,10 @@ NRT(
          help();
       }
       else if(!strcmp(s, "save")){
-         save();
+         //save();
       }
       else if(!strcmp(s, "load")){
-         int ret = load();
+         /*int ret = load();
          if(ret == -1){
             printf("flash error\n");
             return;
@@ -352,7 +352,7 @@ NRT(
             printf("CRC error\n");
          }else{
             printf("done\n");
-         }
+         }*/
       }
       else if(!strcmp(s, "getconf")){
          hal_term_conf();

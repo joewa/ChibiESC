@@ -17,7 +17,7 @@
 #include "bal.h"
 
 #include "stm32f4xx_flash.h"
-#include "eeprom.h"
+//#include "eeprom.h"
 
 extern SerialUSBDriver SDU1;
 #define printf(msg, ...) chprintf(&SDU1, msg, ## __VA_ARGS__)
