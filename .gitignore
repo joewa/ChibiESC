@@ -37,3 +37,4 @@
 .project
 *.launch
 build/
+obj_boot/

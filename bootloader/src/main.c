@@ -21,9 +21,9 @@
 #include "stm32f4xx_conf.h"
 //#include "version.h"
 
-/*#if __GNUC__ < 5
+#if __GNUC__ < 5
    #error gcc to old (< 5.0)
-#endif*/
+#endif
 
 //#if defined(BOARD_LOOONG_STRIP) || defined(BOARD_DRCHIBI_DISCO) || defined(BOARD_VESC)
 #define APP_START 0x08010000
