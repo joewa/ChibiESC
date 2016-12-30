@@ -42,11 +42,11 @@
 #define PWM_ADC_DEFAULT_PERIOD_CYCLES 20	// Choose a default number of ADC samples in a PWM period
 #define PWM_ADC_MAXIMUM_PERIOD_CYCLES 200 	// Choose a maximum number of ADC samples in a PWM period (determines maximum PWM period)
 #define ADC_COMMUTATE_BUF_DEPTH		(ADC_COMMUTATE_NUM_CHANNELS * PWM_ADC_MAXIMUM_PERIOD_CYCLES * 2) // TODO Check if this is sufficient!
-#define PWM_FRT_DEFAULT_PERIOD_CYCLES (ADC_PWM_DIVIDER * ADC_FRT_DEFAULT_PERIOD_CYCLES)
+#define PWM_FRT_DEFAULT_PERIOD_CYCLES (ADC_COMMUTATE_NUM_CHANNELS * ADC_PWM_DIVIDER * ADC_FRT_DEFAULT_PERIOD_CYCLES)
 #define PWM_DEFAULT_PERIOD_CYCLES	(ADC_COMMUTATE_NUM_CHANNELS * ADC_PWM_DIVIDER * PWM_ADC_DEFAULT_PERIOD_CYCLES)
 #define PWM_MAXIMUM_PERIOD_CYCLES	(ADC_COMMUTATE_NUM_CHANNELS * ADC_PWM_DIVIDER * PWM_ADC_MAXIMUM_PERIOD_CYCLES)
 //FRT_DEFAULT_FREQUENCY = PWM_CLOCK_FREQUENCY / PWM_FRT_DEFAULT_PERIOD_CYCLES
-//PWM_DEFAULT_FREQUENCY = PWM_CLOCK_FREQUENCY / PWM_DEFAULT_PERIOD_CYCLES
+#define PWM_DEFAULT_FREQUENCY		(PWM_CLOCK_FREQUENCY / PWM_DEFAULT_PERIOD_CYCLES)
 //PWM_MINIMUM_FREQUENCY = PWM_CLOCK_FREQUENCY / PWM_MAXIMUM_PERIOD_CYCLES
 
 #define ADC_RT_DEFAULT_PERIOD_CYCLES (5*ADC_FRT_DEFAULT_PERIOD_CYCLES)
@@ -221,7 +221,7 @@ static void adcerrorcallback(ADCDriver *adcp, adcerror_t err) {
  * Mode:        Continuous, 16 samples of 8 channels, SW triggered.
  * Channels:    IN11, IN12, IN11, IN12, IN11, IN12, Sensor, VRef.
  */
-static const ADCConversionGroup adc_commutate_group = {
+static const ADCConversionGroup adc_commutate_group = { // TODO: Check if this is fine for F4
   TRUE,
   ADC_COMMUTATE_NUM_CHANNELS,
   adccallback,
@@ -235,9 +235,24 @@ static const ADCConversionGroup adc_commutate_group = {
   ADC_SQR3_SQ2_N(ADC_CHANNEL_IN12)   /*| ADC_SQR3_SQ1_N(ADC_CHANNEL_IN11)*/
 };
 
+static PWMConfig pwm1cfg= {
+		PWM_CLOCK_FREQUENCY, /* PWM clock frequency */
+		PWM_CLOCK_FREQUENCY / PWM_DEFAULT_FREQUENCY, /* PWM period */
+		NULL,  /* No callback */
+		{
+				{PWM_OUTPUT_ACTIVE_HIGH, NULL},
+				{PWM_OUTPUT_ACTIVE_HIGH, NULL},
+				{PWM_OUTPUT_ACTIVE_HIGH, NULL},
+				{PWM_OUTPUT_DISABLED, NULL},
+		},
+		0,//TIM_CR2_MMS_1, // 010: Update - The update event is selected as trigger output (TRGO). //TIM_CR2_MMS_2, // TIM CR2 register initialization data, OC1REF signal is used as trigger output (TRGO)
+		0 // TIM DIER register initialization data, "should normally be zero"
+};
 
 
-static THD_WORKING_AREA(waThreadFRT, 8192);
+
+
+static THD_WORKING_AREA(waThreadFRT, 32768);
 static THD_FUNCTION(ThreadFRT, arg) {
 	// shortest time to compute, but highest frequency and highest priority
 	(void)arg;
@@ -281,7 +296,7 @@ static THD_FUNCTION(ThreadFRT, arg) {
 		   if(bal_ext.frt_extended_state == FRT_WAITFOR_TIMEOUT) {
 			   // Check if deadline is missed and chThdSleepUntil next rt-cycle
 			   time += ADC_FRT_DEFAULT_PERIOD_CYCLES; //PERIOD_FRT_ST; CH_CFG_ST_TIMEDELTA
-			   if( time - (end + CH_CFG_ST_TIMEDELTA) > ADC_FRT_DEFAULT_PERIOD_CYCLES) { // mind uint arithmetics: cannot have negative value!
+			   if( time - (end + CH_CFG_ST_TIMEDELTA) > ADC_FRT_DEFAULT_PERIOD_CYCLES+10) { // mind uint arithmetics: cannot have negative value!
 				   bal.frt_state = FRT_STOP;
 			       bal.hal_state = FRT_TOO_LONG;
 			       bal.rt_state = RT_STOP;
@@ -296,10 +311,10 @@ static THD_FUNCTION(ThreadFRT, arg) {
 			   //msg =
 			   chThdSuspendS(&trp);
 			   chSysUnlock();
-			   time = hal_get_systick_value();
+			   time = hal_get_systick_value();// + ADC_FRT_DEFAULT_PERIOD_CYCLES;
 			   // TODO: Haben time[ADC-Ticks] und hal_get_systick_value die gleiche Einheit!?
 		   }
-	}
+	} // END while
 	chThdExit((msg_t)0);
 }
 
@@ -352,7 +367,7 @@ static THD_FUNCTION(ThreadRT, arg) {
 		   } // Note that this detection may fail in case of excessively missed deadlines and timer counter overrun
 		   bal.rt_state = RT_SLEEP; chThdSleepUntil(time);
 		   //palTogglePad(BANK_LED_ORANGE_DISCO, PIN_LED_ORANGE_DISCO);
-	}
+	} // END while
 	chThdExit((msg_t)0);
 }
 

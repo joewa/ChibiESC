@@ -22,10 +22,10 @@
 
 #pragma once
 
-#define MAX_HAL_PINS 800
+#define MAX_HAL_PINS 200
 #define HAL_NAME_LENGTH 32
-#define MAX_COMP_TYPES 64
-#define MAX_COMPS 64
+#define MAX_COMP_TYPES 8
+#define MAX_COMPS 16
 
 typedef char hal_name_t[HAL_NAME_LENGTH];
 

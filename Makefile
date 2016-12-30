@@ -15,7 +15,7 @@ endif
 
 # C specific options here (added to USE_OPT).
 ifeq ($(USE_COPT),)
-  USE_COPT = -fno-builtin -Wfatal-errors -std=gnu11 #-nostartfiles
+  USE_COPT = -fno-builtin -Wfatal-errors -std=gnu11 -fsingle-precision-constant #-nostartfiles
 endif
 
 # C++ specific options here (added to USE_OPT).
@@ -76,7 +76,7 @@ endif
 
 # Enables the use of FPU on Cortex-M4 (no, softfp, hard).
 ifeq ($(USE_FPU),)
-  USE_FPU = no
+  USE_FPU = hard
 endif
 
 #
