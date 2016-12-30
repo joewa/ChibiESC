@@ -1,0 +1,423 @@
+<html>
+<meta charset="utf-8">
+<head><title>Fräse</title>
+<script type="text/javascript">
+
+var pi = 3.141526;
+
+function round(x, a){
+	return(Math.round(x * a) / a)
+}
+
+var trans = {
+	"plain": {"hss":"hss", "carbid":"carbid", "fe":"fe", "cfe":"cfe", "al":"al", "cu":"cu", "p":"p", "rp":"rp", "al2o3":"al2o3", "sic":"sic", "cbn":"cbn", "diamond":"dimond", "mill":"mill", "turn":"trun", "drill":"drill", "ream":"ream", "grind":"grind", "ae":"ae", "f":"f", "s":"s", "d":"d", "t":"t", "h":"h", "b":"b", "fz":"fz", "vc":"vc", "hm":"hm", "T":"T", "P":"P", "ap":"ap", "l":"l"},
+	"ger": {"hss":"HSS", "carbid":"HM", "fe":"Fe", "cfe":"GG", "al":"Al", "cu":"Cu", "p":"K", "rp":"FK", "al2o3":"Korund", "sic":"SiC", "cbn":"CBN", "diamond":"Diamat", "mill":"Fräsen", "turn":"Drehen", "drill":"Bohren", "ream":"Reiben", "grind":"Schleifen", "ae":"ae", "f":"F", "s":"S", "d":"D", "t":"Z", "h":"Härte", "b":"Umschlingungswinkel", "fz":"Fz", "vc":"Vc", "hm":"hm", "T":"M", "P":"P", "ap":"ap", "l":"l"}
+};
+
+var kc = {
+	"fe" :{0:1200, 1:2600}, "cfe" :{0:900, 1:1800}, "al" :{0:390, 1:900}, "cu" :{0:650, 1:1000}, "p" :{0:100, 1:100}, "rp" :{0:100, 1:100}
+};
+
+var vc_mill = {
+	"hss":    {"fe" :{0:10, 1:35}, "cfe" :{0:20, 1:35}, "al" :{0:100, 1:180}, "cu" :{0:30, 1:130}, "p" :{0:200, 1:1000}, "rp" :{0:0, 1:0}},
+	"carbid": {"fe" :{0:40, 1:180}, "cfe" :{0:80, 1:120}, "al" :{0:180, 1:350}, "cu" :{0:160, 1:230}, "p" :{0:200, 1:1000}, "rp" :{0:200, 1:1500}}
+};
+
+
+var vc_grind = {
+	"al2o3":   {"fe" :{0:20, 1:35}, "hss" :{0:20, 1:35}, "carbid" :{0:0, 1:0}},
+	"sic":     {"fe" :{0:20, 1:35}, "hss" :{0:20, 1:35}, "carbid" :{0:20, 1:35}},
+	"cbn":     {"fe" :{0:22, 1:30}, "hss" :{0:22, 1:30}, "carbid" :{0:0, 1:0}},
+	"diamond": {"fe" :{0:15, 1:25}, "hss" :{0:15, 1:25}, "carbid" :{0:15, 1:25}}
+};
+
+
+var fz_mill = {
+	"hss":    {"fe" :{0:0.8, 1:1.2}, "cfe" :{0:1, 1:1.1}, "al" :{0:1.3, 1:1.5}, "cu" :{0:1, 1:1.2}, "p" :{0:1, 1:1}, "rp" :{0:1, 1:1}},
+	"carbid": {"fe" :{0:0.7, 1:1.2}, "cfe" :{0:0.8, 1:1.1}, "al" :{0:1.5, 1:1.9}, "cu" :{0:0.7, 1:1.1}, "p" :{0:1, 1:1}, "rp" :{0:1, 1:1}}
+};
+
+var vc_corr = {
+	"mill":  1,
+	"turn":  1,
+	"drill": 0.5,
+	"ream":  0.25
+};
+
+var fz_corr = {
+	"mill":  1,
+	"turn":  1,
+	"drill": 0.5,
+	"ream":  2
+};
+
+var lang = {0:"plain", 1:"ger"};
+var proc = {0:"mill", 1:"turn", 2:"drill", 3:"ream", 4:"grind"};
+var tool = {
+	"mill": {0:"hss", 1:"carbid"},
+	"turn": {0:"hss", 1:"carbid"},
+	"drill": {0:"hss", 1:"carbid"},
+	"ream": {0:"hss", 1:"carbid"},
+	"grind": {0:"al2o3", 1:"sic", 2:"cbn", 3:"diamond"}
+};
+var stock = {
+	"hss": {0:"fe", 1:"cfe", 2:"al", 3:"cu", 4:"p"},
+	"carbid": {0:"fe", 1:"cfe", 2:"al", 3:"cu", 4:"p", 5:"rp"},
+	"al2o3": {0:"fe", 1:"hss"},
+	"sic": {0:"fe", 1:"hss", 2:"carbid"},
+	"cbn": {0:"fe", 1:"hss"},
+	"diamond": {0:"fe", 1:"hss", 2:"carbid"}
+};
+
+var gae; // ae 0-2
+var gap; // ap 0-100
+var gt;  // #teeth
+var gr;  // radius
+var gl;  // lenght / radius
+var gh;  // hardness 0-1
+
+var gso; // speed overwrite
+var gfo; // feed overwrite
+
+var gproc;  // process {mill, drill, turn, grind, ream}
+var gtool;  // tool {hss, carbid, al2o3, sic, cbn, diamond}
+var gstock;  // stock {fe, cfe, al, cu, p, rp, hss, carbid}
+
+var gl;  // lang {plain, ger}
+
+function init(){
+	gae = 2;
+	gap = 1;
+	gt = 4;
+	gr = 3;
+	gl = 2;
+	gh = 0;
+
+	gso = 1;
+	gfo = 1;
+
+	gproc = "mill";
+	gtool = "carbid";
+	gstock = "al";
+
+	gl = "ger";
+}
+
+function get_vc(){
+	switch(gproc){
+		case "mill":
+		case "turn":
+		case "drill":
+		case "ream":
+			return((gh * vc_mill[gtool][gstock][0] + (1 - gh) * vc_mill[gtool][gstock][1]) * vc_corr[gproc]);
+		break;
+		case "grind":
+			return(gh * vc_grind[gtool][gstock][0] + (1 - gh) * vc_grind[gtool][gstock][1]);
+		break;
+	}
+	return(0);
+}
+
+
+function get_b(){
+	var ae = 1 - gae;
+	return(Math.abs(pi/2 - Math.asin(ae)));
+}
+
+
+//function calc_fz_corr(r, b, fz){
+function get_fz_corr(){
+	var b = get_b();
+	if(b > 90/180*pi){
+		return(1);
+	}
+	//return(r - sqrt((r * sin(b) - fz)^2 + (r * cos(b))^2));
+	return(1/Math.sin(b));
+}
+
+
+function get_fz(){
+	var d = gr * 2;
+	var fz;
+
+	if(gtool == "hss" ){
+		//fz = 0.0003 * d * d + 0.0017 * d + 0.0031;
+		fz = 0.0035 * d + 0.0003;
+	}
+	else if(gtool == "carbid" ){
+		//fz = 0.0001 * d * d + 0.0014 * d + 0.0014;
+		fz = 0.0017 * d + 0.0015;
+	}
+	else{
+		fz = 0;
+	}
+	return(fz * fz_corr[gproc] * (gh * fz_mill[gtool][gstock][0] + (1 - gh) * fz_mill[gtool][gstock][1]));
+}
+
+function get_kc(){
+	return(gh * kc[gstock][1] + (1 - gh) * kc[gstock][0]);
+}
+
+function get_hm(){
+	return(get_fz() * get_fz_corr());
+}
+
+function calc_s(){
+	return(get_vc() / pi / (gr * 2 / 1000) * gso);
+}
+
+function calc_f(){
+	return(get_hm() * gt * calc_s() * gfo);
+}
+
+function get_p(){
+	return(gap * (gae * gr) * calc_f() * get_kc() / (60 * 1000));
+}
+
+function get_t(){
+	return(get_p() /(2 * pi * calc_s() / 60));
+}
+
+function translate(word){
+	return(trans[gl][word]);
+}
+
+function draw_process(){
+	var select = document.getElementById("process_select");
+	select.innerHTML = "";
+	for(i in proc){
+		select.innerHTML += "<option>" + translate(proc[i]) + "</option>";
+	}
+}
+
+function draw_tool(){
+	var div = document.getElementById("tool_select");
+	div.innerHTML = "";
+	for(i in tool[gproc]){
+		div.innerHTML += "<option>" + translate(tool[gproc][i]) + "</option>";
+	}
+}
+
+function draw_stock(){
+	var select = document.getElementById("stock_select");
+	select.innerHTML = "";
+
+	for(i in stock[gtool]){
+		select.innerHTML += "<option>" + translate(stock[gtool][i]) + "</option>";
+	}
+}
+
+function draw_calc(){
+	var div = document.getElementById("calc_div");
+	div.innerHTML = "";
+
+	switch(gproc){
+		case "mill":
+			div.innerHTML += translate("h") + ": 0 <input type=\"range\" min=0 max=1 step=0.1 id=\"h_range\" value=" + gh + " oninput=\"set_h(); calc();\"> 1: <a id = \"h_a\"></a></br>";
+			div.innerHTML += translate("d") + ": 0mm <input type=\"range\" min=0 max=200 step=1 id=\"d_range\" value=" + gr * 2 + " oninput=\"set_r(); calc();\"> 200mm: <a id = \"d_a\"></a></br>";
+			div.innerHTML += translate("l") + ": 0xd <input type=\"range\" min=0.1 max=10 step=0.1 id=\"l_range\" value=" + gl + " oninput=\"set_l(); calc();\"> 10xd: <a id = \"l_a\"></a></br>";
+			div.innerHTML += translate("t") + ": 0 <input type=\"range\" min=0 max=100 step=1 id=\"t_range\" value=" + gt + " oninput=\"set_t(); calc();\"> 100: <a id = \"t_a\"></a></br>";
+			div.innerHTML += translate("ae") + ": 0 <input type=\"range\" min=0.01 max=2 step=0.01 id=\"ae_range\" value=" + gae + " oninput=\"set_ae(); calc();\"> 100%: <a id = \"ae_a\"></a></br>";
+			div.innerHTML += translate("ap") + ": 0mm <input type=\"range\" min=0 max=100 step=0.5 id=\"ap_range\" value=" + 1 + " oninput=\"set_ap(); calc();\"> 100mm: <a id = \"ap_a\"></a></br>";
+			div.innerHTML += translate("s") + ": 0 <input type=\"range\" min=0 max=2 step=0.01 id=\"so_range\" value=" + gso + " oninput=\"set_so(); calc();\"> 200%: <a id = \"so_a\"></a></br>";
+			div.innerHTML += translate("f") + ": 0 <input type=\"range\" min=0 max=2 step=0.01 id=\"fo_range\" value=" + gfo + " oninput=\"set_fo(); calc();\"> 200%: <a id = \"fo_a\"></a></br>";
+			div.innerHTML += translate("vc") + ": <a id = \"vc_a\"></a></br>";
+			div.innerHTML += translate("fz") + ": <a id = \"fz_a\"></a></br>";
+			div.innerHTML += translate("hm") + ": <a id = \"hm_a\"></a></br>";
+			div.innerHTML += translate("T") + ": <a id = \"to_a\"></a></br>";
+			div.innerHTML += translate("P") + ": <a id = \"p_a\"></a></br>";
+		break;
+		case "turn":
+			div.innerHTML += translate("h") + ": 0 <input type=\"range\" min=0 max=1 step=0.1 id=\"h_range\" value=" + gh + " oninput=\"set_h(); calc();\"> 1: <a id = \"h_a\"></a></br>";
+			div.innerHTML += translate("d") + ": 0mm <input type=\"range\" min=0 max=200 step=1 id=\"d_range\" value=" + gr * 2 + " oninput=\"set_r(); calc();\"> 200mm: <a id = \"d_a\"></a></br>";
+			div.innerHTML += translate("s") + ": 0 <input type=\"range\" min=0 max=2 step=0.01 id=\"so_range\" value=" + gso + " oninput=\"set_so(); calc();\"> 200%: <a id = \"so_a\"></a></br>";
+			div.innerHTML += translate("f") + ": 0 <input type=\"range\" min=0 max=2 step=0.01 id=\"fo_range\" value=" + gfo + " oninput=\"set_fo(); calc();\"> 200%: <a id = \"fo_a\"></a></br>";
+			div.innerHTML += translate("fz") + ": <a id = \"fz_a\"></a></br>";
+			div.innerHTML += translate("vc") + ": <a id = \"vc_a\"></a></br>";
+		break;
+		case "drill":
+			div.innerHTML += translate("h") + ": 0 <input type=\"range\" min=0 max=1 step=0.1 id=\"h_range\" value=" + gh + " oninput=\"set_h(); calc();\"> 1: <a id = \"h_a\"></a></br>";
+			div.innerHTML += translate("d") + ": 0mm <input type=\"range\" min=0 max=50 step=1 id=\"d_range\" value=" + gr * 2 + " oninput=\"set_r(); calc();\"> 50mm: <a id = \"d_a\"></a></br>";
+			div.innerHTML += translate("t") + ": 0 <input type=\"range\" min=0 max=100 step=1 id=\"t_range\" value=" + gt + " oninput=\"set_t(); calc();\"> 100: <a id = \"t_a\"></a></br>";
+			div.innerHTML += translate("s") + ": 0 <input type=\"range\" min=0 max=2 step=0.01 id=\"so_range\" value=" + gso + " oninput=\"set_so(); calc();\"> 200%: <a id = \"so_a\"></a></br>";
+			div.innerHTML += translate("f") + ": 0 <input type=\"range\" min=0 max=2 step=0.01 id=\"fo_range\" value=" + gfo + " oninput=\"set_fo(); calc();\"> 200%: <a id = \"fo_a\"></a></br>";
+			div.innerHTML += translate("vc") + ": <a id = \"vc_a\"></a></br>";
+			div.innerHTML += translate("fz") + ": <a id = \"fz_a\"></a></br>";
+		break;
+		case "ream":
+			div.innerHTML += translate("h") + ": 0 <input type=\"range\" min=0 max=1 step=0.1 id=\"h_range\" value=" + gh + " oninput=\"set_h(); calc();\"> 1: <a id = \"h_a\"></a></br>";
+			div.innerHTML += translate("d") + ": 0mm <input type=\"range\" min=0 max=50 step=1 id=\"d_range\" value=" + gr * 2 + " oninput=\"set_r(); calc();\"> 50mm: <a id = \"d_a\"></a></br>";
+			div.innerHTML += translate("t") + ": 0 <input type=\"range\" min=0 max=100 step=1 id=\"t_range\" value=" + gt + " oninput=\"set_t(); calc();\"> 100: <a id = \"t_a\"></a></br>";
+			div.innerHTML += translate("s") + ": 0 <input type=\"range\" min=0 max=2 step=0.01 id=\"so_range\" value=" + gso + " oninput=\"set_so(); calc();\"> 200%: <a id = \"so_a\"></a></br>";
+			div.innerHTML += translate("f") + ": 0 <input type=\"range\" min=0 max=2 step=0.01 id=\"fo_range\" value=" + gfo + " oninput=\"set_fo(); calc();\"> 200%: <a id = \"fo_a\"></a></br>";
+			div.innerHTML += translate("vc") + ": <a id = \"vc_a\"></a></br>";
+			div.innerHTML += translate("fz") + ": <a id = \"fz_a\"></a></br>";
+		break;
+		case "grind":
+			div.innerHTML += translate("h") + ": 0 <input type=\"range\" min=0 max=1 step=0.1 id=\"h_range\" value=" + gh + " oninput=\"set_h(); calc();\"> 1: <a id = \"h_a\"></a></br>";
+			div.innerHTML += translate("d") + ": 0mm <input type=\"range\" min=0 max=150 step=1 id=\"d_range\" value=" + gr * 2 + " oninput=\"set_r(); calc();\"> 150mm: <a id = \"d_a\"></a></br>";
+			div.innerHTML += translate("s") + ": 0 <input type=\"range\" min=0 max=2 step=0.01 id=\"so_range\" value=" + gso + " oninput=\"set_so(); calc();\"> 200%: <a id = \"so_a\"></a></br>";
+			div.innerHTML += translate("vc") + ": <a id = \"vc_a\"></a></br>";
+		break;
+	}
+
+}
+
+function set_process(){
+	gproc = proc[document.getElementById("process_select").selectedIndex];
+	switch(gproc){
+		case "turn":
+			gt = 1;
+			gae = 2;
+		break;
+		case "drill":
+			gae = 2;
+		break;
+		case "ream":
+			gae = 2;
+		break;
+		case "grind":
+			gt = 1;
+			gae = 2;
+		break;
+	}
+	if(gproc == "grind"){
+		if(gtool == "hss" | gtool == "carbid"){
+			gtool = "al2o3";
+			gstock = "hss";
+		}
+	}
+	else{
+		if(gtool != "hss" & gtool != "carbid"){
+			gtool = "hss";
+			gstock = "al";
+		}
+	}
+}
+
+function set_tool(){
+	gtool = tool[gproc][document.getElementById("tool_select").selectedIndex];
+}
+
+function set_stock(){
+	gstock = stock[gtool][document.getElementById("stock_select").selectedIndex];
+}
+
+function set_h(){
+	gh = document.getElementById("h_range").value;
+}
+
+function set_r(){
+	gr = document.getElementById("d_range").value / 2;
+}
+
+function set_l(){
+	gl = document.getElementById("l_range").value;
+}
+
+function set_t(){
+	gt = document.getElementById("t_range").value;
+}
+
+function set_ae(){
+	gae = document.getElementById("ae_range").value;
+}
+
+function set_ap(){
+	gap = document.getElementById("ap_range").value;
+}
+
+function set_so(){
+	gso = document.getElementById("so_range").value;
+}
+
+function set_h(){
+	gh = document.getElementById("h_range").value;
+}
+
+function set_fo(){
+	gfo = document.getElementById("fo_range").value;
+}
+
+
+function calc(){
+	var a = document.getElementById("h_a");
+	a.innerHTML = gh;
+
+	a = document.getElementById("d_a");
+	a.innerHTML = gr * 2 + "mm";
+
+	a = document.getElementById("l_a");
+	if(a){
+		a.innerHTML = gl * gr * 2 + "mm";
+	}
+
+	a = document.getElementById("t_a");
+	if(a){
+		a.innerHTML = gt;
+	}
+
+	a = document.getElementById("ap_a");
+	if(a){
+		a.innerHTML = gap;
+	}
+
+	a = document.getElementById("ae_a");
+	if(a){
+		a.innerHTML = round(gae * gr, 100) + "mm = " + round(get_b() * 180 / pi, 1) + "° fz corr: " + round(get_fz_corr(), 10);
+	}
+
+	a = document.getElementById("so_a");
+	a.innerHTML = round(gso * 100, 1) + "% = " + round(calc_s(), 1) + "/min";
+
+	a = document.getElementById("fo_a");
+	if(a){
+		a.innerHTML = round(gfo * 100, 1) + "% = " + round(calc_f(), 1) + "mm/min";
+	}
+
+	a = document.getElementById("vc_a");
+	a.innerHTML = round(get_vc() * gso, 1) + " (" + round(get_vc(), 1) + ") m/min";
+
+	a = document.getElementById("hm_a");
+	if(a){
+		a.innerHTML = round(get_fz() * gfo, 1000) + " (" + round(get_fz(), 1000) + ") mm";
+	}
+
+	a = document.getElementById("fz_a");
+	if(a){
+		a.innerHTML = round(get_hm() * gfo, 1000) + " (" + round(get_hm(), 1000) + ") mm";
+	}
+
+	a = document.getElementById("to_a");
+	if(a){
+		a.innerHTML = round(get_t(), 100) + " Nm";
+	}
+
+	a = document.getElementById("p_a");
+	if(a){
+		a.innerHTML = round(get_p(), 1) / 1000 + "kW";
+	}
+}
+
+</script>
+</head>
+<style type="text/css">
+input {width : 500px}
+</style>
+
+<body onload="init(); draw_process();">
+	<form name="formular">
+		<select id="process_select" size = "6" onchange="set_process(); draw_tool(); draw_calc(); calc();">
+		</select>
+		<select id="tool_select" size = "6" onchange="set_tool(); draw_stock(); draw_calc(); calc();">
+		</select>
+		<select id="stock_select" size = "6" onchange="set_stock(); draw_calc(); calc();">
+		</select>
+
+		<br>
+
+		<div id = "calc_div">
+		</div>
+	</form>
+</body>
+</html>

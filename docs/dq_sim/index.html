@@ -1,0 +1,239 @@
+<html>
+<meta charet="utf-8">
+<head><title>pwm</title>
+<script type="text/javascript">
+
+var isMouseDown = false;
+
+var Omega = 0;//velocity rad/s
+var Id, Iq, Iabs;//A
+var Ud, Uq, Uabs;//V
+var M_perm;//Nm
+var M_rel;//Nm
+var M_ges;//Nm
+var p = 2;//polcount
+var psi = 0.04774;//Nm/A
+var ld = 0.0025;//H inductance
+var lq = ld;//H
+var r = 0.6;//ohm
+var dclink = 100;
+
+document.onmousedown = function() { isMouseDown = true  };
+document.onmouseup   = function() { isMouseDown = false };
+
+function round(x, a){
+	return(Math.round(x * a) / a)
+}
+
+function clamp(x, a){
+	return((-a < x) ? ((a < x) ? (a) : (x)) : (-a));
+}
+
+function draw_vec(){
+	var canvas = document.getElementById('canvas_plot');
+	if (canvas.getContext){
+		var ctx = canvas.getContext('2d');
+		var w = canvas.width;
+		var h = canvas.height;
+
+
+		//clear
+		ctx.clearRect(0, 0, w, h);
+		ctx.beginPath();
+		
+		ctx.save();
+		ctx.translate(w / 2, h / 2);
+		ctx.strokeStyle="black";
+		// limit circle
+		ctx.arc(0, 0, h / 2, 0, 2 * Math.PI);
+      // ctx.arc(0, 0, h / 2 * 2 / Math.sqrt(3), 0, 2 * Math.PI);
+
+		// labels
+		ctx.font = "12px serif";
+		ctx.fillText("q", w / 2 - 24, 4);
+		ctx.fillText("d", -4, 10 - h / 2);
+		ctx.stroke();
+		//ctx.fillText("V", Math.cos(1 / 3 * 2 * Math.PI) * w / 2, Math.sin(120 / 180 * Math.PI) * h / 2);
+		//ctx.fillText("W", Math.cos(2 / 3 * 2 *Math.PI) * w / 2, Math.sin(240 / 180 * Math.PI) * h / 2 + 10);
+		//ctx.fillText("W", -4, 10 - h / 2);
+
+		// vector
+		// voltage
+		ctx.beginPath();
+      ctx.moveTo(0, 0);
+		ctx.strokeStyle="red";
+		ctx.lineTo(Uq/dclink * w, -Ud/dclink * h);
+		ctx.stroke();
+      //cur vector
+		ctx.beginPath();
+		ctx.moveTo(0, 0);
+		ctx.strokeStyle="blue";
+		ctx.lineTo(Iq/dclink*r * w, -Id/dclink*r * h);
+		ctx.stroke();
+		
+		ctx.restore();
+	}
+}
+
+function setvoltage(d,q){
+   var Omegapsi = Omega * psi;
+   var Xd   = Omega * ld;
+   var Xq   = Omega * lq;
+
+   Ud = d;
+   Uq = q;
+   Id = (r * d + Xq * (q - Omegapsi)) / (r * r + Xd * Xq);
+   Iq = (r * (q - Omegapsi) - Xd * d) / (r * r + Xd * Xq);
+}
+
+function setcur(d,q){
+   var Omegapsi = Omega * psi;
+   var Xd   = Omega * ld;
+   var Xq   = Omega * lq;
+
+   Id = d;
+   Iq = q;              
+   Ud =           -Iq * Xq + Id * r;
+   Uq = Omegapsi + Id * Xd + Iq * r;
+}
+
+function update(){
+	var d = 0.0;
+	var q = 0.0;
+   
+   var radio = document.getElementById('range_omega');
+	if(radio){
+		Omega = radio.value;
+	}
+   
+   radio = document.getElementById('range_d');
+	if(radio){
+		d = radio.value;
+	}
+
+	radio = document.getElementById('range_q');
+	if(radio){
+		q = radio.value;
+	}
+
+	radio = document.getElementById('radio_volt');
+	if(radio){
+		if(radio.checked){  
+			setvoltage(d*dclink,q*dclink);
+		}
+	}
+	radio = document.getElementById('radio_cur');
+	if(radio){
+		if(radio.checked){
+			setcur(d*dclink/r,q*dclink/r);
+		}
+	}
+	
+	radio = document.getElementById('number_r');
+	if(radio){
+		r = radio.value;
+	}
+	
+	radio = document.getElementById('number_l');
+	if(radio){
+		ld = radio.value;
+		lq = ld;
+	}
+	
+	radio = document.getElementById('number_p');
+	if(radio){
+		p = radio.value;
+	}
+	
+	radio = document.getElementById('number_psi');
+	if(radio){
+		psi = radio.value;
+	}
+	
+	radio = document.getElementById('number_dclink');
+	if(radio){
+		dclink = radio.value;
+	}
+
+   radio = document.getElementById('df');
+   if(radio){
+		var rpm = Omega / 2 / 3.1415 * 60 / p;
+		var m_perm = 1.5 * p * psi * Iq;
+		var m_rel = 1.5 * p * (ld - lq) * Iq * Id;
+		var m = m_perm + m_rel;
+		var p_el = Math.sqrt(Ud * Ud + Uq * Uq) * Math.sqrt(Id * Id + Iq * Iq) * 1.5;
+      radio.innerHTML = "n = " + round(rpm, 100) + " / min<br>";
+		radio.innerHTML += "M_perm = " + round(m_perm, 100) + " Nm<br>";
+		radio.innerHTML += "M_rel = " + round(m_rel, 100) + " Nm<br>";
+		radio.innerHTML += "M = " + round(m, 100) + " Nm<br>";
+		radio.innerHTML += "P_schein = " + round(p_el, 100) + " W<br>";
+		radio.innerHTML += "P_wirk = " + round(1.5 * (Id * Ud + Iq * Uq), 100) + " W<br>";
+		radio.innerHTML += "P_blind = " + round(p_el - 1.5 * (Id * Ud + Iq * Uq), 100) + " W<br>";
+		radio.innerHTML += "P_m = " + round(Omega / p * m, 100) + " W<br>";
+		radio.innerHTML += "Id = " + round(Id, 100) + " A<br>";
+		radio.innerHTML += "Iq = " + round(Iq, 100) + " A<br>";
+		radio.innerHTML += "Ud = " + round(Ud, 100) + " V<br>";
+		radio.innerHTML += "Uq = " + round(Uq, 100) + " V<br>";
+	   	radio.innerHTML += "BEMF = " + round(Omega * psi, 100) + " V<br>";
+   }
+
+
+	draw_vec();
+   // svm(u, v, w, mode, align);
+
+}
+
+function set_ab(e){
+	if(isMouseDown){
+		var mouseX, mouseY;
+
+		if(e.offsetX) {
+			mouseX = e.offsetX;
+			mouseY = e.offsetY;
+		}
+		else if(e.layerX) {
+			mouseX = e.layerX;
+			mouseY = e.layerY;
+		}
+
+		var canvas = document.getElementById('canvas_plot');
+		if (canvas.getContext){
+			var radio = document.getElementById('range_q');
+			if(radio){
+				radio.value = (mouseX - canvas.width / 2) / canvas.width;
+			}
+
+			radio = document.getElementById('range_d');
+			if(radio){
+				radio.value = -(mouseY - canvas.height / 2) / canvas.height;
+			}
+		}
+		update();
+	}
+}
+
+</script>
+</head>
+<style type="text/css">
+input:button {width : 500px}
+</style>
+
+<body onload="update();">
+	<canvas id="canvas_plot" width="400" height="400" onmousedown="isMouseDown = true; set_ab(event);" onmousemove="set_ab(event);">
+		not supported
+	</canvas><br>
+	<input type="radio" id="radio_volt" name="mode" onclick="update();" checked="checked"><font color="red">Set voltage</font><br>
+	<input type="radio" id="radio_cur" name="mode" onclick="update();"><font color="blue">Set current</font><br>
+	<input type="number" id="number_r" oninput="update();" value="9.6">r<br>
+	<input type="number" id="number_l" oninput="update();" value="0.013">l<br>
+	<input type="number" id="number_psi" oninput="update();" value="0.055">psi<br>
+	<input type="number" id="number_p" oninput="update();" value="4">#polespairs<br>
+	<input type="number" id="number_dclink" oninput="update();" value="320">dc link<br>
+   <input type="range" id="range_d" onchange="update();" oninput="update();" min="-0.5" max="0.5" step="0.01" value="0.0">D<br>
+   <input type="range" id="range_q" onchange="update();" oninput="update();" min="-0.5" max="0.5" step="0.01" value="0.0">Q<br>
+   <input type="range" id="range_omega" onchange="update();" oninput="update();" min="0" max="10000" step="1" value="0.0">rpm<br>
+	<a id="df"></a>
+
+</body>
+</html>
+<html><head></head><body></body></html>

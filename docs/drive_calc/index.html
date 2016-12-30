@@ -1,0 +1,187 @@
+<html>
+<meta charset="utf-8">
+<head><title>drive</title>
+<script type="text/javascript">
+
+function round(x, a){
+	return(Math.round(x * a) / a)
+}
+
+function clamp(x, a){
+	return((-a < x) ? ((a < x) ? (a) : (x)) : (-a));
+}
+
+function $(element) {
+  return(document.getElementById(element));
+}
+
+var min_ratio = 1.0;
+var max_ratio = 5.0;
+var ratio_step = 0.1;
+
+var iron_density = 7820.0; // (kg/m^3)
+var pi = 3.141526;
+
+var force = [];
+var speed = [];
+var mot_lin_mass = [];
+var acc = [];
+var spindel_lin_mass;
+var carriage_mass;
+
+function plot(){
+   var canvas = $("canvas");
+   var ctx = canvas.getContext('2d');
+
+	if (ctx){
+		var w = canvas.width;
+		var h = canvas.height;
+
+      var x_offset = 25;
+      var y_offset = 10;
+      var x_scale = (w - x_offset) / (max_ratio - min_ratio);
+      var max_y = Math.max(Math.max.apply(Math, speed) * 60, Math.max.apply(Math, acc));
+      var y_scale = -(h - y_offset) / max_y;
+
+		//clear
+		ctx.clearRect(0, 0, w, h);
+		ctx.beginPath();
+
+      ctx.save();
+		ctx.translate(x_offset, h - y_offset);
+
+      // axis
+      ctx.moveTo(0, 0);
+		ctx.lineTo(0, -h);
+      ctx.moveTo(0, 0);
+      ctx.lineTo(w, 0);
+
+		// labels
+		ctx.font = "12px serif";
+      for(r = min_ratio; r <= max_ratio; r += ratio_step * 5){
+         ctx.fillText(r, (r - min_ratio) * x_scale, y_offset);
+      }
+      ctx.fillText("ratio", (max_ratio - min_ratio) * x_scale - 25, y_offset);
+
+      for(y = 0; y <= max_y; y += max_y / 10){
+         ctx.fillText(round(y, 10), -x_offset, y * y_scale);
+      }
+      ctx.stroke();
+      ctx.closePath();
+      ctx.beginPath();
+
+      // speed
+      ctx.strokeStyle="#FF0000";
+      for(i = 0; i * ratio_step + min_ratio < max_ratio; i += 1){
+         ctx.moveTo(i * ratio_step * x_scale, speed[i] * y_scale * 60);
+         ctx.lineTo((i + 1) * ratio_step * x_scale, speed[i + 1] * y_scale * 60);
+      }
+      ctx.fillStyle="#FF0000";
+      ctx.fillText("speed (m/min)", w - 100, -h + 50);
+      ctx.stroke();
+      ctx.closePath();
+      ctx.beginPath();
+
+
+      // acc
+      ctx.strokeStyle="#0000FF";
+      for(i = 0; i * ratio_step + min_ratio < max_ratio; i += 1){
+         ctx.moveTo(i * ratio_step * x_scale, acc[i] * y_scale);
+         ctx.lineTo((i + 1) * ratio_step * x_scale, acc[i + 1] * y_scale);
+      }
+      ctx.fillStyle="#0000FF";
+      ctx.fillText("acc (m/s^2)", w - 100, -h + 70);
+      ctx.stroke();
+      ctx.closePath();
+
+      ctx.restore();
+	}
+}
+
+function print(){
+   var df = $("df");
+   var ht = "";
+   ht += "<table border='1'>"
+   ht += " <tr>\n";
+   ht += "  <th>ratio</th>\n";
+   ht += "  <th>force (N)</th>\n";
+   ht += "  <th>speed (m/min)</th>\n";
+   ht += "  <th>acc (m/s^2)</th>\n";
+   ht += "  <th>linear mass motor (kg)</th>\n";
+   ht += "  <th>linear mass spindel (kg)</th>\n";
+   ht += "  <th>motor linear mass : carriage mass + spindel linear mass</th>\n";
+   ht += " </tr>\n";
+   for(i = 0; i * ratio_step + min_ratio <= max_ratio; i += 1){
+      ratio = (i * ratio_step + min_ratio);
+      ht += " <tr>\n";
+      ht += "  <td>" + round(ratio, 10) + "</td>\n";
+      ht += "  <td>" + round(force[i], 10) + "</td>\n";
+      ht += "  <td>" + round(speed[i] * 60, 10) + "</td>\n";
+      ht += "  <td>" + round(acc[i], 10) + "</td>\n";
+      ht += "  <td>" + round(mot_lin_mass[i], 10) + "</td>\n";
+      ht += "  <td>" + round(spindel_lin_mass, 10) + "</td>\n";
+      ht += "  <td>" + round(mot_lin_mass[i] / (spindel_lin_mass + carriage_mass), 10) + "</td>\n";
+      ht += " </tr>\n";
+   }
+   ht += "</table>"
+
+   df.innerHTML = ht;
+}
+
+function calc(){
+   force.length = 0;
+   speed.length = 0;
+   mot_lin_mass.length = 0;
+   acc.length = 0;
+
+   var r = Math.max($("diameter").value / 2000.0, 0.001); // (m)
+   var l = Math.max($("length").value / 1000.0, 0.001); // (m)
+   var p = Math.max($("pitch").value / 1000.0, 0.001); // (m)
+   var t = Math.max($("torque").value * 1.0, 0.001); // (Nm)
+   var j = Math.max($("momentum").value / 10000.0, 0.000000001); // (kgm^2)
+   var s = Math.max($("speed").value / 60.0, 0.1); // (1/s)
+   var m = Math.max($("mass").value * 1.0, 0.00001); // (kg)
+   var e = Math.max($("eff").value * 1.0, 0.0001);
+
+   var sm = iron_density * l * r * r * pi; // spindel mass (kg)
+   var sj = sm / 2.0 * r * r; // spindel momentum (kgm^2)
+   var lsm = sj * (2.0 * pi / p) * (2.0 * pi / p); // spindel linear mass (kg)
+   spindel_lin_mass = lsm;
+   carriage_mass = m;
+
+   for(i = 0; i * ratio_step + min_ratio <= max_ratio; i += 1){
+      ratio = (i * ratio_step + min_ratio);
+      force[i] = 2.0 * pi / p * ratio * t * e; // force (N)
+      speed[i] = s / ratio * p; // max speed (m/s)
+      mot_lin_mass[i] = j * (ratio * 2.0 * pi / p) * (ratio * 2.0 * pi / p); // motor linear mass (kg)
+      acc[i] = force[i] / (mot_lin_mass[i] + lsm + m);
+   }
+
+   print();
+   plot();
+}
+
+</script>
+</head>
+<style type="text/css">
+input:button {width : 500px}
+</style>
+
+<body onload="calc();">
+	<canvas id="canvas" width="500" height="400">
+		not supported
+	</canvas><br><br>
+	<input type="text" id="diameter" name="mode" oninput="calc();" value="20"> spindel diameter (mm)<br>
+   <input type="text" id="length" name="mode" oninput="calc();" value="500"> spindel length (mm)<br>
+   <input type="text" id="pitch" name="mode" oninput="calc();" value="10"> spindel pitch (mm)<br>
+   <br>
+   <input type="text" id="torque" name="mode" oninput="calc();" value="2"> motor torque (Nm)<br>
+   <input type="text" id="momentum" name="mode" oninput="calc();" value="0.5"> motor momentum (kgcm^2)<br>
+   <input type="text" id="speed" name="mode" oninput="calc();" value="5000"> motor speed (1/min)<br>
+   <br>
+   <input type="text" id="mass" name="mode" oninput="calc();" value="100"> carriage mass (kg)<br>
+   <br>
+   <input type="text" id="eff" name="mode" oninput="calc();" value="0.8"> efficiency<br><br>
+	<div id="df"></div>
+</body>
+</html>
