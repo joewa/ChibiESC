@@ -10,6 +10,7 @@
  * 1. u,v,w
  * 2. a,b (alpha, beta)
  * 3. Betrag, Phase
+Asymmetric PWM AN4013 nur auf F7!!
  */
 
 float u,v,w;//[-1..1]
