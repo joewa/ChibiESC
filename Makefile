@@ -1,6 +1,6 @@
 #CHIBIESC_BOARD = LOOONG_STRIP
-#CHIBIESC_BOARD = DRCHIBI_DISCO
-CHIBIESC_BOARD = NUCLEO_F446
+CHIBIESC_BOARD = DRCHIBI_DISCO
+#CHIBIESC_BOARD = NUCLEO_F446
 #CHIBIESC_BOARD = VESC
 
 ##############################################################################
@@ -10,7 +10,7 @@ CHIBIESC_BOARD = NUCLEO_F446
 
 # Compiler options here.
 ifeq ($(USE_OPT),)
-  USE_OPT = -O1 -ggdb -fomit-frame-pointer -falign-functions=16 -lm
+  USE_OPT = -Og -ggdb -fomit-frame-pointer -falign-functions=16 -lm
 endif
 
 # C specific options here (added to USE_OPT).
@@ -116,7 +116,8 @@ ifeq ($(CHIBIESC_BOARD),DRCHIBI_DISCO)
 	USE_OPT += -DBOARD_DRCHIBI_DISCO
 endif
 ifeq ($(CHIBIESC_BOARD),NUCLEO_F446) 
-	LDSCRIPT= $(STARTUPLD)/STM32F446xE.ld
+	# LDSCRIPT= $(STARTUPLD)/STM32F446xE.ld
+	LDSCRIPT= bootloader/STM32F446xE_CCM.ld
 	USE_OPT += -DBOARD_NUCLEO_F446
 endif
 ifeq ($(CHIBIESC_BOARD),VESC) 
