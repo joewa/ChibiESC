@@ -2880,9 +2880,9 @@
                                      PIN_MODE_OUTPUT(PIN_LED2) |            \
                                      PIN_MODE_OUTPUT(PIN_DRIVER_ENABLE_NUCLEO) | \
                                      PIN_MODE_ANALOG(PIN_VSENS_C) |         \
-                                     PIN_MODE_ALTERNATE(PIN_PWM_A) |        \
-                                     PIN_MODE_ALTERNATE(PIN_PWM_B) |        \
-                                     PIN_MODE_ALTERNATE(PIN_PWM_C) |        \
+                                     PIN_MODE_OUTPUT(PIN_PWM_A) |        \
+                                     PIN_MODE_OUTPUT(PIN_PWM_B) |        \
+                                     PIN_MODE_OUTPUT(PIN_PWM_C) |        \
                                      PIN_MODE_ALTERNATE(PIN_USB_DM) |       \
                                      PIN_MODE_ALTERNATE(PIN_USB_DP) |       \
                                      PIN_MODE_ALTERNATE(PIN_SWDIO) |        \
@@ -2960,9 +2960,9 @@
                                      PIN_AFIO_AF(PIN_LED2, 0) |             \
                                      PIN_AFIO_AF(PIN_DRIVER_ENABLE_NUCLEO, 0) | \
                                      PIN_AFIO_AF(PIN_VSENS_C, 0))
-#define VAL_GPIOA_AFRH              (PIN_AFIO_AF(PIN_PWM_A, 1) |            \
-                                     PIN_AFIO_AF(PIN_PWM_B, 1) |            \
-                                     PIN_AFIO_AF(PIN_PWM_C, 1) |            \
+#define VAL_GPIOA_AFRH              (PIN_AFIO_AF(PIN_PWM_A, 0) |            \
+                                     PIN_AFIO_AF(PIN_PWM_B, 0) |            \
+                                     PIN_AFIO_AF(PIN_PWM_C, 0) |            \
                                      PIN_AFIO_AF(PIN_USB_DM, 10) |          \
                                      PIN_AFIO_AF(PIN_USB_DP, 10) |          \
                                      PIN_AFIO_AF(PIN_SWDIO, 0) |            \

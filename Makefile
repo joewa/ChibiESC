@@ -10,7 +10,7 @@ CHIBIESC_BOARD = NUCLEO_F446
 
 # Compiler options here.
 ifeq ($(USE_OPT),)
-  USE_OPT = -O2 -ggdb -fomit-frame-pointer -falign-functions=16 -lm
+  USE_OPT = -O1 -ggdb -fomit-frame-pointer -falign-functions=16 -lm
 endif
 
 # C specific options here (added to USE_OPT).
@@ -145,7 +145,8 @@ CSRC = $(STARTUPSRC) \
        src/bal_term.c \
        src/bal_interface.c \
        src/scanf.c \
-       src/misc.c
+       src/misc.c \
+       src/pwmadcdma.c
 
        
        #subsystems/pprzlink/src/pprz_transport.c \

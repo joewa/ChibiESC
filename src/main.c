@@ -14,7 +14,9 @@
     limitations under the License.
 */
 
+//#define USE_DMA_4_PWM // Configure output pins for DMA based PWM generation (in board.h). Comment out for timer usage.
 
+#include <src/pwmadcdma.h>
 #include "ch.h"
 #include "hal.h"
 #include "ch_test.h"
@@ -27,27 +29,14 @@
 #include "subsystems/serial/chibiesc_serial.h"
 
 #include "misc.h"
+#include "chutil.h"
+extern uint32_t *myGPIOA_BSRR;
 #include "bal_interface.h"
+
 
 /*
  * BEGIN Thread timing and clock configuration
  */
-
-// PWM configuration
-#define ADC_PWM_DIVIDER				(Ks_ADC * STM32_ADC_ADCPRESCALER) // ADC_CCR_ADCPRE_DIV2 When f_TIM1 == f_TIM2 (*STM32_PPRE2 for f_TIM1 = f_SYSCLK)
-#define PWM_CLOCK_FREQUENCY 		(f_STM32_SYSCLK / 2)  // Low speed periph clock APB1! TIM1 connected to APB1!
-// Define cycles!
-#define ADC_COMMUTATE_NUM_CHANNELS	1		// Number of channels per ADC for (6-step mode)
-#define ADC_FRT_DEFAULT_PERIOD_CYCLES 100	// Fastest FRT cycle period in ADC cycles
-#define PWM_ADC_DEFAULT_PERIOD_CYCLES 20	// Choose a default number of ADC samples in a PWM period
-#define PWM_ADC_MAXIMUM_PERIOD_CYCLES 200 	// Choose a maximum number of ADC samples in a PWM period (determines maximum PWM period)
-#define ADC_COMMUTATE_BUF_DEPTH		(ADC_COMMUTATE_NUM_CHANNELS * PWM_ADC_MAXIMUM_PERIOD_CYCLES * 2) // TODO Check if this is sufficient!
-#define PWM_FRT_DEFAULT_PERIOD_CYCLES (ADC_COMMUTATE_NUM_CHANNELS * ADC_PWM_DIVIDER * ADC_FRT_DEFAULT_PERIOD_CYCLES)
-#define PWM_DEFAULT_PERIOD_CYCLES	(ADC_COMMUTATE_NUM_CHANNELS * ADC_PWM_DIVIDER * PWM_ADC_DEFAULT_PERIOD_CYCLES)
-#define PWM_MAXIMUM_PERIOD_CYCLES	(ADC_COMMUTATE_NUM_CHANNELS * ADC_PWM_DIVIDER * PWM_ADC_MAXIMUM_PERIOD_CYCLES)
-//FRT_DEFAULT_FREQUENCY = PWM_CLOCK_FREQUENCY / PWM_FRT_DEFAULT_PERIOD_CYCLES
-#define PWM_DEFAULT_FREQUENCY		(PWM_CLOCK_FREQUENCY / PWM_DEFAULT_PERIOD_CYCLES)
-//PWM_MINIMUM_FREQUENCY = PWM_CLOCK_FREQUENCY / PWM_MAXIMUM_PERIOD_CYCLES
 
 #define ADC_RT_DEFAULT_PERIOD_CYCLES (5*ADC_FRT_DEFAULT_PERIOD_CYCLES)
 
@@ -177,63 +166,6 @@ void USB_VCP_send_string(unsigned char *ptr)
 //END copy&paste
 
 
-static adcsample_t commutatesamples[ADC_COMMUTATE_BUF_DEPTH];
-
-
-systime_t count_adc, count_frt;
-/*
- * ADC streaming callback.
- */
-static thread_reference_t trp = NULL;
-size_t nx = 0, ny = 0; int adc_blink_count = 1000;
-static void adccallback(ADCDriver *adcp, adcsample_t *buffer, size_t n) {
-
-  (void)adcp;
-  if (commutatesamples == buffer) {
-    nx += n;
-  }
-  else {
-    ny += n;
-  }
-  count_adc++;
-
-  if(adc_blink_count-- <= 0) {
-	  adc_blink_count = 1000;
-	  //palTogglePad(BANK_LED_RED, PIN_LED_RED);
-	  //palTogglePad(BANK_LED_GREEN, PIN_LED_GREEN);
-  }
-  palTogglePad(BANK_LED_GREEN, PIN_LED_GREEN);
-  /* Wakes up the thread.*/
-  chSysLockFromISR();
-  chThdResumeI(&trp, (msg_t)0x1337);  /* Resuming the thread with message.*/
-  chSysUnlockFromISR();
-}
-
-static void adcerrorcallback(ADCDriver *adcp, adcerror_t err) {
-
-  (void)adcp;
-  (void)err;
-}
-
-
-/*
- * ADC conversion group.
- * Mode:        Continuous, 16 samples of 8 channels, SW triggered.
- * Channels:    IN11, IN12, IN11, IN12, IN11, IN12, Sensor, VRef.
- */
-static const ADCConversionGroup adc_commutate_group = { // TODO: Check if this is fine for F4
-  TRUE,
-  ADC_COMMUTATE_NUM_CHANNELS,
-  adccallback,
-  adcerrorcallback,
-  0,                        /* CR1 */
-  ADC_CR2_SWSTART,          /* CR2 */
-  ADC_SMPR1_SMP_AN12(ADC_SAMPLE_3) /*| ADC_SMPR1_SMP_AN11(ADC_SAMPLE_3)*/,
-  0,                        /* SMPR2 */
-  ADC_SQR1_NUM_CH(ADC_COMMUTATE_NUM_CHANNELS),
-  0,
-  ADC_SQR3_SQ2_N(ADC_CHANNEL_IN12)   /*| ADC_SQR3_SQ1_N(ADC_CHANNEL_IN11)*/
-};
 
 static PWMConfig pwm1cfg= {
 		PWM_CLOCK_FREQUENCY, /* PWM clock frequency */
@@ -260,7 +192,7 @@ static THD_FUNCTION(ThreadFRT, arg) {
 
 	int delta_count, last_delta_count;
 	delta_count=0; last_delta_count=0;
-	count_adc=0; count_frt=0;
+	//count_adc=0; count_frt=0;
 	//adcStartConversion(&ADCD1, &adcgrpcfg2, samples2, ADC_GRP2_BUF_DEPTH);
 	bal_ext.frt_extended_state = FRT_WAITFOR_TIMEOUT;
 	systime_t time = hal_get_systick_value();// + ADC_FRT_DEFAULT_PERIOD_CYCLES;
@@ -309,7 +241,7 @@ static THD_FUNCTION(ThreadFRT, arg) {
 			   bal.frt_state = FRT_SLEEP;
 			   chSysLock();
 			   //msg =
-			   chThdSuspendS(&trp);
+			   chThdSuspendS(&adc_trp);
 			   chSysUnlock();
 			   time = hal_get_systick_value();// + ADC_FRT_DEFAULT_PERIOD_CYCLES;
 			   // TODO: Haben time[ADC-Ticks] und hal_get_systick_value die gleiche Einheit!?
@@ -439,7 +371,6 @@ void hal_disable_frt() {
 int main(void) {
 	// main loop always runs at NORMALPRIO
 	int len;
-
   halInit();
   chSysInit();
   /*
@@ -460,7 +391,8 @@ int main(void) {
   #include "comps/term.comp"
   //#include "comps/sim.comp"
   #include "comps/simfast.comp"
-  #include "comps/sixstep.comp"
+  //#include "comps/sixstep.comp"
+  #include "comps/pwm1dma.comp"
 
   //command comps
 
@@ -493,8 +425,10 @@ int main(void) {
   hal_set_pin("term0.rt_prio", 15.0);
   hal_set_pin("simfast0.rt_prio", 50.0);
   hal_set_pin("simfast0.frt_prio", 50.0);
-  hal_set_pin("sixstep0.rt_prio", 100.0);
-  hal_set_pin("sixstep0.frt_prio", 100.0);
+  //hal_set_pin("sixstep0.rt_prio", 100.0);
+  //hal_set_pin("sixstep0.frt_prio", 100.0);
+  hal_set_pin("pwm1dma0.rt_prio", 110.0);
+  hal_set_pin("pwm1dma0.frt_prio", 110.0);
   //hal_set_pin("sixstep0.frt_prio", 100.0);
   //hal_set_pin("sim0.rt_prio", 14.0);
   //hal_set_pin("sixstep0.rt_prio", 13.0);

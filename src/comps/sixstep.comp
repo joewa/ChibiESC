@@ -103,7 +103,6 @@ FRT(
 	  adcStopConversion(&ADCD1);
 	  pwmStop(&PWMD1);
 	  PIN(angle6) = 0.0f; last_angle6 = 0.0f; EDGE( PIN(angle6) );
-	  //TODO: ACHTUNG: Erneutes starten geht nicht!
   }
 
 );

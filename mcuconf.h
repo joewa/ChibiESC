@@ -124,7 +124,7 @@
 #define STM32_ADC_USE_ADC3                  TRUE
 #define STM32_ADC_ADC1_DMA_STREAM           STM32_DMA_STREAM_ID(2, 4)
 #define STM32_ADC_ADC2_DMA_STREAM           STM32_DMA_STREAM_ID(2, 2)
-#define STM32_ADC_ADC3_DMA_STREAM           STM32_DMA_STREAM_ID(2, 1)
+#define STM32_ADC_ADC3_DMA_STREAM           STM32_DMA_STREAM_ID(2, 0) //Vorher:1 TODO: Achtung: Stream 1 evtl. durch pwm_dma belegt!=
 #define STM32_ADC_ADC1_DMA_PRIORITY         2
 #define STM32_ADC_ADC2_DMA_PRIORITY         2
 #define STM32_ADC_ADC3_DMA_PRIORITY         2
@@ -231,9 +231,9 @@
 #define STM32_I2C_I2C1_IRQ_PRIORITY         5
 #define STM32_I2C_I2C2_IRQ_PRIORITY         5
 #define STM32_I2C_I2C3_IRQ_PRIORITY         5
-#define STM32_I2C_I2C1_DMA_PRIORITY         3
-#define STM32_I2C_I2C2_DMA_PRIORITY         3
-#define STM32_I2C_I2C3_DMA_PRIORITY         3
+#define STM32_I2C_I2C1_DMA_PRIORITY         2 // Vorher 3
+#define STM32_I2C_I2C2_DMA_PRIORITY         2 //3
+#define STM32_I2C_I2C3_DMA_PRIORITY         2 //3
 #define STM32_I2C_DMA_ERROR_HOOK(i2cp)      osalSysHalt("DMA failure")
 
 /*
@@ -256,7 +256,7 @@
  */
 #define STM32_ICU_USE_TIM1                  FALSE
 #define STM32_ICU_USE_TIM2                  FALSE
-#define STM32_ICU_USE_TIM3                  TRUE
+#define STM32_ICU_USE_TIM3                  FALSE //Joe geändert für LED_Driver-Test TRUE
 #define STM32_ICU_USE_TIM4                  FALSE
 #define STM32_ICU_USE_TIM5                  FALSE
 #define STM32_ICU_USE_TIM8                  FALSE
@@ -286,10 +286,10 @@
 #define STM32_PWM_USE_ADVANCED              FALSE
 #define STM32_PWM_USE_TIM1                  TRUE
 #define STM32_PWM_USE_TIM2                  TRUE
-#define STM32_PWM_USE_TIM3                  FALSE
+#define STM32_PWM_USE_TIM3                  FALSE// Joe: geändert für LED_Driver-Test FALSE
 #define STM32_PWM_USE_TIM4                  FALSE
 #define STM32_PWM_USE_TIM5                  FALSE
-#define STM32_PWM_USE_TIM8                  FALSE
+#define STM32_PWM_USE_TIM8                  TRUE
 #define STM32_PWM_USE_TIM9                  FALSE
 #define STM32_PWM_TIM1_IRQ_PRIORITY         7
 #define STM32_PWM_TIM2_IRQ_PRIORITY         7
@@ -302,7 +302,7 @@
 /*
  * SDC driver system settings.
  */
-#define STM32_SDC_SDIO_DMA_PRIORITY         3
+#define STM32_SDC_SDIO_DMA_PRIORITY         2 //Vorher 3
 #define STM32_SDC_SDIO_IRQ_PRIORITY         9
 #define STM32_SDC_WRITE_TIMEOUT_MS          250
 #define STM32_SDC_READ_TIMEOUT_MS           25
