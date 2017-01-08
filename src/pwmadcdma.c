@@ -153,9 +153,11 @@
  */
 #define WS2812_BLUE_BIT(led, bit)           WS2812_BIT((led), 2, (bit))
 
+#define intoSRAM2  __attribute__((section(".ram2")))  __attribute__((aligned(4)))
+
 /* --- PRIVATE VARIABLES ---------------------------------------------------- */
 static pwm_dma_state_t pwm_dma_state = PWM_DMA_STOPPED;
-uint32_t pwm_dma_frame_buffer[PWM_DMA_BIT_N];                             /**< Buffer for a frame */
+volatile uint32_t pwm_dma_frame_buffer[PWM_DMA_BIT_N] intoSRAM2;                             /**< Buffer for a frame */
 adcsample_t commutatesamples[ADC_COMMUTATE_BUF_DEPTH];
 
 /* --- PUBLIC FUNCTIONS ----------------------------------------------------- */
@@ -235,6 +237,9 @@ void pwm_dma_init(void)
     for (i = 0; i < PWM_DMA_BIT_N; i++) pwm_dma_frame_buffer[i] = 0;   // All color bits are zero duty cycle
     uint32_t tx_high   = GPIO_BSRR_BS_10; // Dies in den request_buf schreiben, um Pin 10 auf high zu setzen. Nimm CONCAT_SYMBOLS mit PIN_PWM_X...
     uint32_t tx_low    = GPIO_BSRR_BR_10; // Pin 10 auf low setzen
+    //uint32_t tx_high   = GPIO_BSRR_BS_1; // Dies in den request_buf schreiben, um Pin 10 auf high zu setzen. Nimm CONCAT_SYMBOLS mit PIN_PWM_X...
+    //uint32_t tx_low    = GPIO_BSRR_BR_1; // Pin 10 auf low setzen
+
     // Configure PA0 as AF output
     //palSetPadMode(GPIOA, 1, PAL_MODE_ALTERNATE(1)); //palSetPadMode(GPIOA, 1, PAL_MODE_ALTERNATE(1)); Nur für TIM1&2? Siehe F4-Datenblatt
     pwm_dma_frame_buffer[PWM_DMA_MAXIMUM_PERIOD_CYCLES - 1] = tx_low;// Test: Pin am Ende der Periode zurücksetzen
@@ -274,6 +279,7 @@ void pwm_dma_init(void)
     // disable counting, enable the channel, and then make whatever configuration changes we need.
     adcStartConversion(&ADCD1, &adc_commutate_group, commutatesamples, 2*ADC_FRT_DEFAULT_PERIOD_CYCLES);
     pwmStart(&PWMDMA_PWMD, &pwm_dma_config);
+    //pwmStart(&PWMDMA_PWMD, &genpwmcfg);
     //ADC_CR2_EXTSEL_3 | ADC_CR2_EXTSEL_2 | ADC_CR2_EXTSEL_0 // Timer 8 CC1 event
     pwmEnableChannel(&PWMDMA_PWMD, PWM_DMA_TIM_CH, 1);     // Initial period is 0; output will be low until first duty cycle is DMA'd in
 }
@@ -289,10 +295,12 @@ void pwm_dma_stop(void) {
 
 // HW-Double-Buffer brauchen wir nicht. Aber über ADC-Callback auswählen!
 // Dazu muss der frame_buffer doppelt so groß sein
+// TODO: Mache eine Funktion für PWM-EN (Strip) und H-L (VESC)
 uint16_t last_offset = 0;
 int pwm_dma_setvals(uint8_t channel_number, uint16_t t_on, uint16_t offset, uint16_t period) { // Einheit ist DMA-Request-Ticks
 	pwm_dma_frame_buffer[last_offset] = 0;  // Bei diesem Offset wurde das letzte Mal eingeschaltet.
 	pwm_dma_frame_buffer[offset] = GPIO_BSRR_BS_10; // Pin10 einschalten
+	//pwm_dma_frame_buffer[offset] = GPIO_BSRR_BS_1; // Pin1 einschalten
 	last_offset = offset;
 	return 0;
 }

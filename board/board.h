@@ -1814,7 +1814,7 @@
  * PA15 - PIN_ZCD                   (output push-pull 50MHz).
  */
 #define VAL_GPIOA_MODER             (PIN_MODE_ANALOG(PIN_VSENS_C) |         \
-                                     PIN_MODE_ALTERNATE(PIN_PWM_F) |        \
+                                     PIN_MODE_OUTPUT(PIN_PWM_F) |        \
                                      PIN_MODE_ANALOG(PIN_VSENS_A) |         \
                                      PIN_MODE_ANALOG(PIN_VSENS_D) |         \
                                      PIN_MODE_ANALOG(PIN_VSENS_E) |         \
@@ -1894,7 +1894,7 @@
                                      PIN_ODR_HIGH(PIN_SWDCLK) |             \
 									 PIN_ODR_HIGH(PIN_ZCD))
 #define VAL_GPIOA_AFRL              (PIN_AFIO_AF(PIN_VSENS_C, 0) |          \
-                                     PIN_AFIO_AF(PIN_PWM_F, 1) |            \
+                                     PIN_AFIO_AF(PIN_PWM_F, 0) |            \
                                      PIN_AFIO_AF(PIN_VSENS_A, 0) |          \
                                      PIN_AFIO_AF(PIN_VSENS_D, 0) |          \
                                      PIN_AFIO_AF(PIN_VSENS_E, 0) |          \
