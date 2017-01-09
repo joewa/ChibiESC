@@ -25,24 +25,26 @@
 #include "chutil.h"
 
 
-#define PWM_DMA_TIM_N		8 // oder 2
-#define PWM_DMA_TIM_CH		0 // Vorher 1 Probiere 2?
+#define PWM_DMA_TIM_N		8 // 8 oder 1
+#define PWM_DMA_TIM_CH		0 // so lassen
 
 /* --- CONFIGURATION CHECK -------------------------------------------------- */
 
 
 #if !defined(PWM_DMA_TIM_N)
     #error PWM_DMA timer not specified
-#elif PWM_DMA_TIM_N == 1
-    #define PWM_DMA_STREAM STM32_DMA1_STREAM5
-#elif PWM_DMA_TIM_N == 2
-    #define PWM_DMA_STREAM STM32_DMA1_STREAM1 // OK - No DMA to GPIO
-#elif PWM_DMA_TIM_N == 3
-    #define PWM_DMA_STREAM STM32_DMA1_STREAM3
-#elif PWM_DMA_TIM_N == 4
-    #define PWM_DMA_STREAM STM32_DMA1_STREAM7
+#elif PWM_DMA_TIM_N == 1				// DMA funzt, ADC-Trigger noch nicht
+    #define PWM_DMA_STREAM				STM32_DMA2_STREAM6 // OK
+	#define PWM_DMA_TIM_DIER			TIM_DIER_CC1DE //OK
+	#define PWM_DMA_CR_CHSEL 			STM32_DMA_CR_CHSEL(0) // OK
+	#define PWM_DMA_ADC_CR2_EXTSEL_SRC	ADC_CR2_EXTSEL_SRC(0)  // TIM1_CC1 event
+	#define PWM_DMA_TIM_CR2				(TIM_CR2_MMS_1 | TIM_CR2_MMS_0)	// MMS = 011 = TRGO on Compare Pulse --> Trigger ADC
 #elif PWM_DMA_TIM_N == 8
-    #define PWM_DMA_STREAM STM32_DMA2_STREAM1 // OK
+    #define PWM_DMA_STREAM				STM32_DMA2_STREAM1
+	#define PWM_DMA_CR_CHSEL 			STM32_DMA_CR_CHSEL(7)
+	#define PWM_DMA_ADC_CR2_EXTSEL_SRC	ADC_CR2_EXTSEL_SRC(14)	// TIM8_TRGO event
+	#define PWM_DMA_TIM_CR2				TIM_CR2_MMS_1			// MMS = 010 = TRGO on Update Event --> Trigger ADC
+	#define PWM_DMA_TIM_DIER			TIM_DIER_UDE
 #else
     #error PWM_DMA timer set to invalid value
 #endif
@@ -158,7 +160,7 @@
 /* --- PRIVATE VARIABLES ---------------------------------------------------- */
 static pwm_dma_state_t pwm_dma_state = PWM_DMA_STOPPED;
 volatile uint32_t pwm_dma_frame_buffer[PWM_DMA_BIT_N] intoSRAM2;                             /**< Buffer for a frame */
-adcsample_t commutatesamples[ADC_COMMUTATE_BUF_DEPTH];
+adcsample_t commutatesamples[ADC_COMMUTATE_BUF_DEPTH];// intoSRAM2; // Better NOT ADC Buffer into SRAM2
 
 /* --- PUBLIC FUNCTIONS ----------------------------------------------------- */
 /*
@@ -215,7 +217,7 @@ ADCConversionGroup adc_commutate_group = { // TODO: Check if this is fine for F4
   adccallback,
   adcerrorcallback,
   0,                        // CR1
-  ADC_CR2_SWSTART, //ADC_CR2_CONT | ADC_CR2_EXTEN_0 | ADC_CR2_EXTSEL_3 | ADC_CR2_EXTSEL_2 | ADC_CR2_EXTSEL_0,//ADC_CR2_SWSTART,// Rising Edge: CR2 --> 1101: Timer 8 CC1 event EXTSEL und EXTEN!
+  ADC_CR2_CONT | ADC_CR2_EXTEN_RISING | PWM_DMA_ADC_CR2_EXTSEL_SRC,// | ADC_CR2_EXTSEL_3 | ADC_CR2_EXTSEL_2 | ADC_CR2_EXTSEL_0,//ADC_CR2_SWSTART,// Rising Edge: CR2 --> 1101: Timer 8 CC1 event EXTSEL und EXTEN!
   ADC_SMPR1_SMP_AN12(ADC_SAMPLE_3) /*| ADC_SMPR1_SMP_AN11(ADC_SAMPLE_3)*/,
   0,                        /* SMPR2 */
   ADC_SQR1_NUM_CH(ADC_COMMUTATE_NUM_CHANNELS),
@@ -251,21 +253,21 @@ void pwm_dma_init(void)
         .period             = PWM_DMA_TRANSFER_PERIOD_TICKS, //Mit dieser Periode wird UDE-Event erzeugt und ein neuer Wert (Länge WS2812_BIT_N) vom DMA ins CCR geschrieben
         .callback           = NULL,
         .channels = {
-            [0 ... 3]       = {.mode = PWM_OUTPUT_DISABLED,  .callback = NULL},          // Channels default to disabled
-            [PWM_DMA_TIM_CH]= {.mode = PWM_OUTPUT_DISABLED,  .callback = NULL},          // Turn on the channel we care about
+            [0 ... 3]       = {.mode = PWM_OUTPUT_DISABLED,  .callback = NULL},         // Channels default to disabled
+            [PWM_DMA_TIM_CH]= {.mode = PWM_OUTPUT_DISABLED,  .callback = NULL},         // Turn on the channel we care about
         },
-        .cr2                = 0,
-        .dier               = TIM_DIER_UDE,                                                 // DMA on update event for next period
+        .cr2                = PWM_DMA_TIM_CR2,
+        .dier               = PWM_DMA_TIM_DIER,											// DMA on update event for next period
     };
     #pragma GCC diagnostic pop                                                              // Restore command-line warning options
-
+    //TIM_EGR_CC1G
     // Configure DMA
     dmaStreamAllocate(PWM_DMA_STREAM, 10, NULL, NULL);
     dmaStreamSetPeripheral(PWM_DMA_STREAM, &(GPIOA->BSRR.W));  // BSSR: Bit-Set-Reset-Register
     dmaStreamSetMemory0(PWM_DMA_STREAM, pwm_dma_frame_buffer);
     dmaStreamSetTransactionSize(PWM_DMA_STREAM, PWM_DMA_MAXIMUM_PERIOD_CYCLES); // Anhand der aktuellen FRT-Periodendauer einstellen. Maximal PWM_DMA_BIT_N
     dmaStreamSetMode(PWM_DMA_STREAM,
-    		STM32_DMA_CR_CHSEL(7) | STM32_DMA_CR_DIR_M2P | STM32_DMA_CR_PSIZE_WORD | STM32_DMA_CR_MSIZE_WORD |
+    		PWM_DMA_CR_CHSEL | STM32_DMA_CR_DIR_M2P | STM32_DMA_CR_PSIZE_WORD | STM32_DMA_CR_MSIZE_WORD |
 			STM32_DMA_CR_MINC | STM32_DMA_CR_CIRC | STM32_DMA_CR_PL(3));
     //CHSEL(7): Select DMA-channel 7 (TIM8_UP); M2P: Memory 2 Periph; PL: Priority Level
     //TODO: CHSEL should be configured depending on which WS2812_TIM_N is selected
@@ -282,6 +284,7 @@ void pwm_dma_init(void)
     //pwmStart(&PWMDMA_PWMD, &genpwmcfg);
     //ADC_CR2_EXTSEL_3 | ADC_CR2_EXTSEL_2 | ADC_CR2_EXTSEL_0 // Timer 8 CC1 event
     pwmEnableChannel(&PWMDMA_PWMD, PWM_DMA_TIM_CH, 1);     // Initial period is 0; output will be low until first duty cycle is DMA'd in
+
 }
 
 void pwm_dma_stop(void) {

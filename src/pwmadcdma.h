@@ -58,7 +58,7 @@
 //PWM_MINIMUM_FREQUENCY = PWM_CLOCK_FREQUENCY / PWM_MAXIMUM_PERIOD_CYCLES
 
 //#define WS2812_PWM_FREQUENCY    PWM_CLOCK_FREQUENCY                         /**< Clock frequency of PWM */
-#define PWM_DMA_TRANSFER_PERIOD_TICKS	(20)                      /** DMA Transfer triggered after this number of PWM clock cycles */
+#define PWM_DMA_TRANSFER_PERIOD_TICKS	(10)                      /** DMA Transfer triggered after this number of PWM clock cycles */
 #define PWM_DMA_CLOCK_FREQUENCY			(PWM_CLOCK_FREQUENCY / PWM_DMA_TRANSFER_PERIOD_TICKS)
 #define PWM_DMA_MAXIMUM_PERIOD_CYCLES	(PWM_MAXIMUM_PERIOD_CYCLES / PWM_DMA_TRANSFER_PERIOD_TICKS)
 #define PWM_DMA_DEFAULT_PERIOD_CYCLES	(PWM_DEFAULT_PERIOD_CYCLES / PWM_DMA_TRANSFER_PERIOD_TICKS)
@@ -73,7 +73,7 @@ typedef enum {
 
 
 extern ADCConversionGroup adc_commutate_group;
-extern adcsample_t commutatesamples[];
+//extern adcsample_t commutatesamples[];
 /*
  * ADC streaming callback.
  */
