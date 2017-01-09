@@ -228,7 +228,7 @@ ADCConversionGroup adc_commutate_group = { // TODO: Check if this is fine for F4
 // DMA scheint Werte zu verlieren!
 
 
-
+static uint16_t actual_PWM_DMA_PERIOD_CYCLES = PWM_DMA_MAXIMUM_PERIOD_CYCLES; // Aktuelle Zahl von PWM-Period-Cycles
 void pwm_dma_init(void)
 {
 	if(pwm_dma_state == PWM_DMA_RUNNING) return;
@@ -299,6 +299,8 @@ void pwm_dma_stop(void) {
 // HW-Double-Buffer brauchen wir nicht. Aber über ADC-Callback auswählen!
 // Dazu muss der frame_buffer doppelt so groß sein
 // TODO: Mache eine Funktion für PWM-EN (Strip) und H-L (VESC)
+// TODO: verwende actual_PWM_DMA_PERIOD_CYCLES
+// TODO: setvals MUSS im adc-Callback in den Frame-Buffer geschrieben werden, nicht hier! Es kann hier vorbereitet werden.
 uint16_t last_offset = 0;
 int pwm_dma_setvals(uint8_t channel_number, uint16_t t_on, uint16_t offset, uint16_t period) { // Einheit ist DMA-Request-Ticks
 	pwm_dma_frame_buffer[last_offset] = 0;  // Bei diesem Offset wurde das letzte Mal eingeschaltet.
