@@ -38,7 +38,7 @@
 	#define PWM_DMA_TIM_DIER			TIM_DIER_CC1DE //OK
 	#define PWM_DMA_CR_CHSEL 			STM32_DMA_CR_CHSEL(0) // OK
 	#define PWM_DMA_ADC_CR2_EXTSEL_SRC	ADC_CR2_EXTSEL_SRC(0)  // TIM1_CC1 event
-	#define PWM_DMA_TIM_CR2				(TIM_CR2_MMS_1 | TIM_CR2_MMS_0)	// MMS = 011 = TRGO on Compare Pulse --> Trigger ADC
+	#define PWM_DMA_TIM_CR2				(TIM_CR2_MMS_1)	// MMS = 011 = TRGO on Compare Pulse --> Trigger ADC
 #elif PWM_DMA_TIM_N == 8
     #define PWM_DMA_STREAM				STM32_DMA2_STREAM1
 	#define PWM_DMA_CR_CHSEL 			STM32_DMA_CR_CHSEL(7)
@@ -340,18 +340,18 @@ int pwm_dma_setvals(uint8_t channel_number, uint16_t t_on, uint16_t offset, uint
 
 #define PWM_DMA_TIM_DIER_2			(TIM_DIER_UDE | TIM_DIER_CC1DE)*/
 
-#define PWM_DMA_STREAM2				STM32_DMA2_STREAM6 // OK
-#define PWM_DMA_CR_CHSEL2 			STM32_DMA_CR_CHSEL(0) // OK
-#define PWM_DMA_STREAM1				STM32_DMA2_STREAM1 // OK
-#define PWM_DMA_CR_CHSEL1 			STM32_DMA_CR_CHSEL(6) // OK
+#define PWM_DMA_STREAM2				STM32_DMA2_STREAM6 // Does not start when STREAM1 and 2 are exchanged or when BSSR-DMA-priority is < than DMA-ARR-prio
+#define PWM_DMA_CR_CHSEL2 			STM32_DMA_CR_CHSEL(0) //
+#define PWM_DMA_STREAM1				STM32_DMA2_STREAM1 //
+#define PWM_DMA_CR_CHSEL1 			STM32_DMA_CR_CHSEL(6) //
 // Timmer 1 CH1 kann auch noch Stream 3 triggern!
 
-#define PWM_DMA_TIM_DIER			TIM_DIER_CC1DE //OK
+#define PWM_DMA_TIM_DIER			TIM_DIER_CC1DE // CC1 triggert BEIDE DMA-Streams!
 
 
 
 #define PWM_DMA_MAX_EDGES (6*10) // Number of pwm-channels * max number of edges per period (>=2, even number)
-volatile uint32_t pwm_dma_timer_buffer[PWM_DMA_MAX_EDGES] intoSRAM2;		/**< Buffer for the duration to the next pulse*/
+volatile uint16_t pwm_dma_timer_buffer[PWM_DMA_MAX_EDGES] intoSRAM2;		/**< Buffer for the duration to the next pulse*/
 
 
 void pwm_dma_init_2(void)
@@ -367,8 +367,6 @@ void pwm_dma_init_2(void)
     //uint32_t tx_high   = GPIO_BSRR_BS_1; // Dies in den request_buf schreiben, um Pin 10 auf high zu setzen. Nimm CONCAT_SYMBOLS mit PIN_PWM_X...
     //uint32_t tx_low    = GPIO_BSRR_BR_1; // Pin 10 auf low setzen
 
-    // Configure PA0 as AF output
-    //palSetPadMode(GPIOA, 1, PAL_MODE_ALTERNATE(1)); //palSetPadMode(GPIOA, 1, PAL_MODE_ALTERNATE(1)); Nur für TIM1&2? Siehe F4-Datenblatt
     pwm_dma_frame_buffer[0] = tx_high;
     pwm_dma_frame_buffer[1] = tx_low;// Test: Pin am Ende der Periode zurücksetzen
     pwm_dma_timer_buffer[0] = 100;//PWM_MAXIMUM_PERIOD_CYCLES / 2;
@@ -388,37 +386,135 @@ void pwm_dma_init_2(void)
         .dier               = PWM_DMA_TIM_DIER,											// DMA on update event for next period
     };
     #pragma GCC diagnostic pop                                                              // Restore command-line warning options
-
     // Configure DMA stream to GPIO
     dmaStreamAllocate(PWM_DMA_STREAM1, 10, NULL, NULL);
     dmaStreamSetPeripheral(PWM_DMA_STREAM1, &(GPIOA->BSRR.W));  // BSSR: Bit-Set-Reset-Register
     dmaStreamSetMemory0(PWM_DMA_STREAM1, pwm_dma_frame_buffer);
-    dmaStreamSetTransactionSize(PWM_DMA_STREAM1, 2); // Anzahl der Edges je 2*FRT-Periode
+    dmaStreamSetTransactionSize(PWM_DMA_STREAM1, 2); // Number of edges per 2*FRT-Period
     dmaStreamSetMode(PWM_DMA_STREAM1,
     		PWM_DMA_CR_CHSEL1 | STM32_DMA_CR_DIR_M2P | STM32_DMA_CR_PSIZE_WORD | STM32_DMA_CR_MSIZE_WORD |
 			STM32_DMA_CR_MINC | STM32_DMA_CR_CIRC | STM32_DMA_CR_PL(3));
-    //CHSEL(7): Select DMA-channel 7 (TIM8_UP); M2P: Memory 2 Periph; PL: Priority Level
-    dmaStreamEnable(PWM_DMA_STREAM1); // Start DMA
+    //dmaStreamEnable(PWM_DMA_STREAM1); // Start DMA
 
     // Configure DMA stream to Timer ARR
     dmaStreamAllocate(PWM_DMA_STREAM2, 10, NULL, NULL);
-    dmaStreamSetPeripheral(PWM_DMA_STREAM2, &(PWMDMA_PWMD.tim->ARR));  // ARR: Auto-Reload-Register
+    dmaStreamSetPeripheral(PWM_DMA_STREAM2, &(PWMDMA_PWMD.tim->DMAR));// Write to Auto-Reload-Register &(PWMDMA_PWMD.tim->ARR) through DMAR and DCR!
     dmaStreamSetMemory0(PWM_DMA_STREAM2, pwm_dma_timer_buffer);
-    dmaStreamSetTransactionSize(PWM_DMA_STREAM2, 2); // Anzahl der Edges je 2*FRT-Periode
+    dmaStreamSetTransactionSize(PWM_DMA_STREAM2, 2); // Number of edges per 2*FRT-Period
     dmaStreamSetMode(PWM_DMA_STREAM2,
-    		PWM_DMA_CR_CHSEL2 | STM32_DMA_CR_DIR_M2P | STM32_DMA_CR_PSIZE_WORD | STM32_DMA_CR_MSIZE_WORD |
+    		PWM_DMA_CR_CHSEL2 | STM32_DMA_CR_DIR_M2P | STM32_DMA_CR_PSIZE_HWORD | STM32_DMA_CR_MSIZE_HWORD |
+			STM32_DMA_CR_MINC | STM32_DMA_CR_CIRC | STM32_DMA_CR_PL(3));
+    //dmaStreamEnable(PWM_DMA_STREAM2); // Start DMA
+
+    // Configure PWM
+    adcStartConversion(&ADCD1, &adc_commutate_group, commutatesamples, 2*ADC_FRT_DEFAULT_PERIOD_CYCLES);// TODO: Start in sync!
+
+    PWMDMA_PWMD.tim->DCR = 11; // DMA base address = ARR; DMA Circular mode disable?
+    pwmStart(&PWMDMA_PWMD, &pwm_dma_config);
+    PWMDMA_PWMD.tim->DCR = 11; // DMA base address = ARR; DMA Circular mode disable?
+    pwmEnableChannel(&PWMDMA_PWMD, PWM_DMA_TIM_CH, 0);     // Initial period is 0; output will be low until first duty cycle is DMA'd in
+    dmaStreamEnable(PWM_DMA_STREAM2); // Start DMA 2
+    dmaStreamEnable(PWM_DMA_STREAM1); // Start DMA 1
+}
+
+
+
+// DMA für GPIO
+#define XPWM_DMA_STREAM1				STM32_DMA2_STREAM1 // OK
+#define XPWM_DMA_CR_CHSEL1 			STM32_DMA_CR_CHSEL(6) // OK
+// DMA für ARR
+#define XPWM_DMA_STREAM2				STM32_DMA1_STREAM1 // ??
+#define XPWM_DMA_CR_CHSEL2 			STM32_DMA_CR_CHSEL(3) // OK
+
+// Timmer 1 CH1 kann auch noch Stream 3 triggern!
+
+#define PWM_DMA_TIM_DIER_T1			TIM_DIER_CC1DE // CC1 triggert BEIDE DMA-Streams!
+#define PWM_DMA_TIM_DIER_T2			TIM_DIER_UDE
+
+void pwm_dma_init_3(void) // mit 2 timern und DMA1 + DMA2
+{
+	if(pwm_dma_state == PWM_DMA_RUNNING) return;
+	pwm_dma_state = PWM_DMA_RUNNING;
+
+    // Initialize frame buffer
+    uint32_t i;
+    for (i = 0; i < PWM_DMA_BIT_N; i++) pwm_dma_frame_buffer[i] = 0;   // All color bits are zero duty cycle
+    uint32_t tx_high   = GPIO_BSRR_BS_10; // Dies in den request_buf schreiben, um Pin 10 auf high zu setzen. Nimm CONCAT_SYMBOLS mit PIN_PWM_X...
+    uint32_t tx_low    = GPIO_BSRR_BR_10; // Pin 10 auf low setzen
+    //uint32_t tx_high   = GPIO_BSRR_BS_1; // Dies in den request_buf schreiben, um Pin 10 auf high zu setzen. Nimm CONCAT_SYMBOLS mit PIN_PWM_X...
+    //uint32_t tx_low    = GPIO_BSRR_BR_1; // Pin 10 auf low setzen
+
+    // Configure PA0 as AF output
+    //palSetPadMode(GPIOA, 1, PAL_MODE_ALTERNATE(1)); //palSetPadMode(GPIOA, 1, PAL_MODE_ALTERNATE(1)); Nur für TIM1&2? Siehe F4-Datenblatt
+    pwm_dma_frame_buffer[0] = tx_high;
+    pwm_dma_frame_buffer[1] = tx_low;// Test: Pin am Ende der Periode zurücksetzen
+    pwm_dma_timer_buffer[0] = 9;//PWM_MAXIMUM_PERIOD_CYCLES / 2;
+    pwm_dma_timer_buffer[1] = 9;//PWM_MAXIMUM_PERIOD_CYCLES / 2;
+
+    // PWM Configuration
+    #pragma GCC diagnostic ignored "-Woverride-init"                                        // Turn off override-init warning for this struct. We use the overriding ability to set a "default" channel config
+    static const PWMConfig pwm_dma_config = {
+        .frequency          = PWM_CLOCK_FREQUENCY,
+        .period             = PWM_DMA_TRANSFER_PERIOD_TICKS, //Mit dieser Periode wird UDE-Event erzeugt und ein neuer Wert (Länge WS2812_BIT_N) vom DMA ins CCR geschrieben
+        .callback           = NULL,
+        .channels = {
+            [0 ... 3]       = {.mode = PWM_OUTPUT_DISABLED,  .callback = NULL},         // Channels default to disabled
+            [PWM_DMA_TIM_CH]= {.mode = PWM_OUTPUT_DISABLED,  .callback = NULL},         // Turn on the channel we care about
+        },
+        .cr2                = 0,//PWM_DMA_TIM_CR2, // Master timer
+        .dier               = PWM_DMA_TIM_DIER_T1,											// DMA on update event for next period
+    };
+    static const PWMConfig tim_dma_config = {
+        .frequency          = PWM_CLOCK_FREQUENCY,
+        .period             = 10000, //Mit dieser Periode wird UDE-Event erzeugt und ein neuer Wert (Länge WS2812_BIT_N) vom DMA ins CCR geschrieben
+        .callback           = NULL,
+        .channels = {
+            [0 ... 3]       = {.mode = PWM_OUTPUT_DISABLED,  .callback = NULL},         // Channels default to disabled
+            [1]= {.mode = PWM_OUTPUT_DISABLED,  .callback = NULL},         // Turn on the channel we care about
+        },
+        .cr2                = 0,// Slave timer
+        .dier               = PWM_DMA_TIM_DIER_T2,											// DMA on update event for next period
+    };
+    #pragma GCC diagnostic pop                                                              // Restore command-line warning options
+
+    //PWMD.tim->CR1: ARPE-Bit: Auto-reload preload enable. TODO: Damit rumspielen.
+    // Configure DMA stream to GPIO
+    dmaStreamAllocate(XPWM_DMA_STREAM1, 10, NULL, NULL);
+    dmaStreamSetPeripheral(XPWM_DMA_STREAM1, &(GPIOA->BSRR.W));  // BSSR: Bit-Set-Reset-Register
+    dmaStreamSetMemory0(XPWM_DMA_STREAM1, pwm_dma_frame_buffer);
+    dmaStreamSetTransactionSize(XPWM_DMA_STREAM1, 2); // Anzahl der Edges je 2*FRT-Periode
+    dmaStreamSetMode(XPWM_DMA_STREAM1,
+    		XPWM_DMA_CR_CHSEL1 | STM32_DMA_CR_DIR_M2P | STM32_DMA_CR_PSIZE_WORD | STM32_DMA_CR_MSIZE_WORD |
 			STM32_DMA_CR_MINC | STM32_DMA_CR_CIRC | STM32_DMA_CR_PL(3));
     //CHSEL(7): Select DMA-channel 7 (TIM8_UP); M2P: Memory 2 Periph; PL: Priority Level
-    dmaStreamEnable(PWM_DMA_STREAM2); // Start DMA
+    //dmaStreamEnable(XPWM_DMA_STREAM1); // Start DMA
 
+    // Configure DMA stream to Timer ARR
+    dmaStreamAllocate(XPWM_DMA_STREAM2, 10, NULL, NULL);
+    dmaStreamSetPeripheral(XPWM_DMA_STREAM2, &(PWMDMA_PWMD.tim->DMAR));  // ARR: Auto-Reload-Register &(PWMDMA_PWMD.tim->ARR)
+    dmaStreamSetMemory0(XPWM_DMA_STREAM2, pwm_dma_timer_buffer);
+    dmaStreamSetTransactionSize(XPWM_DMA_STREAM2, 2); // Anzahl der Edges je 2*FRT-Periode
+    dmaStreamSetMode(XPWM_DMA_STREAM2,
+    		XPWM_DMA_CR_CHSEL2 | STM32_DMA_CR_DIR_M2P | STM32_DMA_CR_PSIZE_WORD | STM32_DMA_CR_MSIZE_WORD |
+			STM32_DMA_CR_MINC | STM32_DMA_CR_CIRC | STM32_DMA_CR_PL(3));
+    //CHSEL(7): Select DMA-channel 7 (TIM8_UP); M2P: Memory 2 Periph; PL: Priority Level
+    dmaStreamEnable(XPWM_DMA_STREAM2); // Start DMA
 
     // Configure PWM
     // NOTE: It's required that preload be enabled on the timer channel CCR register. This is currently enabled in the
     // ChibiOS driver code, so we don't have to do anything special to the timer. If we did, we'd have to start the timer,
     // disable counting, enable the channel, and then make whatever configuration changes we need.
     adcStartConversion(&ADCD1, &adc_commutate_group, commutatesamples, 2*ADC_FRT_DEFAULT_PERIOD_CYCLES);
+    // Slave-Timer Tim 2
+    //PWMD2.tim->CR1 = PWMD2.tim->CR1 | STM32_TIM_CR1_OPM; // One-Pulse-Mode
+    //PWMD2.tim->SMCR = TIM_SMCR_SMS_2 | TIM_SMCR_SMS_1 ;  // SlaveModeSelection: Trigger Mode; TS: Trigger selection = 000 ->TIM1
+    pwmStart(&PWMD2, &tim_dma_config);
+    //PWMD2.tim->CR1 = PWMD2.tim->CR1 | STM32_TIM_CR1_OPM; // One-Pulse-Mode
+    //PWMD2.tim->SMCR = TIM_SMCR_SMS_2 | TIM_SMCR_SMS_1 ;  // SlaveModeSelection: Trigger Mode; TS: Trigger selection = 000 ->TIM1
+    pwmEnableChannel(&PWMD2, 2, 5);
+
     pwmStart(&PWMDMA_PWMD, &pwm_dma_config);
-    pwmEnableChannel(&PWMDMA_PWMD, PWM_DMA_TIM_CH, 2);     // Initial period is 0; output will be low until first duty cycle is DMA'd in
+    pwmEnableChannel(&PWMDMA_PWMD, 1, 1);     // Initial period is 0; output will be low until first duty cycle is DMA'd in
 }
 
 void pwm_dma_stop_2(void) {

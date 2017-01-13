@@ -740,8 +740,8 @@
 #define BANK_CAN_RX					GPIOB
 #define PIN_CAN_TX					GPIOB_PIN9
 #define BANK_CAN_TX					GPIOB
-#define PIN_PB10					GPIOB_PIN10
-#define BANK_PB10					GPIOB
+#define PIN_PWM_E					GPIOB_PIN10
+#define BANK_PWM_E					GPIOB
 #define PIN_PB11					GPIOB_PIN11
 #define BANK_PB11					GPIOB
 #define PIN_PB12					GPIOB_PIN12
@@ -2999,7 +2999,7 @@
                                      PIN_MODE_ALTERNATE(PIN_I2C_SDA) |      \
                                      PIN_MODE_ALTERNATE(PIN_CAN_RX) |       \
                                      PIN_MODE_ALTERNATE(PIN_CAN_TX) |       \
-                                     PIN_MODE_INPUT(PIN_PB10) |             \
+                                     PIN_MODE_ALTERNATE(PIN_PWM_E) |             \
                                      PIN_MODE_INPUT(PIN_PB11) |             \
                                      PIN_MODE_INPUT(PIN_PB12) |             \
                                      PIN_MODE_INPUT(PIN_PB13) |             \
@@ -3015,7 +3015,7 @@
                                      PIN_OTYPE_OPENDRAIN(PIN_I2C_SDA) |     \
                                      PIN_OTYPE_PUSHPULL(PIN_CAN_RX) |       \
                                      PIN_OTYPE_PUSHPULL(PIN_CAN_TX) |       \
-                                     PIN_OTYPE_PUSHPULL(PIN_PB10) |         \
+                                     PIN_OTYPE_PUSHPULL(PIN_PWM_E) |         \
                                      PIN_OTYPE_PUSHPULL(PIN_PB11) |         \
                                      PIN_OTYPE_PUSHPULL(PIN_PB12) |         \
                                      PIN_OTYPE_PUSHPULL(PIN_PB13) |         \
@@ -3031,7 +3031,7 @@
 									 PIN_OSPEED_100M(PIN_I2C_SDA) |         \
                                      PIN_OSPEED_50M(PIN_CAN_RX) |           \
 									 PIN_OSPEED_50M(PIN_CAN_TX) |           \
-                                     PIN_OSPEED_100M(PIN_PB10) |            \
+                                     PIN_OSPEED_100M(PIN_PWM_E) |            \
 									 PIN_OSPEED_100M(PIN_PB11) |            \
                                      PIN_OSPEED_100M(PIN_PB12) |            \
                                      PIN_OSPEED_100M(PIN_PB13) |            \
@@ -3047,7 +3047,7 @@
 									 PIN_PUPDR_FLOATING(PIN_I2C_SDA) |      \
                                      PIN_PUPDR_PULLUP(PIN_CAN_RX) |         \
 									 PIN_PUPDR_PULLUP(PIN_CAN_TX) |         \
-                                     PIN_PUPDR_FLOATING(PIN_PB10) |         \
+                                     PIN_PUPDR_FLOATING(PIN_PWM_E) |         \
 									 PIN_PUPDR_FLOATING(PIN_PB11) |         \
                                      PIN_PUPDR_FLOATING(PIN_PB12) |         \
                                      PIN_PUPDR_FLOATING(PIN_PB13) |         \
@@ -3063,7 +3063,7 @@
 									 PIN_ODR_HIGH(PIN_I2C_SDA) |            \
                                      PIN_ODR_HIGH(PIN_CAN_RX) |             \
 									 PIN_ODR_HIGH(PIN_CAN_TX) |             \
-                                     PIN_ODR_LOW(PIN_PB10) |                \
+                                     PIN_ODR_LOW(PIN_PWM_E) |                \
 									 PIN_ODR_LOW(PIN_PB11) |                \
                                      PIN_ODR_LOW(PIN_PB12) |                \
                                      PIN_ODR_LOW(PIN_PB13) |                \
@@ -3079,7 +3079,7 @@
                                      PIN_AFIO_AF(PIN_I2C_SDA, 4))
 #define VAL_GPIOB_AFRH              (PIN_AFIO_AF(PIN_CAN_RX, 9) |           \
                                      PIN_AFIO_AF(PIN_CAN_TX, 9) |           \
-                                     PIN_AFIO_AF(PIN_PB10, 0) |             \
+                                     PIN_AFIO_AF(PIN_PWM_E, 1) |             \
                                      PIN_AFIO_AF(PIN_PB11, 0) |             \
                                      PIN_AFIO_AF(PIN_PB12, 0) |             \
                                      PIN_AFIO_AF(PIN_PB13, 0) | /* TODO: make sure that AF setting is ignored when pin is in GPIO mode */ \
