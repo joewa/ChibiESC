@@ -127,6 +127,7 @@ FRT(
   if(en == YES && bal_ext.frt_extended_state == FRT_WAITFOR_REMOTE) {			// Normal operation: PWM is active
 	    //pwm_dma_setvals(0, 0, (uint16_t)PIN(d), 0);
 	    //commutate_6step_anti();
+	  //palTogglePad(BANK_PWM_F, PIN_PWM_F);
   } else if(en == YES && bal_ext.frt_extended_state == FRT_WAITFOR_TIMEOUT) {	// Enable operation: FRT-Thread will be invoked by ADC-callback
 	  bal_ext.frt_extended_state = FRT_WAITFOR_REMOTE; // Das Setzen und Ruecksetzen vielleicht lieber in einer speicher-comp machen? Diese kriegt die niedrigeste prio
 	  pwm_dma_init_3();

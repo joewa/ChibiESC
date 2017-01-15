@@ -48,8 +48,8 @@
 #define STM32_CLOCK48_REQUIRED              TRUE
 #define STM32_SW                            STM32_SW_PLL
 #define STM32_PLLSRC                        STM32_PLLSRC_HSE
-#define STM32_PLLM_VALUE                    6
-#define STM32_PLLN_VALUE                    216
+#define STM32_PLLM_VALUE                    4
+#define STM32_PLLN_VALUE                    144
 #define STM32_PLLP_VALUE                    2 // SYSCLK 144MHz
 #define STM32_PLLQ_VALUE                    6 // 48MHz
 #define STM32_HPRE                          STM32_HPRE_DIV1 // AHB prescaler -> HCLK 144MHz
@@ -125,9 +125,9 @@
 #define STM32_ADC_ADC1_DMA_STREAM           STM32_DMA_STREAM_ID(2, 4)
 #define STM32_ADC_ADC2_DMA_STREAM           STM32_DMA_STREAM_ID(2, 2)
 #define STM32_ADC_ADC3_DMA_STREAM           STM32_DMA_STREAM_ID(2, 0) //Vorher:1 TODO: Achtung: Stream 1 evtl. durch pwm_dma belegt!=
-#define STM32_ADC_ADC1_DMA_PRIORITY         2
-#define STM32_ADC_ADC2_DMA_PRIORITY         2
-#define STM32_ADC_ADC3_DMA_PRIORITY         2
+#define STM32_ADC_ADC1_DMA_PRIORITY         3
+#define STM32_ADC_ADC2_DMA_PRIORITY         3
+#define STM32_ADC_ADC3_DMA_PRIORITY         3
 #define STM32_ADC_IRQ_PRIORITY              6
 #define STM32_ADC_ADC1_DMA_IRQ_PRIORITY     6
 #define STM32_ADC_ADC2_DMA_IRQ_PRIORITY     6

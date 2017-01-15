@@ -431,7 +431,7 @@ void pwm_dma_init_2(void)
 //#define PWM_DMA_TIM_DIER_T1			TIM_DIER_CC1DE // CC1 triggert BEIDE DMA-Streams!
 //#define PWM_DMA_TIM_DIER_T2			TIM_DIER_UDE
 
-#define PWM_DMA_DELAY_ST			10 // Triggering DMA2 to send to GPIO is delayed by this number of systicks
+#define PWM_DMA_DELAY_ST			4 // Triggering DMA2 to send to GPIO is delayed by this number of systicks
 
 void pwm_dma_init_3(void) // mit 2 timern und DMA1 + DMA2
 {
@@ -441,8 +441,8 @@ void pwm_dma_init_3(void) // mit 2 timern und DMA1 + DMA2
     // Initialize frame buffer
     uint32_t i;
     for (i = 0; i < PWM_DMA_BIT_N; i++) pwm_dma_frame_buffer[i] = 0;   // All color bits are zero duty cycle
-    uint32_t tx_high   = GPIO_BSRR_BS_10; // Dies in den request_buf schreiben, um Pin 10 auf high zu setzen. Nimm CONCAT_SYMBOLS mit PIN_PWM_X...
-    uint32_t tx_low    = GPIO_BSRR_BR_10; // Pin 10 auf low setzen
+    uint32_t tx_high   = 1<<15;//1<<10;//GPIO_BSRR_BS_10; // Dies in den request_buf schreiben, um Pin 10 auf high zu setzen. Nimm CONCAT_SYMBOLS mit PIN_PWM_X...
+    uint32_t tx_low    = 1<<1;//GPIO_BSRR_BR_10; // Pin 10 auf low setzen
     //uint32_t tx_high   = GPIO_BSRR_BS_1; // Dies in den request_buf schreiben, um Pin 10 auf high zu setzen. Nimm CONCAT_SYMBOLS mit PIN_PWM_X...
     //uint32_t tx_low    = GPIO_BSRR_BR_1; // Pin 10 auf low setzen
 
@@ -481,7 +481,8 @@ void pwm_dma_init_3(void) // mit 2 timern und DMA1 + DMA2
 
     // Configure DMA stream to GPIO
     dmaStreamAllocate(XPWM_DMA_STREAM1, 10, NULL, NULL);
-    dmaStreamSetPeripheral(XPWM_DMA_STREAM1, &(GPIOA->BSRR.W));  // BSSR: Bit-Set-Reset-Register
+    //dmaStreamSetPeripheral(XPWM_DMA_STREAM1, &(GPIOA->BSRR.W));  // &(GPIOA->BSRR.W) BSSR: Bit-Set-Reset-Register
+    dmaStreamSetPeripheral(XPWM_DMA_STREAM1, &(GPIOA->ODR));
     dmaStreamSetMemory0(XPWM_DMA_STREAM1, pwm_dma_frame_buffer);
     dmaStreamSetTransactionSize(XPWM_DMA_STREAM1, 2); // Anzahl der Edges je 2*FRT-Periode
     dmaStreamSetMode(XPWM_DMA_STREAM1,
