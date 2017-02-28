@@ -2290,11 +2290,11 @@
                                      PIN_MODE_INPUT(PIN_PE6) |              \
                                      PIN_MODE_INPUT(PIN_PE7) |              \
                                      PIN_MODE_INPUT(PIN_PE8) |              \
-                                     PIN_MODE_ALTERNATE(PIN_PWM_C_HS) |     \
+                                     PIN_MODE_OUTPUT(PIN_PWM_C_HS) |     \
                                      PIN_MODE_INPUT(PIN_PE10) |             \
-                                     PIN_MODE_ALTERNATE(PIN_PWM_B_HS) |     \
+                                     PIN_MODE_OUTPUT(PIN_PWM_B_HS) |     \
                                      PIN_MODE_INPUT(PIN_PE12) |             \
-                                     PIN_MODE_ALTERNATE(PIN_PWM_A_HS) |     \
+                                     PIN_MODE_OUTPUT(PIN_PWM_A_HS) |     \
                                      PIN_MODE_INPUT(PIN_PE14) |             \
                                      PIN_MODE_INPUT(PIN_PE15))
 #define VAL_GPIOE_OTYPER            (PIN_OTYPE_PUSHPULL(PIN_PE0) |          \
@@ -2370,11 +2370,11 @@
                                      PIN_AFIO_AF(PIN_PE6, 0) |              \
                                      PIN_AFIO_AF(PIN_PE7, 0))
 #define VAL_GPIOE_AFRH              (PIN_AFIO_AF(PIN_PE8, 0) |              \
-                                     PIN_AFIO_AF(PIN_PWM_C_HS, 1) |         \
+                                     PIN_AFIO_AF(PIN_PWM_C_HS, 0) |         \
                                      PIN_AFIO_AF(PIN_PE10, 0) |             \
-                                     PIN_AFIO_AF(PIN_PWM_B_HS, 1) |         \
+                                     PIN_AFIO_AF(PIN_PWM_B_HS, 0) |         \
                                      PIN_AFIO_AF(PIN_PE12, 0) |             \
-                                     PIN_AFIO_AF(PIN_PWM_A_HS, 1) |         \
+                                     PIN_AFIO_AF(PIN_PWM_A_HS, 0) |         \
                                      PIN_AFIO_AF(PIN_PE14, 0) |             \
                                      PIN_AFIO_AF(PIN_PE15, 0))
 

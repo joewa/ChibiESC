@@ -230,8 +230,10 @@ ADCConversionGroup adc_commutate_group = { // TODO: Check if this is fine for F4
 
 // DMA scheint Werte zu verlieren!
 
+uint16_t next_ADC_FRT_PERIOD_CYCLES = ADC_FRT_DEFAULT_PERIOD_CYCLES;		// Zahl von ADC-Zyklen von der Periode die gerade geplant wird
+uint16_t actual_ADC_FRT_PERIOD_CYCLES = ADC_FRT_DEFAULT_PERIOD_CYCLES; 	// Zahl von ADC-Zyklen von der Periode die gerade läuft
+uint16_t recent_ADC_FRT_PERIOD_CYCLES = ADC_FRT_DEFAULT_PERIOD_CYCLES;	// Zahl von ADC-Zyklen von der Periode die fertig ist und ausgewertet werden kann
 
-static uint16_t actual_PWM_DMA_PERIOD_CYCLES = PWM_DMA_MAXIMUM_PERIOD_CYCLES; // Aktuelle Zahl von PWM-Period-Cycles - je nachdem wie weit der DMA kreist
 void pwm_dma_init(void)
 {
 	if(pwm_dma_state == PWM_DMA_RUNNING) return;
@@ -350,8 +352,11 @@ int pwm_dma_setvals(uint8_t channel_number, uint16_t t_on, uint16_t offset, uint
 
 
 
-#define PWM_DMA_MAX_EDGES (6*10) // Number of pwm-channels * max number of edges per period (>=2, even number)
+#define PWM_DMA_MAX_EDGES (N_PWM_CHANNELS*N_PWM_MAX_EDGES) // Number of pwm-channels * max number of edges per period (>=2, even number)
 volatile uint32_t pwm_dma_timer_buffer[PWM_DMA_MAX_EDGES] intoSRAM2;		/**< Buffer for the duration to the next pulse*/
+
+uint32_t ch_timer_buffer[N_PWM_CHANNELS][PWM_DMA_MAX_EDGES]; // Ein Array fuer jeden Channel
+uint16_t ch_GPIOs_buffer[PWM_DMA_MAX_EDGES];
 
 
 void pwm_dma_init_2(void)

@@ -34,6 +34,8 @@ extern "C" {
 #define STEP(from, to, step)  (((from) < (to)) ? (MIN((from) + (step), (to))) : (MAX((from) - (step), (to))))
 #define MIN(a, b)  (((a) < (b)) ? (a) : (b))
 #define MAX(a, b)  (((a) > (b)) ? (a) : (b))
+#define MIN3(a, b, c)   MIN(a, MIN(b,c))
+#define MAX3(a, b, c)   MAX(a, MAX(b,c))
 #define DEG(a) ((a) * M_PI / 180.0)
 #define RAD(a) ((a) * 180.0 / M_PI)
 #define SIGN(a) (((a) < 0.0) ? (-1.0) : (((a) > 0.0) ? (1.0) : (0.0)))

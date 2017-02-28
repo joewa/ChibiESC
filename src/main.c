@@ -393,6 +393,8 @@ int main(void) {
   #include "comps/simfast.comp"
   //#include "comps/sixstep.comp"
   #include "comps/pwm1dma.comp"
+  #include "comps/svm3.comp"
+  #include "comps/genpp3.comp"
 
   //command comps
 

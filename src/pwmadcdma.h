@@ -57,17 +57,26 @@
 #define PWM_DEFAULT_FREQUENCY			(PWM_CLOCK_FREQUENCY / PWM_DEFAULT_PERIOD_CYCLES)
 //PWM_MINIMUM_FREQUENCY = (PWM_CLOCK_FREQUENCY / PWM_MAXIMUM_PERIOD_CYCLES)
 
-//#define WS2812_PWM_FREQUENCY    PWM_CLOCK_FREQUENCY                         /**< Clock frequency of PWM */
+// Fuer die Pulsmustererzeugung
+#define N_PWM_CHANNELS 3
+#define N_PWM_MAX_EDGES 10
+
+//BEGIN altes Zeug: obsolet mit Timer-DMA #define WS2812_PWM_FREQUENCY    PWM_CLOCK_FREQUENCY                         /**< Clock frequency of PWM */
 #define PWM_DMA_TRANSFER_PERIOD_TICKS	(10)                      /** DMA Transfer triggered after this number of PWM clock cycles */
 #define PWM_DMA_CLOCK_FREQUENCY			(PWM_CLOCK_FREQUENCY / PWM_DMA_TRANSFER_PERIOD_TICKS)
 #define PWM_DMA_MAXIMUM_PERIOD_CYCLES	(PWM_MAXIMUM_PERIOD_CYCLES / PWM_DMA_TRANSFER_PERIOD_TICKS)
 #define PWM_DMA_DEFAULT_PERIOD_CYCLES	(PWM_DEFAULT_PERIOD_CYCLES / PWM_DMA_TRANSFER_PERIOD_TICKS)
+//END altes Zeug
+
+/*
+ * Board-unabhängige Schnittstelle:
+ */
 
 /**
  * @brief   Return codes from ws2812 interface functions
  */
 typedef enum {
-    PWM_DMA_RUNNING      = 0x00,     /**PWM-DMA is running */
+    PWM_DMA_RUNNING      = 0x00,    /**PWM-DMA is running */
     PWM_DMA_STOPPED             /**<PWM-DMA stopped */
 } pwm_dma_state_t;
 

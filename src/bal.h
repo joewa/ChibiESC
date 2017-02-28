@@ -195,6 +195,7 @@ extern uint32_t hal_get_systick_freq();
   volatile hal_pin_t name##_hal_pin;
 
 #define MEM(var) static var
+#define MEMEXT(var) extern var
 
 #define PIN(name)                       \
   (name##_hal_pin.source->source->value)
