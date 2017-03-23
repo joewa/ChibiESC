@@ -1,0 +1,63 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP C
+D Unpolarized capacitor
+$ENDCMP
+#
+$CMP C_Small
+D Unpolarized capacitor
+$ENDCMP
+#
+$CMP L
+D Inductor
+$ENDCMP
+#
+$CMP LED
+K LED
+$ENDCMP
+#
+$CMP L_Small
+D Inductor
+$ENDCMP
+#
+$CMP Led2_Small
+D Led
+$ENDCMP
+#
+$CMP Led_Small
+D Led
+$ENDCMP
+#
+$CMP Q_NMOS_BD_NAMES
+D Transistor N-MOSFET with body diode (names not numbers) (general)
+K nmos n-mos n-mosfet transistor
+$ENDCMP
+#
+$CMP Q_NMOS_BD_SGD
+D Transistor N-MOSFET with body diode (general)
+K nmos n-mos n-mosfet transistor
+$ENDCMP
+#
+$CMP Q_NMOS_BD_SSSGD
+D Transistor N-MOSFET with body diode (general)
+K nmos n-mos n-mosfet transistor
+$ENDCMP
+#
+$CMP R
+D Resistor
+K R DEV
+$ENDCMP
+#
+$CMP R_Small
+D Resistor
+$ENDCMP
+#
+$CMP TH
+D Thermistor
+$ENDCMP
+#
+$CMP TH_Small
+D Thermistor
+$ENDCMP
+#
+#End Doc Library

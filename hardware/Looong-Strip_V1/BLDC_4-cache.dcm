@@ -1,0 +1,8 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP IRS2184
+D Half-Bridge-Driver
+F http://www.irf.com/product-info/datasheets/data/irs2184.pdf
+$ENDCMP
+#
+#End Doc Library

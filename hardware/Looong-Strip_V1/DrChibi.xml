@@ -1,0 +1,3173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export version="D">
+  <design>
+    <source>/home/joerg/repos/OpenBLDC/joewa/ChibiESC/hardware/Looong-Strip_V1/DrChibi.sch</source>
+    <date>Mi 22 Mär 2017 17:17:58 CET</date>
+    <tool>Eeschema no-vcs-found-996cba7~58~ubuntu16.04.1</tool>
+    <sheet number="1" name="/" tstamps="/">
+      <title_block>
+        <title>DrChibi, Looong-Strip 47</title>
+        <company/>
+        <rev>1</rev>
+        <date>2017-03-22</date>
+        <source>DrChibi.sch</source>
+        <comment number="1" value="6-Bridge Universal Power Stage"/>
+        <comment number="2" value=""/>
+        <comment number="3" value="CC-BY-SA 4.0"/>
+        <comment number="4" value="Top level"/>
+      </title_block>
+    </sheet>
+    <sheet number="2" name="/CAN bus transceiver/" tstamps="/53FFB6E1/">
+      <title_block>
+        <title>DrChibi, Looong-Strip 47</title>
+        <company/>
+        <rev>1</rev>
+        <date>2017-03-22</date>
+        <source>CAN.sch</source>
+        <comment number="1" value="CAN Bus transceiver"/>
+        <comment number="2" value=""/>
+        <comment number="3" value="CC-BY-SA 4.0"/>
+        <comment number="4" value=""/>
+      </title_block>
+    </sheet>
+    <sheet number="3" name="/Half Bridge A/" tstamps="/55DB7E47/">
+      <title_block>
+        <title>DrChibi, Looong-Strip 47</title>
+        <company/>
+        <rev>1</rev>
+        <date>2017-03-22</date>
+        <source>half_bridge_insd.sch</source>
+        <comment number="1" value="DrMOS power stage"/>
+        <comment number="2" value=""/>
+        <comment number="3" value="CC-BY-SA 4.0"/>
+        <comment number="4" value=""/>
+      </title_block>
+    </sheet>
+    <sheet number="4" name="/Power Supply/" tstamps="/504F83BE/">
+      <title_block>
+        <title>DrChibi, Looong-Strip 47</title>
+        <company/>
+        <rev>1</rev>
+        <date>2017-03-22</date>
+        <source>Power.sch</source>
+        <comment number="1" value="DrChibi, auxiliary power"/>
+        <comment number="2" value=""/>
+        <comment number="3" value="CC-BY-SA 4.0"/>
+        <comment number="4" value=""/>
+      </title_block>
+    </sheet>
+    <sheet number="5" name="/Virtual Y/" tstamps="/55DFCB16/">
+      <title_block>
+        <title>DrChibi, Looong-Strip 47</title>
+        <company/>
+        <rev>1</rev>
+        <date>2017-03-22</date>
+        <source>virtual_y.sch</source>
+        <comment number="1" value="Alternate voltage sensing options"/>
+        <comment number="2" value=""/>
+        <comment number="3" value="CC-BY-SA 4.0"/>
+        <comment number="4" value=""/>
+      </title_block>
+    </sheet>
+    <sheet number="6" name="/Half Bridge B/" tstamps="/56B809CA/">
+      <title_block>
+        <title>DrChibi, Looong-Strip 47</title>
+        <company/>
+        <rev>1</rev>
+        <date>2017-03-22</date>
+        <source>half_bridge_insd.sch</source>
+        <comment number="1" value="DrMOS power stage"/>
+        <comment number="2" value=""/>
+        <comment number="3" value="CC-BY-SA 4.0"/>
+        <comment number="4" value=""/>
+      </title_block>
+    </sheet>
+    <sheet number="7" name="/Half Bridge C/" tstamps="/56B8347B/">
+      <title_block>
+        <title>DrChibi, Looong-Strip 47</title>
+        <company/>
+        <rev>1</rev>
+        <date>2017-03-22</date>
+        <source>half_bridge_insd.sch</source>
+        <comment number="1" value="DrMOS power stage"/>
+        <comment number="2" value=""/>
+        <comment number="3" value="CC-BY-SA 4.0"/>
+        <comment number="4" value=""/>
+      </title_block>
+    </sheet>
+    <sheet number="8" name="/Half Bridge D/" tstamps="/56BC308A/">
+      <title_block>
+        <title>DrChibi, Looong-Strip 47</title>
+        <company/>
+        <rev>1</rev>
+        <date>2017-03-22</date>
+        <source>half_bridge_insd.sch</source>
+        <comment number="1" value="DrMOS power stage"/>
+        <comment number="2" value=""/>
+        <comment number="3" value="CC-BY-SA 4.0"/>
+        <comment number="4" value=""/>
+      </title_block>
+    </sheet>
+    <sheet number="9" name="/Half Bridge E/" tstamps="/56BA2E2B/">
+      <title_block>
+        <title>DrChibi, Looong-Strip 47</title>
+        <company/>
+        <rev>1</rev>
+        <date>2017-03-22</date>
+        <source>half_bridge_insd.sch</source>
+        <comment number="1" value="DrMOS power stage"/>
+        <comment number="2" value=""/>
+        <comment number="3" value="CC-BY-SA 4.0"/>
+        <comment number="4" value=""/>
+      </title_block>
+    </sheet>
+    <sheet number="10" name="/Half Bridge F/" tstamps="/56BA5F82/">
+      <title_block>
+        <title>DrChibi, Looong-Strip 47</title>
+        <company/>
+        <rev>1</rev>
+        <date>2017-03-22</date>
+        <source>half_bridge_insd.sch</source>
+        <comment number="1" value="DrMOS power stage"/>
+        <comment number="2" value=""/>
+        <comment number="3" value="CC-BY-SA 4.0"/>
+        <comment number="4" value=""/>
+      </title_block>
+    </sheet>
+    <sheet number="11" name="/MCU/" tstamps="/53F7501A/">
+      <title_block>
+        <title>DrChibi, Looong-Strip 47</title>
+        <company/>
+        <rev>1</rev>
+        <date>2017-03-22</date>
+        <source>STM32F4 64LQFP.sch</source>
+        <comment number="1" value="Microcontroller STM32F405 / STM32F7"/>
+        <comment number="2" value=""/>
+        <comment number="3" value="CC-BY-SA 4.0"/>
+        <comment number="4" value=""/>
+      </title_block>
+    </sheet>
+  </design>
+  <components>
+    <comp ref="X1">
+      <value>MINI-USB-SHIELD-32005-201</value>
+      <footprint>CRF1:mini_USB_gnd</footprint>
+      <fields>
+        <field name="Manufacturer">Cypress Industries</field>
+        <field name="Part Number">CCMUSBB-32005-201</field>
+      </fields>
+      <libsource lib="crf_1" part="MINI-USB-SCHIELD-32005-201"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>522DA102</tstamp>
+    </comp>
+    <comp ref="P4">
+      <value>IN-</value>
+      <footprint>Pads:1PAD_3.5x6mm</footprint>
+      <libsource lib="DrChibi-cache" part="CONN_1"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>53FA5B63</tstamp>
+    </comp>
+    <comp ref="P3">
+      <value>IN+</value>
+      <footprint>Pads:1PAD_3x6mm</footprint>
+      <libsource lib="DrChibi-cache" part="CONN_1"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>53FA5B6A</tstamp>
+    </comp>
+    <comp ref="Rusb2">
+      <value>22R</value>
+      <footprint>Resistors_SMD:R_0402</footprint>
+      <libsource lib="BLDC_4-rescue" part="R-RESCUE-BLDC_4"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>53FCA251</tstamp>
+    </comp>
+    <comp ref="Rusb3">
+      <value>22R</value>
+      <footprint>Resistors_SMD:R_0402</footprint>
+      <libsource lib="BLDC_4-rescue" part="R-RESCUE-BLDC_4"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>53FCA272</tstamp>
+    </comp>
+    <comp ref="Rled1">
+      <value>100R</value>
+      <footprint>Resistors_SMD:R_0402</footprint>
+      <libsource lib="BLDC_4-rescue" part="R-RESCUE-BLDC_4"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>53FC020B</tstamp>
+    </comp>
+    <comp ref="D1">
+      <value>RED</value>
+      <footprint>LEDs:LED_0402</footprint>
+      <libsource lib="BLDC_4-rescue" part="LED-RESCUE-BLDC_4"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>53FC0212</tstamp>
+    </comp>
+    <comp ref="Rled2">
+      <value>100R</value>
+      <footprint>Resistors_SMD:R_0402</footprint>
+      <libsource lib="BLDC_4-rescue" part="R-RESCUE-BLDC_4"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>53FC130C</tstamp>
+    </comp>
+    <comp ref="D2">
+      <value>GREEN</value>
+      <footprint>LEDs:LED_0402</footprint>
+      <libsource lib="BLDC_4-rescue" part="LED-RESCUE-BLDC_4"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>53FC1313</tstamp>
+    </comp>
+    <comp ref="R2">
+      <value>100R</value>
+      <footprint>Resistors_SMD:R_0603</footprint>
+      <libsource lib="device" part="R"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>56039017</tstamp>
+    </comp>
+    <comp ref="R1">
+      <value>100R</value>
+      <footprint>Resistors_SMD:R_0603</footprint>
+      <libsource lib="device" part="R"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>56039328</tstamp>
+    </comp>
+    <comp ref="Dusb1">
+      <value>BAT46WH</value>
+      <footprint>Diodes_SMD:SOD-123</footprint>
+      <fields>
+        <field name="Manufacturer">NXP</field>
+        <field name="Part Number">BAT46WH</field>
+      </fields>
+      <libsource lib="DrChibi-cache" part="BAT46WH"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>55DFBB15</tstamp>
+    </comp>
+    <comp ref="Rusb1">
+      <value>10k</value>
+      <footprint>Resistors_SMD:R_0402</footprint>
+      <libsource lib="device" part="R"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>55DFC8FE</tstamp>
+    </comp>
+    <comp ref="P1">
+      <value>CONN_02X05</value>
+      <footprint>Pads:Pin_Header_Straight_2x05_Pitch1.27mm</footprint>
+      <libsource lib="conn" part="CONN_02X05"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>56DBBF3B</tstamp>
+    </comp>
+    <comp ref="P5">
+      <value>CONN_01X04</value>
+      <footprint>Connectors_Molex:Connector_Molex_PicoBlade_53261-0471</footprint>
+      <fields>
+        <field name="Manufacturer">Molex</field>
+        <field name="Part Number">PicoBlade 53261-0471</field>
+      </fields>
+      <libsource lib="conn" part="CONN_01X04"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>56E2C5D4</tstamp>
+    </comp>
+    <comp ref="P_PWM2">
+      <value>PAD_SMD</value>
+      <footprint>Pads:PAD_SMD_1x1</footprint>
+      <libsource lib="pkl_misc" part="PAD_SMD"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>57CE1E7F</tstamp>
+    </comp>
+    <comp ref="P_PWM3">
+      <value>PAD_SMD</value>
+      <footprint>Pads:PAD_SMD_1x1</footprint>
+      <libsource lib="pkl_misc" part="PAD_SMD"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>57CE2131</tstamp>
+    </comp>
+    <comp ref="P_PWM4">
+      <value>PAD_SMD</value>
+      <footprint>Pads:PAD_SMD_1x1</footprint>
+      <libsource lib="pkl_misc" part="PAD_SMD"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>57CDF36C</tstamp>
+    </comp>
+    <comp ref="Ccan1">
+      <value>2.2u</value>
+      <footprint>Capacitors_SMD:C_0603</footprint>
+      <libsource lib="BLDC_4-rescue" part="C-RESCUE-BLDC_4"/>
+      <sheetpath names="/CAN bus transceiver/" tstamps="/53FFB6E1/"/>
+      <tstamp>53F59FA3</tstamp>
+    </comp>
+    <comp ref="Rcan1">
+      <value>NI</value>
+      <footprint>Resistors_SMD:R_0603_HandSoldering</footprint>
+      <libsource lib="BLDC_4-rescue" part="R-RESCUE-BLDC_4"/>
+      <sheetpath names="/CAN bus transceiver/" tstamps="/53FFB6E1/"/>
+      <tstamp>540030A8</tstamp>
+    </comp>
+    <comp ref="Ccan2">
+      <value>2.2u</value>
+      <footprint>Capacitors_SMD:C_0603_HandSoldering</footprint>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/CAN bus transceiver/" tstamps="/53FFB6E1/"/>
+      <tstamp>56DB9D5F</tstamp>
+    </comp>
+    <comp ref="U2">
+      <value>ISO1050</value>
+      <footprint>CRF1:PDSO-G8</footprint>
+      <libsource lib="crf_1" part="ISO1050"/>
+      <sheetpath names="/CAN bus transceiver/" tstamps="/53FFB6E1/"/>
+      <tstamp>56DB0D06</tstamp>
+    </comp>
+    <comp ref="Cboot1">
+      <value>0.47uF</value>
+      <footprint>Capacitors_SMD:C_0603_HandSoldering</footprint>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/Half Bridge A/" tstamps="/55DB7E47/"/>
+      <tstamp>55DF8D4F</tstamp>
+    </comp>
+    <comp ref="CDrGate1">
+      <value>0.47uF</value>
+      <footprint>Capacitors_SMD:C_0603_HandSoldering</footprint>
+      <fields>
+        <field name="Comment">X7R, &gt;10V</field>
+      </fields>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/Half Bridge A/" tstamps="/55DB7E47/"/>
+      <tstamp>55DF8D84</tstamp>
+    </comp>
+    <comp ref="Usens1">
+      <value>ACS711</value>
+      <footprint>Allegro:QFN-12-1EX_3x3mm_Pitch0.5mm</footprint>
+      <fields>
+        <field name="Manufacturer">Allegro</field>
+        <field name="Part Number">ACS711KEXLT-31AB-T</field>
+      </fields>
+      <libsource lib="pkl_sensor" part="ACS711"/>
+      <sheetpath names="/Half Bridge A/" tstamps="/55DB7E47/"/>
+      <tstamp>56984538</tstamp>
+    </comp>
+    <comp ref="UDrmos1">
+      <value>DrMOS_SiC632A</value>
+      <footprint>DrMOS:MLP55-31L</footprint>
+      <datasheet>http://www.vishay.com/docs/62992/sic632a.pdf</datasheet>
+      <fields>
+        <field name="Manufacturer">Vishay</field>
+        <field name="Part Number">SiC632ACD-T1-GE3</field>
+      </fields>
+      <libsource lib="pkl_drmos" part="DrMOS_SiC632A"/>
+      <sheetpath names="/Half Bridge A/" tstamps="/55DB7E47/"/>
+      <tstamp>56A19C85</tstamp>
+    </comp>
+    <comp ref="CDrLogic1">
+      <value>2.2uF</value>
+      <footprint>Capacitors_SMD:C_0603</footprint>
+      <fields>
+        <field name="Manufacturer">Kemet</field>
+        <field name="Part Number">C0603C225K8RACTU</field>
+        <field name="Comment">X7R, &gt;10V</field>
+      </fields>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/Half Bridge A/" tstamps="/55DB7E47/"/>
+      <tstamp>56A2CDC4</tstamp>
+    </comp>
+    <comp ref="RDrLogic1">
+      <value>100R</value>
+      <footprint>Resistors_SMD:R_0603</footprint>
+      <libsource lib="device" part="R"/>
+      <sheetpath names="/Half Bridge A/" tstamps="/55DB7E47/"/>
+      <tstamp>56A2D0BC</tstamp>
+    </comp>
+    <comp ref="Rhsens1">
+      <value>10k,0.1%</value>
+      <footprint>Capacitors_SMD:C_0603_HandSoldering</footprint>
+      <libsource lib="device" part="R"/>
+      <sheetpath names="/Half Bridge A/" tstamps="/55DB7E47/"/>
+      <tstamp>56A2FD69</tstamp>
+    </comp>
+    <comp ref="Rlsens1">
+      <value>2k2,0.1%</value>
+      <footprint>Resistors_SMD:R_0402</footprint>
+      <libsource lib="device" part="R"/>
+      <sheetpath names="/Half Bridge A/" tstamps="/55DB7E47/"/>
+      <tstamp>56A2FEAC</tstamp>
+    </comp>
+    <comp ref="Rcfilt1">
+      <value>20k</value>
+      <footprint>Resistors_SMD:R_0402</footprint>
+      <libsource lib="device" part="R"/>
+      <sheetpath names="/Half Bridge A/" tstamps="/55DB7E47/"/>
+      <tstamp>56A3225A</tstamp>
+    </comp>
+    <comp ref="Ccfilt1">
+      <value>0.47n</value>
+      <footprint>Capacitors_SMD:C_0402</footprint>
+      <fields>
+        <field name="Comment">Use COG or NPO ceramic. Or poly- propylene or carbonate</field>
+      </fields>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/Half Bridge A/" tstamps="/55DB7E47/"/>
+      <tstamp>56A3233B</tstamp>
+    </comp>
+    <comp ref="CDrHV1">
+      <value>10u,35V</value>
+      <footprint>Capacitors_SMD:C_1206</footprint>
+      <fields>
+        <field name="Comment">dc link, X7R, &gt;35V</field>
+      </fields>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/Half Bridge A/" tstamps="/55DB7E47/"/>
+      <tstamp>56A69B0E</tstamp>
+    </comp>
+    <comp ref="CDrHVs1">
+      <value>0.47u,35V</value>
+      <footprint>Capacitors_SMD:C_0603</footprint>
+      <fields>
+        <field name="Comment">dc link, X7R, &gt;35V</field>
+      </fields>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/Half Bridge A/" tstamps="/55DB7E47/"/>
+      <tstamp>56AF6D20</tstamp>
+    </comp>
+    <comp ref="PMotor1">
+      <value>PAD_SMD</value>
+      <footprint>CRF1:1PAD_4x5mm</footprint>
+      <libsource lib="pkl_misc" part="PAD_SMD"/>
+      <sheetpath names="/Half Bridge A/" tstamps="/55DB7E47/"/>
+      <tstamp>56B30AD6</tstamp>
+    </comp>
+    <comp ref="Csens1">
+      <value>0.47u</value>
+      <footprint>Capacitors_SMD:C_0603</footprint>
+      <fields>
+        <field name="Comment">bypass capacitor for ACS711, X7R, &gt;10V</field>
+      </fields>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/Half Bridge A/" tstamps="/55DB7E47/"/>
+      <tstamp>56B897AB</tstamp>
+    </comp>
+    <comp ref="CDrHV1back1">
+      <value>4.7u,35V</value>
+      <footprint>Capacitors_SMD:C_1206</footprint>
+      <fields>
+        <field name="Comment">dc link, X7R, &gt;35V</field>
+      </fields>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/Half Bridge A/" tstamps="/55DB7E47/"/>
+      <tstamp>578D654C</tstamp>
+    </comp>
+    <comp ref="CDrHV2back1">
+      <value>10u,35V</value>
+      <footprint>Capacitors_SMD:C_1206_HandSoldering</footprint>
+      <fields>
+        <field name="Comment">dc link, X5R, &gt;35V</field>
+      </fields>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/Half Bridge A/" tstamps="/55DB7E47/"/>
+      <tstamp>578D76CB</tstamp>
+    </comp>
+    <comp ref="PVSens1">
+      <value>PAD_SMD</value>
+      <footprint>Pads:PAD_SMD_1x1</footprint>
+      <libsource lib="pkl_misc" part="PAD_SMD"/>
+      <sheetpath names="/Half Bridge A/" tstamps="/55DB7E47/"/>
+      <tstamp>57981B05</tstamp>
+    </comp>
+    <comp ref="C5vo1">
+      <value>2.2u</value>
+      <footprint>Capacitors_SMD:C_0603</footprint>
+      <libsource lib="BLDC_4-rescue" part="C-RESCUE-BLDC_4"/>
+      <sheetpath names="/Power Supply/" tstamps="/504F83BE/"/>
+      <tstamp>50500B3A</tstamp>
+    </comp>
+    <comp ref="C5vo2">
+      <value>100u</value>
+      <footprint>Capacitors_SMD:C_0805</footprint>
+      <libsource lib="BLDC_4-rescue" part="CP1-RESCUE-BLDC_4"/>
+      <sheetpath names="/Power Supply/" tstamps="/504F83BE/"/>
+      <tstamp>50500B52</tstamp>
+    </comp>
+    <comp ref="Cpwr1">
+      <value>4.7u,35V</value>
+      <footprint>Capacitors_SMD:C_0805</footprint>
+      <fields>
+        <field name="Comment">X7R, e.g. GRM32ER7YA106KA12L</field>
+      </fields>
+      <libsource lib="BLDC_4-rescue" part="C-RESCUE-BLDC_4"/>
+      <sheetpath names="/Power Supply/" tstamps="/504F83BE/"/>
+      <tstamp>523435A0</tstamp>
+    </comp>
+    <comp ref="Cpwr2">
+      <value>10u,35V</value>
+      <footprint>Capacitors_SMD:C_2220</footprint>
+      <libsource lib="BLDC_4-rescue" part="C-RESCUE-BLDC_4"/>
+      <sheetpath names="/Power Supply/" tstamps="/504F83BE/"/>
+      <tstamp>523435AB</tstamp>
+    </comp>
+    <comp ref="C3vo1">
+      <value>4.7u</value>
+      <footprint>Capacitors_SMD:C_0805</footprint>
+      <libsource lib="BLDC_4-rescue" part="CP1-RESCUE-BLDC_4"/>
+      <sheetpath names="/Power Supply/" tstamps="/504F83BE/"/>
+      <tstamp>56A90D23</tstamp>
+    </comp>
+    <comp ref="C3vn1">
+      <value>10n</value>
+      <footprint>Capacitors_SMD:C_0603</footprint>
+      <fields>
+        <field name="Comment">Use COG or NPO ceramic. Or poly- propylene or carbonate</field>
+      </fields>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/Power Supply/" tstamps="/504F83BE/"/>
+      <tstamp>56A90DF3</tstamp>
+    </comp>
+    <comp ref="Ureg2">
+      <value>LP2992AIM5-3.3</value>
+      <footprint>TO_SOT_Packages_SMD:SOT-23-5</footprint>
+      <datasheet>http://www.ti.com/lit/ds/symlink/lp2992.pdf</datasheet>
+      <fields>
+        <field name="Manufacturer">Texas Instruments</field>
+        <field name="Part Number">LP2992AIM5-3.3/NOPB</field>
+      </fields>
+      <libsource lib="pkl_misc" part="LP2992AIM5-3.3"/>
+      <sheetpath names="/Power Supply/" tstamps="/504F83BE/"/>
+      <tstamp>56A909DA</tstamp>
+    </comp>
+    <comp ref="C3vi1">
+      <value>100u</value>
+      <footprint>Capacitors_SMD:C_0805</footprint>
+      <libsource lib="BLDC_4-rescue" part="CP1-RESCUE-BLDC_4"/>
+      <sheetpath names="/Power Supply/" tstamps="/504F83BE/"/>
+      <tstamp>56A92E4E</tstamp>
+    </comp>
+    <comp ref="R3vi1">
+      <value>2R7</value>
+      <footprint>Resistors_SMD:R_0805</footprint>
+      <fields>
+        <field name="Comment">Filter resistor to Has to dissipate 1/4W.</field>
+      </fields>
+      <libsource lib="device" part="R"/>
+      <sheetpath names="/Power Supply/" tstamps="/504F83BE/"/>
+      <tstamp>56A53CCD</tstamp>
+    </comp>
+    <comp ref="C3vi2">
+      <value>1u</value>
+      <footprint>Capacitors_SMD:C_0603</footprint>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/Power Supply/" tstamps="/504F83BE/"/>
+      <tstamp>56A68848</tstamp>
+    </comp>
+    <comp ref="Ureg1">
+      <value>LTM8020</value>
+      <footprint>Regulators_User:Housings_LGA_21_6.25x6.25mm</footprint>
+      <datasheet>http://cds.linear.com/docs/en/datasheet/8020fd.pdf</datasheet>
+      <fields>
+        <field name="Manufacturer">Linear Technology</field>
+        <field name="Part Number">LTM8020V</field>
+      </fields>
+      <libsource lib="pkl_regulator" part="LTM8020"/>
+      <sheetpath names="/Power Supply/" tstamps="/504F83BE/"/>
+      <tstamp>575F2868</tstamp>
+    </comp>
+    <comp ref="Radj1">
+      <value>165R</value>
+      <footprint>Resistors_SMD:R_0402</footprint>
+      <libsource lib="device" part="R"/>
+      <sheetpath names="/Power Supply/" tstamps="/504F83BE/"/>
+      <tstamp>575F5779</tstamp>
+    </comp>
+    <comp ref="CDrHVX3">
+      <value>C</value>
+      <footprint>Capacitors_SMD:C_1206</footprint>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/Power Supply/" tstamps="/504F83BE/"/>
+      <tstamp>578D6E7F</tstamp>
+    </comp>
+    <comp ref="CDrHVX2">
+      <value>C</value>
+      <footprint>Capacitors_SMD:C_1206</footprint>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/Power Supply/" tstamps="/504F83BE/"/>
+      <tstamp>578D6ECF</tstamp>
+    </comp>
+    <comp ref="CDrHVX1">
+      <value>C</value>
+      <footprint>Capacitors_SMD:C_1206</footprint>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/Power Supply/" tstamps="/504F83BE/"/>
+      <tstamp>578D7017</tstamp>
+    </comp>
+    <comp ref="CDrHVX5">
+      <value>C</value>
+      <footprint>Capacitors_SMD:C_1206</footprint>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/Power Supply/" tstamps="/504F83BE/"/>
+      <tstamp>578D8027</tstamp>
+    </comp>
+    <comp ref="CDrHVX4">
+      <value>C</value>
+      <footprint>Capacitors_SMD:C_1206</footprint>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/Power Supply/" tstamps="/504F83BE/"/>
+      <tstamp>578D8069</tstamp>
+    </comp>
+    <comp ref="CDrHVX6">
+      <value>C</value>
+      <footprint>Capacitors_SMD:C_1206</footprint>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/Power Supply/" tstamps="/504F83BE/"/>
+      <tstamp>578D8F3E</tstamp>
+    </comp>
+    <comp ref="RY1">
+      <value>R/DNP</value>
+      <footprint>Resistors_SMD:R_0603_HandSoldering</footprint>
+      <libsource lib="device" part="R"/>
+      <sheetpath names="/Virtual Y/" tstamps="/55DFCB16/"/>
+      <tstamp>55E2B8A9</tstamp>
+    </comp>
+    <comp ref="RY2">
+      <value>R/DNP</value>
+      <footprint>Resistors_SMD:R_0603_HandSoldering</footprint>
+      <libsource lib="device" part="R"/>
+      <sheetpath names="/Virtual Y/" tstamps="/55DFCB16/"/>
+      <tstamp>55E2B8E8</tstamp>
+    </comp>
+    <comp ref="RY3">
+      <value>R/DNP</value>
+      <footprint>Resistors_SMD:R_0603_HandSoldering</footprint>
+      <libsource lib="device" part="R"/>
+      <sheetpath names="/Virtual Y/" tstamps="/55DFCB16/"/>
+      <tstamp>55E2B905</tstamp>
+    </comp>
+    <comp ref="RY4">
+      <value>R/DNP</value>
+      <footprint>Resistors_SMD:R_0603_HandSoldering</footprint>
+      <libsource lib="device" part="R"/>
+      <sheetpath names="/Virtual Y/" tstamps="/55DFCB16/"/>
+      <tstamp>56CBA2E3</tstamp>
+    </comp>
+    <comp ref="RY5">
+      <value>R/DNP</value>
+      <footprint>Resistors_SMD:R_0603_HandSoldering</footprint>
+      <libsource lib="device" part="R"/>
+      <sheetpath names="/Virtual Y/" tstamps="/55DFCB16/"/>
+      <tstamp>56CBA350</tstamp>
+    </comp>
+    <comp ref="RY6">
+      <value>R/DNP</value>
+      <footprint>Resistors_SMD:R_0603_HandSoldering</footprint>
+      <libsource lib="device" part="R"/>
+      <sheetpath names="/Virtual Y/" tstamps="/55DFCB16/"/>
+      <tstamp>56CBA38A</tstamp>
+    </comp>
+    <comp ref="RYS1">
+      <value>0R/DNP</value>
+      <footprint>Resistors_SMD:R_0603_HandSoldering</footprint>
+      <libsource lib="device" part="R"/>
+      <sheetpath names="/Virtual Y/" tstamps="/55DFCB16/"/>
+      <tstamp>56CBA751</tstamp>
+    </comp>
+    <comp ref="RYSGND1">
+      <value>20k</value>
+      <footprint>Resistors_SMD:R_0402</footprint>
+      <libsource lib="device" part="R"/>
+      <sheetpath names="/Virtual Y/" tstamps="/55DFCB16/"/>
+      <tstamp>57935AF7</tstamp>
+    </comp>
+    <comp ref="PHFAC1">
+      <value>PAD_SMD</value>
+      <footprint>Pads:PAD_SMD_1.2x2.5</footprint>
+      <libsource lib="pkl_misc" part="PAD_SMD"/>
+      <sheetpath names="/Virtual Y/" tstamps="/55DFCB16/"/>
+      <tstamp>579D159A</tstamp>
+    </comp>
+    <comp ref="RHFAC1">
+      <value>100R</value>
+      <footprint>Resistors_SMD:R_0603_HandSoldering</footprint>
+      <libsource lib="device" part="R"/>
+      <sheetpath names="/Virtual Y/" tstamps="/55DFCB16/"/>
+      <tstamp>579D1630</tstamp>
+    </comp>
+    <comp ref="CHFAC1">
+      <value>10n,35V</value>
+      <footprint>Capacitors_SMD:C_0603_HandSoldering</footprint>
+      <fields>
+        <field name="Comment">Use COG or NPO ceramic. Or poly- propylene or carbonate</field>
+      </fields>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/Virtual Y/" tstamps="/55DFCB16/"/>
+      <tstamp>579D1951</tstamp>
+    </comp>
+    <comp ref="RYOFFS1">
+      <value>20k</value>
+      <footprint>Resistors_SMD:R_0603_HandSoldering</footprint>
+      <libsource lib="device" part="R"/>
+      <sheetpath names="/Virtual Y/" tstamps="/55DFCB16/"/>
+      <tstamp>579D1B7A</tstamp>
+    </comp>
+    <comp ref="Dclamp1">
+      <value>D_Schottky_x2_Serial_AKC__BAT754S</value>
+      <footprint>TO_SOT_Packages_SMD:SOT-23</footprint>
+      <fields>
+        <field name="Manufacturer">NXP</field>
+        <field name="Part Number">BAT754S</field>
+      </fields>
+      <libsource lib="device" part="D_Schottky_x2_Serial_AKC"/>
+      <sheetpath names="/Virtual Y/" tstamps="/55DFCB16/"/>
+      <tstamp>579D5C9B</tstamp>
+    </comp>
+    <comp ref="Cboot2">
+      <value>0.47uF</value>
+      <footprint>Capacitors_SMD:C_0603_HandSoldering</footprint>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/Half Bridge B/" tstamps="/56B809CA/"/>
+      <tstamp>55DF8D4F</tstamp>
+    </comp>
+    <comp ref="CDrGate2">
+      <value>0.47uF</value>
+      <footprint>Capacitors_SMD:C_0603_HandSoldering</footprint>
+      <fields>
+        <field name="Comment">X7R, &gt;10V</field>
+      </fields>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/Half Bridge B/" tstamps="/56B809CA/"/>
+      <tstamp>55DF8D84</tstamp>
+    </comp>
+    <comp ref="Usens2">
+      <value>ACS711</value>
+      <footprint>Allegro:QFN-12-1EX_3x3mm_Pitch0.5mm</footprint>
+      <fields>
+        <field name="Manufacturer">Allegro</field>
+        <field name="Part Number">ACS711KEXLT-31AB-T</field>
+      </fields>
+      <libsource lib="pkl_sensor" part="ACS711"/>
+      <sheetpath names="/Half Bridge B/" tstamps="/56B809CA/"/>
+      <tstamp>56984538</tstamp>
+    </comp>
+    <comp ref="UDrmos2">
+      <value>DrMOS_SiC632A</value>
+      <footprint>DrMOS:MLP55-31L</footprint>
+      <datasheet>http://www.vishay.com/docs/62992/sic632a.pdf</datasheet>
+      <fields>
+        <field name="Manufacturer">Vishay</field>
+        <field name="Part Number">SiC632ACD-T1-GE3</field>
+      </fields>
+      <libsource lib="pkl_drmos" part="DrMOS_SiC632A"/>
+      <sheetpath names="/Half Bridge B/" tstamps="/56B809CA/"/>
+      <tstamp>56A19C85</tstamp>
+    </comp>
+    <comp ref="CDrLogic2">
+      <value>2.2uF</value>
+      <footprint>Capacitors_SMD:C_0603</footprint>
+      <fields>
+        <field name="Manufacturer">Kemet</field>
+        <field name="Part Number">C0603C225K8RACTU</field>
+        <field name="Comment">X7R, &gt;10V</field>
+      </fields>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/Half Bridge B/" tstamps="/56B809CA/"/>
+      <tstamp>56A2CDC4</tstamp>
+    </comp>
+    <comp ref="RDrLogic2">
+      <value>100R</value>
+      <footprint>Resistors_SMD:R_0603</footprint>
+      <libsource lib="device" part="R"/>
+      <sheetpath names="/Half Bridge B/" tstamps="/56B809CA/"/>
+      <tstamp>56A2D0BC</tstamp>
+    </comp>
+    <comp ref="Rhsens2">
+      <value>10k,0.1%</value>
+      <footprint>Capacitors_SMD:C_0603_HandSoldering</footprint>
+      <libsource lib="device" part="R"/>
+      <sheetpath names="/Half Bridge B/" tstamps="/56B809CA/"/>
+      <tstamp>56A2FD69</tstamp>
+    </comp>
+    <comp ref="Rlsens2">
+      <value>2k2,0.1%</value>
+      <footprint>Resistors_SMD:R_0402</footprint>
+      <libsource lib="device" part="R"/>
+      <sheetpath names="/Half Bridge B/" tstamps="/56B809CA/"/>
+      <tstamp>56A2FEAC</tstamp>
+    </comp>
+    <comp ref="Rcfilt2">
+      <value>20k</value>
+      <footprint>Resistors_SMD:R_0402</footprint>
+      <libsource lib="device" part="R"/>
+      <sheetpath names="/Half Bridge B/" tstamps="/56B809CA/"/>
+      <tstamp>56A3225A</tstamp>
+    </comp>
+    <comp ref="Ccfilt2">
+      <value>0.47n</value>
+      <footprint>Capacitors_SMD:C_0402</footprint>
+      <fields>
+        <field name="Comment">Use COG or NPO ceramic. Or poly- propylene or carbonate</field>
+      </fields>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/Half Bridge B/" tstamps="/56B809CA/"/>
+      <tstamp>56A3233B</tstamp>
+    </comp>
+    <comp ref="CDrHV2">
+      <value>10u,35V</value>
+      <footprint>Capacitors_SMD:C_1206</footprint>
+      <fields>
+        <field name="Comment">dc link, X7R, &gt;35V</field>
+      </fields>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/Half Bridge B/" tstamps="/56B809CA/"/>
+      <tstamp>56A69B0E</tstamp>
+    </comp>
+    <comp ref="CDrHVs2">
+      <value>0.47u,35V</value>
+      <footprint>Capacitors_SMD:C_0603</footprint>
+      <fields>
+        <field name="Comment">dc link, X7R, &gt;35V</field>
+      </fields>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/Half Bridge B/" tstamps="/56B809CA/"/>
+      <tstamp>56AF6D20</tstamp>
+    </comp>
+    <comp ref="PMotor2">
+      <value>PAD_SMD</value>
+      <footprint>CRF1:1PAD_4x5mm</footprint>
+      <libsource lib="pkl_misc" part="PAD_SMD"/>
+      <sheetpath names="/Half Bridge B/" tstamps="/56B809CA/"/>
+      <tstamp>56B30AD6</tstamp>
+    </comp>
+    <comp ref="Csens2">
+      <value>0.47u</value>
+      <footprint>Capacitors_SMD:C_0603</footprint>
+      <fields>
+        <field name="Comment">bypass capacitor for ACS711, X7R, &gt;10V</field>
+      </fields>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/Half Bridge B/" tstamps="/56B809CA/"/>
+      <tstamp>56B897AB</tstamp>
+    </comp>
+    <comp ref="CDrHV1back2">
+      <value>4.7u,35V</value>
+      <footprint>Capacitors_SMD:C_1206</footprint>
+      <fields>
+        <field name="Comment">dc link, X7R, &gt;35V</field>
+      </fields>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/Half Bridge B/" tstamps="/56B809CA/"/>
+      <tstamp>578D654C</tstamp>
+    </comp>
+    <comp ref="CDrHV2back2">
+      <value>10u,35V</value>
+      <footprint>Capacitors_SMD:C_1206_HandSoldering</footprint>
+      <fields>
+        <field name="Comment">dc link, X5R, &gt;35V</field>
+      </fields>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/Half Bridge B/" tstamps="/56B809CA/"/>
+      <tstamp>578D76CB</tstamp>
+    </comp>
+    <comp ref="PVSens2">
+      <value>PAD_SMD</value>
+      <footprint>Pads:PAD_SMD_1x1</footprint>
+      <libsource lib="pkl_misc" part="PAD_SMD"/>
+      <sheetpath names="/Half Bridge B/" tstamps="/56B809CA/"/>
+      <tstamp>57981B05</tstamp>
+    </comp>
+    <comp ref="Cboot3">
+      <value>0.47uF</value>
+      <footprint>Capacitors_SMD:C_0603_HandSoldering</footprint>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/Half Bridge C/" tstamps="/56B8347B/"/>
+      <tstamp>55DF8D4F</tstamp>
+    </comp>
+    <comp ref="CDrGate3">
+      <value>0.47uF</value>
+      <footprint>Capacitors_SMD:C_0603_HandSoldering</footprint>
+      <fields>
+        <field name="Comment">X7R, &gt;10V</field>
+      </fields>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/Half Bridge C/" tstamps="/56B8347B/"/>
+      <tstamp>55DF8D84</tstamp>
+    </comp>
+    <comp ref="Usens3">
+      <value>ACS711</value>
+      <footprint>Allegro:QFN-12-1EX_3x3mm_Pitch0.5mm</footprint>
+      <fields>
+        <field name="Manufacturer">Allegro</field>
+        <field name="Part Number">ACS711KEXLT-31AB-T</field>
+      </fields>
+      <libsource lib="pkl_sensor" part="ACS711"/>
+      <sheetpath names="/Half Bridge C/" tstamps="/56B8347B/"/>
+      <tstamp>56984538</tstamp>
+    </comp>
+    <comp ref="UDrmos3">
+      <value>DrMOS_SiC632A</value>
+      <footprint>DrMOS:MLP55-31L</footprint>
+      <datasheet>http://www.vishay.com/docs/62992/sic632a.pdf</datasheet>
+      <fields>
+        <field name="Manufacturer">Vishay</field>
+        <field name="Part Number">SiC632ACD-T1-GE3</field>
+      </fields>
+      <libsource lib="pkl_drmos" part="DrMOS_SiC632A"/>
+      <sheetpath names="/Half Bridge C/" tstamps="/56B8347B/"/>
+      <tstamp>56A19C85</tstamp>
+    </comp>
+    <comp ref="CDrLogic3">
+      <value>2.2uF</value>
+      <footprint>Capacitors_SMD:C_0603</footprint>
+      <fields>
+        <field name="Manufacturer">Kemet</field>
+        <field name="Part Number">C0603C225K8RACTU</field>
+        <field name="Comment">X7R, &gt;10V</field>
+      </fields>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/Half Bridge C/" tstamps="/56B8347B/"/>
+      <tstamp>56A2CDC4</tstamp>
+    </comp>
+    <comp ref="RDrLogic3">
+      <value>100R</value>
+      <footprint>Resistors_SMD:R_0603</footprint>
+      <libsource lib="device" part="R"/>
+      <sheetpath names="/Half Bridge C/" tstamps="/56B8347B/"/>
+      <tstamp>56A2D0BC</tstamp>
+    </comp>
+    <comp ref="Rhsens3">
+      <value>10k,0.1%</value>
+      <footprint>Capacitors_SMD:C_0603_HandSoldering</footprint>
+      <libsource lib="device" part="R"/>
+      <sheetpath names="/Half Bridge C/" tstamps="/56B8347B/"/>
+      <tstamp>56A2FD69</tstamp>
+    </comp>
+    <comp ref="Rlsens3">
+      <value>2k2,0.1%</value>
+      <footprint>Resistors_SMD:R_0402</footprint>
+      <libsource lib="device" part="R"/>
+      <sheetpath names="/Half Bridge C/" tstamps="/56B8347B/"/>
+      <tstamp>56A2FEAC</tstamp>
+    </comp>
+    <comp ref="Rcfilt3">
+      <value>20k</value>
+      <footprint>Resistors_SMD:R_0402</footprint>
+      <libsource lib="device" part="R"/>
+      <sheetpath names="/Half Bridge C/" tstamps="/56B8347B/"/>
+      <tstamp>56A3225A</tstamp>
+    </comp>
+    <comp ref="Ccfilt3">
+      <value>0.47n</value>
+      <footprint>Capacitors_SMD:C_0402</footprint>
+      <fields>
+        <field name="Comment">Use COG or NPO ceramic. Or poly- propylene or carbonate</field>
+      </fields>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/Half Bridge C/" tstamps="/56B8347B/"/>
+      <tstamp>56A3233B</tstamp>
+    </comp>
+    <comp ref="CDrHV3">
+      <value>10u,35V</value>
+      <footprint>Capacitors_SMD:C_1206</footprint>
+      <fields>
+        <field name="Comment">dc link, X7R, &gt;35V</field>
+      </fields>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/Half Bridge C/" tstamps="/56B8347B/"/>
+      <tstamp>56A69B0E</tstamp>
+    </comp>
+    <comp ref="CDrHVs3">
+      <value>0.47u,35V</value>
+      <footprint>Capacitors_SMD:C_0603</footprint>
+      <fields>
+        <field name="Comment">dc link, X7R, &gt;35V</field>
+      </fields>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/Half Bridge C/" tstamps="/56B8347B/"/>
+      <tstamp>56AF6D20</tstamp>
+    </comp>
+    <comp ref="PMotor3">
+      <value>PAD_SMD</value>
+      <footprint>CRF1:1PAD_4x5mm</footprint>
+      <libsource lib="pkl_misc" part="PAD_SMD"/>
+      <sheetpath names="/Half Bridge C/" tstamps="/56B8347B/"/>
+      <tstamp>56B30AD6</tstamp>
+    </comp>
+    <comp ref="Csens3">
+      <value>0.47u</value>
+      <footprint>Capacitors_SMD:C_0603</footprint>
+      <fields>
+        <field name="Comment">bypass capacitor for ACS711, X7R, &gt;10V</field>
+      </fields>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/Half Bridge C/" tstamps="/56B8347B/"/>
+      <tstamp>56B897AB</tstamp>
+    </comp>
+    <comp ref="CDrHV1back3">
+      <value>4.7u,35V</value>
+      <footprint>Capacitors_SMD:C_1206</footprint>
+      <fields>
+        <field name="Comment">dc link, X7R, &gt;35V</field>
+      </fields>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/Half Bridge C/" tstamps="/56B8347B/"/>
+      <tstamp>578D654C</tstamp>
+    </comp>
+    <comp ref="CDrHV2back3">
+      <value>10u,35V</value>
+      <footprint>Capacitors_SMD:C_1206_HandSoldering</footprint>
+      <fields>
+        <field name="Comment">dc link, X5R, &gt;35V</field>
+      </fields>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/Half Bridge C/" tstamps="/56B8347B/"/>
+      <tstamp>578D76CB</tstamp>
+    </comp>
+    <comp ref="PVSens3">
+      <value>PAD_SMD</value>
+      <footprint>Pads:PAD_SMD_1x1</footprint>
+      <libsource lib="pkl_misc" part="PAD_SMD"/>
+      <sheetpath names="/Half Bridge C/" tstamps="/56B8347B/"/>
+      <tstamp>57981B05</tstamp>
+    </comp>
+    <comp ref="Cboot4">
+      <value>0.47uF</value>
+      <footprint>Capacitors_SMD:C_0603_HandSoldering</footprint>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/Half Bridge D/" tstamps="/56BC308A/"/>
+      <tstamp>55DF8D4F</tstamp>
+    </comp>
+    <comp ref="CDrGate4">
+      <value>0.47uF</value>
+      <footprint>Capacitors_SMD:C_0603_HandSoldering</footprint>
+      <fields>
+        <field name="Comment">X7R, &gt;10V</field>
+      </fields>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/Half Bridge D/" tstamps="/56BC308A/"/>
+      <tstamp>55DF8D84</tstamp>
+    </comp>
+    <comp ref="Usens4">
+      <value>ACS711</value>
+      <footprint>Allegro:QFN-12-1EX_3x3mm_Pitch0.5mm</footprint>
+      <fields>
+        <field name="Manufacturer">Allegro</field>
+        <field name="Part Number">ACS711KEXLT-31AB-T</field>
+      </fields>
+      <libsource lib="pkl_sensor" part="ACS711"/>
+      <sheetpath names="/Half Bridge D/" tstamps="/56BC308A/"/>
+      <tstamp>56984538</tstamp>
+    </comp>
+    <comp ref="UDrmos4">
+      <value>DrMOS_SiC632A</value>
+      <footprint>DrMOS:MLP55-31L</footprint>
+      <datasheet>http://www.vishay.com/docs/62992/sic632a.pdf</datasheet>
+      <fields>
+        <field name="Manufacturer">Vishay</field>
+        <field name="Part Number">SiC632ACD-T1-GE3</field>
+      </fields>
+      <libsource lib="pkl_drmos" part="DrMOS_SiC632A"/>
+      <sheetpath names="/Half Bridge D/" tstamps="/56BC308A/"/>
+      <tstamp>56A19C85</tstamp>
+    </comp>
+    <comp ref="CDrLogic4">
+      <value>2.2uF</value>
+      <footprint>Capacitors_SMD:C_0603</footprint>
+      <fields>
+        <field name="Manufacturer">Kemet</field>
+        <field name="Part Number">C0603C225K8RACTU</field>
+        <field name="Comment">X7R, &gt;10V</field>
+      </fields>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/Half Bridge D/" tstamps="/56BC308A/"/>
+      <tstamp>56A2CDC4</tstamp>
+    </comp>
+    <comp ref="RDrLogic4">
+      <value>100R</value>
+      <footprint>Resistors_SMD:R_0603</footprint>
+      <libsource lib="device" part="R"/>
+      <sheetpath names="/Half Bridge D/" tstamps="/56BC308A/"/>
+      <tstamp>56A2D0BC</tstamp>
+    </comp>
+    <comp ref="Rhsens4">
+      <value>10k,0.1%</value>
+      <footprint>Capacitors_SMD:C_0603_HandSoldering</footprint>
+      <libsource lib="device" part="R"/>
+      <sheetpath names="/Half Bridge D/" tstamps="/56BC308A/"/>
+      <tstamp>56A2FD69</tstamp>
+    </comp>
+    <comp ref="Rlsens4">
+      <value>2k2,0.1%</value>
+      <footprint>Resistors_SMD:R_0402</footprint>
+      <libsource lib="device" part="R"/>
+      <sheetpath names="/Half Bridge D/" tstamps="/56BC308A/"/>
+      <tstamp>56A2FEAC</tstamp>
+    </comp>
+    <comp ref="Rcfilt4">
+      <value>20k</value>
+      <footprint>Resistors_SMD:R_0402</footprint>
+      <libsource lib="device" part="R"/>
+      <sheetpath names="/Half Bridge D/" tstamps="/56BC308A/"/>
+      <tstamp>56A3225A</tstamp>
+    </comp>
+    <comp ref="Ccfilt4">
+      <value>0.47n</value>
+      <footprint>Capacitors_SMD:C_0402</footprint>
+      <fields>
+        <field name="Comment">Use COG or NPO ceramic. Or poly- propylene or carbonate</field>
+      </fields>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/Half Bridge D/" tstamps="/56BC308A/"/>
+      <tstamp>56A3233B</tstamp>
+    </comp>
+    <comp ref="CDrHV4">
+      <value>10u,35V</value>
+      <footprint>Capacitors_SMD:C_1206</footprint>
+      <fields>
+        <field name="Comment">dc link, X7R, &gt;35V</field>
+      </fields>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/Half Bridge D/" tstamps="/56BC308A/"/>
+      <tstamp>56A69B0E</tstamp>
+    </comp>
+    <comp ref="CDrHVs4">
+      <value>0.47u,35V</value>
+      <footprint>Capacitors_SMD:C_0603</footprint>
+      <fields>
+        <field name="Comment">dc link, X7R, &gt;35V</field>
+      </fields>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/Half Bridge D/" tstamps="/56BC308A/"/>
+      <tstamp>56AF6D20</tstamp>
+    </comp>
+    <comp ref="PMotor4">
+      <value>PAD_SMD</value>
+      <footprint>CRF1:1PAD_4x5mm</footprint>
+      <libsource lib="pkl_misc" part="PAD_SMD"/>
+      <sheetpath names="/Half Bridge D/" tstamps="/56BC308A/"/>
+      <tstamp>56B30AD6</tstamp>
+    </comp>
+    <comp ref="Csens4">
+      <value>0.47u</value>
+      <footprint>Capacitors_SMD:C_0603</footprint>
+      <fields>
+        <field name="Comment">bypass capacitor for ACS711, X7R, &gt;10V</field>
+      </fields>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/Half Bridge D/" tstamps="/56BC308A/"/>
+      <tstamp>56B897AB</tstamp>
+    </comp>
+    <comp ref="CDrHV1back4">
+      <value>4.7u,35V</value>
+      <footprint>Capacitors_SMD:C_1206</footprint>
+      <fields>
+        <field name="Comment">dc link, X7R, &gt;35V</field>
+      </fields>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/Half Bridge D/" tstamps="/56BC308A/"/>
+      <tstamp>578D654C</tstamp>
+    </comp>
+    <comp ref="CDrHV2back4">
+      <value>10u,35V</value>
+      <footprint>Capacitors_SMD:C_1206_HandSoldering</footprint>
+      <fields>
+        <field name="Comment">dc link, X5R, &gt;35V</field>
+      </fields>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/Half Bridge D/" tstamps="/56BC308A/"/>
+      <tstamp>578D76CB</tstamp>
+    </comp>
+    <comp ref="PVSens4">
+      <value>PAD_SMD</value>
+      <footprint>Pads:PAD_SMD_1x1</footprint>
+      <libsource lib="pkl_misc" part="PAD_SMD"/>
+      <sheetpath names="/Half Bridge D/" tstamps="/56BC308A/"/>
+      <tstamp>57981B05</tstamp>
+    </comp>
+    <comp ref="Cboot5">
+      <value>0.47uF</value>
+      <footprint>Capacitors_SMD:C_0603_HandSoldering</footprint>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/Half Bridge E/" tstamps="/56BA2E2B/"/>
+      <tstamp>55DF8D4F</tstamp>
+    </comp>
+    <comp ref="CDrGate5">
+      <value>0.47uF</value>
+      <footprint>Capacitors_SMD:C_0603_HandSoldering</footprint>
+      <fields>
+        <field name="Comment">X7R, &gt;10V</field>
+      </fields>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/Half Bridge E/" tstamps="/56BA2E2B/"/>
+      <tstamp>55DF8D84</tstamp>
+    </comp>
+    <comp ref="Usens5">
+      <value>ACS711</value>
+      <footprint>Allegro:QFN-12-1EX_3x3mm_Pitch0.5mm</footprint>
+      <fields>
+        <field name="Manufacturer">Allegro</field>
+        <field name="Part Number">ACS711KEXLT-31AB-T</field>
+      </fields>
+      <libsource lib="pkl_sensor" part="ACS711"/>
+      <sheetpath names="/Half Bridge E/" tstamps="/56BA2E2B/"/>
+      <tstamp>56984538</tstamp>
+    </comp>
+    <comp ref="UDrmos5">
+      <value>DrMOS_SiC632A</value>
+      <footprint>DrMOS:MLP55-31L</footprint>
+      <datasheet>http://www.vishay.com/docs/62992/sic632a.pdf</datasheet>
+      <fields>
+        <field name="Manufacturer">Vishay</field>
+        <field name="Part Number">SiC632ACD-T1-GE3</field>
+      </fields>
+      <libsource lib="pkl_drmos" part="DrMOS_SiC632A"/>
+      <sheetpath names="/Half Bridge E/" tstamps="/56BA2E2B/"/>
+      <tstamp>56A19C85</tstamp>
+    </comp>
+    <comp ref="CDrLogic5">
+      <value>2.2uF</value>
+      <footprint>Capacitors_SMD:C_0603</footprint>
+      <fields>
+        <field name="Manufacturer">Kemet</field>
+        <field name="Part Number">C0603C225K8RACTU</field>
+        <field name="Comment">X7R, &gt;10V</field>
+      </fields>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/Half Bridge E/" tstamps="/56BA2E2B/"/>
+      <tstamp>56A2CDC4</tstamp>
+    </comp>
+    <comp ref="RDrLogic5">
+      <value>100R</value>
+      <footprint>Resistors_SMD:R_0603</footprint>
+      <libsource lib="device" part="R"/>
+      <sheetpath names="/Half Bridge E/" tstamps="/56BA2E2B/"/>
+      <tstamp>56A2D0BC</tstamp>
+    </comp>
+    <comp ref="Rhsens5">
+      <value>10k,0.1%</value>
+      <footprint>Capacitors_SMD:C_0603_HandSoldering</footprint>
+      <libsource lib="device" part="R"/>
+      <sheetpath names="/Half Bridge E/" tstamps="/56BA2E2B/"/>
+      <tstamp>56A2FD69</tstamp>
+    </comp>
+    <comp ref="Rlsens5">
+      <value>2k2,0.1%</value>
+      <footprint>Resistors_SMD:R_0402</footprint>
+      <libsource lib="device" part="R"/>
+      <sheetpath names="/Half Bridge E/" tstamps="/56BA2E2B/"/>
+      <tstamp>56A2FEAC</tstamp>
+    </comp>
+    <comp ref="Rcfilt5">
+      <value>20k</value>
+      <footprint>Resistors_SMD:R_0402</footprint>
+      <libsource lib="device" part="R"/>
+      <sheetpath names="/Half Bridge E/" tstamps="/56BA2E2B/"/>
+      <tstamp>56A3225A</tstamp>
+    </comp>
+    <comp ref="Ccfilt5">
+      <value>0.47n</value>
+      <footprint>Capacitors_SMD:C_0402</footprint>
+      <fields>
+        <field name="Comment">Use COG or NPO ceramic. Or poly- propylene or carbonate</field>
+      </fields>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/Half Bridge E/" tstamps="/56BA2E2B/"/>
+      <tstamp>56A3233B</tstamp>
+    </comp>
+    <comp ref="CDrHV5">
+      <value>10u,35V</value>
+      <footprint>Capacitors_SMD:C_1206</footprint>
+      <fields>
+        <field name="Comment">dc link, X7R, &gt;35V</field>
+      </fields>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/Half Bridge E/" tstamps="/56BA2E2B/"/>
+      <tstamp>56A69B0E</tstamp>
+    </comp>
+    <comp ref="CDrHVs5">
+      <value>0.47u,35V</value>
+      <footprint>Capacitors_SMD:C_0603</footprint>
+      <fields>
+        <field name="Comment">dc link, X7R, &gt;35V</field>
+      </fields>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/Half Bridge E/" tstamps="/56BA2E2B/"/>
+      <tstamp>56AF6D20</tstamp>
+    </comp>
+    <comp ref="PMotor5">
+      <value>PAD_SMD</value>
+      <footprint>CRF1:1PAD_4x5mm</footprint>
+      <libsource lib="pkl_misc" part="PAD_SMD"/>
+      <sheetpath names="/Half Bridge E/" tstamps="/56BA2E2B/"/>
+      <tstamp>56B30AD6</tstamp>
+    </comp>
+    <comp ref="Csens5">
+      <value>0.47u</value>
+      <footprint>Capacitors_SMD:C_0603</footprint>
+      <fields>
+        <field name="Comment">bypass capacitor for ACS711, X7R, &gt;10V</field>
+      </fields>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/Half Bridge E/" tstamps="/56BA2E2B/"/>
+      <tstamp>56B897AB</tstamp>
+    </comp>
+    <comp ref="CDrHV1back5">
+      <value>4.7u,35V</value>
+      <footprint>Capacitors_SMD:C_1206</footprint>
+      <fields>
+        <field name="Comment">dc link, X7R, &gt;35V</field>
+      </fields>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/Half Bridge E/" tstamps="/56BA2E2B/"/>
+      <tstamp>578D654C</tstamp>
+    </comp>
+    <comp ref="CDrHV2back5">
+      <value>10u,35V</value>
+      <footprint>Capacitors_SMD:C_1206_HandSoldering</footprint>
+      <fields>
+        <field name="Comment">dc link, X5R, &gt;35V</field>
+      </fields>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/Half Bridge E/" tstamps="/56BA2E2B/"/>
+      <tstamp>578D76CB</tstamp>
+    </comp>
+    <comp ref="PVSens5">
+      <value>PAD_SMD</value>
+      <footprint>Pads:PAD_SMD_1x1</footprint>
+      <libsource lib="pkl_misc" part="PAD_SMD"/>
+      <sheetpath names="/Half Bridge E/" tstamps="/56BA2E2B/"/>
+      <tstamp>57981B05</tstamp>
+    </comp>
+    <comp ref="Cboot6">
+      <value>0.47uF</value>
+      <footprint>Capacitors_SMD:C_0603_HandSoldering</footprint>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/Half Bridge F/" tstamps="/56BA5F82/"/>
+      <tstamp>55DF8D4F</tstamp>
+    </comp>
+    <comp ref="CDrGate6">
+      <value>0.47uF</value>
+      <footprint>Capacitors_SMD:C_0603_HandSoldering</footprint>
+      <fields>
+        <field name="Comment">X7R, &gt;10V</field>
+      </fields>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/Half Bridge F/" tstamps="/56BA5F82/"/>
+      <tstamp>55DF8D84</tstamp>
+    </comp>
+    <comp ref="Usens6">
+      <value>ACS711</value>
+      <footprint>Allegro:QFN-12-1EX_3x3mm_Pitch0.5mm</footprint>
+      <fields>
+        <field name="Manufacturer">Allegro</field>
+        <field name="Part Number">ACS711KEXLT-31AB-T</field>
+      </fields>
+      <libsource lib="pkl_sensor" part="ACS711"/>
+      <sheetpath names="/Half Bridge F/" tstamps="/56BA5F82/"/>
+      <tstamp>56984538</tstamp>
+    </comp>
+    <comp ref="UDrmos6">
+      <value>DrMOS_SiC632A</value>
+      <footprint>DrMOS:MLP55-31L</footprint>
+      <datasheet>http://www.vishay.com/docs/62992/sic632a.pdf</datasheet>
+      <fields>
+        <field name="Manufacturer">Vishay</field>
+        <field name="Part Number">SiC632ACD-T1-GE3</field>
+      </fields>
+      <libsource lib="pkl_drmos" part="DrMOS_SiC632A"/>
+      <sheetpath names="/Half Bridge F/" tstamps="/56BA5F82/"/>
+      <tstamp>56A19C85</tstamp>
+    </comp>
+    <comp ref="CDrLogic6">
+      <value>2.2uF</value>
+      <footprint>Capacitors_SMD:C_0603</footprint>
+      <fields>
+        <field name="Manufacturer">Kemet</field>
+        <field name="Part Number">C0603C225K8RACTU</field>
+        <field name="Comment">X7R, &gt;10V</field>
+      </fields>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/Half Bridge F/" tstamps="/56BA5F82/"/>
+      <tstamp>56A2CDC4</tstamp>
+    </comp>
+    <comp ref="RDrLogic6">
+      <value>100R</value>
+      <footprint>Resistors_SMD:R_0603</footprint>
+      <libsource lib="device" part="R"/>
+      <sheetpath names="/Half Bridge F/" tstamps="/56BA5F82/"/>
+      <tstamp>56A2D0BC</tstamp>
+    </comp>
+    <comp ref="Rhsens6">
+      <value>10k,0.1%</value>
+      <footprint>Capacitors_SMD:C_0603_HandSoldering</footprint>
+      <libsource lib="device" part="R"/>
+      <sheetpath names="/Half Bridge F/" tstamps="/56BA5F82/"/>
+      <tstamp>56A2FD69</tstamp>
+    </comp>
+    <comp ref="Rlsens6">
+      <value>2k2,0.1%</value>
+      <footprint>Resistors_SMD:R_0402</footprint>
+      <libsource lib="device" part="R"/>
+      <sheetpath names="/Half Bridge F/" tstamps="/56BA5F82/"/>
+      <tstamp>56A2FEAC</tstamp>
+    </comp>
+    <comp ref="Rcfilt6">
+      <value>20k</value>
+      <footprint>Resistors_SMD:R_0402</footprint>
+      <libsource lib="device" part="R"/>
+      <sheetpath names="/Half Bridge F/" tstamps="/56BA5F82/"/>
+      <tstamp>56A3225A</tstamp>
+    </comp>
+    <comp ref="Ccfilt6">
+      <value>0.47n</value>
+      <footprint>Capacitors_SMD:C_0402</footprint>
+      <fields>
+        <field name="Comment">Use COG or NPO ceramic. Or poly- propylene or carbonate</field>
+      </fields>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/Half Bridge F/" tstamps="/56BA5F82/"/>
+      <tstamp>56A3233B</tstamp>
+    </comp>
+    <comp ref="CDrHV6">
+      <value>10u,35V</value>
+      <footprint>Capacitors_SMD:C_1206</footprint>
+      <fields>
+        <field name="Comment">dc link, X7R, &gt;35V</field>
+      </fields>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/Half Bridge F/" tstamps="/56BA5F82/"/>
+      <tstamp>56A69B0E</tstamp>
+    </comp>
+    <comp ref="CDrHVs6">
+      <value>0.47u,35V</value>
+      <footprint>Capacitors_SMD:C_0603</footprint>
+      <fields>
+        <field name="Comment">dc link, X7R, &gt;35V</field>
+      </fields>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/Half Bridge F/" tstamps="/56BA5F82/"/>
+      <tstamp>56AF6D20</tstamp>
+    </comp>
+    <comp ref="PMotor6">
+      <value>PAD_SMD</value>
+      <footprint>CRF1:1PAD_4x5mm</footprint>
+      <libsource lib="pkl_misc" part="PAD_SMD"/>
+      <sheetpath names="/Half Bridge F/" tstamps="/56BA5F82/"/>
+      <tstamp>56B30AD6</tstamp>
+    </comp>
+    <comp ref="Csens6">
+      <value>0.47u</value>
+      <footprint>Capacitors_SMD:C_0603</footprint>
+      <fields>
+        <field name="Comment">bypass capacitor for ACS711, X7R, &gt;10V</field>
+      </fields>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/Half Bridge F/" tstamps="/56BA5F82/"/>
+      <tstamp>56B897AB</tstamp>
+    </comp>
+    <comp ref="CDrHV1back6">
+      <value>4.7u,35V</value>
+      <footprint>Capacitors_SMD:C_1206</footprint>
+      <fields>
+        <field name="Comment">dc link, X7R, &gt;35V</field>
+      </fields>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/Half Bridge F/" tstamps="/56BA5F82/"/>
+      <tstamp>578D654C</tstamp>
+    </comp>
+    <comp ref="CDrHV2back6">
+      <value>10u,35V</value>
+      <footprint>Capacitors_SMD:C_1206_HandSoldering</footprint>
+      <fields>
+        <field name="Comment">dc link, X5R, &gt;35V</field>
+      </fields>
+      <libsource lib="device" part="C"/>
+      <sheetpath names="/Half Bridge F/" tstamps="/56BA5F82/"/>
+      <tstamp>578D76CB</tstamp>
+    </comp>
+    <comp ref="PVSens6">
+      <value>PAD_SMD</value>
+      <footprint>Pads:PAD_SMD_1x1</footprint>
+      <libsource lib="pkl_misc" part="PAD_SMD"/>
+      <sheetpath names="/Half Bridge F/" tstamps="/56BA5F82/"/>
+      <tstamp>57981B05</tstamp>
+    </comp>
+    <comp ref="C2">
+      <value>STM32F4:2.2u / STM32F7:0R</value>
+      <footprint>Capacitors_SMD:C_0603</footprint>
+      <libsource lib="BLDC_4-rescue" part="C-RESCUE-BLDC_4"/>
+      <sheetpath names="/MCU/" tstamps="/53F7501A/"/>
+      <tstamp>53F757AE</tstamp>
+    </comp>
+    <comp ref="C1">
+      <value>STM32F4:2.2u / STM32F7:4.7u</value>
+      <footprint>Capacitors_SMD:C_0603</footprint>
+      <libsource lib="BLDC_4-rescue" part="C-RESCUE-BLDC_4"/>
+      <sheetpath names="/MCU/" tstamps="/53F7501A/"/>
+      <tstamp>53F757B5</tstamp>
+    </comp>
+    <comp ref="Cclk1">
+      <value>18p</value>
+      <footprint>Capacitors_SMD:C_0402</footprint>
+      <fields>
+        <field name="Comment">for the crystal</field>
+      </fields>
+      <libsource lib="BLDC_4-rescue" part="C-RESCUE-BLDC_4"/>
+      <sheetpath names="/MCU/" tstamps="/53F7501A/"/>
+      <tstamp>53F757DB</tstamp>
+    </comp>
+    <comp ref="Cclk2">
+      <value>18p</value>
+      <footprint>Capacitors_SMD:C_0402</footprint>
+      <fields>
+        <field name="Comment">for the crystal</field>
+      </fields>
+      <libsource lib="BLDC_4-rescue" part="C-RESCUE-BLDC_4"/>
+      <sheetpath names="/MCU/" tstamps="/53F7501A/"/>
+      <tstamp>53F757E2</tstamp>
+    </comp>
+    <comp ref="C3">
+      <value>2.2u</value>
+      <footprint>Capacitors_SMD:C_0603</footprint>
+      <libsource lib="BLDC_4-rescue" part="C-RESCUE-BLDC_4"/>
+      <sheetpath names="/MCU/" tstamps="/53F7501A/"/>
+      <tstamp>53F757F8</tstamp>
+    </comp>
+    <comp ref="C4">
+      <value>2.2u</value>
+      <footprint>Capacitors_SMD:C_0603</footprint>
+      <libsource lib="BLDC_4-rescue" part="C-RESCUE-BLDC_4"/>
+      <sheetpath names="/MCU/" tstamps="/53F7501A/"/>
+      <tstamp>53F757FF</tstamp>
+    </comp>
+    <comp ref="C5">
+      <value>100n</value>
+      <footprint>Capacitors_SMD:C_0603</footprint>
+      <libsource lib="BLDC_4-rescue" part="C-RESCUE-BLDC_4"/>
+      <sheetpath names="/MCU/" tstamps="/53F7501A/"/>
+      <tstamp>53F75896</tstamp>
+    </comp>
+    <comp ref="Cmcu1">
+      <value>2.2u</value>
+      <footprint>Capacitors_SMD:C_0603</footprint>
+      <libsource lib="BLDC_4-rescue" part="C-RESCUE-BLDC_4"/>
+      <sheetpath names="/MCU/" tstamps="/53F7501A/"/>
+      <tstamp>53F77426</tstamp>
+    </comp>
+    <comp ref="Cmcu2">
+      <value>2.2u</value>
+      <footprint>Capacitors_SMD:C_0603</footprint>
+      <libsource lib="BLDC_4-rescue" part="C-RESCUE-BLDC_4"/>
+      <sheetpath names="/MCU/" tstamps="/53F7501A/"/>
+      <tstamp>53F7742D</tstamp>
+    </comp>
+    <comp ref="Cmcu3">
+      <value>2.2u</value>
+      <footprint>Capacitors_SMD:C_0603</footprint>
+      <libsource lib="BLDC_4-rescue" part="C-RESCUE-BLDC_4"/>
+      <sheetpath names="/MCU/" tstamps="/53F7501A/"/>
+      <tstamp>53F77447</tstamp>
+    </comp>
+    <comp ref="Cmcu4">
+      <value>2.2u</value>
+      <footprint>Capacitors_SMD:C_0603</footprint>
+      <libsource lib="BLDC_4-rescue" part="C-RESCUE-BLDC_4"/>
+      <sheetpath names="/MCU/" tstamps="/53F7501A/"/>
+      <tstamp>53F7744E</tstamp>
+    </comp>
+    <comp ref="X2">
+      <value>8MHz 10ppm</value>
+      <footprint>Crystals_User:Crystal_5x3mm</footprint>
+      <fields>
+        <field name="Part Number">ABM3B-8.0-10-1UT</field>
+      </fields>
+      <libsource lib="DrChibi-rescue" part="CRYSTAL_SMD-RESCUE-DrChibi"/>
+      <sheetpath names="/MCU/" tstamps="/53F7501A/"/>
+      <tstamp>540978A3</tstamp>
+    </comp>
+    <comp ref="R4">
+      <value>0R</value>
+      <footprint>Resistors_SMD:R_0805</footprint>
+      <libsource lib="device" part="R"/>
+      <sheetpath names="/MCU/" tstamps="/53F7501A/"/>
+      <tstamp>55E738BB</tstamp>
+    </comp>
+    <comp ref="CONN2">
+      <value>CONN_01X05</value>
+      <footprint>Pads:Pin_Header_Straight_1x05_Pitch1.27mm</footprint>
+      <libsource lib="conn" part="CONN_01X05"/>
+      <sheetpath names="/MCU/" tstamps="/53F7501A/"/>
+      <tstamp>56A6A68D</tstamp>
+    </comp>
+    <comp ref="U1">
+      <value>STM32F40X_LQFP64</value>
+      <footprint>CRF1:lqfp64_pad_mod</footprint>
+      <fields>
+        <field name="Manufacturer">ST</field>
+        <field name="Part Number">STM32F405RGTx</field>
+      </fields>
+      <libsource lib="crf_1" part="STM32F40X_LQFP64"/>
+      <sheetpath names="/MCU/" tstamps="/53F7501A/"/>
+      <tstamp>53F757A7</tstamp>
+    </comp>
+    <comp ref="R3">
+      <value>2k2</value>
+      <footprint>Resistors_SMD:R_0402</footprint>
+      <libsource lib="device" part="R"/>
+      <sheetpath names="/MCU/" tstamps="/53F7501A/"/>
+      <tstamp>56A6E871</tstamp>
+    </comp>
+    <comp ref="Rthwn1">
+      <value>2k2</value>
+      <footprint>Resistors_SMD:R_0402</footprint>
+      <libsource lib="device" part="R"/>
+      <sheetpath names="/MCU/" tstamps="/53F7501A/"/>
+      <tstamp>577AD1BD</tstamp>
+    </comp>
+    <comp ref="PBOOT1P1">
+      <value>PAD_SMD</value>
+      <footprint>Pads:PAD_SMD_1x1</footprint>
+      <libsource lib="pkl_misc" part="PAD_SMD"/>
+      <sheetpath names="/MCU/" tstamps="/53F7501A/"/>
+      <tstamp>579EE0ED</tstamp>
+    </comp>
+    <comp ref="PBOOT1GND1">
+      <value>PAD_SMD</value>
+      <footprint>Pads:PAD_SMD_1x1</footprint>
+      <libsource lib="pkl_misc" part="PAD_SMD"/>
+      <sheetpath names="/MCU/" tstamps="/53F7501A/"/>
+      <tstamp>579EE6E1</tstamp>
+    </comp>
+    <comp ref="PBOOT0P1">
+      <value>PAD_SMD</value>
+      <footprint>Pads:PAD_SMD_1x1</footprint>
+      <libsource lib="pkl_misc" part="PAD_SMD"/>
+      <sheetpath names="/MCU/" tstamps="/53F7501A/"/>
+      <tstamp>579EE936</tstamp>
+    </comp>
+    <comp ref="PBOOT03V31">
+      <value>PAD_SMD</value>
+      <footprint>Pads:PAD_SMD_1x1</footprint>
+      <libsource lib="pkl_misc" part="PAD_SMD"/>
+      <sheetpath names="/MCU/" tstamps="/53F7501A/"/>
+      <tstamp>579EF824</tstamp>
+    </comp>
+    <comp ref="JP8">
+      <value>STM32F4:DNP / STM32F7:0R</value>
+      <footprint>Capacitors_SMD:C_0402</footprint>
+      <libsource lib="device" part="R"/>
+      <sheetpath names="/MCU/" tstamps="/53F7501A/"/>
+      <tstamp>58D12AAD</tstamp>
+    </comp>
+    <comp ref="JP10">
+      <value>STM32F4:DNP / STM32F7:0R</value>
+      <footprint>Capacitors_SMD:C_0402</footprint>
+      <libsource lib="device" part="R"/>
+      <sheetpath names="/MCU/" tstamps="/53F7501A/"/>
+      <tstamp>58D13877</tstamp>
+    </comp>
+    <comp ref="JP9">
+      <value>STM32F4:0R / STM32F7:DNP</value>
+      <footprint>Capacitors_SMD:C_0402</footprint>
+      <libsource lib="device" part="R"/>
+      <sheetpath names="/MCU/" tstamps="/53F7501A/"/>
+      <tstamp>58D13A41</tstamp>
+    </comp>
+    <comp ref="JP4">
+      <value>STM32F4:0R / STM32F7:DNP</value>
+      <footprint>Capacitors_SMD:C_0402</footprint>
+      <libsource lib="device" part="R"/>
+      <sheetpath names="/MCU/" tstamps="/53F7501A/"/>
+      <tstamp>58D14E36</tstamp>
+    </comp>
+    <comp ref="JP6">
+      <value>STM32F4:0R / STM32F7:DNP</value>
+      <footprint>Capacitors_SMD:C_0402</footprint>
+      <libsource lib="device" part="R"/>
+      <sheetpath names="/MCU/" tstamps="/53F7501A/"/>
+      <tstamp>58D15BF5</tstamp>
+    </comp>
+    <comp ref="JP5">
+      <value>STM32F4:DNP / STM32F7:0R</value>
+      <footprint>Capacitors_SMD:C_0402</footprint>
+      <libsource lib="device" part="R"/>
+      <sheetpath names="/MCU/" tstamps="/53F7501A/"/>
+      <tstamp>58D170AD</tstamp>
+    </comp>
+    <comp ref="JP2">
+      <value>STM32F4:0R / STM32F7:DNP</value>
+      <footprint>Capacitors_SMD:C_0402</footprint>
+      <libsource lib="device" part="R"/>
+      <sheetpath names="/MCU/" tstamps="/53F7501A/"/>
+      <tstamp>58D18B8D</tstamp>
+    </comp>
+    <comp ref="JP1">
+      <value>STM32F4:0R / STM32F7:DNP</value>
+      <footprint>Capacitors_SMD:C_0402</footprint>
+      <libsource lib="device" part="R"/>
+      <sheetpath names="/MCU/" tstamps="/53F7501A/"/>
+      <tstamp>58D19151</tstamp>
+    </comp>
+    <comp ref="JP3">
+      <value>STM32F4:DNP / STM32F7:0R</value>
+      <footprint>Capacitors_SMD:C_0402</footprint>
+      <libsource lib="device" part="R"/>
+      <sheetpath names="/MCU/" tstamps="/53F7501A/"/>
+      <tstamp>58D1A4D3</tstamp>
+    </comp>
+    <comp ref="JP12">
+      <value>STM32F4:DNP / STM32F7:0R</value>
+      <footprint>Capacitors_SMD:C_0402</footprint>
+      <libsource lib="device" part="R"/>
+      <sheetpath names="/MCU/" tstamps="/53F7501A/"/>
+      <tstamp>58D16880</tstamp>
+    </comp>
+    <comp ref="JP13">
+      <value>STM32F4:DNP / STM32F7:0R</value>
+      <footprint>Capacitors_SMD:C_0402</footprint>
+      <libsource lib="device" part="R"/>
+      <sheetpath names="/MCU/" tstamps="/53F7501A/"/>
+      <tstamp>58D15EF3</tstamp>
+    </comp>
+  </components>
+  <libparts>
+    <libpart lib="pkl_sensor" part="ACS711">
+      <description>Hall Effect Linear Current Sensor with Overcurrent</description>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">ACS711</field>
+        <field name="Footprint">QFN12EX</field>
+      </fields>
+      <pins>
+        <pin num="1" name="IP+" type="passive"/>
+        <pin num="2" name="IP+" type="passive"/>
+        <pin num="3" name="IP-" type="passive"/>
+        <pin num="4" name="IP-" type="passive"/>
+        <pin num="5" name="GND" type="power_in"/>
+        <pin num="6" name="~FAULT" type="openCol"/>
+        <pin num="7" name="NC" type="passive"/>
+        <pin num="8" name="NC" type="passive"/>
+        <pin num="9" name="NC" type="passive"/>
+        <pin num="10" name="NC" type="passive"/>
+        <pin num="11" name="VIOUT" type="power_in"/>
+        <pin num="12" name="VCC" type="power_in"/>
+      </pins>
+    </libpart>
+    <libpart lib="DrChibi-cache" part="BAT46WH">
+      <footprints>
+        <fp>D-Pak_TO252AA</fp>
+        <fp>Diode_*</fp>
+        <fp>*SingleDiode</fp>
+        <fp>*SingleDiode*</fp>
+        <fp>*_Diode_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">D</field>
+        <field name="Value">BAT46WH</field>
+      </fields>
+      <pins>
+        <pin num="1" name="K" type="passive"/>
+        <pin num="2" name="A" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="device" part="C">
+      <description>Unpolarized capacitor</description>
+      <footprints>
+        <fp>C_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">C</field>
+        <field name="Value">C</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="BLDC_4-rescue" part="C-RESCUE-BLDC_4">
+      <footprints>
+        <fp>SM*</fp>
+        <fp>C?</fp>
+        <fp>C1-1</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">C</field>
+        <field name="Value">C-RESCUE-BLDC_4</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="conn" part="CONN_01X04">
+      <description>Connector, single row, 01x04, pin header</description>
+      <footprints>
+        <fp>Pin_Header_Straight_1X*</fp>
+        <fp>Pin_Header_Angled_1X*</fp>
+        <fp>Socket_Strip_Straight_1X*</fp>
+        <fp>Socket_Strip_Angled_1X*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">CONN_01X04</field>
+      </fields>
+      <pins>
+        <pin num="1" name="P1" type="passive"/>
+        <pin num="2" name="P2" type="passive"/>
+        <pin num="3" name="P3" type="passive"/>
+        <pin num="4" name="P4" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="conn" part="CONN_01X05">
+      <description>Connector, single row, 01x05, pin header</description>
+      <footprints>
+        <fp>Pin_Header_Straight_1X*</fp>
+        <fp>Pin_Header_Angled_1X*</fp>
+        <fp>Socket_Strip_Straight_1X*</fp>
+        <fp>Socket_Strip_Angled_1X*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">CONN_01X05</field>
+      </fields>
+      <pins>
+        <pin num="1" name="P1" type="passive"/>
+        <pin num="2" name="P2" type="passive"/>
+        <pin num="3" name="P3" type="passive"/>
+        <pin num="4" name="P4" type="passive"/>
+        <pin num="5" name="P5" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="conn" part="CONN_02X05">
+      <description>Connector, double row, 02x05, pin header</description>
+      <footprints>
+        <fp>Pin_Header_Straight_2X*</fp>
+        <fp>Pin_Header_Angled_2X*</fp>
+        <fp>Socket_Strip_Straight_2X*</fp>
+        <fp>Socket_Strip_Angled_2X*</fp>
+        <fp>IDC_Header_Straight_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">CONN_02X05</field>
+      </fields>
+      <pins>
+        <pin num="1" name="P1" type="passive"/>
+        <pin num="2" name="P2" type="passive"/>
+        <pin num="3" name="P3" type="passive"/>
+        <pin num="4" name="P4" type="passive"/>
+        <pin num="5" name="P5" type="passive"/>
+        <pin num="6" name="P6" type="passive"/>
+        <pin num="7" name="P7" type="passive"/>
+        <pin num="8" name="P8" type="passive"/>
+        <pin num="9" name="P9" type="passive"/>
+        <pin num="10" name="P10" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="DrChibi-cache" part="CONN_1">
+      <fields>
+        <field name="Reference">P</field>
+        <field name="Value">CONN_1</field>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="BLDC_4-rescue" part="CP1-RESCUE-BLDC_4">
+      <footprints>
+        <fp>CP*</fp>
+        <fp>SM*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">C</field>
+        <field name="Value">CP1-RESCUE-BLDC_4</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="DrChibi-rescue" part="CRYSTAL_SMD-RESCUE-DrChibi">
+      <fields>
+        <field name="Reference">X</field>
+        <field name="Value">CRYSTAL_SMD-RESCUE-DrChibi</field>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+        <pin num="2" name="2" type="passive"/>
+        <pin num="3" name="case" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="device" part="D_Schottky_x2_Serial_AKC">
+      <description>Dual schottky diode</description>
+      <fields>
+        <field name="Reference">D</field>
+        <field name="Value">D_Schottky_x2_Serial_AKC</field>
+      </fields>
+      <pins>
+        <pin num="1" name="A" type="passive"/>
+        <pin num="2" name="K" type="passive"/>
+        <pin num="3" name="common" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="pkl_drmos" part="DrMOS_SiC632A">
+      <description>DrMOS Integrated Power Stage (24V, 50A, pack MLP55-31L)</description>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">DrMOS_SiC632A</field>
+        <field name="Footprint">DrMOS:MLP55-31L</field>
+      </fields>
+      <pins>
+        <pin num="1" name="PWM" type="3state"/>
+        <pin num="2" name="ZCD_EN" type="input"/>
+        <pin num="3" name="VCIN" type="3state"/>
+        <pin num="4" name="CGND" type="BiDi"/>
+        <pin num="5" name="BOOT" type="BiDi"/>
+        <pin num="6" name="N.C." type="NotConnected"/>
+        <pin num="7" name="PHASE" type="BiDi"/>
+        <pin num="8" name="VIN" type="BiDi"/>
+        <pin num="9" name="VIN" type="BiDi"/>
+        <pin num="10" name="VIN" type="BiDi"/>
+        <pin num="11" name="VIN" type="BiDi"/>
+        <pin num="12" name="PGND" type="BiDi"/>
+        <pin num="13" name="PGND" type="BiDi"/>
+        <pin num="14" name="PGND" type="BiDi"/>
+        <pin num="15" name="PGND" type="BiDi"/>
+        <pin num="16" name="VSWH" type="BiDi"/>
+        <pin num="17" name="VSWH" type="BiDi"/>
+        <pin num="18" name="VSWH" type="BiDi"/>
+        <pin num="19" name="VSWH" type="BiDi"/>
+        <pin num="20" name="VSWH" type="BiDi"/>
+        <pin num="21" name="VSWH" type="BiDi"/>
+        <pin num="22" name="VSWH" type="BiDi"/>
+        <pin num="23" name="VSWH" type="BiDi"/>
+        <pin num="24" name="VSWH" type="BiDi"/>
+        <pin num="25" name="VSWH" type="BiDi"/>
+        <pin num="26" name="VSWH" type="BiDi"/>
+        <pin num="27" name="GL" type="BiDi"/>
+        <pin num="28" name="PGND" type="BiDi"/>
+        <pin num="29" name="VDRV" type="BiDi"/>
+        <pin num="30" name="THWn" type="3state"/>
+        <pin num="31" name="DSBL" type="input"/>
+        <pin num="32" name="CGND" type="BiDi"/>
+        <pin num="33" name="GL" type="BiDi"/>
+        <pin num="34" name="VIN" type="BiDi"/>
+        <pin num="35" name="PGND" type="BiDi"/>
+      </pins>
+    </libpart>
+    <libpart lib="crf_1" part="ISO1050">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">ISO1050</field>
+      </fields>
+      <pins>
+        <pin num="1" name="VCC1" type="power_in"/>
+        <pin num="2" name="RXD" type="output"/>
+        <pin num="3" name="TXD" type="input"/>
+        <pin num="4" name="GND1" type="power_in"/>
+        <pin num="5" name="GND2" type="input"/>
+        <pin num="6" name="CANL" type="BiDi"/>
+        <pin num="7" name="CANH" type="BiDi"/>
+        <pin num="8" name="VCC2" type="input"/>
+      </pins>
+    </libpart>
+    <libpart lib="BLDC_4-rescue" part="LED-RESCUE-BLDC_4">
+      <footprints>
+        <fp>LED-3MM</fp>
+        <fp>LED-5MM</fp>
+        <fp>LED-10MM</fp>
+        <fp>LED-0603</fp>
+        <fp>LED-0805</fp>
+        <fp>LED-1206</fp>
+        <fp>LEDV</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">D</field>
+        <field name="Value">LED-RESCUE-BLDC_4</field>
+      </fields>
+      <pins>
+        <pin num="1" name="A" type="passive"/>
+        <pin num="2" name="K" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="pkl_misc" part="LP2992AIM5-3.3">
+      <description>250 mA Low Dropout Voltage Regulator, Fixed Output 3.3V, SOT-23-5</description>
+      <docs>http://www.ti.com/lit/ds/symlink/lp2992.pdf</docs>
+      <footprints>
+        <fp>SOT*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">LP2992AIM5-3.3</field>
+        <field name="Footprint">SOT-23-5</field>
+      </fields>
+      <pins>
+        <pin num="1" name="VIN" type="input"/>
+        <pin num="2" name="GND" type="power_in"/>
+        <pin num="3" name="~SHDN~" type="input"/>
+        <pin num="4" name="BYP" type="input"/>
+        <pin num="5" name="VOUT" type="power_out"/>
+      </pins>
+    </libpart>
+    <libpart lib="pkl_regulator" part="LTM8020">
+      <description>200mA, 36V DC/DC, Adjustable 1.25V-5V, LGA</description>
+      <docs>http://cds.linear.com/docs/en/datasheet/8020fd.pdf</docs>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">LTM8020</field>
+        <field name="Footprint">LGA</field>
+      </fields>
+      <pins>
+        <pin num="1" name="VIN" type="power_in"/>
+        <pin num="2" name="VOUT" type="power_out"/>
+        <pin num="3" name="GND" type="power_in"/>
+        <pin num="4" name="~SHDN~" type="input"/>
+        <pin num="5" name="ADJ" type="input"/>
+        <pin num="6" name="BIAS" type="input"/>
+      </pins>
+    </libpart>
+    <libpart lib="crf_1" part="MINI-USB-SCHIELD-32005-201">
+      <fields>
+        <field name="Reference">X</field>
+        <field name="Value">MINI-USB-SCHIELD-32005-201</field>
+        <field name="Footprint">con-cypressindustries-32005-201</field>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+        <pin num="2" name="2" type="passive"/>
+        <pin num="3" name="3" type="passive"/>
+        <pin num="4" name="4" type="passive"/>
+        <pin num="5" name="5" type="passive"/>
+        <pin num="M1" name="S1" type="passive"/>
+        <pin num="M2" name="S2" type="passive"/>
+        <pin num="M3" name="S3" type="passive"/>
+        <pin num="M4" name="S4" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="pkl_misc" part="PAD_SMD">
+      <description>SMD solder pad</description>
+      <fields>
+        <field name="Reference">P</field>
+        <field name="Value">PAD_SMD</field>
+      </fields>
+      <pins>
+        <pin num="1" name="PAD" type="input"/>
+      </pins>
+    </libpart>
+    <libpart lib="device" part="R">
+      <description>Resistor</description>
+      <footprints>
+        <fp>R_*</fp>
+        <fp>R_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">R</field>
+        <field name="Value">R</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="BLDC_4-rescue" part="R-RESCUE-BLDC_4">
+      <footprints>
+        <fp>R?</fp>
+        <fp>SM0603</fp>
+        <fp>SM0805</fp>
+        <fp>R?-*</fp>
+        <fp>SM1206</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">R</field>
+        <field name="Value">R-RESCUE-BLDC_4</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="crf_1" part="STM32F40X_LQFP64">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">STM32F40X_LQFP64</field>
+      </fields>
+      <pins>
+        <pin num="1" name="VBAT" type="power_in"/>
+        <pin num="2" name="PC13_(RTC_AF1)" type="BiDi"/>
+        <pin num="3" name="PC14-OSC32_IN" type="BiDi"/>
+        <pin num="4" name="PC15-OSC32_OUT" type="power_in"/>
+        <pin num="5" name="PH0-OSC_IN" type="BiDi"/>
+        <pin num="6" name="PH1-OSC_OUT" type="BiDi"/>
+        <pin num="7" name="NRST" type="BiDi"/>
+        <pin num="8" name="PC0(ADC123_IN10)" type="BiDi"/>
+        <pin num="9" name="PC1(ADC123_IN11)" type="BiDi"/>
+        <pin num="10" name="PC2(ADC123_IN12)" type="BiDi"/>
+        <pin num="11" name="PC3(ADC123_IN13)" type="BiDi"/>
+        <pin num="12" name="VSSA" type="power_in"/>
+        <pin num="13" name="VDDA" type="power_in"/>
+        <pin num="14" name="PA0(ADC123_IN0/WKUP)" type="BiDi"/>
+        <pin num="15" name="PA1(ADC123_IN1)" type="BiDi"/>
+        <pin num="16" name="PA2(ADC123_IN2)" type="BiDi"/>
+        <pin num="17" name="PA3(ADC123_IN3)" type="BiDi"/>
+        <pin num="18" name="VSS" type="power_in"/>
+        <pin num="19" name="VDD" type="power_in"/>
+        <pin num="20" name="PA4(ADC12_IN4/DAC1_OUT)" type="BiDi"/>
+        <pin num="21" name="PA5(ADC12_IN5/DAC2_OUT)" type="BiDi"/>
+        <pin num="22" name="PA6(ADC12_IN6)" type="BiDi"/>
+        <pin num="23" name="PA7(ADC12_IN7)" type="BiDi"/>
+        <pin num="24" name="PC4(ADC12_IN14)" type="BiDi"/>
+        <pin num="25" name="PC5(ADC12_IN15)" type="BiDi"/>
+        <pin num="26" name="PB0(ADC12_IN8)" type="BiDi"/>
+        <pin num="27" name="PB1(ADC12_IN9)" type="BiDi"/>
+        <pin num="28" name="PB2-BOOT1" type="BiDi"/>
+        <pin num="29" name="PB10" type="BiDi"/>
+        <pin num="30" name="PB11" type="BiDi"/>
+        <pin num="31" name="VCAP1" type="power_out"/>
+        <pin num="32" name="VDD" type="power_in"/>
+        <pin num="33" name="PB12" type="BiDi"/>
+        <pin num="34" name="PB13(OTG_HS_VBUS)" type="BiDi"/>
+        <pin num="35" name="PB14" type="BiDi"/>
+        <pin num="36" name="PB15" type="BiDi"/>
+        <pin num="37" name="PC6" type="BiDi"/>
+        <pin num="38" name="PC7" type="BiDi"/>
+        <pin num="39" name="PC8" type="BiDi"/>
+        <pin num="40" name="PC9" type="BiDi"/>
+        <pin num="41" name="PA8" type="BiDi"/>
+        <pin num="42" name="PA9(OTG_FS_VBUS)" type="BiDi"/>
+        <pin num="43" name="PA10" type="BiDi"/>
+        <pin num="44" name="PA11" type="BiDi"/>
+        <pin num="45" name="PA12" type="BiDi"/>
+        <pin num="46" name="PA13(JTMS-SWDIO)" type="BiDi"/>
+        <pin num="47" name="VCAP2" type="power_out"/>
+        <pin num="48" name="VDD" type="power_in"/>
+        <pin num="49" name="PA14(JTCK-SWCLK)" type="BiDi"/>
+        <pin num="50" name="PA15(JTDI)" type="BiDi"/>
+        <pin num="51" name="PC10" type="BiDi"/>
+        <pin num="52" name="PC11" type="BiDi"/>
+        <pin num="53" name="PC12" type="BiDi"/>
+        <pin num="54" name="PD2" type="BiDi"/>
+        <pin num="55" name="PB3(JTDO/TRACESWO)" type="BiDi"/>
+        <pin num="56" name="PB4(NJTRST)" type="BiDi"/>
+        <pin num="57" name="PB5" type="BiDi"/>
+        <pin num="58" name="PB6" type="BiDi"/>
+        <pin num="59" name="PB7" type="BiDi"/>
+        <pin num="60" name="BOOT0(VPP)" type="input"/>
+        <pin num="61" name="PB8" type="BiDi"/>
+        <pin num="62" name="PB9" type="BiDi"/>
+        <pin num="63" name="VSS" type="power_in"/>
+        <pin num="64" name="VDD" type="power_in"/>
+      </pins>
+    </libpart>
+  </libparts>
+  <libraries>
+    <library logical="DrChibi-rescue">
+      <uri>/home/joerg/repos/OpenBLDC/joewa/ChibiESC/hardware/Looong-Strip_V1/DrChibi-rescue.lib</uri>
+    </library>
+    <library logical="BLDC_4-rescue">
+      <uri>/home/joerg/repos/OpenBLDC/joewa/ChibiESC/hardware/Looong-Strip_V1/BLDC_4-rescue.lib</uri>
+    </library>
+    <library logical="device">
+      <uri>/usr/share/kicad/library/device.lib</uri>
+    </library>
+    <library logical="conn">
+      <uri>/usr/share/kicad/library/conn.lib</uri>
+    </library>
+    <library logical="pkl_drmos">
+      <uri>/home/joerg/repos/OpenBLDC/joewa/ChibiESC/hardware/Looong-Strip_V1/Libraries/pkl_drmos.lib</uri>
+    </library>
+    <library logical="crf_1">
+      <uri>/home/joerg/repos/OpenBLDC/joewa/ChibiESC/hardware/Looong-Strip_V1/Libraries/crf_1.lib</uri>
+    </library>
+    <library logical="pkl_regulator">
+      <uri>/home/joerg/repos/OpenBLDC/joewa/ChibiESC/hardware/Looong-Strip_V1/Libraries/pkl_regulator.lib</uri>
+    </library>
+    <library logical="pkl_sensor">
+      <uri>/home/joerg/repos/OpenBLDC/joewa/ChibiESC/hardware/Looong-Strip_V1/Libraries/pkl_sensor.lib</uri>
+    </library>
+    <library logical="pkl_misc">
+      <uri>/home/joerg/repos/OpenBLDC/joewa/ChibiESC/hardware/Looong-Strip_V1/Libraries/pkl_misc.lib</uri>
+    </library>
+    <library logical="DrChibi-cache">
+      <uri>/home/joerg/repos/OpenBLDC/joewa/ChibiESC/hardware/Looong-Strip_V1/DrChibi-cache.lib</uri>
+    </library>
+  </libraries>
+  <nets>
+    <net code="1" name="/Virtual Y/SENS5">
+      <node ref="U1" pin="20"/>
+      <node ref="Rhsens5" pin="2"/>
+      <node ref="Rlsens5" pin="1"/>
+      <node ref="RY5" pin="2"/>
+    </net>
+    <net code="2" name="Net-(P1-Pad5)">
+      <node ref="R1" pin="2"/>
+      <node ref="P1" pin="5"/>
+    </net>
+    <net code="3" name="Net-(P1-Pad3)">
+      <node ref="R2" pin="2"/>
+      <node ref="P1" pin="3"/>
+    </net>
+    <net code="4" name="/MCU/USART6_CK">
+      <node ref="P1" pin="1"/>
+      <node ref="U1" pin="39"/>
+    </net>
+    <net code="5" name="/MCU/SENSVY2">
+      <node ref="Dclamp1" pin="3"/>
+      <node ref="RY4" pin="1"/>
+      <node ref="RYOFFS1" pin="2"/>
+      <node ref="RHFAC1" pin="2"/>
+      <node ref="U1" pin="8"/>
+      <node ref="RYSGND1" pin="2"/>
+      <node ref="RYS1" pin="2"/>
+      <node ref="RY5" pin="1"/>
+      <node ref="RY6" pin="1"/>
+    </net>
+    <net code="6" name="/Virtual Y/SENS6">
+      <node ref="U1" pin="21"/>
+      <node ref="Rhsens6" pin="2"/>
+      <node ref="Rlsens6" pin="1"/>
+      <node ref="RY6" pin="2"/>
+    </net>
+    <net code="7" name="/Virtual Y/SENS4">
+      <node ref="Rlsens4" pin="1"/>
+      <node ref="Rhsens4" pin="2"/>
+      <node ref="U1" pin="17"/>
+      <node ref="RY4" pin="2"/>
+    </net>
+    <net code="8" name="/MCU/SENSVY1">
+      <node ref="RY1" pin="1"/>
+      <node ref="RY3" pin="1"/>
+      <node ref="RY2" pin="1"/>
+      <node ref="RYS1" pin="1"/>
+      <node ref="U1" pin="9"/>
+    </net>
+    <net code="9" name="/Half Bridge D/DSBL">
+      <node ref="U1" pin="54"/>
+      <node ref="UDrmos4" pin="31"/>
+    </net>
+    <net code="10" name="/Half Bridge E/DSBL">
+      <node ref="U1" pin="56"/>
+      <node ref="UDrmos5" pin="31"/>
+    </net>
+    <net code="11" name="/Half Bridge F/SENSC">
+      <node ref="Ccfilt6" pin="1"/>
+      <node ref="Usens6" pin="11"/>
+      <node ref="Rcfilt6" pin="1"/>
+      <node ref="U1" pin="22"/>
+    </net>
+    <net code="12" name="/Half Bridge F/DSBL">
+      <node ref="U1" pin="57"/>
+      <node ref="UDrmos6" pin="31"/>
+    </net>
+    <net code="13" name="/Half Bridge E/SENSC">
+      <node ref="U1" pin="23"/>
+      <node ref="Ccfilt5" pin="1"/>
+      <node ref="Rcfilt5" pin="1"/>
+      <node ref="Usens5" pin="11"/>
+    </net>
+    <net code="14" name="/Half Bridge D/SENSC">
+      <node ref="Ccfilt4" pin="1"/>
+      <node ref="Rcfilt4" pin="1"/>
+      <node ref="U1" pin="24"/>
+      <node ref="Usens4" pin="11"/>
+    </net>
+    <net code="15" name="/MCU/I2C_SCL">
+      <node ref="P1" pin="10"/>
+      <node ref="U1" pin="58"/>
+    </net>
+    <net code="16" name="/Half Bridge F/PWM">
+      <node ref="UDrmos6" pin="1"/>
+      <node ref="P_PWM3" pin="1"/>
+      <node ref="U1" pin="15"/>
+    </net>
+    <net code="17" name="/Half Bridge E/PWM">
+      <node ref="JP5" pin="2"/>
+      <node ref="JP6" pin="2"/>
+      <node ref="P_PWM2" pin="1"/>
+      <node ref="UDrmos5" pin="1"/>
+    </net>
+    <net code="18" name="/Half Bridge D/PWM">
+      <node ref="P_PWM4" pin="1"/>
+      <node ref="JP4" pin="2"/>
+      <node ref="JP12" pin="2"/>
+      <node ref="UDrmos4" pin="1"/>
+    </net>
+    <net code="19" name="/MCU/LED2">
+      <node ref="U1" pin="3"/>
+      <node ref="Rled2" pin="2"/>
+    </net>
+    <net code="20" name="/MCU/LED1">
+      <node ref="U1" pin="2"/>
+      <node ref="Rled1" pin="2"/>
+    </net>
+    <net code="21" name="/CAN bus transceiver/VCC2">
+      <node ref="P5" pin="1"/>
+      <node ref="Ccan2" pin="1"/>
+      <node ref="U2" pin="8"/>
+    </net>
+    <net code="22" name="/CAN bus transceiver/GND2">
+      <node ref="P5" pin="2"/>
+      <node ref="U2" pin="5"/>
+      <node ref="Ccan2" pin="2"/>
+    </net>
+    <net code="23" name="/MCU/I2C_SDA">
+      <node ref="P1" pin="9"/>
+      <node ref="U1" pin="59"/>
+    </net>
+    <net code="24" name="/MCU/SPI3_MOSI">
+      <node ref="P1" pin="8"/>
+      <node ref="U1" pin="53"/>
+    </net>
+    <net code="25" name="/MCU/SPI3_SCK">
+      <node ref="P1" pin="6"/>
+      <node ref="U1" pin="51"/>
+    </net>
+    <net code="26" name="/MCU/SPI3_MISO">
+      <node ref="P1" pin="4"/>
+      <node ref="U1" pin="52"/>
+    </net>
+    <net code="27" name="/MCU/PWM_IN1">
+      <node ref="U1" pin="40"/>
+      <node ref="P1" pin="7"/>
+    </net>
+    <net code="28" name="/CAN bus transceiver/CANH">
+      <node ref="Rcan1" pin="1"/>
+      <node ref="U2" pin="7"/>
+      <node ref="P5" pin="4"/>
+    </net>
+    <net code="29" name="/CAN bus transceiver/CANL">
+      <node ref="Rcan1" pin="2"/>
+      <node ref="U2" pin="6"/>
+      <node ref="P5" pin="3"/>
+    </net>
+    <net code="30" name="+24V">
+      <node ref="UDrmos6" pin="11"/>
+      <node ref="UDrmos4" pin="9"/>
+      <node ref="UDrmos6" pin="34"/>
+      <node ref="UDrmos6" pin="10"/>
+      <node ref="UDrmos6" pin="9"/>
+      <node ref="UDrmos6" pin="8"/>
+      <node ref="UDrmos4" pin="8"/>
+      <node ref="UDrmos4" pin="10"/>
+      <node ref="CDrHV2" pin="1"/>
+      <node ref="CDrHV2back1" pin="1"/>
+      <node ref="UDrmos4" pin="11"/>
+      <node ref="UDrmos4" pin="34"/>
+      <node ref="CDrHV1back2" pin="1"/>
+      <node ref="CDrHVs2" pin="1"/>
+      <node ref="UDrmos2" pin="34"/>
+      <node ref="CDrHV6" pin="1"/>
+      <node ref="CDrHVs6" pin="1"/>
+      <node ref="CDrHV1back1" pin="1"/>
+      <node ref="UDrmos1" pin="34"/>
+      <node ref="UDrmos1" pin="11"/>
+      <node ref="UDrmos1" pin="10"/>
+      <node ref="UDrmos1" pin="9"/>
+      <node ref="UDrmos1" pin="8"/>
+      <node ref="CDrHV1back6" pin="1"/>
+      <node ref="CDrHV2back4" pin="1"/>
+      <node ref="CDrHV2back2" pin="1"/>
+      <node ref="UDrmos2" pin="11"/>
+      <node ref="CDrHV4" pin="1"/>
+      <node ref="UDrmos2" pin="10"/>
+      <node ref="UDrmos2" pin="9"/>
+      <node ref="UDrmos2" pin="8"/>
+      <node ref="P3" pin="1"/>
+      <node ref="CDrHV2back6" pin="1"/>
+      <node ref="CDrHV1" pin="1"/>
+      <node ref="UDrmos3" pin="8"/>
+      <node ref="UDrmos3" pin="34"/>
+      <node ref="UDrmos5" pin="34"/>
+      <node ref="UDrmos3" pin="11"/>
+      <node ref="Ureg1" pin="1"/>
+      <node ref="UDrmos3" pin="10"/>
+      <node ref="UDrmos3" pin="9"/>
+      <node ref="Ureg1" pin="4"/>
+      <node ref="CDrHVX4" pin="1"/>
+      <node ref="CDrHVs3" pin="1"/>
+      <node ref="CDrHVX5" pin="1"/>
+      <node ref="CDrHVs1" pin="1"/>
+      <node ref="CDrHV1back5" pin="1"/>
+      <node ref="UDrmos5" pin="8"/>
+      <node ref="UDrmos5" pin="9"/>
+      <node ref="UDrmos5" pin="10"/>
+      <node ref="UDrmos5" pin="11"/>
+      <node ref="CDrHVs5" pin="1"/>
+      <node ref="CDrHV5" pin="1"/>
+      <node ref="CDrHV2back3" pin="1"/>
+      <node ref="CDrHV3" pin="1"/>
+      <node ref="CDrHV1back4" pin="1"/>
+      <node ref="CDrHVX3" pin="1"/>
+      <node ref="CDrHVX1" pin="1"/>
+      <node ref="CDrHVX2" pin="1"/>
+      <node ref="CDrHV1back3" pin="1"/>
+      <node ref="CDrHVs4" pin="1"/>
+      <node ref="Cpwr1" pin="2"/>
+      <node ref="CDrHV2back5" pin="1"/>
+      <node ref="Cpwr2" pin="2"/>
+      <node ref="CDrHVX6" pin="1"/>
+    </net>
+    <net code="31" name="/Half Bridge C/DSBL">
+      <node ref="U1" pin="34"/>
+      <node ref="UDrmos3" pin="31"/>
+    </net>
+    <net code="32" name="/Half Bridge C/SENSC">
+      <node ref="Rcfilt3" pin="1"/>
+      <node ref="U1" pin="10"/>
+      <node ref="Usens3" pin="11"/>
+      <node ref="Ccfilt3" pin="1"/>
+    </net>
+    <net code="33" name="/Virtual Y/SENS3">
+      <node ref="U1" pin="14"/>
+      <node ref="Rlsens3" pin="1"/>
+      <node ref="Rhsens3" pin="2"/>
+      <node ref="RY3" pin="2"/>
+    </net>
+    <net code="34" name="/Half Bridge C/PWM">
+      <node ref="U1" pin="41"/>
+      <node ref="UDrmos3" pin="1"/>
+    </net>
+    <net code="35" name="/Half Bridge B/SENSC">
+      <node ref="JP1" pin="2"/>
+      <node ref="JP3" pin="2"/>
+      <node ref="Usens2" pin="11"/>
+      <node ref="Rcfilt2" pin="1"/>
+      <node ref="Ccfilt2" pin="1"/>
+    </net>
+    <net code="36" name="/Virtual Y/SENS2">
+      <node ref="U1" pin="11"/>
+      <node ref="Rhsens2" pin="2"/>
+      <node ref="Rlsens2" pin="1"/>
+      <node ref="RY2" pin="2"/>
+    </net>
+    <net code="37" name="/Half Bridge B/DSBL">
+      <node ref="UDrmos2" pin="31"/>
+      <node ref="U1" pin="35"/>
+    </net>
+    <net code="38" name="/Half Bridge B/PWM">
+      <node ref="UDrmos2" pin="1"/>
+      <node ref="U1" pin="42"/>
+    </net>
+    <net code="39" name="Net-(D1-Pad1)">
+      <node ref="Rled1" pin="1"/>
+      <node ref="D1" pin="1"/>
+    </net>
+    <net code="40" name="/MCU/USB_DP">
+      <node ref="Rusb3" pin="1"/>
+      <node ref="U1" pin="45"/>
+    </net>
+    <net code="41" name="Net-(Rusb2-Pad2)">
+      <node ref="Rusb2" pin="2"/>
+      <node ref="X1" pin="2"/>
+    </net>
+    <net code="42" name="/MCU/USB_DM">
+      <node ref="Rusb2" pin="1"/>
+      <node ref="U1" pin="44"/>
+    </net>
+    <net code="43" name="Net-(D2-Pad1)">
+      <node ref="D2" pin="1"/>
+      <node ref="Rled2" pin="1"/>
+    </net>
+    <net code="44" name="/CAN bus transceiver/CAN_TX">
+      <node ref="U2" pin="3"/>
+      <node ref="U1" pin="62"/>
+    </net>
+    <net code="45" name="/CAN bus transceiver/CAN_RX">
+      <node ref="U2" pin="2"/>
+      <node ref="U1" pin="61"/>
+    </net>
+    <net code="46" name="Net-(X1-Pad4)">
+      <node ref="X1" pin="4"/>
+    </net>
+    <net code="47" name="Net-(Rusb3-Pad2)">
+      <node ref="Rusb3" pin="2"/>
+      <node ref="X1" pin="3"/>
+    </net>
+    <net code="48" name="/Half Bridge A/ZCD_EN">
+      <node ref="UDrmos4" pin="2"/>
+      <node ref="UDrmos3" pin="2"/>
+      <node ref="UDrmos1" pin="2"/>
+      <node ref="UDrmos5" pin="2"/>
+      <node ref="U1" pin="50"/>
+      <node ref="UDrmos6" pin="2"/>
+      <node ref="UDrmos2" pin="2"/>
+    </net>
+    <net code="49" name="Net-(Dusb1-Pad2)">
+      <node ref="Dusb1" pin="2"/>
+      <node ref="X1" pin="1"/>
+      <node ref="Rusb1" pin="1"/>
+    </net>
+    <net code="50" name="+5V">
+      <node ref="RDrLogic2" pin="1"/>
+      <node ref="C5vo1" pin="1"/>
+      <node ref="RDrLogic5" pin="1"/>
+      <node ref="CDrGate6" pin="1"/>
+      <node ref="CDrGate1" pin="1"/>
+      <node ref="RDrLogic4" pin="1"/>
+      <node ref="Dusb1" pin="1"/>
+      <node ref="R3vi1" pin="2"/>
+      <node ref="RDrLogic3" pin="1"/>
+      <node ref="UDrmos6" pin="29"/>
+      <node ref="UDrmos1" pin="29"/>
+      <node ref="RDrLogic6" pin="1"/>
+      <node ref="Ureg1" pin="2"/>
+      <node ref="UDrmos4" pin="29"/>
+      <node ref="UDrmos3" pin="29"/>
+      <node ref="CDrGate2" pin="1"/>
+      <node ref="RDrLogic1" pin="1"/>
+      <node ref="CDrGate3" pin="1"/>
+      <node ref="Ureg1" pin="6"/>
+      <node ref="UDrmos2" pin="29"/>
+      <node ref="C5vo2" pin="1"/>
+      <node ref="CDrGate4" pin="1"/>
+      <node ref="CDrGate5" pin="1"/>
+      <node ref="UDrmos5" pin="29"/>
+    </net>
+    <net code="51" name="/MCU/USART6_RX">
+      <node ref="U1" pin="38"/>
+      <node ref="R1" pin="1"/>
+    </net>
+    <net code="52" name="/MCU/USART6_TX">
+      <node ref="R2" pin="1"/>
+      <node ref="U1" pin="37"/>
+    </net>
+    <net code="53" name="/Half Bridge A/FAULTC">
+      <node ref="Usens4" pin="6"/>
+      <node ref="Usens2" pin="6"/>
+      <node ref="Usens6" pin="6"/>
+      <node ref="Usens5" pin="6"/>
+      <node ref="U1" pin="4"/>
+      <node ref="Usens3" pin="6"/>
+      <node ref="Usens1" pin="6"/>
+    </net>
+    <net code="54" name="/Half Bridge A/THWn">
+      <node ref="UDrmos5" pin="30"/>
+      <node ref="UDrmos1" pin="30"/>
+      <node ref="PBOOT1P1" pin="1"/>
+      <node ref="Rthwn1" pin="2"/>
+      <node ref="UDrmos4" pin="30"/>
+      <node ref="U1" pin="33"/>
+      <node ref="UDrmos6" pin="30"/>
+      <node ref="UDrmos2" pin="30"/>
+      <node ref="UDrmos3" pin="30"/>
+    </net>
+    <net code="55" name="/Half Bridge A/SENSC">
+      <node ref="JP13" pin="2"/>
+      <node ref="Usens1" pin="11"/>
+      <node ref="Rcfilt1" pin="1"/>
+      <node ref="Ccfilt1" pin="1"/>
+      <node ref="JP2" pin="2"/>
+    </net>
+    <net code="56" name="/Virtual Y/SENS1">
+      <node ref="RY1" pin="2"/>
+      <node ref="Rlsens1" pin="1"/>
+      <node ref="Rhsens1" pin="2"/>
+      <node ref="U1" pin="16"/>
+    </net>
+    <net code="57" name="/Half Bridge A/DSBL">
+      <node ref="U1" pin="36"/>
+      <node ref="UDrmos1" pin="31"/>
+    </net>
+    <net code="58" name="/Half Bridge A/PWM">
+      <node ref="U1" pin="43"/>
+      <node ref="UDrmos1" pin="1"/>
+    </net>
+    <net code="59" name="Net-(Radj1-Pad2)">
+      <node ref="Radj1" pin="2"/>
+      <node ref="Ureg1" pin="5"/>
+    </net>
+    <net code="60" name="Net-(C3vi1-Pad1)">
+      <node ref="C3vi2" pin="1"/>
+      <node ref="R3vi1" pin="1"/>
+      <node ref="Ureg2" pin="1"/>
+      <node ref="Ureg2" pin="3"/>
+      <node ref="C3vi1" pin="1"/>
+    </net>
+    <net code="61" name="Net-(C3vn1-Pad1)">
+      <node ref="Ureg2" pin="4"/>
+      <node ref="C3vn1" pin="1"/>
+    </net>
+    <net code="62" name="+3V3">
+      <node ref="Usens3" pin="12"/>
+      <node ref="Csens3" pin="1"/>
+      <node ref="Usens4" pin="12"/>
+      <node ref="Usens2" pin="8"/>
+      <node ref="Csens6" pin="1"/>
+      <node ref="RYOFFS1" pin="1"/>
+      <node ref="Usens3" pin="7"/>
+      <node ref="Usens3" pin="8"/>
+      <node ref="Usens4" pin="7"/>
+      <node ref="Usens4" pin="8"/>
+      <node ref="Usens2" pin="7"/>
+      <node ref="Usens2" pin="12"/>
+      <node ref="Dclamp1" pin="2"/>
+      <node ref="Usens5" pin="7"/>
+      <node ref="Ureg2" pin="5"/>
+      <node ref="Csens2" pin="1"/>
+      <node ref="Usens6" pin="12"/>
+      <node ref="Usens6" pin="8"/>
+      <node ref="Usens5" pin="8"/>
+      <node ref="Usens6" pin="7"/>
+      <node ref="C3vo1" pin="1"/>
+      <node ref="U1" pin="19"/>
+      <node ref="U1" pin="48"/>
+      <node ref="Ccan1" pin="1"/>
+      <node ref="U2" pin="1"/>
+      <node ref="Cmcu1" pin="2"/>
+      <node ref="Csens5" pin="1"/>
+      <node ref="Rthwn1" pin="1"/>
+      <node ref="Usens5" pin="12"/>
+      <node ref="Cmcu4" pin="2"/>
+      <node ref="U1" pin="64"/>
+      <node ref="U1" pin="32"/>
+      <node ref="R4" pin="1"/>
+      <node ref="Cmcu3" pin="2"/>
+      <node ref="Cmcu2" pin="2"/>
+      <node ref="U1" pin="1"/>
+      <node ref="Csens4" pin="1"/>
+      <node ref="Usens1" pin="7"/>
+      <node ref="Usens1" pin="8"/>
+      <node ref="Csens1" pin="1"/>
+      <node ref="PBOOT03V31" pin="1"/>
+      <node ref="Usens1" pin="12"/>
+    </net>
+    <net code="63" name="Net-(Cclk1-Pad1)">
+      <node ref="U1" pin="5"/>
+      <node ref="Cclk1" pin="1"/>
+      <node ref="X2" pin="1"/>
+    </net>
+    <net code="64" name="Net-(Cclk2-Pad1)">
+      <node ref="X2" pin="2"/>
+      <node ref="Cclk2" pin="1"/>
+      <node ref="U1" pin="6"/>
+    </net>
+    <net code="65" name="Net-(C2-Pad1)">
+      <node ref="C2" pin="1"/>
+      <node ref="U1" pin="47"/>
+    </net>
+    <net code="66" name="Net-(C3-Pad2)">
+      <node ref="U1" pin="13"/>
+      <node ref="R4" pin="2"/>
+      <node ref="C3" pin="2"/>
+      <node ref="C4" pin="2"/>
+    </net>
+    <net code="67" name="Net-(C1-Pad1)">
+      <node ref="JP9" pin="1"/>
+      <node ref="C1" pin="1"/>
+      <node ref="JP8" pin="1"/>
+    </net>
+    <net code="68" name="Net-(JP4-Pad1)">
+      <node ref="JP8" pin="2"/>
+      <node ref="JP4" pin="1"/>
+      <node ref="U1" pin="30"/>
+    </net>
+    <net code="69" name="Net-(JP10-Pad2)">
+      <node ref="U1" pin="31"/>
+      <node ref="JP10" pin="2"/>
+      <node ref="JP9" pin="2"/>
+    </net>
+    <net code="70" name="Net-(PBOOT0P1-Pad1)">
+      <node ref="U1" pin="60"/>
+      <node ref="PBOOT0P1" pin="1"/>
+      <node ref="R3" pin="2"/>
+    </net>
+    <net code="71" name="SWCLK">
+      <node ref="CONN2" pin="3"/>
+      <node ref="U1" pin="49"/>
+    </net>
+    <net code="72" name="Net-(JP12-Pad1)">
+      <node ref="JP12" pin="1"/>
+      <node ref="JP6" pin="1"/>
+      <node ref="U1" pin="29"/>
+    </net>
+    <net code="73" name="Net-(JP2-Pad1)">
+      <node ref="JP2" pin="1"/>
+      <node ref="U1" pin="27"/>
+    </net>
+    <net code="74" name="Net-(JP5-Pad1)">
+      <node ref="U1" pin="28"/>
+      <node ref="JP5" pin="1"/>
+    </net>
+    <net code="75" name="Net-(JP1-Pad1)">
+      <node ref="JP13" pin="1"/>
+      <node ref="U1" pin="26"/>
+      <node ref="JP1" pin="1"/>
+    </net>
+    <net code="76" name="Net-(JP3-Pad1)">
+      <node ref="U1" pin="25"/>
+      <node ref="JP3" pin="1"/>
+    </net>
+    <net code="77" name="NRST">
+      <node ref="U1" pin="7"/>
+      <node ref="CONN2" pin="5"/>
+      <node ref="C5" pin="2"/>
+    </net>
+    <net code="78" name="TRACESWO">
+      <node ref="U1" pin="55"/>
+      <node ref="CONN2" pin="4"/>
+    </net>
+    <net code="79" name="SWDIO">
+      <node ref="U1" pin="46"/>
+      <node ref="CONN2" pin="1"/>
+    </net>
+    <net code="80" name="Net-(Cboot1-Pad1)">
+      <node ref="Cboot1" pin="1"/>
+      <node ref="UDrmos1" pin="7"/>
+    </net>
+    <net code="81" name="Net-(Cboot1-Pad2)">
+      <node ref="Cboot1" pin="2"/>
+      <node ref="UDrmos1" pin="5"/>
+    </net>
+    <net code="82" name="Net-(UDrmos1-Pad33)">
+      <node ref="UDrmos1" pin="33"/>
+    </net>
+    <net code="83" name="Net-(UDrmos1-Pad27)">
+      <node ref="UDrmos1" pin="27"/>
+    </net>
+    <net code="84" name="Net-(PMotor1-Pad1)">
+      <node ref="Usens1" pin="4"/>
+      <node ref="Rhsens1" pin="1"/>
+      <node ref="PVSens1" pin="1"/>
+      <node ref="PMotor1" pin="1"/>
+      <node ref="Usens1" pin="3"/>
+    </net>
+    <net code="85" name="Net-(CDrLogic1-Pad1)">
+      <node ref="UDrmos1" pin="3"/>
+      <node ref="RDrLogic1" pin="2"/>
+      <node ref="CDrLogic1" pin="1"/>
+    </net>
+    <net code="86" name="Net-(UDrmos1-Pad6)">
+      <node ref="UDrmos1" pin="6"/>
+    </net>
+    <net code="87" name="Net-(Usens1-Pad9)">
+      <node ref="Usens1" pin="9"/>
+    </net>
+    <net code="88" name="Net-(Usens1-Pad10)">
+      <node ref="Usens1" pin="10"/>
+    </net>
+    <net code="89" name="Net-(UDrmos1-Pad16)">
+      <node ref="UDrmos1" pin="21"/>
+      <node ref="UDrmos1" pin="22"/>
+      <node ref="UDrmos1" pin="23"/>
+      <node ref="UDrmos1" pin="20"/>
+      <node ref="UDrmos1" pin="24"/>
+      <node ref="UDrmos1" pin="25"/>
+      <node ref="Usens1" pin="2"/>
+      <node ref="Usens1" pin="1"/>
+      <node ref="UDrmos1" pin="18"/>
+      <node ref="UDrmos1" pin="17"/>
+      <node ref="UDrmos1" pin="16"/>
+      <node ref="UDrmos1" pin="26"/>
+      <node ref="UDrmos1" pin="19"/>
+    </net>
+    <net code="90" name="Net-(CHFAC1-Pad2)">
+      <node ref="RHFAC1" pin="1"/>
+      <node ref="CHFAC1" pin="2"/>
+    </net>
+    <net code="91" name="Net-(CHFAC1-Pad1)">
+      <node ref="PHFAC1" pin="1"/>
+      <node ref="CHFAC1" pin="1"/>
+    </net>
+    <net code="92" name="Net-(Usens2-Pad9)">
+      <node ref="Usens2" pin="9"/>
+    </net>
+    <net code="93" name="Net-(Usens2-Pad10)">
+      <node ref="Usens2" pin="10"/>
+    </net>
+    <net code="94" name="Net-(CDrLogic2-Pad1)">
+      <node ref="UDrmos2" pin="3"/>
+      <node ref="RDrLogic2" pin="2"/>
+      <node ref="CDrLogic2" pin="1"/>
+    </net>
+    <net code="95" name="Net-(UDrmos2-Pad6)">
+      <node ref="UDrmos2" pin="6"/>
+    </net>
+    <net code="96" name="Net-(Cboot2-Pad2)">
+      <node ref="UDrmos2" pin="5"/>
+      <node ref="Cboot2" pin="2"/>
+    </net>
+    <net code="97" name="Net-(Cboot2-Pad1)">
+      <node ref="UDrmos2" pin="7"/>
+      <node ref="Cboot2" pin="1"/>
+    </net>
+    <net code="98" name="Net-(PMotor2-Pad1)">
+      <node ref="Usens2" pin="4"/>
+      <node ref="PVSens2" pin="1"/>
+      <node ref="Usens2" pin="3"/>
+      <node ref="Rhsens2" pin="1"/>
+      <node ref="PMotor2" pin="1"/>
+    </net>
+    <net code="99" name="Net-(UDrmos2-Pad33)">
+      <node ref="UDrmos2" pin="33"/>
+    </net>
+    <net code="100" name="Net-(UDrmos2-Pad16)">
+      <node ref="UDrmos2" pin="16"/>
+      <node ref="UDrmos2" pin="19"/>
+      <node ref="UDrmos2" pin="17"/>
+      <node ref="UDrmos2" pin="26"/>
+      <node ref="Usens2" pin="2"/>
+      <node ref="UDrmos2" pin="25"/>
+      <node ref="UDrmos2" pin="24"/>
+      <node ref="UDrmos2" pin="23"/>
+      <node ref="UDrmos2" pin="22"/>
+      <node ref="UDrmos2" pin="21"/>
+      <node ref="UDrmos2" pin="18"/>
+      <node ref="Usens2" pin="1"/>
+      <node ref="UDrmos2" pin="20"/>
+    </net>
+    <net code="101" name="Net-(UDrmos2-Pad27)">
+      <node ref="UDrmos2" pin="27"/>
+    </net>
+    <net code="102" name="Net-(Cboot3-Pad2)">
+      <node ref="UDrmos3" pin="5"/>
+      <node ref="Cboot3" pin="2"/>
+    </net>
+    <net code="103" name="Net-(Cboot3-Pad1)">
+      <node ref="Cboot3" pin="1"/>
+      <node ref="UDrmos3" pin="7"/>
+    </net>
+    <net code="104" name="Net-(UDrmos3-Pad33)">
+      <node ref="UDrmos3" pin="33"/>
+    </net>
+    <net code="105" name="Net-(UDrmos3-Pad27)">
+      <node ref="UDrmos3" pin="27"/>
+    </net>
+    <net code="106" name="Net-(CDrLogic3-Pad1)">
+      <node ref="RDrLogic3" pin="2"/>
+      <node ref="UDrmos3" pin="3"/>
+      <node ref="CDrLogic3" pin="1"/>
+    </net>
+    <net code="107" name="Net-(PMotor3-Pad1)">
+      <node ref="PVSens3" pin="1"/>
+      <node ref="Rhsens3" pin="1"/>
+      <node ref="Usens3" pin="4"/>
+      <node ref="PMotor3" pin="1"/>
+      <node ref="Usens3" pin="3"/>
+    </net>
+    <net code="108" name="Net-(UDrmos3-Pad6)">
+      <node ref="UDrmos3" pin="6"/>
+    </net>
+    <net code="109" name="Net-(Usens3-Pad9)">
+      <node ref="Usens3" pin="9"/>
+    </net>
+    <net code="110" name="Net-(Usens3-Pad10)">
+      <node ref="Usens3" pin="10"/>
+    </net>
+    <net code="111" name="Net-(UDrmos3-Pad16)">
+      <node ref="UDrmos3" pin="18"/>
+      <node ref="Usens3" pin="2"/>
+      <node ref="UDrmos3" pin="23"/>
+      <node ref="UDrmos3" pin="17"/>
+      <node ref="UDrmos3" pin="25"/>
+      <node ref="UDrmos3" pin="26"/>
+      <node ref="UDrmos3" pin="16"/>
+      <node ref="Usens3" pin="1"/>
+      <node ref="UDrmos3" pin="21"/>
+      <node ref="UDrmos3" pin="19"/>
+      <node ref="UDrmos3" pin="24"/>
+      <node ref="UDrmos3" pin="20"/>
+      <node ref="UDrmos3" pin="22"/>
+    </net>
+    <net code="112" name="GND">
+      <node ref="Csens4" pin="2"/>
+      <node ref="Usens5" pin="5"/>
+      <node ref="UDrmos5" pin="12"/>
+      <node ref="CDrHV5" pin="2"/>
+      <node ref="CDrLogic5" pin="2"/>
+      <node ref="UDrmos5" pin="28"/>
+      <node ref="UDrmos5" pin="15"/>
+      <node ref="UDrmos5" pin="32"/>
+      <node ref="CDrHVs4" pin="2"/>
+      <node ref="CDrGate5" pin="2"/>
+      <node ref="CDrHV1back5" pin="2"/>
+      <node ref="UDrmos5" pin="4"/>
+      <node ref="CDrHV1back4" pin="2"/>
+      <node ref="CDrLogic6" pin="2"/>
+      <node ref="UDrmos4" pin="28"/>
+      <node ref="UDrmos4" pin="35"/>
+      <node ref="UDrmos4" pin="15"/>
+      <node ref="Rlsens4" pin="2"/>
+      <node ref="Ccfilt4" pin="2"/>
+      <node ref="Rcfilt4" pin="2"/>
+      <node ref="CDrHVs6" pin="2"/>
+      <node ref="CDrHV2back6" pin="2"/>
+      <node ref="CDrHV4" pin="2"/>
+      <node ref="CDrLogic4" pin="2"/>
+      <node ref="UDrmos4" pin="14"/>
+      <node ref="Rlsens6" pin="2"/>
+      <node ref="Rcfilt6" pin="2"/>
+      <node ref="Ccfilt6" pin="2"/>
+      <node ref="CDrHV6" pin="2"/>
+      <node ref="UDrmos6" pin="35"/>
+      <node ref="UDrmos6" pin="28"/>
+      <node ref="UDrmos6" pin="15"/>
+      <node ref="UDrmos4" pin="13"/>
+      <node ref="CDrGate6" pin="2"/>
+      <node ref="UDrmos4" pin="32"/>
+      <node ref="Usens6" pin="5"/>
+      <node ref="UDrmos4" pin="12"/>
+      <node ref="UDrmos4" pin="4"/>
+      <node ref="CDrHV2back5" pin="2"/>
+      <node ref="UDrmos6" pin="14"/>
+      <node ref="UDrmos5" pin="35"/>
+      <node ref="UDrmos5" pin="14"/>
+      <node ref="UDrmos5" pin="13"/>
+      <node ref="Csens6" pin="2"/>
+      <node ref="CDrHV1back6" pin="2"/>
+      <node ref="Usens4" pin="5"/>
+      <node ref="CDrGate4" pin="2"/>
+      <node ref="CDrHV2back4" pin="2"/>
+      <node ref="UDrmos6" pin="4"/>
+      <node ref="UDrmos6" pin="12"/>
+      <node ref="UDrmos6" pin="32"/>
+      <node ref="UDrmos6" pin="13"/>
+      <node ref="C3vo1" pin="2"/>
+      <node ref="Rcfilt1" pin="2"/>
+      <node ref="Ccfilt1" pin="2"/>
+      <node ref="CDrHV1" pin="2"/>
+      <node ref="UDrmos1" pin="28"/>
+      <node ref="Ureg2" pin="2"/>
+      <node ref="C3vi1" pin="2"/>
+      <node ref="UDrmos1" pin="32"/>
+      <node ref="CDrHV2back1" pin="2"/>
+      <node ref="UDrmos1" pin="12"/>
+      <node ref="UDrmos1" pin="4"/>
+      <node ref="UDrmos1" pin="13"/>
+      <node ref="UDrmos1" pin="14"/>
+      <node ref="UDrmos1" pin="15"/>
+      <node ref="UDrmos1" pin="35"/>
+      <node ref="CDrGate1" pin="2"/>
+      <node ref="C3vn1" pin="2"/>
+      <node ref="Usens1" pin="5"/>
+      <node ref="Rlsens1" pin="2"/>
+      <node ref="UDrmos2" pin="4"/>
+      <node ref="Usens2" pin="5"/>
+      <node ref="CDrGate2" pin="2"/>
+      <node ref="CDrHV2back2" pin="2"/>
+      <node ref="C5vo1" pin="2"/>
+      <node ref="CDrLogic1" pin="2"/>
+      <node ref="C5vo2" pin="2"/>
+      <node ref="Cpwr1" pin="1"/>
+      <node ref="Cpwr2" pin="1"/>
+      <node ref="RYSGND1" pin="1"/>
+      <node ref="Dclamp1" pin="1"/>
+      <node ref="C3" pin="1"/>
+      <node ref="JP10" pin="1"/>
+      <node ref="Cclk2" pin="2"/>
+      <node ref="Cclk1" pin="2"/>
+      <node ref="C1" pin="2"/>
+      <node ref="C2" pin="2"/>
+      <node ref="PBOOT1GND1" pin="1"/>
+      <node ref="U1" pin="18"/>
+      <node ref="R3" pin="1"/>
+      <node ref="CONN2" pin="2"/>
+      <node ref="X2" pin="3"/>
+      <node ref="C5" pin="1"/>
+      <node ref="Cmcu2" pin="1"/>
+      <node ref="Cmcu1" pin="1"/>
+      <node ref="Cmcu3" pin="1"/>
+      <node ref="Cmcu4" pin="1"/>
+      <node ref="C4" pin="1"/>
+      <node ref="CDrHVs1" pin="2"/>
+      <node ref="Csens1" pin="2"/>
+      <node ref="CDrHV1back1" pin="2"/>
+      <node ref="U2" pin="4"/>
+      <node ref="U1" pin="63"/>
+      <node ref="U1" pin="12"/>
+      <node ref="CDrHVX2" pin="2"/>
+      <node ref="Ccan1" pin="2"/>
+      <node ref="Rcfilt3" pin="2"/>
+      <node ref="UDrmos3" pin="15"/>
+      <node ref="CDrGate3" pin="2"/>
+      <node ref="Usens3" pin="5"/>
+      <node ref="D2" pin="2"/>
+      <node ref="Rlsens3" pin="2"/>
+      <node ref="Ccfilt3" pin="2"/>
+      <node ref="UDrmos3" pin="35"/>
+      <node ref="UDrmos3" pin="28"/>
+      <node ref="CDrHV3" pin="2"/>
+      <node ref="UDrmos3" pin="4"/>
+      <node ref="Rusb1" pin="2"/>
+      <node ref="UDrmos3" pin="12"/>
+      <node ref="P1" pin="2"/>
+      <node ref="UDrmos3" pin="32"/>
+      <node ref="UDrmos3" pin="13"/>
+      <node ref="UDrmos3" pin="14"/>
+      <node ref="Rlsens5" pin="2"/>
+      <node ref="Rcfilt5" pin="2"/>
+      <node ref="Ccfilt5" pin="2"/>
+      <node ref="Csens5" pin="2"/>
+      <node ref="CDrLogic3" pin="2"/>
+      <node ref="X1" pin="5"/>
+      <node ref="P4" pin="1"/>
+      <node ref="D1" pin="2"/>
+      <node ref="CDrHV2back3" pin="2"/>
+      <node ref="CDrHVs5" pin="2"/>
+      <node ref="UDrmos2" pin="12"/>
+      <node ref="UDrmos2" pin="32"/>
+      <node ref="UDrmos2" pin="13"/>
+      <node ref="UDrmos2" pin="15"/>
+      <node ref="UDrmos2" pin="14"/>
+      <node ref="CDrHVX5" pin="2"/>
+      <node ref="CDrHVX4" pin="2"/>
+      <node ref="Ureg1" pin="3"/>
+      <node ref="UDrmos2" pin="35"/>
+      <node ref="Csens2" pin="2"/>
+      <node ref="CDrLogic2" pin="2"/>
+      <node ref="UDrmos2" pin="28"/>
+      <node ref="CDrHVX6" pin="2"/>
+      <node ref="CDrHVX3" pin="2"/>
+      <node ref="CDrHVX1" pin="2"/>
+      <node ref="CDrHVs2" pin="2"/>
+      <node ref="Radj1" pin="1"/>
+      <node ref="CDrHVs3" pin="2"/>
+      <node ref="Csens3" pin="2"/>
+      <node ref="CDrHV1back3" pin="2"/>
+      <node ref="Ccfilt2" pin="2"/>
+      <node ref="Rcfilt2" pin="2"/>
+      <node ref="C3vi2" pin="2"/>
+      <node ref="CDrHV1back2" pin="2"/>
+      <node ref="CDrHV2" pin="2"/>
+      <node ref="Rlsens2" pin="2"/>
+    </net>
+    <net code="113" name="Net-(UDrmos5-Pad33)">
+      <node ref="UDrmos5" pin="33"/>
+    </net>
+    <net code="114" name="Net-(UDrmos5-Pad27)">
+      <node ref="UDrmos5" pin="27"/>
+    </net>
+    <net code="115" name="Net-(Cboot5-Pad2)">
+      <node ref="Cboot5" pin="2"/>
+      <node ref="UDrmos5" pin="5"/>
+    </net>
+    <net code="116" name="Net-(Cboot5-Pad1)">
+      <node ref="UDrmos5" pin="7"/>
+      <node ref="Cboot5" pin="1"/>
+    </net>
+    <net code="117" name="Net-(CDrLogic5-Pad1)">
+      <node ref="UDrmos5" pin="3"/>
+      <node ref="CDrLogic5" pin="1"/>
+      <node ref="RDrLogic5" pin="2"/>
+    </net>
+    <net code="118" name="Net-(UDrmos5-Pad6)">
+      <node ref="UDrmos5" pin="6"/>
+    </net>
+    <net code="119" name="Net-(Usens5-Pad10)">
+      <node ref="Usens5" pin="10"/>
+    </net>
+    <net code="120" name="Net-(Usens5-Pad9)">
+      <node ref="Usens5" pin="9"/>
+    </net>
+    <net code="121" name="Net-(UDrmos5-Pad16)">
+      <node ref="UDrmos5" pin="25"/>
+      <node ref="UDrmos5" pin="21"/>
+      <node ref="Usens5" pin="1"/>
+      <node ref="Usens5" pin="2"/>
+      <node ref="UDrmos5" pin="19"/>
+      <node ref="UDrmos5" pin="22"/>
+      <node ref="UDrmos5" pin="23"/>
+      <node ref="UDrmos5" pin="24"/>
+      <node ref="UDrmos5" pin="16"/>
+      <node ref="UDrmos5" pin="26"/>
+      <node ref="UDrmos5" pin="17"/>
+      <node ref="UDrmos5" pin="18"/>
+      <node ref="UDrmos5" pin="20"/>
+    </net>
+    <net code="122" name="Net-(PMotor5-Pad1)">
+      <node ref="PMotor5" pin="1"/>
+      <node ref="PVSens5" pin="1"/>
+      <node ref="Usens5" pin="3"/>
+      <node ref="Rhsens5" pin="1"/>
+      <node ref="Usens5" pin="4"/>
+    </net>
+    <net code="123" name="Net-(Usens6-Pad10)">
+      <node ref="Usens6" pin="10"/>
+    </net>
+    <net code="124" name="Net-(Usens6-Pad9)">
+      <node ref="Usens6" pin="9"/>
+    </net>
+    <net code="125" name="Net-(CDrLogic6-Pad1)">
+      <node ref="UDrmos6" pin="3"/>
+      <node ref="CDrLogic6" pin="1"/>
+      <node ref="RDrLogic6" pin="2"/>
+    </net>
+    <net code="126" name="Net-(UDrmos6-Pad33)">
+      <node ref="UDrmos6" pin="33"/>
+    </net>
+    <net code="127" name="Net-(Cboot6-Pad1)">
+      <node ref="UDrmos6" pin="7"/>
+      <node ref="Cboot6" pin="1"/>
+    </net>
+    <net code="128" name="Net-(UDrmos6-Pad6)">
+      <node ref="UDrmos6" pin="6"/>
+    </net>
+    <net code="129" name="Net-(Cboot6-Pad2)">
+      <node ref="Cboot6" pin="2"/>
+      <node ref="UDrmos6" pin="5"/>
+    </net>
+    <net code="130" name="Net-(PMotor6-Pad1)">
+      <node ref="Usens6" pin="3"/>
+      <node ref="Usens6" pin="4"/>
+      <node ref="PMotor6" pin="1"/>
+      <node ref="Rhsens6" pin="1"/>
+      <node ref="PVSens6" pin="1"/>
+    </net>
+    <net code="131" name="Net-(UDrmos6-Pad27)">
+      <node ref="UDrmos6" pin="27"/>
+    </net>
+    <net code="132" name="Net-(UDrmos6-Pad16)">
+      <node ref="UDrmos6" pin="19"/>
+      <node ref="UDrmos6" pin="20"/>
+      <node ref="UDrmos6" pin="21"/>
+      <node ref="UDrmos6" pin="22"/>
+      <node ref="UDrmos6" pin="23"/>
+      <node ref="UDrmos6" pin="16"/>
+      <node ref="UDrmos6" pin="18"/>
+      <node ref="UDrmos6" pin="24"/>
+      <node ref="UDrmos6" pin="25"/>
+      <node ref="UDrmos6" pin="17"/>
+      <node ref="UDrmos6" pin="26"/>
+      <node ref="Usens6" pin="1"/>
+      <node ref="Usens6" pin="2"/>
+    </net>
+    <net code="133" name="Net-(UDrmos4-Pad27)">
+      <node ref="UDrmos4" pin="27"/>
+    </net>
+    <net code="134" name="Net-(CDrLogic4-Pad1)">
+      <node ref="RDrLogic4" pin="2"/>
+      <node ref="CDrLogic4" pin="1"/>
+      <node ref="UDrmos4" pin="3"/>
+    </net>
+    <net code="135" name="Net-(PMotor4-Pad1)">
+      <node ref="PVSens4" pin="1"/>
+      <node ref="PMotor4" pin="1"/>
+      <node ref="Usens4" pin="3"/>
+      <node ref="Rhsens4" pin="1"/>
+      <node ref="Usens4" pin="4"/>
+    </net>
+    <net code="136" name="Net-(UDrmos4-Pad16)">
+      <node ref="UDrmos4" pin="16"/>
+      <node ref="UDrmos4" pin="24"/>
+      <node ref="UDrmos4" pin="25"/>
+      <node ref="Usens4" pin="1"/>
+      <node ref="Usens4" pin="2"/>
+      <node ref="UDrmos4" pin="26"/>
+      <node ref="UDrmos4" pin="17"/>
+      <node ref="UDrmos4" pin="22"/>
+      <node ref="UDrmos4" pin="18"/>
+      <node ref="UDrmos4" pin="19"/>
+      <node ref="UDrmos4" pin="21"/>
+      <node ref="UDrmos4" pin="20"/>
+      <node ref="UDrmos4" pin="23"/>
+    </net>
+    <net code="137" name="Net-(Usens4-Pad9)">
+      <node ref="Usens4" pin="9"/>
+    </net>
+    <net code="138" name="Net-(UDrmos4-Pad33)">
+      <node ref="UDrmos4" pin="33"/>
+    </net>
+    <net code="139" name="Net-(Cboot4-Pad1)">
+      <node ref="Cboot4" pin="1"/>
+      <node ref="UDrmos4" pin="7"/>
+    </net>
+    <net code="140" name="Net-(UDrmos4-Pad6)">
+      <node ref="UDrmos4" pin="6"/>
+    </net>
+    <net code="141" name="Net-(Cboot4-Pad2)">
+      <node ref="UDrmos4" pin="5"/>
+      <node ref="Cboot4" pin="2"/>
+    </net>
+    <net code="142" name="Net-(Usens4-Pad10)">
+      <node ref="Usens4" pin="10"/>
+    </net>
+  </nets>
+</export>
