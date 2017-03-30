@@ -1,0 +1,123 @@
+### Module positions - created on Thu Mar 30 22:55:14 2017 ###
+### Printed by Pcbnew version kicad no-vcs-found-8f3423b~58~ubuntu16.04.1
+## Unit = mm, Angle = deg.
+## Side : top
+# Ref      Val                          Package                           PosX       PosY       Rot  Side
+C1         STM32F4:2.2u / STM32F7:4.7u  C_0603                         30.2126    36.3982    0.0000  top
+C2         STM32F4:2.2u / STM32F7:0R    C_0603                         12.1920    36.3220  180.0000  top
+C3         2.2u                         C_0603                         25.1460    25.0190  180.0000  top
+C3vi1      100u                         C_0805                          1.3970    35.1790   90.0000  top
+C3vi2      1u                           C_0603                          3.9370    36.1315  180.0000  top
+C3vn1      10n                          C_0603                          3.8100    34.1630  180.0000  top
+C3vo1      4.7u                         C_0805                          9.8298    31.9278   90.0000  top
+C4         2.2u                         C_0603                         12.0650    24.5110    0.0000  top
+C5         100n                         C_0603                         -4.1910    34.0360    0.0000  top
+C5vo1      2.2u                         C_0603                         -1.1430    34.0360    0.0000  top
+C5vo2      100u                         C_0805                          2.7940    25.5430  270.0000  top
+CDrGate1   0.47uF                       C_0603_HandSoldering           44.5770    31.8770  270.0000  top
+CDrGate2   0.47uF                       C_0603_HandSoldering           59.3090    31.8770  270.0000  top
+CDrGate3   0.47uF                       C_0603_HandSoldering           74.1680    32.0040  270.0000  top
+CDrGate4   0.47uF                       C_0603_HandSoldering           88.9000    32.0040  270.0000  top
+CDrGate5   0.47uF                       C_0603_HandSoldering          103.6320    32.0040  270.0000  top
+CDrGate6   0.47uF                       C_0603_HandSoldering          117.6020    31.8770  270.0000  top
+CDrHV1     10u,35V                      C_1206                         32.8930    32.7660  270.0000  top
+CDrHV2     10u,35V                      C_1206                         47.6250    32.7660  270.0000  top
+CDrHV3     10u,35V                      C_1206                         62.4840    32.7660  270.0000  top
+CDrHV4     10u,35V                      C_1206                         77.2160    32.7660  270.0000  top
+CDrHV5     10u,35V                      C_1206                         91.9480    32.7660  270.0000  top
+CDrHV6     10u,35V                      C_1206                        106.6800    32.7660  270.0000  top
+CDrHVs1    0.47u,35V                    C_0603                         35.3060    32.0040  270.0000  top
+CDrHVs2    0.47u,35V                    C_0603                         50.0380    32.0040  270.0000  top
+CDrHVs3    0.47u,35V                    C_0603                         64.7700    32.2580  270.0000  top
+CDrHVs4    0.47u,35V                    C_0603                         79.5020    32.2580  270.0000  top
+CDrHVs5    0.47u,35V                    C_0603                         94.2340    32.2580  270.0000  top
+CDrHVs6    0.47u,35V                    C_0603                        108.9660    32.2580  270.0000  top
+CDrLogic1  2.2uF                        C_0603                         41.1480    36.1950  180.0000  top
+CDrLogic2  2.2uF                        C_0603                         55.8800    36.1950  180.0000  top
+CDrLogic3  2.2uF                        C_0603                         70.8025    36.1950  180.0000  top
+CDrLogic4  2.2uF                        C_0603                         85.4710    36.1950  180.0000  top
+CDrLogic5  2.2uF                        C_0603                        100.0760    36.1950  180.0000  top
+CDrLogic6  2.2uF                        C_0603                        114.8080    36.1950  180.0000  top
+Cboot1     0.47uF                       C_0603_HandSoldering           37.5920    36.0680    0.0000  top
+Cboot2     0.47uF                       C_0603_HandSoldering           52.3240    36.0680    0.0000  top
+Cboot3     0.47uF                       C_0603_HandSoldering           67.1830    36.0680    0.0000  top
+Cboot4     0.47uF                       C_0603_HandSoldering           81.7880    36.0680    0.0000  top
+Cboot5     0.47uF                       C_0603_HandSoldering           96.3930    36.0680    0.0000  top
+Cboot6     0.47uF                       C_0603_HandSoldering          111.1250    36.0680    0.0000  top
+Ccan1      2.2u                         C_0603                         -7.1120    34.0360  180.0000  top
+Ccfilt1    0.47n                        C_0402                         30.3022    33.5788    0.0000  top
+Ccfilt2    0.47n                        C_0402                         30.3276    31.2420  270.0000  top
+Ccfilt3    0.47n                        C_0402                         30.3022    32.7406    0.0000  top
+Ccfilt4    0.47n                        C_0402                         28.6004    30.2006    0.0000  top
+Ccfilt5    0.47n                        C_0402                         26.9240    29.3624    0.0000  top
+Ccfilt6    0.47n                        C_0402                         28.9560    29.1084    0.0000  top
+Cclk1      18p                          C_0402                          6.6040    24.6380  180.0000  top
+Cclk2      18p                          C_0402                          6.6040    32.1945    0.0000  top
+Cmcu1      2.2u                         C_0603                         10.9220    27.3050  270.0000  top
+Cmcu2      2.2u                         C_0603                         26.1620    27.2288   90.0000  top
+Cmcu3      2.2u                         C_0603                         10.4775    34.7345    0.0000  top
+Cmcu4      2.2u                         C_0603                         25.2730    36.3220  180.0000  top
+Cpwr1      4.7u,35V                     C_0805                         -0.5080    25.9080  180.0000  top
+Csens1     0.47u                        C_0603                         44.5770    29.2100  180.0000  top
+Csens2     0.47u                        C_0603                         59.3090    29.2100  180.0000  top
+Csens3     0.47u                        C_0603                         74.1680    29.2735  180.0000  top
+Csens4     0.47u                        C_0603                         88.9000    29.2735  180.0000  top
+Csens5     0.47u                        C_0603                        103.5050    29.2735  180.0000  top
+Csens6     0.47u                        C_0603                        118.1220    29.2100  180.0000  top
+D1         RED                          LED_0402                       -4.4450    24.2570  180.0000  top
+D2         GREEN                        LED_0402                       -4.6990    25.9080  270.0000  top
+Dusb1      BAT46WH                      SOD-123                        -7.7470    24.8920  180.0000  top
+JP1        STM32F4:0R / STM32F7:DNP     C_0402                         28.9052    31.9024    0.0000  top
+JP2        STM32F4:0R / STM32F7:DNP     C_0402                         27.5082    32.7152   90.0000  top
+JP3        STM32F4:DNP / STM32F7:0R     C_0402                         28.9052    31.0388    0.0000  top
+JP6        STM32F4:0R / STM32F7:DNP     C_0402                         28.0670    34.8742    0.0000  top
+JP8        STM32F4:DNP / STM32F7:0R     C_0402                         27.7456    35.7632  180.0000  top
+JP9        STM32F4:0R / STM32F7:DNP     C_0402                         27.7368    36.6014  180.0000  top
+JP10       STM32F4:DNP / STM32F7:0R     C_0402                         25.5778    34.5694  270.0000  top
+JP13       STM32F4:DNP / STM32F7:0R     C_0402                         28.3210    32.7152   90.0000  top
+R1         100R                         R_0603                         -9.6520    33.7820  270.0000  top
+R2         100R                         R_0603                         -8.8900    36.0680  180.0000  top
+R3         2k2                          R_0402                          9.7790    29.4640    0.0000  top
+R3vi1      2R7                          R_0805                          2.9210    30.8000  270.0000  top
+R4         0R                           R_0805                          9.1694    25.5270  270.0000  top
+RDrLogic1  100R                         R_0603                         44.4500    35.3060   90.0000  top
+RDrLogic2  100R                         R_0603                         59.1820    35.3060   90.0000  top
+RDrLogic3  100R                         R_0603                         73.9775    35.3060   90.0000  top
+RDrLogic4  100R                         R_0603                         88.7730    35.3060   90.0000  top
+RDrLogic5  100R                         R_0603                        103.3780    35.4330   90.0000  top
+RDrLogic6  100R                         R_0603                        117.4750    35.4330   90.0000  top
+Radj1      165R                         R_0402                          2.1590    28.4480    0.0000  top
+Rcfilt1    20k                          R_0402                         46.3550    27.0510    0.0000  top
+Rcfilt2    20k                          R_0402                         61.0870    27.0510    0.0000  top
+Rcfilt3    20k                          R_0402                         75.9460    27.0510    0.0000  top
+Rcfilt4    20k                          R_0402                         91.4400    28.3210  180.0000  top
+Rcfilt5    20k                          R_0402                        105.2830    27.8130    0.0000  top
+Rcfilt6    20k                          R_0402                        119.8880    27.4320   90.0000  top
+Rhsens1    10k,0.1%                     C_0603_HandSoldering           33.2740    25.5270  270.0000  top
+Rhsens2    10k,0.1%                     C_0603_HandSoldering           48.1330    25.5270   90.0000  top
+Rhsens3    10k,0.1%                     C_0603_HandSoldering           62.9920    25.5270   90.0000  top
+Rhsens4    10k,0.1%                     C_0603_HandSoldering           77.7240    25.5270   90.0000  top
+Rhsens5    10k,0.1%                     C_0603_HandSoldering           92.3290    25.5270   90.0000  top
+Rhsens6    10k,0.1%                     C_0603_HandSoldering          107.0610    25.5270   90.0000  top
+Rled1      100R                         R_0402                         -2.4130    24.2570    0.0000  top
+Rled2      100R                         R_0402                         -3.3020    25.9080  270.0000  top
+Rlsens1    2k2,0.1%                     R_0402                         31.4960    25.0190  270.0000  top
+Rlsens2    2k2,0.1%                     R_0402                         29.7180    25.0190  270.0000  top
+Rlsens3    2k2,0.1%                     R_0402                         27.9400    25.0190  270.0000  top
+Rlsens4    2k2,0.1%                     R_0402                         31.4960    27.3050  270.0000  top
+Rlsens5    2k2,0.1%                     R_0402                         29.7180    27.3050  270.0000  top
+Rlsens6    2k2,0.1%                     R_0402                         27.9400    27.3050  270.0000  top
+Rthwn1     2k2                          R_0402                        119.3800    32.8930   90.0000  top
+Rusb1      10k                          R_0402                         -9.6520    26.9240  270.0000  top
+Rusb2      22R                          R_0402                         -9.6520    30.9880   90.0000  top
+Rusb3      22R                          R_0402                         -9.6520    29.0830   90.0000  top
+Ureg1      LTM8020                      Housings_LGA_21_6.25x6.25mm    -2.0320    30.0990    0.0000  top
+Ureg2      LP2992AIM5-3.3               SOT-23-5                        7.2390    35.2425  270.0000  top
+Usens1     ACS711                       QFN-12-1EX_3x3mm_Pitch0.5mm    43.1800    26.1620    0.0000  top
+Usens2     ACS711                       QFN-12-1EX_3x3mm_Pitch0.5mm    57.9120    26.1620    0.0000  top
+Usens3     ACS711                       QFN-12-1EX_3x3mm_Pitch0.5mm    72.7710    26.1620    0.0000  top
+Usens4     ACS711                       QFN-12-1EX_3x3mm_Pitch0.5mm    87.5030    26.1620    0.0000  top
+Usens5     ACS711                       QFN-12-1EX_3x3mm_Pitch0.5mm   102.1080    26.1620    0.0000  top
+Usens6     ACS711                       QFN-12-1EX_3x3mm_Pitch0.5mm   116.8400    26.1620    0.0000  top
+X1         MINI-USB-SHIELD-32005-201    mini_USB_gnd                  -15.2400    30.6070    0.0000  top
+## End

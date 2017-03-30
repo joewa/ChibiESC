@@ -1,4 +1,4 @@
-(kicad_pcb (version 20170123) (host pcbnew no-vcs-found-996cba7~58~ubuntu16.04.1)
+(kicad_pcb (version 20170123) (host pcbnew no-vcs-found-8f3423b~58~ubuntu16.04.1)
 
   (general
     (links 670)
@@ -74,7 +74,7 @@
     (grid_origin 54.75 130.48)
     (visible_elements FFFCFF7F)
     (pcbplotparams
-      (layerselection 0x010dc_ffffffff)
+      (layerselection 0x310dc_ffffffff)
       (usegerberextensions true)
       (excludeedgelayer true)
       (linewidth 0.100000)

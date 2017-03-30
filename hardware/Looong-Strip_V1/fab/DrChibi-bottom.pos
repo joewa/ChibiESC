@@ -1,0 +1,42 @@
+### Module positions - created on Thu Mar 30 22:55:14 2017 ###
+### Printed by Pcbnew version kicad no-vcs-found-8f3423b~58~ubuntu16.04.1
+## Unit = mm, Angle = deg.
+## Side : bottom
+# Ref        Val                                Package                    PosX       PosY       Rot  Side
+CDrHV1back1  4.7u,35V                           C_1206                  32.1310    31.7500  270.0000  bottom
+CDrHV1back2  4.7u,35V                           C_1206                  34.4170    31.7500  270.0000  bottom
+CDrHV1back3  4.7u,35V                           C_1206                  74.6760    31.7500  270.0000  bottom
+CDrHV1back4  4.7u,35V                           C_1206                  62.7380    31.7500  270.0000  bottom
+CDrHV1back5  4.7u,35V                           C_1206                  81.0260    31.7500  270.0000  bottom
+CDrHV1back6  4.7u,35V                           C_1206                  85.4710    31.7500  270.0000  bottom
+CDrHV2back1  10u,35V                            C_1206_HandSoldering    93.9800    31.7500  270.0000  bottom
+CDrHV2back2  10u,35V                            C_1206_HandSoldering    96.1390    31.7500  270.0000  bottom
+CDrHV2back3  10u,35V                            C_1206_HandSoldering    91.8210    31.7500  270.0000  bottom
+CDrHV2back4  10u,35V                            C_1206_HandSoldering    78.7400    31.7500  270.0000  bottom
+CDrHV2back5  10u,35V                            C_1206_HandSoldering    98.2980    31.7500  270.0000  bottom
+CDrHV2back6  10u,35V                            C_1206_HandSoldering    89.6620    31.7500  270.0000  bottom
+CDrHVX1      C                                  C_1206                  65.2780    31.7500  270.0000  bottom
+CDrHVX2      C                                  C_1206                  48.2600    31.7500  270.0000  bottom
+CDrHVX3      C                                  C_1206                  50.6730    31.7500  270.0000  bottom
+CDrHVX4      C                                  C_1206                  54.2290    31.7500  270.0000  bottom
+CDrHVX5      C                                  C_1206                  69.3420    31.7500  270.0000  bottom
+CDrHVX6      C                                  C_1206                  36.5760    31.7500  270.0000  bottom
+CHFAC1       10n,35V                            C_0603_HandSoldering     7.7470    25.4000  270.0000  bottom
+Ccan2        2.2u                               C_0603_HandSoldering   -11.9380    24.6380  180.0000  bottom
+Cpwr2        10u,35V                            C_2220                 105.2830    31.4960   90.0000  bottom
+Dclamp1      D_Schottky_x2_Serial_AKC__BAT754S  SOT-23                  13.5382    31.2420   90.0000  bottom
+JP4          STM32F4:0R / STM32F7:DNP           C_0402                  24.0538    32.4358   90.0000  bottom
+JP5          STM32F4:DNP / STM32F7:0R           C_0402                  27.6098    32.6898   90.0000  bottom
+JP12         STM32F4:DNP / STM32F7:0R           C_0402                  25.0698    32.4612   90.0000  bottom
+RHFAC1       100R                               R_0603_HandSoldering    10.5410    24.8920    0.0000  bottom
+RY1          R/DNP                              R_0603_HandSoldering    20.4470    24.3840    0.0000  bottom
+RY2          R/DNP                              R_0603_HandSoldering    20.1930    25.6540    0.0000  bottom
+RY3          R/DNP                              R_0603_HandSoldering    19.6850    27.1780    0.0000  bottom
+RY4          R/DNP                              R_0603_HandSoldering    18.9230    28.8290    0.0000  bottom
+RY5          R/DNP                              R_0603_HandSoldering    19.3040    30.2260    0.0000  bottom
+RY6          R/DNP                              R_0603_HandSoldering    19.3040    31.4960    0.0000  bottom
+RYOFFS1      20k                                R_0603_HandSoldering    13.2080    25.4000  270.0000  bottom
+RYS1         0R/DNP                             R_0603_HandSoldering    16.5100    24.3840  180.0000  bottom
+RYSGND1      20k                                R_0603_HandSoldering    14.0970    29.0830    0.0000  bottom
+Rcan1        NI                                 R_0603_HandSoldering   -11.8110    36.4490  180.0000  bottom
+## End
