@@ -71,6 +71,13 @@
 #define STM32F446xx
 #endif
 
+// Looong-Strip and VESC do not have USB-VBUSSENS wire connected (never master)
+#if defined(BOARD_LOOONG_STRIP) || defined(BOARD_VESC)
+// TODO: NRT function blocks as long as USB is NOT connected!
+#define BOARD_OTG_NOVBUSSENS
+#endif
+
+
 /*
  * IO pins assignments.
  */

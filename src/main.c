@@ -318,8 +318,8 @@ static THD_FUNCTION(ThreadNRT, arg) {
   while (true) {
 	  if(nrt_blink_count-- <= 0) {
 		  nrt_blink_count = 1000;
-		  //palTogglePad(BANK_LED_RED, PIN_LED_RED);
-		  //palTogglePad(BANK_LED_GREEN, PIN_LED_GREEN);
+		  palTogglePad(BANK_LED_RED, PIN_LED_RED);
+		  palTogglePad(BANK_LED_GREEN, PIN_LED_GREEN);
 	  }
 	  nrt_starttime = chVTGetSystemTime();
 	  hal_run_nrt(nrt_Period); // Calls term which calls USB_VCP_get_string. Call from own thread, NOT HERE!!!

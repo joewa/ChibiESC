@@ -1,7 +1,7 @@
 #CHIBIESC_BOARD = LOOONG_STRIP
-CHIBIESC_BOARD = DRCHIBI_DISCO
+#CHIBIESC_BOARD = DRCHIBI_DISCO
 #CHIBIESC_BOARD = NUCLEO_F446
-#CHIBIESC_BOARD = VESC
+CHIBIESC_BOARD = VESC
 
 ##############################################################################
 # Build global options
@@ -108,7 +108,7 @@ include $(CHIBIOS)/test/rt/test.mk
 
 # Define linker script file here
 ifeq ($(CHIBIESC_BOARD),LOOONG_STRIP) 
-	LDSCRIPT= $(STARTUPLD)/STM32F405xG.ld
+	LDSCRIPT= bootloader/STM32F405xG_CCM.ld
 	USE_OPT += -DBOARD_LOOONG_STRIP
 endif
 ifeq ($(CHIBIESC_BOARD),DRCHIBI_DISCO) 
