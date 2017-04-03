@@ -230,9 +230,13 @@ ADCConversionGroup adc_commutate_group = { // TODO: Check if this is fine for F4
 
 // DMA scheint Werte zu verlieren!
 
-uint16_t next_ADC_FRT_PERIOD_CYCLES = ADC_FRT_DEFAULT_PERIOD_CYCLES;		// Zahl von ADC-Zyklen von der Periode die gerade geplant wird
-uint16_t actual_ADC_FRT_PERIOD_CYCLES = ADC_FRT_DEFAULT_PERIOD_CYCLES; 	// Zahl von ADC-Zyklen von der Periode die gerade läuft
-uint16_t recent_ADC_FRT_PERIOD_CYCLES = ADC_FRT_DEFAULT_PERIOD_CYCLES;	// Zahl von ADC-Zyklen von der Periode die fertig ist und ausgewertet werden kann
+
+
+
+struct pwm_dma_s pwmdma_state_array[2];
+struct pwm_dma_s *next_pwmdma_state_ptr;// Zahl von ADC-Zyklen von der Periode die gerade geplant wird
+struct pwm_dma_s *actual_pwmdma_state_ptr;// Zahl von ADC-Zyklen von der Periode die gerade läuft
+struct pwm_dma_s *past_pwmdma_state_ptr;// Zahl von ADC-Zyklen von der Periode die fertig ist und ausgewertet werden kann
 
 void pwm_dma_init(void)
 {
@@ -540,4 +544,72 @@ void pwm_dma_stop_2(void) {
 	dmaStreamDisable(PWM_DMA_STREAM2);
 	dmaStreamRelease(PWM_DMA_STREAM2);
 	adcStopConversion(&ADCD1);
+}
+
+
+/*
+ * Sortiere die Pulse für eine beliebige Phasenzahl
+ * Jetzt erstmal für 3.
+ */
+inline uint8_t allpulseswritten(uint16_t *pptr, uint8_t numphases) {
+	uint8_t retval = 1;
+	for(uint8_t phaseID=0; phaseID < numphases; phaseID++) { //ch_timer_buffer[ip][i]
+		retval = retval && (uint8_t)(ch_timer_buffer[phaseID][pptr[phaseID]] == 0xFFFF);
+	}
+}
+
+inline findmin(uint16_t *pptr, uint8_t numphases) {
+	uint16_t minval = 0xFFFF;
+	uint16_t val = minval;
+	uint16_t minID = 0;
+	for(uint8_t phaseID=0; phaseID < numphases; phaseID++) { //ch_timer_buffer[ip][i]
+		val = ch_timer_buffer[phaseID][pptr[phaseID]];
+		if(val <= minval) {
+			minval = val;
+			minID = phaseID;
+		}
+	}
+}
+
+void sortpp() {
+	uint16_t pptr[3]; pptr[0]=0; pptr[1]=0; pptr[2]=0;
+	uint16_t tick=0, last_tick=0;
+	uint8_t phaseID;
+    //pwm_dma_frame_buffer[1] = tx_low;// Test: Pin am Ende der Periode zurücksetzen
+    //pwm_dma_timer_buffer[0] = 100;//PWM_MAXIMUM_PERIOD_CYCLES / 2;
+	while ( !allPulsesWritten(pptr, 3) ) {// alle pulse von ch_timer_buffer geschrieben?
+		phaseID = findmin(pptr, 3);
+
+	}
+/*
+    while ( !allPulsesWritten(dma_timer_buffer, pptr, 3) ) % Bedingung besser als schnelle Inline-Funktion "allPulsesWritten" machen.
+      phaseID = findmin(dma_timer_buffer, pptr, 3);   % Welcher ist der nächste Puls?
+      if (bitand(dma_GPIOs_buffer(pptr(phaseID)), PIN_MASK(phaseID)) != 0) % Setze PIN_MASK(phaseID)
+        pstate = setPin(pstate, PIN_MASK(phaseID));
+      else
+        pstate = clearPin(pstate, PIN_MASK(phaseID));
+      endif
+      %phaseID
+      %pptr
+      %pstate
+      t = dma_timer_buffer(phaseID,pptr(phaseID));
+      delta_t = int16(t) - int16(last_t); % Das muss ins ARR-Register
+      if (delta_t > 0) % TODO: Pulse, die nicht nur zum gleichen Zeitpunkt kommen sondern auch seeehr dicht hintereinander in einen DMA-Transfer packen.
+        actual_pulseID_written = mod(actual_pulseID_written + 1, PULSE_BUFFER_SIZE); % inc
+        pwm_dma_timer_buffer(actual_pulseID_written) = delta_t;
+        % TODO: bei sehr kleinen delta_t hier auch t korrigieren, damit last_t passt.
+      endif
+      %pwm_dma_timer_buffer(actual_pulseID_written) = t; % TODO: Hier delta_t ins ARR-Register schreiben
+      pwm_dma_GPIOs_buffer(actual_pulseID_written) = pstate;
+      last_t = t;
+      pptr(phaseID) = pptr(phaseID) + 1;
+    endwhile
+    % Noch einen DMA-Transfer ans Ende der FRT-Periode setzen:
+    actual_pulseID_written = mod(actual_pulseID_written + 1, PULSE_BUFFER_SIZE); % inc
+    %pwm_dma_timer_buffer(actual_pulseID_written) = actual_period_FRT_PWM;
+    pwm_dma_timer_buffer(actual_pulseID_written) = uint16(int16(actual_period_FRT_PWM) - int16(last_t) );
+    % pwm_dma_GPIOs_buffer(actual_pulseID_written+1) = letzter GPIO-Zustand nochmal
+    actual_pulseID_written = mod(actual_pulseID_written + 1, PULSE_BUFFER_SIZE); % inc
+*/
+
 }

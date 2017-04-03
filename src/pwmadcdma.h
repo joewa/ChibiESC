@@ -81,6 +81,10 @@ typedef enum {
 } pwm_dma_state_t;
 
 
+typedef struct pwm_dma_s {
+	uint16_t adc_frt_period_cycles;
+};
+
 extern ADCConversionGroup adc_commutate_group;
 //extern adcsample_t commutatesamples[];
 /*
