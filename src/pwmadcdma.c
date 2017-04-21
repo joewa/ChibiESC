@@ -159,7 +159,7 @@
 #define intoSRAM2  __attribute__((section(".ram2")))  __attribute__((aligned(4)))
 
 /* --- PRIVATE VARIABLES ---------------------------------------------------- */
-volatile uint32_t pwm_dma_frame_buffer[PWM_DMA_BIT_N] intoSRAM2;			/**< Buffer for a frame */
+volatile uint16_t pwm_dma_frame_buffer[PWM_DMA_BIT_N] intoSRAM2;			/**< Buffer for a frame */
 
 adcsample_t commutatesamples[ADC_COMMUTATE_BUF_DEPTH];// intoSRAM2; // Better NOT ADC Buffer into SRAM2
 
@@ -450,17 +450,28 @@ void pwm_dma_init_3(void) // mit 2 timern und DMA1 + DMA2
     // Initialize frame buffer
     uint32_t i;
     for (i = 0; i < PWM_DMA_BIT_N; i++) pwm_dma_frame_buffer[i] = 0;   // All color bits are zero duty cycle
-    uint32_t tx_high   = 1<<15;//1<<10;//GPIO_BSRR_BS_10; // Dies in den request_buf schreiben, um Pin 10 auf high zu setzen. Nimm CONCAT_SYMBOLS mit PIN_PWM_X...
-    uint32_t tx_low    = 1<<1;//GPIO_BSRR_BR_10; // Pin 10 auf low setzen
+    // ACHTUNG: High und Low vertauschen geht nicht!
+    uint32_t tx_high   = 0;//1<<10;//GPIO_BSRR_BS_10; // Dies in den request_buf schreiben, um Pin 10 auf high zu setzen. Nimm CONCAT_SYMBOLS mit PIN_PWM_X...
+    uint32_t tx_low    = 1<<8 | 1<<1;//GPIO_BSRR_BR_10; // Pin 10 auf low setzen
     //uint32_t tx_high   = GPIO_BSRR_BS_1; // Dies in den request_buf schreiben, um Pin 10 auf high zu setzen. Nimm CONCAT_SYMBOLS mit PIN_PWM_X...
     //uint32_t tx_low    = GPIO_BSRR_BR_1; // Pin 10 auf low setzen
 
     // Configure PA0 as AF output
     //palSetPadMode(GPIOA, 1, PAL_MODE_ALTERNATE(1)); //palSetPadMode(GPIOA, 1, PAL_MODE_ALTERNATE(1)); Nur für TIM1&2? Siehe F4-Datenblatt
-    pwm_dma_frame_buffer[0] = tx_high;
-    pwm_dma_frame_buffer[1] = tx_low;// Test: Pin am Ende der Periode zurücksetzen
+    pwm_dma_frame_buffer[0] = 1<<1;//tx_high;; 300 Never used
+    pwm_dma_frame_buffer[1] = 1<<1;	// 400
+    pwm_dma_frame_buffer[2] = 1<<8 | 1<<1;		// 100// Test: Pin am Ende der Periode zurücksetzen
+    pwm_dma_frame_buffer[3] = 1<<8 | 1<<1 | 1<<15;			// 200
+    pwm_dma_frame_buffer[4] = 1<<1;			//never used
+    pwm_dma_frame_buffer[5] = 1<<1;	// 400
+    pwm_dma_frame_buffer[6] = 1<<8 | 1<<1;		// 100// Test: Pin am Ende der Periode zurücksetzen
+    pwm_dma_frame_buffer[7] = 1<<8 | 1<<1 | 1<<15;			// 200
+    pwm_dma_frame_buffer[8] = 1<<1;
+
     pwm_dma_timer_buffer[0] = 100;//PWM_MAXIMUM_PERIOD_CYCLES / 2;
-    pwm_dma_timer_buffer[1] = 400;//PWM_MAXIMUM_PERIOD_CYCLES / 2;
+    pwm_dma_timer_buffer[1] = 200;//PWM_MAXIMUM_PERIOD_CYCLES / 2;
+    pwm_dma_timer_buffer[2] = 8; // Hier startet der Ringpuffer neu. Dabei wird "0" ins ODR geschrieben (komisches Verhalten). Workaround mit BSRR??
+    pwm_dma_timer_buffer[3] = 400;
 
     // PWM Configuration
     #pragma GCC diagnostic ignored "-Woverride-init"                                        // Turn off override-init warning for this struct. We use the overriding ability to set a "default" channel config
@@ -493,9 +504,9 @@ void pwm_dma_init_3(void) // mit 2 timern und DMA1 + DMA2
     //dmaStreamSetPeripheral(XPWM_DMA_STREAM1, &(GPIOA->BSRR.W));  // &(GPIOA->BSRR.W) BSSR: Bit-Set-Reset-Register
     dmaStreamSetPeripheral(XPWM_DMA_STREAM1, &(GPIOA->ODR));
     dmaStreamSetMemory0(XPWM_DMA_STREAM1, pwm_dma_frame_buffer);
-    dmaStreamSetTransactionSize(XPWM_DMA_STREAM1, 2); // Anzahl der Edges je 2*FRT-Periode
+    dmaStreamSetTransactionSize(XPWM_DMA_STREAM1, 4); // Anzahl der Edges je 2*FRT-Periode
     dmaStreamSetMode(XPWM_DMA_STREAM1,
-    		XPWM_DMA_CR_CHSEL1 | STM32_DMA_CR_DIR_M2P | STM32_DMA_CR_PSIZE_WORD | STM32_DMA_CR_MSIZE_WORD |
+    		XPWM_DMA_CR_CHSEL1 | STM32_DMA_CR_DIR_M2P | STM32_DMA_CR_PSIZE_HWORD | STM32_DMA_CR_MSIZE_HWORD |
 			STM32_DMA_CR_MINC | STM32_DMA_CR_CIRC | STM32_DMA_CR_PL(3));
     dmaStreamEnable(XPWM_DMA_STREAM1); // Start DMA
 
@@ -503,7 +514,7 @@ void pwm_dma_init_3(void) // mit 2 timern und DMA1 + DMA2
     dmaStreamAllocate(XPWM_DMA_STREAM2, 10, NULL, NULL);
     dmaStreamSetPeripheral(XPWM_DMA_STREAM2, &(PWMD2.tim->ARR));  // &(PWMDMA_PWMD.tim->DMAR)ARR: Auto-Reload-Register &(PWMDMA_PWMD.tim->ARR)
     dmaStreamSetMemory0(XPWM_DMA_STREAM2, pwm_dma_timer_buffer);
-    dmaStreamSetTransactionSize(XPWM_DMA_STREAM2, 2); // Anzahl der Edges je 2*FRT-Periode
+    dmaStreamSetTransactionSize(XPWM_DMA_STREAM2, 4); // Anzahl der Edges je 2*FRT-Periode
     dmaStreamSetMode(XPWM_DMA_STREAM2,
     		XPWM_DMA_CR_CHSEL2 | STM32_DMA_CR_DIR_M2P | STM32_DMA_CR_PSIZE_WORD | STM32_DMA_CR_MSIZE_WORD |
 			STM32_DMA_CR_MINC | STM32_DMA_CR_CIRC | STM32_DMA_CR_PL(3));

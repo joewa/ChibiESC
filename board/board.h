@@ -389,8 +389,8 @@
 #define BANK_CSENS_F				GPIOA
 #define PIN_CSENS_E					GPIOA_PIN7
 #define BANK_CSENS_E				GPIOA
-#define PIN_PA8						GPIOA_PIN8
-#define BANK_PA8					GPIOA
+#define PIN_PWM_C					GPIOA_PIN8
+#define BANK_PWM_C					GPIOA
 #define PIN_VBUS_FS					GPIOA_PIN9
 #define BANK_VBUS_FS				GPIOA
 #define PIN_OTG_FS_ID				GPIOA_PIN10
@@ -1828,14 +1828,14 @@
                                      PIN_MODE_ANALOG(PIN_VSENS_F) |         \
                                      PIN_MODE_ANALOG(PIN_CSENS_F) |         \
                                      PIN_MODE_ANALOG(PIN_CSENS_E) |         \
-                                     PIN_MODE_INPUT(PIN_PA8) |              \
+                                     PIN_MODE_OUTPUT(PIN_PWM_C) |              \
                                      PIN_MODE_INPUT(PIN_VBUS_FS) |          \
                                      PIN_MODE_ALTERNATE(PIN_OTG_FS_ID) |    \
                                      PIN_MODE_ALTERNATE(PIN_USB_DM) |       \
                                      PIN_MODE_ALTERNATE(PIN_USB_DP) |       \
                                      PIN_MODE_ALTERNATE(PIN_SWDIO) |        \
                                      PIN_MODE_ALTERNATE(PIN_SWDCLK) |       \
-									 PIN_MODE_INPUT(PIN_ZCD))
+									 PIN_MODE_OUTPUT(PIN_ZCD))
 #define VAL_GPIOA_OTYPER            (PIN_OTYPE_PUSHPULL(PIN_VSENS_C) |      \
                                      PIN_OTYPE_PUSHPULL(PIN_PWM_F) |        \
                                      PIN_OTYPE_PUSHPULL(PIN_VSENS_A) |      \
@@ -1844,7 +1844,7 @@
                                      PIN_OTYPE_PUSHPULL(PIN_VSENS_F) |      \
                                      PIN_OTYPE_PUSHPULL(PIN_CSENS_F) |      \
                                      PIN_OTYPE_PUSHPULL(PIN_CSENS_E) |      \
-                                     PIN_OTYPE_PUSHPULL(PIN_PA8) |          \
+                                     PIN_OTYPE_PUSHPULL(PIN_PWM_C) |          \
                                      PIN_OTYPE_PUSHPULL(PIN_VBUS_FS) |      \
                                      PIN_OTYPE_PUSHPULL(PIN_OTG_FS_ID) |    \
                                      PIN_OTYPE_PUSHPULL(PIN_USB_DM) |       \
@@ -1860,7 +1860,7 @@
                                      PIN_OSPEED_100M(PIN_VSENS_F) |         \
                                      PIN_OSPEED_100M(PIN_CSENS_F) |         \
                                      PIN_OSPEED_100M(PIN_CSENS_E) |         \
-                                     PIN_OSPEED_100M(PIN_PA8) |             \
+                                     PIN_OSPEED_50M(PIN_PWM_C) |             \
                                      PIN_OSPEED_100M(PIN_VBUS_FS) |         \
                                      PIN_OSPEED_100M(PIN_OTG_FS_ID) |       \
                                      PIN_OSPEED_100M(PIN_USB_DM) |          \
@@ -1876,7 +1876,7 @@
                                      PIN_PUPDR_FLOATING(PIN_VSENS_F) |      \
                                      PIN_PUPDR_FLOATING(PIN_CSENS_F) |      \
                                      PIN_PUPDR_FLOATING(PIN_CSENS_E) |      \
-                                     PIN_PUPDR_FLOATING(PIN_PA8) |          \
+                                     PIN_PUPDR_FLOATING(PIN_PWM_C) |          \
                                      PIN_PUPDR_FLOATING(PIN_VBUS_FS) |      \
                                      PIN_PUPDR_FLOATING(PIN_OTG_FS_ID) |    \
                                      PIN_PUPDR_FLOATING(PIN_USB_DM) |       \
@@ -1892,7 +1892,7 @@
                                      PIN_ODR_HIGH(PIN_VSENS_F) |            \
                                      PIN_ODR_HIGH(PIN_CSENS_F) |            \
                                      PIN_ODR_HIGH(PIN_CSENS_E) |            \
-                                     PIN_ODR_HIGH(PIN_PA8) |                \
+                                     PIN_ODR_HIGH(PIN_PWM_C) |                \
                                      PIN_ODR_HIGH(PIN_VBUS_FS) |            \
                                      PIN_ODR_HIGH(PIN_OTG_FS_ID) |          \
                                      PIN_ODR_HIGH(PIN_USB_DM) |             \
@@ -1908,7 +1908,7 @@
                                      PIN_AFIO_AF(PIN_VSENS_F, 0) |          \
                                      PIN_AFIO_AF(PIN_CSENS_F, 0) |          \
                                      PIN_AFIO_AF(PIN_CSENS_E, 0))
-#define VAL_GPIOA_AFRH              (PIN_AFIO_AF(PIN_PA8, 0) |              \
+#define VAL_GPIOA_AFRH              (PIN_AFIO_AF(PIN_PWM_C, 0) |              \
                                      PIN_AFIO_AF(PIN_VBUS_FS, 0) |          \
                                      PIN_AFIO_AF(PIN_OTG_FS_ID, 10) |       \
                                      PIN_AFIO_AF(PIN_USB_DM, 10) |          \

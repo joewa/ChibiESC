@@ -1,7 +1,7 @@
 #CHIBIESC_BOARD = LOOONG_STRIP
-#CHIBIESC_BOARD = DRCHIBI_DISCO
+CHIBIESC_BOARD = DRCHIBI_DISCO
 #CHIBIESC_BOARD = NUCLEO_F446
-CHIBIESC_BOARD = VESC
+#CHIBIESC_BOARD = VESC
 
 ##############################################################################
 # Build global options
