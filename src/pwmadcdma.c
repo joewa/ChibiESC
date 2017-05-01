@@ -364,8 +364,8 @@ int pwm_dma_setvals(uint8_t channel_number, uint16_t t_on, uint16_t offset, uint
 volatile uint32_t pwm_dma_timer_buffer[PWM_DMA_MAX_EDGES] intoSRAM2;		/**< Buffer for the duration to the next pulse*/
 volatile uint16_t pwm_dma_GPIOs_buffer[PWM_DMA_MAX_EDGES] intoSRAM2;			/**< Buffer for a frame */
 //pwm_dma_GPIOs_buffer pwm_dma_frame_buffer
-uint32_t ch_timer_buffer[N_PWM_CHANNELS][PWM_DMA_MAX_EDGES]; // Ein Array fuer jeden Channel
-uint16_t ch_GPIOs_buffer[PWM_DMA_MAX_EDGES];
+uint32_t ch_timer_buffer[N_PWM_CHANNELS][N_PWM_MAX_EDGES]; // Ein Array fuer jeden Channel
+uint16_t ch_GPIOs_buffer[N_PWM_MAX_EDGES];
 
 
 void pwm_dma_init_2(void)
@@ -454,29 +454,25 @@ void pwm_dma_init_3(void) // mit 2 timern und DMA1 + DMA2
 
     // Initialize frame buffer
     uint32_t i;
-    for (i = 0; i < PWM_DMA_BIT_N; i++) pwm_dma_GPIOs_buffer[i] = 0;   // All color bits are zero duty cycle
-    // ACHTUNG: High und Low vertauschen geht nicht!
-    uint32_t tx_high   = 0;//1<<10;//GPIO_BSRR_BS_10; // Dies in den request_buf schreiben, um Pin 10 auf high zu setzen. Nimm CONCAT_SYMBOLS mit PIN_PWM_X...
-    uint32_t tx_low    = 1<<8 | 1<<1;//GPIO_BSRR_BR_10; // Pin 10 auf low setzen
-    //uint32_t tx_high   = GPIO_BSRR_BS_1; // Dies in den request_buf schreiben, um Pin 10 auf high zu setzen. Nimm CONCAT_SYMBOLS mit PIN_PWM_X...
-    //uint32_t tx_low    = GPIO_BSRR_BR_1; // Pin 10 auf low setzen
+    for (i = 0; i < PWM_DMA_MAX_EDGES; i++) {
+    	pwm_dma_timer_buffer[i] = 100;
+    	pwm_dma_GPIOs_buffer[i] = PIN_MASK[i%3]; // make some pulses
+    }
 
     // Configure PA0 as AF output
     //palSetPadMode(GPIOA, 1, PAL_MODE_ALTERNATE(1)); //palSetPadMode(GPIOA, 1, PAL_MODE_ALTERNATE(1)); Nur für TIM1&2? Siehe F4-Datenblatt
-    pwm_dma_GPIOs_buffer[0] = 1<<1;//tx_high;; 300 Never used
+    /*
+    pwm_dma_GPIOs_buffer[0] = 1<<15; // 800
     pwm_dma_GPIOs_buffer[1] = 1<<1;	// 400
     pwm_dma_GPIOs_buffer[2] = 1<<8 | 1<<1;		// 100// Test: Pin am Ende der Periode zurücksetzen
     pwm_dma_GPIOs_buffer[3] = 1<<8 | 1<<1 | 1<<15;			// 200
-    pwm_dma_GPIOs_buffer[4] = 1<<1;			//never used
-    pwm_dma_GPIOs_buffer[5] = 1<<1;	// 400
-    pwm_dma_GPIOs_buffer[6] = 1<<8 | 1<<1;		// 100// Test: Pin am Ende der Periode zurücksetzen
-    pwm_dma_GPIOs_buffer[7] = 1<<8 | 1<<1 | 1<<15;			// 200
-    pwm_dma_GPIOs_buffer[8] = 1<<1;
+    */
 
     pwm_dma_timer_buffer[0] = 100;//PWM_MAXIMUM_PERIOD_CYCLES / 2;
-    pwm_dma_timer_buffer[1] = 200;//PWM_MAXIMUM_PERIOD_CYCLES / 2;
-    pwm_dma_timer_buffer[2] = 800; // Hier startet der Ringpuffer neu. Dabei wird "0" ins ODR geschrieben (komisches Verhalten). Workaround mit BSRR??
-    pwm_dma_timer_buffer[3] = 400;
+    pwm_dma_timer_buffer[1] = 100;//PWM_MAXIMUM_PERIOD_CYCLES / 2;
+    //pwm_dma_timer_buffer[2] = 800; // Hier startet der Ringpuffer neu. Dabei wird "0" ins ODR geschrieben (komisches Verhalten). Workaround mit BSRR??
+    //pwm_dma_timer_buffer[3] = 400;
+    actual_pulseID_written = 1; // Dann schreibt sortpp() ab pwm_dma_timer_buffer[2]
 
     // PWM Configuration
     #pragma GCC diagnostic ignored "-Woverride-init"                                        // Turn off override-init warning for this struct. We use the overriding ability to set a "default" channel config
@@ -509,7 +505,7 @@ void pwm_dma_init_3(void) // mit 2 timern und DMA1 + DMA2
     //dmaStreamSetPeripheral(XPWM_DMA_STREAM1, &(GPIOA->BSRR.W));  // &(GPIOA->BSRR.W) BSSR: Bit-Set-Reset-Register
     dmaStreamSetPeripheral(XPWM_DMA_STREAM1, &(GPIOA->ODR));
     dmaStreamSetMemory0(XPWM_DMA_STREAM1, pwm_dma_GPIOs_buffer);
-    dmaStreamSetTransactionSize(XPWM_DMA_STREAM1, 4); // Anzahl der Edges je 2*FRT-Periode (PWM_DMA_MAX_EDGES)
+    dmaStreamSetTransactionSize(XPWM_DMA_STREAM1, PWM_DMA_MAX_EDGES); //4 Anzahl der Edges je 2*FRT-Periode (PWM_DMA_MAX_EDGES)
     dmaStreamSetMode(XPWM_DMA_STREAM1,
     		XPWM_DMA_CR_CHSEL1 | STM32_DMA_CR_DIR_M2P | STM32_DMA_CR_PSIZE_HWORD | STM32_DMA_CR_MSIZE_HWORD |
 			STM32_DMA_CR_MINC | STM32_DMA_CR_CIRC | STM32_DMA_CR_PL(3));
@@ -519,7 +515,7 @@ void pwm_dma_init_3(void) // mit 2 timern und DMA1 + DMA2
     dmaStreamAllocate(XPWM_DMA_STREAM2, 10, NULL, NULL);
     dmaStreamSetPeripheral(XPWM_DMA_STREAM2, &(PWMD2.tim->ARR));  // &(PWMDMA_PWMD.tim->DMAR)ARR: Auto-Reload-Register &(PWMDMA_PWMD.tim->ARR)
     dmaStreamSetMemory0(XPWM_DMA_STREAM2, pwm_dma_timer_buffer);
-    dmaStreamSetTransactionSize(XPWM_DMA_STREAM2, 4); // Anzahl der Edges je 2*FRT-Periode
+    dmaStreamSetTransactionSize(XPWM_DMA_STREAM2, PWM_DMA_MAX_EDGES); //4 Anzahl der Edges je 2*FRT-Periode
     dmaStreamSetMode(XPWM_DMA_STREAM2,
     		XPWM_DMA_CR_CHSEL2 | STM32_DMA_CR_DIR_M2P | STM32_DMA_CR_PSIZE_WORD | STM32_DMA_CR_MSIZE_WORD |
 			STM32_DMA_CR_MINC | STM32_DMA_CR_CIRC | STM32_DMA_CR_PL(3));
@@ -587,14 +583,14 @@ inline findmin(uint16_t *pptr, uint8_t numphases) {
 	}
 }
 
-void sortpp() {  // sortiere pulse-pattern
+void sortpp() {  // Sortiere pulse-pattern. Erstmal fuer 3-Phasen, ist aber im Prinzip generisch.
 	uint16_t pptr[3]; pptr[0]=0; pptr[1]=0; pptr[2]=0;
 	uint32_t tick=0, last_tick=0;
 	uint8_t phaseID;
 	uint16_t pstate = 0, delta_tick=0;
     //pwm_dma_frame_buffer[1] = tx_low;// Test: Pin am Ende der Periode zurücksetzen
     //pwm_dma_timer_buffer[0] = 100;//PWM_MAXIMUM_PERIOD_CYCLES / 2;
-	while ( !allPulsesWritten(pptr, 3) ) {			// alle pulse von ch_timer_buffer geschrieben?
+	while ( !allpulseswritten(pptr, 3) ) {			// alle pulse von ch_timer_buffer geschrieben?
 		phaseID = findmin(pptr, 3);					// Welcher ist der naechste Puls?
 		if( (ch_GPIOs_buffer[pptr[phaseID]] & PIN_MASK[phaseID]) != 0) {
 			pstate |= PIN_MASK[phaseID]; 			// Setze PIN_MASK(phaseID)
@@ -605,7 +601,7 @@ void sortpp() {  // sortiere pulse-pattern
 	    delta_tick = (uint16_t)(tick - last_tick);	// Das muss ins ARR-Register
 	    if (delta_tick > 0) {//TODO: Pulse, die nicht nur zum gleichen Zeitpunkt kommen sondern auch seeehr dicht hintereinander in einen DMA-Transfer packen.
 	    	actual_pulseID_written = (actual_pulseID_written + 1) % PWM_DMA_MAX_EDGES; // increment
-	    	pwm_dma_timer_buffer[actual_pulseID_written] = delta_tick;
+	    	pwm_dma_timer_buffer[(actual_pulseID_written+2)%PWM_DMA_MAX_EDGES] = delta_tick;
 	    	// TODO: bei sehr kleinen delta_t hier auch t korrigieren, damit last_t passt.
 	    }
 	    //pwm_dma_timer_buffer(actual_pulseID_written) = t; % TODO: Hier delta_t ins ARR-Register schreiben
@@ -616,7 +612,7 @@ void sortpp() {  // sortiere pulse-pattern
     // Noch einen DMA-Transfer ans Ende der FRT-Periode setzen:
     actual_pulseID_written = (actual_pulseID_written + 1) % PWM_DMA_MAX_EDGES; // increment
     uint16_t next_PWM_FRT_PERIOD_CYCLES = next_pwmdma_state_ptr->adc_frt_period_cycles * ADC_PWM_DIVIDER;
-    pwm_dma_timer_buffer[actual_pulseID_written] = (uint16_t)(next_PWM_FRT_PERIOD_CYCLES - last_tick ); //(uint16_t)(tick - last_tick);
+    pwm_dma_timer_buffer[(actual_pulseID_written+2)%PWM_DMA_MAX_EDGES] = (uint16_t)(next_PWM_FRT_PERIOD_CYCLES - last_tick ); //(uint16_t)(tick - last_tick);
     pwm_dma_GPIOs_buffer[actual_pulseID_written] = pstate;						// letzter GPIO-Zustand nochmal
     actual_pulseID_written = (actual_pulseID_written + 1) % PWM_DMA_MAX_EDGES; // increment
 }

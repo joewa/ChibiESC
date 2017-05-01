@@ -392,7 +392,7 @@ int main(void) {
   //#include "comps/sim.comp"
   #include "comps/simfast.comp"
   //#include "comps/sixstep.comp"
-  #include "comps/pwm1dma.comp"
+  #include "comps/pwm3dma.comp"
   #include "comps/svm3.comp"
   #include "comps/genpp3.comp"
 
@@ -429,12 +429,18 @@ int main(void) {
   hal_set_pin("simfast0.frt_prio", 50.0);
   //hal_set_pin("sixstep0.rt_prio", 100.0);
   //hal_set_pin("sixstep0.frt_prio", 100.0);
-  hal_set_pin("pwm1dma0.rt_prio", 110.0);
-  hal_set_pin("pwm1dma0.frt_prio", 110.0);
+  hal_set_pin("svm30.frt_prio", 100.0);
+  hal_set_pin("genpp30.rt_prio", 105.0);
+  hal_set_pin("genpp30.frt_prio", 105.0);
+  hal_set_pin("pwm3dma0.rt_prio", 110.0);
+  hal_set_pin("pwm3dma0.frt_prio", 110.0);
   //hal_set_pin("sixstep0.frt_prio", 100.0);
   //hal_set_pin("sim0.rt_prio", 14.0);
   //hal_set_pin("sixstep0.rt_prio", 13.0);
  //hal_link_pins("conf0.cmd_rev", "rev0.rev");
+  hal_link_pins("svm30.sdu", "genpp30.sdu");
+  hal_link_pins("svm30.sdv", "genpp30.sdv");
+  hal_link_pins("svm30.sdw", "genpp30.sdw");
 
   if(bal.pin_errors + bal.comp_errors == 0){
      hal_start();
