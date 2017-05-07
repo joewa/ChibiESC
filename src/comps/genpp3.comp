@@ -30,7 +30,7 @@ MEMEXT(struct pwm_dma_s *actual_pwmdma_state_ptr);
 // TODO: Gedanke: ch_timer_buffer und ch_GPIOs_buffer sind wahrscheinlich am Besten für die Auswertung?? Dann 3*PWM_DMA_MAX_EDGES lang machen und Ringpuffern
 MEMEXT(uint32_t ch_timer_buffer[N_PWM_CHANNELS][N_PWM_MAX_EDGES]); // Ein Array fuer jeden Channel. N_PWM_CHANNELS=3
 MEMEXT(uint16_t ch_GPIOs_buffer[N_PWM_MAX_EDGES]);
-MEM(uint16_t const_PIN_MASK[3]); // TODO: in pwmadcdma.c definieren
+MEMEXT(const uint16_t PIN_MASK[]);
 MEM(int en) = 0;
 
 FRT(
@@ -40,16 +40,13 @@ FRT(
 //for i = 1:length(PIN_IDs)
 //  PIN_MASK(i) = uint16( bitshift(uint16(1), uint16(PIN_IDs(i))) );
 //endfor
-   const_PIN_MASK[0] = 1<<1;
-   const_PIN_MASK[1] = 1<<2;
-   const_PIN_MASK[2] = 1<<3;
    next_pwmdma_state_ptr->adc_frt_period_cycles = ADC_FRT_DEFAULT_PERIOD_CYCLES;	// next_ADC_FRT_PERIOD_CYCLES wurde ggf vorher neu berechnet:
    actual_pwmdma_state_ptr->adc_frt_period_cycles = ADC_FRT_DEFAULT_PERIOD_CYCLES; 	// Dito
    uint16_t next_PWM_FRT_PERIOD_CYCLES = next_pwmdma_state_ptr->adc_frt_period_cycles * ADC_PWM_DIVIDER;
    uint16_t actual_PWM_FRT_PERIOD_CYCLES = actual_pwmdma_state_ptr->adc_frt_period_cycles * ADC_PWM_DIVIDER;
 
-   int16_t periods = (int16_t)PIN(periods);
-   int16_t sp_period = next_PWM_FRT_PERIOD_CYCLES / periods; // Periode eines Single Pulse. TODO: Beachte nicht-ganzzahlige Division
+   uint16_t periods = (int16_t)PIN(periods);
+   uint16_t sp_period = next_PWM_FRT_PERIOD_CYCLES / periods; // Periode eines Single Pulse. TODO: Beachte nicht-ganzzahlige Division
 
    // Wertebereich zurechstutzen
    uint16_t p[3];
@@ -87,14 +84,14 @@ FRT(
 
    uint16_t periods2 = 2 * periods;
    uint16_t i; uint16_t ip;
-   for(i = 1; i < periods2; i += 2) {
-	   center = i * next_PWM_FRT_PERIOD_CYCLES / periods2;
+   for(i = 0; i < periods2; i += 2) {
+	   center = (i + 1) * next_PWM_FRT_PERIOD_CYCLES / periods2;
 	   for(ip = 0; ip < 3; ip++) {
 		   if(p[ip] > 0) {
-			   ch_timer_buffer[ip][i]	=	center - p[i]; 		// Einschaltpuls
-			   ch_GPIOs_buffer[i]		|=	const_PIN_MASK[ip];
-			   ch_timer_buffer[ip][i+1]	=	center + p[i]; 		// Ausschaltpuls
-			   ch_GPIOs_buffer[i+1]		&=	~const_PIN_MASK[ip];
+			   ch_timer_buffer[ip][i]	=	center - p[ip]; 		// Einschaltpuls
+			   ch_GPIOs_buffer[i]		|=	PIN_MASK[ip];
+			   ch_timer_buffer[ip][i+1]	=	center + p[ip]; 		// Ausschaltpuls
+			   ch_GPIOs_buffer[i+1]		&=	~PIN_MASK[ip];
 			   pcnt[ip] += 2;
 		   }
 	   }
