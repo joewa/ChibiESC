@@ -11,6 +11,7 @@ CHIBIESC_BOARD = DRCHIBI_DISCO
 # Compiler options here.
 ifeq ($(USE_OPT),)
   USE_OPT = -Og -ggdb -fomit-frame-pointer -falign-functions=16 -lm
+  #USE_OPT = -O2 -ggdb -fomit-frame-pointer -falign-functions=16 -lm # DMA problem
 endif
 
 # C specific options here (added to USE_OPT).

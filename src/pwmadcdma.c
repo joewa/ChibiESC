@@ -360,7 +360,7 @@ int pwm_dma_setvals(uint8_t channel_number, uint16_t t_on, uint16_t offset, uint
 
 
 
-#define PWM_DMA_MAX_EDGES (N_PWM_CHANNELS*N_PWM_MAX_EDGES) // Number of pwm-channels * max number of edges per period (>=2, even number)
+#define PWM_DMA_MAX_EDGES (3*N_PWM_CHANNELS*N_PWM_MAX_EDGES) // Number of pwm-channels * max number of edges per period (>=2, even number)
 volatile uint32_t pwm_dma_timer_buffer[PWM_DMA_MAX_EDGES] intoSRAM2;		/**< Buffer for the duration to the next pulse*/
 volatile uint16_t pwm_dma_GPIOs_buffer[PWM_DMA_MAX_EDGES] intoSRAM2;			/**< Buffer for a frame */
 //pwm_dma_GPIOs_buffer pwm_dma_frame_buffer
@@ -468,8 +468,8 @@ void pwm_dma_init_3(void) // mit 2 timern und DMA1 + DMA2
     pwm_dma_GPIOs_buffer[3] = 1<<8 | 1<<1 | 1<<15;			// 200
     */
 
-    pwm_dma_timer_buffer[0] = 100;//PWM_MAXIMUM_PERIOD_CYCLES / 2;
-    pwm_dma_timer_buffer[1] = 100;//PWM_MAXIMUM_PERIOD_CYCLES / 2;
+    //pwm_dma_timer_buffer[0] = 100;//PWM_MAXIMUM_PERIOD_CYCLES / 2;
+    //pwm_dma_timer_buffer[1] = 100;//PWM_MAXIMUM_PERIOD_CYCLES / 2;
     //pwm_dma_timer_buffer[2] = 800; // Hier startet der Ringpuffer neu. Dabei wird "0" ins ODR geschrieben (komisches Verhalten). Workaround mit BSRR??
     //pwm_dma_timer_buffer[3] = 400;
     actual_pulseID_written = 1; // Dann schreibt sortpp() ab pwm_dma_timer_buffer[2]
@@ -603,8 +603,8 @@ void sortpp() {  // Sortiere pulse-pattern. Erstmal fuer 3-Phasen, ist aber im P
 		tick = ch_timer_buffer[phaseID][pptr[phaseID]];
 	    delta_tick = tick - last_stick;	// Das muss ins ARR-Register
 	    if (delta_tick > 0) {//TODO: Pulse, die nicht nur zum gleichen Zeitpunkt kommen sondern auch seeehr dicht hintereinander in einen DMA-Transfer packen.
-	    	actual_pulseID_written = (actual_pulseID_written + 1) % PWM_DMA_MAX_EDGES; // increment
-	    	pwm_dma_timer_buffer[(actual_pulseID_written+2)%PWM_DMA_MAX_EDGES] = delta_tick;
+	    	pwm_dma_timer_buffer[actual_pulseID_written] = delta_tick;
+	    	actual_pulseID_written = (actual_pulseID_written + 1) % PWM_DMA_MAX_EDGES; // increment, Ja hier ist richtig. Spart ein +1 bei GPIO
 	    	// TODO: bei sehr kleinen delta_t hier auch t korrigieren, damit last_t passt.
 	    }
 	    //pwm_dma_timer_buffer(actual_pulseID_written) = t; % TODO: Hier delta_t ins ARR-Register schreiben
@@ -613,9 +613,8 @@ void sortpp() {  // Sortiere pulse-pattern. Erstmal fuer 3-Phasen, ist aber im P
 	    pptr[phaseID]++;
 	}
     // Noch einen DMA-Transfer ans Ende der FRT-Periode setzen:
-    actual_pulseID_written = (actual_pulseID_written + 1) % PWM_DMA_MAX_EDGES; // increment
     uint16_t next_PWM_FRT_PERIOD_CYCLES = next_pwmdma_state_ptr->adc_frt_period_cycles * ADC_PWM_DIVIDER;
-    pwm_dma_timer_buffer[(actual_pulseID_written+2)%PWM_DMA_MAX_EDGES] = (uint16_t)(next_PWM_FRT_PERIOD_CYCLES - last_stick ); //(uint16_t)(tick - last_tick);
-    pwm_dma_GPIOs_buffer[actual_pulseID_written] = pstate;						// letzter GPIO-Zustand nochmal
+    pwm_dma_timer_buffer[actual_pulseID_written] = (uint16_t)(next_PWM_FRT_PERIOD_CYCLES - last_stick ); //(uint16_t)(tick - last_tick);
     actual_pulseID_written = (actual_pulseID_written + 1) % PWM_DMA_MAX_EDGES; // increment
+    pwm_dma_GPIOs_buffer[actual_pulseID_written] = pstate;						// letzter GPIO-Zustand nochmal
 }
