@@ -59,7 +59,7 @@
 
 // Fuer die Pulsmustererzeugung
 #define N_PWM_CHANNELS 3
-#define N_PWM_MAX_EDGES 10
+#define N_PWM_MAX_EDGES 16
 
 //BEGIN altes Zeug: obsolet mit Timer-DMA #define WS2812_PWM_FREQUENCY    PWM_CLOCK_FREQUENCY                         /**< Clock frequency of PWM */
 #define PWM_DMA_TRANSFER_PERIOD_TICKS	(10)                      /** DMA Transfer triggered after this number of PWM clock cycles */

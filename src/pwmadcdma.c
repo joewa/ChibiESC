@@ -351,7 +351,7 @@ int pwm_dma_setvals(uint8_t channel_number, uint16_t t_on, uint16_t offset, uint
 #define PWM_DMA_TIM_DIER_2			(TIM_DIER_UDE | TIM_DIER_CC1DE)*/
 
 #define PWM_DMA_STREAM2				STM32_DMA2_STREAM6 // Does not start when STREAM1 and 2 are exchanged or when BSSR-DMA-priority is < than DMA-ARR-prio
-#define PWM_DMA_CR_CHSEL2 			STM32_DMA_CR_CHSEL(0) //
+#define PWM_DMA_CR_CHSEL2 			STM32_DMA_CR_CHSEL(0) // DMA2_STREAM6, Channel 0 --> Request ist TIM1_CH1
 #define PWM_DMA_STREAM1				STM32_DMA2_STREAM1 //
 #define PWM_DMA_CR_CHSEL1 			STM32_DMA_CR_CHSEL(6) //
 // Timmer 1 CH1 kann auch noch Stream 3 triggern!
@@ -435,10 +435,10 @@ void pwm_dma_init_2(void)
 
 // DMA für GPIO
 #define XPWM_DMA_STREAM1				STM32_DMA2_STREAM1 // OK
-#define XPWM_DMA_CR_CHSEL1 			STM32_DMA_CR_CHSEL(6) // OK
+#define XPWM_DMA_CR_CHSEL1 			STM32_DMA_CR_CHSEL(6) // Request von DMA2_STREAM1,CHSEL(7) ist TIM1_CH1
 // DMA für ARR
 #define XPWM_DMA_STREAM2				STM32_DMA1_STREAM1 // ??
-#define XPWM_DMA_CR_CHSEL2 			STM32_DMA_CR_CHSEL(3) // OK
+#define XPWM_DMA_CR_CHSEL2 			STM32_DMA_CR_CHSEL(3) // Request von DMA1_STREAM1,CHSEL(3) ist TIM2_UP
 
 // Timmer 1 CH1 kann auch noch Stream 3 triggern!
 
@@ -455,7 +455,7 @@ void pwm_dma_init_3(void) // mit 2 timern und DMA1 + DMA2
     // Initialize frame buffer
     uint32_t i;
     for (i = 0; i < PWM_DMA_MAX_EDGES; i++) {
-    	pwm_dma_timer_buffer[i] = 1000;
+    	pwm_dma_timer_buffer[i] = 10; //1000; // TODO: Vorsicht: jeder Wert hier verfaelscht die Zeit.
     	pwm_dma_GPIOs_buffer[i] = 0;//PIN_MASK[i%3]; // make some pulses
     }
 
@@ -489,7 +489,7 @@ void pwm_dma_init_3(void) // mit 2 timern und DMA1 + DMA2
     };
     static const PWMConfig tim_dma_config = {
         .frequency          = PWM_CLOCK_FREQUENCY,
-        .period             = 10, //Mit dieser Periode wird UDE-Event erzeugt und ein neuer Wert (Länge WS2812_BIT_N) vom DMA ins CCR geschrieben
+        .period             = 10, //Mit dieser Periode wird das erste UDE-Event erzeugt und ein neuer Wert vom DMA ins ARR geschrieben
         .callback           = NULL,
         .channels = {
             [0 ... 3]       = {.mode = PWM_OUTPUT_DISABLED,  .callback = NULL},         // Channels default to disabled
@@ -505,7 +505,7 @@ void pwm_dma_init_3(void) // mit 2 timern und DMA1 + DMA2
     //dmaStreamSetPeripheral(XPWM_DMA_STREAM1, &(GPIOA->BSRR.W));  // &(GPIOA->BSRR.W) BSSR: Bit-Set-Reset-Register
     dmaStreamSetPeripheral(XPWM_DMA_STREAM1, &(GPIOA->ODR));
     dmaStreamSetMemory0(XPWM_DMA_STREAM1, pwm_dma_GPIOs_buffer);
-    dmaStreamSetTransactionSize(XPWM_DMA_STREAM1, PWM_DMA_MAX_EDGES); //4 Anzahl der Edges je 2*FRT-Periode (PWM_DMA_MAX_EDGES)
+    dmaStreamSetTransactionSize(XPWM_DMA_STREAM1, PWM_DMA_MAX_EDGES); // Anzahl der Edges je 2*FRT-Periode (PWM_DMA_MAX_EDGES)
     dmaStreamSetMode(XPWM_DMA_STREAM1,
     		XPWM_DMA_CR_CHSEL1 | STM32_DMA_CR_DIR_M2P | STM32_DMA_CR_PSIZE_HWORD | STM32_DMA_CR_MSIZE_HWORD |
 			STM32_DMA_CR_MINC | STM32_DMA_CR_CIRC | STM32_DMA_CR_PL(3));
@@ -515,7 +515,7 @@ void pwm_dma_init_3(void) // mit 2 timern und DMA1 + DMA2
     dmaStreamAllocate(XPWM_DMA_STREAM2, 10, NULL, NULL);
     dmaStreamSetPeripheral(XPWM_DMA_STREAM2, &(PWMD2.tim->ARR));  // &(PWMDMA_PWMD.tim->DMAR)ARR: Auto-Reload-Register &(PWMDMA_PWMD.tim->ARR)
     dmaStreamSetMemory0(XPWM_DMA_STREAM2, pwm_dma_timer_buffer);
-    dmaStreamSetTransactionSize(XPWM_DMA_STREAM2, PWM_DMA_MAX_EDGES); //4 Anzahl der Edges je 2*FRT-Periode
+    dmaStreamSetTransactionSize(XPWM_DMA_STREAM2, PWM_DMA_MAX_EDGES); // Anzahl der Edges je 2*FRT-Periode
     dmaStreamSetMode(XPWM_DMA_STREAM2,
     		XPWM_DMA_CR_CHSEL2 | STM32_DMA_CR_DIR_M2P | STM32_DMA_CR_PSIZE_WORD | STM32_DMA_CR_MSIZE_WORD |
 			STM32_DMA_CR_MINC | STM32_DMA_CR_CIRC | STM32_DMA_CR_PL(3));
@@ -526,14 +526,16 @@ void pwm_dma_init_3(void) // mit 2 timern und DMA1 + DMA2
     // ChibiOS driver code, so we don't have to do anything special to the timer. If we did, we'd have to start the timer,
     // disable counting, enable the channel, and then make whatever configuration changes we need.
     adcStartConversion(&ADCD1, &adc_commutate_group, commutatesamples, 2*ADC_FRT_DEFAULT_PERIOD_CYCLES);
-    // Start Master-Timer Tim 2
-    pwmStart(&PWMD2, &tim_dma_config);
-    pwmEnableChannel(&PWMD2, 2, 1);
 
+    // Start Slave-Timer Tim 1
     pwmStart(&PWMD1, &pwm_dma_config);
     //PWMD1.tim->CR1 = PWMD1.tim->CR1 | STM32_TIM_CR1_OPM; // One-Pulse-Mode
     PWMD1.tim->SMCR = TIM_SMCR_SMS_2 | TIM_SMCR_TS_0;  // SlaveModeSelection: Reset Mode; TS: Trigger selection = 001 ->TIM2
     pwmEnableChannel(&PWMD1, 0, PWM_DMA_DELAY_ST);     // Initial period is 0; output will be low until first duty cycle is DMA'd in
+
+    // Start Master-Timer Tim 2
+    pwmStart(&PWMD2, &tim_dma_config);
+    //pwmEnableChannel(&PWMD2, 2, 1); // Gar nich notwendig.
 }
 
 void pwm_dma_stop_3(void) {
@@ -603,18 +605,18 @@ void sortpp() {  // Sortiere pulse-pattern. Erstmal fuer 3-Phasen, ist aber im P
 		tick = ch_timer_buffer[phaseID][pptr[phaseID]];
 	    delta_tick = tick - last_stick;	// Das muss ins ARR-Register
 	    if (delta_tick > 0) {//TODO: Pulse, die nicht nur zum gleichen Zeitpunkt kommen sondern auch seeehr dicht hintereinander in einen DMA-Transfer packen.
-	    	pwm_dma_timer_buffer[actual_pulseID_written] = delta_tick;
 	    	actual_pulseID_written = (actual_pulseID_written + 1) % PWM_DMA_MAX_EDGES; // increment, Ja hier ist richtig. Spart ein +1 bei GPIO
+	    	pwm_dma_timer_buffer[actual_pulseID_written] = delta_tick;
 	    	// TODO: bei sehr kleinen delta_t hier auch t korrigieren, damit last_t passt.
 	    }
 	    //pwm_dma_timer_buffer(actual_pulseID_written) = t; % TODO: Hier delta_t ins ARR-Register schreiben
-	    pwm_dma_GPIOs_buffer[actual_pulseID_written] = pstate;
+	    pwm_dma_GPIOs_buffer[(actual_pulseID_written+3) % PWM_DMA_MAX_EDGES] = pstate;
 	    last_stick = tick;
 	    pptr[phaseID]++;
 	}
     // Noch einen DMA-Transfer ans Ende der FRT-Periode setzen:
     uint16_t next_PWM_FRT_PERIOD_CYCLES = next_pwmdma_state_ptr->adc_frt_period_cycles * ADC_PWM_DIVIDER;
-    pwm_dma_timer_buffer[actual_pulseID_written] = (uint16_t)(next_PWM_FRT_PERIOD_CYCLES - last_stick ); //(uint16_t)(tick - last_tick);
     actual_pulseID_written = (actual_pulseID_written + 1) % PWM_DMA_MAX_EDGES; // increment
-    pwm_dma_GPIOs_buffer[actual_pulseID_written] = pstate;						// letzter GPIO-Zustand nochmal
+    pwm_dma_timer_buffer[actual_pulseID_written] = (uint16_t)(next_PWM_FRT_PERIOD_CYCLES - last_stick ); //(uint16_t)(tick - last_tick);
+    pwm_dma_GPIOs_buffer[(actual_pulseID_written+3) % PWM_DMA_MAX_EDGES] = pstate;						// letzter GPIO-Zustand nochmal
 }
