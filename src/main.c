@@ -214,6 +214,7 @@ static THD_FUNCTION(ThreadFRT, arg) {
 		   static unsigned int last_start = 0;
 		   unsigned int start = hal_get_systick_value();
 
+		   palSetPad(BANK_LED_GREEN, PIN_LED_GREEN);
 		   float period = ((float)(start - last_start)) / hal_get_systick_freq();
 		   last_start = start;
 
@@ -224,6 +225,7 @@ static THD_FUNCTION(ThreadFRT, arg) {
 
 		   PIN(frt_time) = ((float)(end - start)) / hal_get_systick_freq();
 		   PIN(frt_period_time) = period;
+		   palClearPad(BANK_LED_GREEN, PIN_LED_GREEN);
 
 		   if(bal_ext.frt_extended_state == FRT_WAITFOR_TIMEOUT) {
 			   // Check if deadline is missed and chThdSleepUntil next rt-cycle
@@ -319,7 +321,7 @@ static THD_FUNCTION(ThreadNRT, arg) {
 	  if(nrt_blink_count-- <= 0) {
 		  nrt_blink_count = 1000;
 		  palTogglePad(BANK_LED_RED, PIN_LED_RED);
-		  palTogglePad(BANK_LED_GREEN, PIN_LED_GREEN);
+		  //palTogglePad(BANK_LED_GREEN, PIN_LED_GREEN);
 	  }
 	  nrt_starttime = chVTGetSystemTime();
 	  hal_run_nrt(nrt_Period); // Calls term which calls USB_VCP_get_string. Call from own thread, NOT HERE!!!

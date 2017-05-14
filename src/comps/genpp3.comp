@@ -40,10 +40,10 @@ FRT(
 //for i = 1:length(PIN_IDs)
 //  PIN_MASK(i) = uint16( bitshift(uint16(1), uint16(PIN_IDs(i))) );
 //endfor
-   next_pwmdma_state_ptr->adc_frt_period_cycles = ADC_FRT_DEFAULT_PERIOD_CYCLES;	// next_ADC_FRT_PERIOD_CYCLES wurde ggf vorher neu berechnet:
+   next_pwmdma_state_ptr->adc_frt_period_cycles = ADC_FRT_DEFAULT_PERIOD_CYCLES ;	// next_ADC_FRT_PERIOD_CYCLES wurde ggf vorher neu berechnet:
    actual_pwmdma_state_ptr->adc_frt_period_cycles = ADC_FRT_DEFAULT_PERIOD_CYCLES; 	// Dito
-   uint16_t next_PWM_FRT_PERIOD_CYCLES = next_pwmdma_state_ptr->adc_frt_period_cycles * ADC_PWM_DIVIDER;
    uint16_t actual_PWM_FRT_PERIOD_CYCLES = actual_pwmdma_state_ptr->adc_frt_period_cycles * ADC_PWM_DIVIDER;
+   uint16_t next_PWM_FRT_PERIOD_CYCLES = next_pwmdma_state_ptr->adc_frt_period_cycles * ADC_PWM_DIVIDER;
 
    uint16_t periods = (int16_t)PIN(periods);
    uint16_t sp_period = next_PWM_FRT_PERIOD_CYCLES / periods; // Periode eines Single Pulse. TODO: Beachte nicht-ganzzahlige Division
@@ -84,6 +84,7 @@ FRT(
 
    uint16_t periods2 = 2 * periods;
    uint16_t i; uint16_t ip;
+   uint16_t last_gpio_state = 0; // ACHTUNG: Muss eigentlich vom letzten Durchlauf gemerkt werden.
    for(i = 0; i < periods2; i += 2) {
 	   center = (i + 1) * next_PWM_FRT_PERIOD_CYCLES / periods2;
 	   for(ip = 0; ip < 3; ip++) {
@@ -96,6 +97,13 @@ FRT(
 		   }
 	   }
    }
+
+   /*
+   // Noch einen DMA-Transfer ans Ende der Periode auf irgendeinem Kanal bei Zeit "next_PWM_FRT_PERIOD_CYCLES" schreiben
+   ch_timer_buffer[0][pcnt[0]] = next_PWM_FRT_PERIOD_CYCLES; // Schreibe einen Puls auf Kanal 0
+   ch_GPIOs_buffer[pcnt[0] + 1] = ch_GPIOs_buffer[pcnt[0]];
+   pcnt[0]++;
+   */
 
    // ch_timer_buffer immer 0xFFFF-terminieren weil so das Sortieren schneller geht.
    for(ip = 0; ip < 3; ip++) {
