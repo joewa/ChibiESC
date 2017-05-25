@@ -597,8 +597,6 @@ void sortpp() {  // Sortiere pulse-pattern. Erstmal fuer 3-Phasen, ist aber im P
 	uint8_t phaseID;
 	uint16_t pstate = 0; //TODO: pstate static oder global definieren, da es aus dem letzten Schritt auch != 0 sein kann
 	last_stick = 0;
-    //pwm_dma_frame_buffer[1] = tx_low;// Test: Pin am Ende der Periode zurücksetzen
-    //pwm_dma_timer_buffer[0] = 100;//PWM_MAXIMUM_PERIOD_CYCLES / 2;
 	while ( !allpulseswritten(pptr, 3) ) {			// alle pulse von ch_timer_buffer geschrieben?
 		phaseID = findmin(pptr, 3);					// Welcher ist der naechste Puls?
 		if( (ch_GPIOs_buffer[pptr[phaseID]] & PIN_MASK[phaseID]) != 0) {
@@ -608,22 +606,21 @@ void sortpp() {  // Sortiere pulse-pattern. Erstmal fuer 3-Phasen, ist aber im P
 		}
 		tick = ch_timer_buffer[phaseID][pptr[phaseID]];
 	    delta_tick = tick - last_stick;	// Das muss ins ARR-Register!! ACHTUNG: "-1" Damit in Sync mit ADC!!! Aber warum??
-	    if (delta_tick > 0) {//TODO: Pulse, die nicht nur zum gleichen Zeitpunkt kommen sondern auch seeehr dicht hintereinander in einen DMA-Transfer packen.
+	    if (delta_tick > 20) {//Pulse, die nicht nur zum gleichen Zeitpunkt kommen sondern auch seeehr dicht hintereinander in einen DMA-Transfer packen.
 	    	actual_pulseID_written = (actual_pulseID_written + 1) % PWM_DMA_MAX_EDGES; // increment, Ja hier ist richtig. Spart ein +1 bei GPIO
 	    	delta_tick--;	// Damit PWM immer synchron mit FRT-Periode bleibt!
 	    	pwm_dma_timer_buffer[actual_pulseID_written] = delta_tick;
+	    	last_stick = tick;
 	    	// TODO: bei sehr kleinen delta_t hier auch t korrigieren, damit last_t passt.
 	    }
-	    //pwm_dma_timer_buffer(actual_pulseID_written) = t; % TODO: Hier delta_t ins ARR-Register schreiben
 	    pwm_dma_GPIOs_buffer[(actual_pulseID_written+3) % PWM_DMA_MAX_EDGES] = pstate;
-	    last_stick = tick;
 	    pptr[phaseID]++;
 	}
 
     // Noch einen DMA-Transfer ans Ende der FRT-Periode setzen:
     uint16_t next_PWM_FRT_PERIOD_CYCLES = next_pwmdma_state_ptr->adc_frt_period_cycles * ADC_PWM_DIVIDER - 1;  //ACHTUNG: "-3" Damit in Sync mit ADC!!! Aber warum??
     actual_pulseID_written = (actual_pulseID_written + 1) % PWM_DMA_MAX_EDGES; // increment
-    //pwm_dma_timer_buffer[actual_pulseID_written] = (uint16_t)(next_PWM_FRT_PERIOD_CYCLES - delta_tick_sum); //(uint16_t)(tick - last_tick);
+    // TODO: Auch hier, Pulse, die nicht nur zum gleichen Zeitpunkt kommen sondern auch seeehr dicht hintereinander in einen DMA-Transfer packen.
     pwm_dma_timer_buffer[actual_pulseID_written] = (uint16_t)(next_PWM_FRT_PERIOD_CYCLES - last_stick ); //(uint16_t)(tick - last_tick);
     pwm_dma_GPIOs_buffer[(actual_pulseID_written+3) % PWM_DMA_MAX_EDGES] = pstate;						// letzter GPIO-Zustand nochmal
 
