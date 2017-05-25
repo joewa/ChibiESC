@@ -26,7 +26,7 @@ HAL_PIN(min_on_pwm) = 20.0;		// min on-time [pwm-systicks] - Genügt das zum Mes
 HAL_PIN(min_off_pwm) = 40.0; 	//min off-time [pwm-systicks]
 
 MEMEXT(struct pwm_dma_s *next_pwmdma_state_ptr); // Defined in pwmadcdma.c
-MEMEXT(struct pwm_dma_s *actual_pwmdma_state_ptr);
+//MEMEXT(struct pwm_dma_s *actual_pwmdma_state_ptr);
 // TODO: Gedanke: ch_timer_buffer und ch_GPIOs_buffer sind wahrscheinlich am Besten für die Auswertung?? Dann 3*PWM_DMA_MAX_EDGES lang machen und Ringpuffern
 MEMEXT(uint32_t ch_timer_buffer[N_PWM_CHANNELS][N_PWM_MAX_EDGES]); // Ein Array fuer jeden Channel. N_PWM_CHANNELS=3
 MEMEXT(uint16_t ch_GPIOs_buffer[N_PWM_MAX_EDGES]);
@@ -40,9 +40,11 @@ FRT(
 //for i = 1:length(PIN_IDs)
 //  PIN_MASK(i) = uint16( bitshift(uint16(1), uint16(PIN_IDs(i))) );
 //endfor
+   step_pwmdma_state_ptr();
+
    next_pwmdma_state_ptr->adc_frt_period_cycles = ADC_FRT_DEFAULT_PERIOD_CYCLES ;	// next_ADC_FRT_PERIOD_CYCLES wurde ggf vorher neu berechnet:
-   actual_pwmdma_state_ptr->adc_frt_period_cycles = ADC_FRT_DEFAULT_PERIOD_CYCLES; 	// Dito
-   uint16_t actual_PWM_FRT_PERIOD_CYCLES = actual_pwmdma_state_ptr->adc_frt_period_cycles * ADC_PWM_DIVIDER;
+   //actual_pwmdma_state_ptr->adc_frt_period_cycles = ADC_FRT_DEFAULT_PERIOD_CYCLES; 	// Dito
+   //uint16_t actual_PWM_FRT_PERIOD_CYCLES = actual_pwmdma_state_ptr->adc_frt_period_cycles * ADC_PWM_DIVIDER;
    uint16_t next_PWM_FRT_PERIOD_CYCLES = next_pwmdma_state_ptr->adc_frt_period_cycles * ADC_PWM_DIVIDER;
 
    uint16_t periods = (int16_t)PIN(periods);

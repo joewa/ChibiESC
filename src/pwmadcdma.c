@@ -195,6 +195,7 @@ static void adccallback(ADCDriver *adcp, adcsample_t *buffer, size_t n) {
 	  //palTogglePad(BANK_LED_RED, PIN_LED_RED);
 	  //palTogglePad(BANK_LED_GREEN, PIN_LED_GREEN);
   }
+  step_pwmdma_state_ptr();
   /* Wakes up the thread.*/
   chSysLockFromISR();
   chThdResumeI(&adc_trp, (msg_t)0x1337);  /* Resuming the thread with message.*/
@@ -232,9 +233,10 @@ ADCConversionGroup adc_commutate_group = { // TODO: Check if this is fine for F4
 
 
 
-struct pwm_dma_s pwmdma_state_array[3];
-struct pwm_dma_s *next_pwmdma_state_ptr = pwmdma_state_array + 2;// Zahl von ADC-Zyklen von der Periode die gerade geplant wird
-struct pwm_dma_s *actual_pwmdma_state_ptr = pwmdma_state_array + 1;// Zahl von ADC-Zyklen von der Periode die gerade läuft
+struct pwm_dma_s pwmdma_state_array[4];
+struct pwm_dma_s *next_pwmdma_state_ptr = pwmdma_state_array + 3;// Zahl von ADC-Zyklen von der Periode die gerade geplant wird
+struct pwm_dma_s *actual2nd_pwmdma_state_ptr = pwmdma_state_array + 2;// Zahl von ADC-Zyklen von der Periode die gerade läuft
+struct pwm_dma_s *actual1st_pwmdma_state_ptr = pwmdma_state_array + 1;// Zahl von ADC-Zyklen von der Periode die gerade läuft
 struct pwm_dma_s *past_pwmdma_state_ptr = pwmdma_state_array;// Zahl von ADC-Zyklen von der Periode die fertig ist und ausgewertet werden kann
 uint16_t actual_pulseID_written=0;
 
@@ -458,7 +460,7 @@ void pwm_dma_init_3(void) // mit 2 timern und DMA1 + DMA2
 	// TODO: Hier noch (einmalig) past_pwmdma_state_ptr->adc_frt_period_cycles setzen. Da koennte dann auch z.B. die Back-EMF gemessen werden um zu sehen ob der Motor schon dreht.
     uint32_t i;
     for (i = 0; i < PWM_DMA_MAX_EDGES; i++) {
-    	pwm_dma_timer_buffer[i] = (ADC_FRT_DEFAULT_PERIOD_CYCLES * ADC_PWM_DIVIDER) - 1;// / 2; // TODO: Achtung 2 Zyklen zurück: past, actual1, actual2, next.
+    	pwm_dma_timer_buffer[i] = (ADC_FRT_DEFAULT_PERIOD_CYCLES * ADC_PWM_DIVIDER) - 1;// / 2; // TODO: Achtung 2 Zyklen zurück: past, actual1st, actual2nd, next.
     	pwm_dma_GPIOs_buffer[i] = 0;//PIN_MASK[i%3]; // make some pulses
     }
 
@@ -539,6 +541,10 @@ void pwm_dma_init_3(void) // mit 2 timern und DMA1 + DMA2
     // Start Master-Timer Tim 2
     pwmStart(&PWMD2, &tim_dma_config);
     //pwmEnableChannel(&PWMD2, 2, 1); // Gar nich notwendig.
+    next_pwmdma_state_ptr->adc_frt_period_cycles = ADC_FRT_DEFAULT_PERIOD_CYCLES;
+    actual2nd_pwmdma_state_ptr->adc_frt_period_cycles = ADC_FRT_DEFAULT_PERIOD_CYCLES;
+	actual1st_pwmdma_state_ptr->adc_frt_period_cycles = ADC_FRT_DEFAULT_PERIOD_CYCLES;
+	past_pwmdma_state_ptr->adc_frt_period_cycles = ADC_FRT_DEFAULT_PERIOD_CYCLES;
 }
 
 void pwm_dma_stop_3(void) {
@@ -563,6 +569,20 @@ void pwm_dma_stop_2(void) {
 	adcStopConversion(&ADCD1);
 }
 
+
+// Ringpuffer lohnt fuer 4 Elemente noch nicht. Diese Funktion vom Anfang der ADC-Auswertung aufrufen.
+
+uint16_t get__next_pwmdma_state__adc_frt_period_cycles() {
+	return next_pwmdma_state_ptr->adc_frt_period_cycles;
+}
+
+void step_pwmdma_state_ptr() { // Besser inline machen?
+	struct pwm_dma_s *temp_pwmdma_state_ptr = past_pwmdma_state_ptr;
+	past_pwmdma_state_ptr = actual1st_pwmdma_state_ptr;
+	actual1st_pwmdma_state_ptr = actual2nd_pwmdma_state_ptr;
+	actual2nd_pwmdma_state_ptr = next_pwmdma_state_ptr;
+	next_pwmdma_state_ptr = temp_pwmdma_state_ptr;
+}
 
 /*
  * Sortiere die Pulse für eine beliebige Phasenzahl
@@ -611,14 +631,13 @@ void sortpp() {  // Sortiere pulse-pattern. Erstmal fuer 3-Phasen, ist aber im P
 	    	delta_tick--;	// Damit PWM immer synchron mit FRT-Periode bleibt!
 	    	pwm_dma_timer_buffer[actual_pulseID_written] = delta_tick;
 	    	last_stick = tick;
-	    	// TODO: bei sehr kleinen delta_t hier auch t korrigieren, damit last_t passt.
 	    }
 	    pwm_dma_GPIOs_buffer[(actual_pulseID_written+3) % PWM_DMA_MAX_EDGES] = pstate;
 	    pptr[phaseID]++;
 	}
 
     // Noch einen DMA-Transfer ans Ende der FRT-Periode setzen:
-    uint16_t next_PWM_FRT_PERIOD_CYCLES = next_pwmdma_state_ptr->adc_frt_period_cycles * ADC_PWM_DIVIDER - 1;  //ACHTUNG: "-3" Damit in Sync mit ADC!!! Aber warum??
+    uint16_t next_PWM_FRT_PERIOD_CYCLES = next_pwmdma_state_ptr->adc_frt_period_cycles * ADC_PWM_DIVIDER - 1;
     actual_pulseID_written = (actual_pulseID_written + 1) % PWM_DMA_MAX_EDGES; // increment
     // TODO: Auch hier, Pulse, die nicht nur zum gleichen Zeitpunkt kommen sondern auch seeehr dicht hintereinander in einen DMA-Transfer packen.
     pwm_dma_timer_buffer[actual_pulseID_written] = (uint16_t)(next_PWM_FRT_PERIOD_CYCLES - last_stick ); //(uint16_t)(tick - last_tick);

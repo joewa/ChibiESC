@@ -127,6 +127,9 @@ int pwm_dma_setvals(uint8_t channel_number, uint16_t t_on, uint16_t offset, uint
 
 void pwm_dma_init_2(void);
 void pwm_dma_stop_2(void);
+void pwm_dma_init_3(void);
+void pwm_dma_stop_3(void);
+void step_pwmdma_state_ptr();
 
 
 #endif /* SRC_PWMADCDMA_H_ */
