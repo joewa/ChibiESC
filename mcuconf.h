@@ -39,7 +39,7 @@
 
 //#include "clockconf.h"
 
-#if defined(BOARD_DRCHIBI_DISCO) || defined(BOARD_VESC) || defined(BOARD_LOOONG_STRIP)
+#if defined(BOARD_DRCHIBI_DISCO) || defined(BOARD_VESC) || defined(BOARD_LOOONG_STRIP_F4) || defined(BOARD_LOOONG_STRIP_F7)
 #define STM32_NO_INIT                       FALSE
 #define STM32_HSI_ENABLED                   TRUE
 #define STM32_LSI_ENABLED                   TRUE
