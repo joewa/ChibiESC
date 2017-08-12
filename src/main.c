@@ -227,10 +227,12 @@ static THD_FUNCTION(ThreadFRT, arg) {
 		   PIN(frt_period_time) = period;
 		   palClearPad(BANK_LED_GREEN, PIN_LED_GREEN);
 
-		   if(bal_ext.frt_extended_state == FRT_WAITFOR_TIMEOUT) {
+		   //if(bal_ext.frt_extended_state == FRT_WAITFOR_TIMEOUT) {
 			   // Check if deadline is missed and chThdSleepUntil next rt-cycle
-			   time += ADC_FRT_DEFAULT_PERIOD_CYCLES; //PERIOD_FRT_ST; CH_CFG_ST_TIMEDELTA
-			   if( time - (end + CH_CFG_ST_TIMEDELTA) > ADC_FRT_DEFAULT_PERIOD_CYCLES+10) { // mind uint arithmetics: cannot have negative value!
+			   //time += ADC_FRT_DEFAULT_PERIOD_CYCLES; //PERIOD_FRT_ST; CH_CFG_ST_TIMEDELTA
+		       unsigned int waittime = get__next_pwmdma_state__adc_frt_period_cycles();
+		   	   time += waittime;
+			   if( time - (end + CH_CFG_ST_TIMEDELTA) > waittime+10) { // mind uint arithmetics: cannot have negative value!
 				   bal.frt_state = FRT_STOP;
 			       bal.hal_state = FRT_TOO_LONG;
 			       bal.rt_state = RT_STOP;
@@ -238,7 +240,7 @@ static THD_FUNCTION(ThreadFRT, arg) {
 			   } // Note that this detection may fail in case of excessively missed deadlines and timer counter overrun
 			   bal.frt_state = FRT_SLEEP;
 			   chThdSleepUntil(time);
-		   } else { //bal_ext.frt_extended_state == FRT_WAITFOR_REMOTE
+		   /*} else { //bal_ext.frt_extended_state == FRT_WAITFOR_REMOTE
 			   // Warte auf ADC-Callback: http://www.chibios.org/dokuwiki/doku.php?id=chibios:howtos:wakeup
 			   bal.frt_state = FRT_SLEEP;
 			   chSysLock();
@@ -247,7 +249,7 @@ static THD_FUNCTION(ThreadFRT, arg) {
 			   chSysUnlock();
 			   time = hal_get_systick_value();// + ADC_FRT_DEFAULT_PERIOD_CYCLES;
 			   // TODO: Haben time[ADC-Ticks] und hal_get_systick_value die gleiche Einheit!?
-		   }
+		   }*/
 	} // END while
 	chThdExit((msg_t)0);
 }

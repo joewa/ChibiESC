@@ -49,7 +49,7 @@
 #define ADC_FRT_DEFAULT_PERIOD_CYCLES 100	// Fastest FRT cycle period in ADC cycles
 #define PWM_ADC_DEFAULT_PERIOD_CYCLES 20	// Choose a default number of ADC samples in a PWM period
 #define PWM_ADC_MAXIMUM_PERIOD_CYCLES 200 	// Choose a maximum number of ADC samples in a PWM period (determines maximum PWM period)
-#define ADC_COMMUTATE_BUF_DEPTH			(ADC_COMMUTATE_NUM_CHANNELS * PWM_ADC_MAXIMUM_PERIOD_CYCLES * 2) // TODO Check if this is sufficient!
+#define ADC_COMMUTATE_BUF_DEPTH			(ADC_COMMUTATE_NUM_CHANNELS * PWM_ADC_MAXIMUM_PERIOD_CYCLES * 4) // TODO Check if this is sufficient!
 #define PWM_FRT_DEFAULT_PERIOD_CYCLES 	(ADC_COMMUTATE_NUM_CHANNELS * ADC_PWM_DIVIDER * ADC_FRT_DEFAULT_PERIOD_CYCLES)
 #define PWM_DEFAULT_PERIOD_CYCLES		(ADC_COMMUTATE_NUM_CHANNELS * ADC_PWM_DIVIDER * PWM_ADC_DEFAULT_PERIOD_CYCLES)
 #define PWM_MAXIMUM_PERIOD_CYCLES		(ADC_COMMUTATE_NUM_CHANNELS * ADC_PWM_DIVIDER * PWM_ADC_MAXIMUM_PERIOD_CYCLES)
@@ -130,6 +130,7 @@ void pwm_dma_stop_2(void);
 void pwm_dma_init_3(void);
 void pwm_dma_stop_3(void);
 void step_pwmdma_state_ptr();
+uint16_t get__next_pwmdma_state__adc_frt_period_cycles();
 
 
 #endif /* SRC_PWMADCDMA_H_ */

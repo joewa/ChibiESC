@@ -214,18 +214,32 @@ static void adcerrorcallback(ADCDriver *adcp, adcerror_t err) {
  * Mode:        Continuous, 16 samples of 8 channels, SW triggered.
  * Channels:    IN11, IN12, IN11, IN12, IN11, IN12, Sensor, VRef.
  */
-ADCConversionGroup adc_commutate_group = { // TODO: Check if this is fine for F4
+/*ADCConversionGroup adc_commutate_group = { // TODO: Check if this is fine for F4
   TRUE,
   ADC_COMMUTATE_NUM_CHANNELS,
   adccallback,
   adcerrorcallback,
   0,                        // CR1
   ADC_CR2_CONT | ADC_CR2_EXTEN_RISING | PWM_DMA_ADC_CR2_EXTSEL_SRC,// | ADC_CR2_EXTSEL_3 | ADC_CR2_EXTSEL_2 | ADC_CR2_EXTSEL_0,//ADC_CR2_SWSTART,// Rising Edge: CR2 --> 1101: Timer 8 CC1 event EXTSEL und EXTEN!
-  ADC_SMPR1_SMP_AN12(ADC_SAMPLE_3) /*| ADC_SMPR1_SMP_AN11(ADC_SAMPLE_3)*/,
-  0,                        /* SMPR2 */
+  ADC_SMPR1_SMP_AN12(ADC_SAMPLE_3), //| ADC_SMPR1_SMP_AN11(ADC_SAMPLE_3)
+  0,                        // SMPR2
   ADC_SQR1_NUM_CH(ADC_COMMUTATE_NUM_CHANNELS),
   0,
-  ADC_SQR3_SQ2_N(ADC_CHANNEL_IN12)   /*| ADC_SQR3_SQ1_N(ADC_CHANNEL_IN11)*/
+  ADC_SQR3_SQ2_N(ADC_CHANNEL_IN12)   // | ADC_SQR3_SQ1_N(ADC_CHANNEL_IN11)
+};*/
+
+ADCConversionGroup adc_commutate_group = { // TODO: Check if this is fine for F4
+  TRUE,
+  ADC_COMMUTATE_NUM_CHANNELS,
+  NULL,//Keine Callbacks
+  NULL,
+  0,                        // CR1
+  ADC_CR2_CONT | ADC_CR2_EXTEN_RISING | PWM_DMA_ADC_CR2_EXTSEL_SRC,// | ADC_CR2_EXTSEL_3 | ADC_CR2_EXTSEL_2 | ADC_CR2_EXTSEL_0,//ADC_CR2_SWSTART,// Rising Edge: CR2 --> 1101: Timer 8 CC1 event EXTSEL und EXTEN!
+  ADC_SMPR1_SMP_AN12(ADC_SAMPLE_3), //| ADC_SMPR1_SMP_AN11(ADC_SAMPLE_3)
+  0,                        // SMPR2
+  ADC_SQR1_NUM_CH(ADC_COMMUTATE_NUM_CHANNELS),
+  0,
+  ADC_SQR3_SQ2_N(ADC_CHANNEL_IN12)   // | ADC_SQR3_SQ1_N(ADC_CHANNEL_IN11)
 };
 
 // DMA scheint Werte zu verlieren!
@@ -361,7 +375,7 @@ int pwm_dma_setvals(uint8_t channel_number, uint16_t t_on, uint16_t offset, uint
 
 
 
-#define PWM_DMA_MAX_EDGES (3*N_PWM_CHANNELS*N_PWM_MAX_EDGES) // Number of pwm-channels * max number of edges per period (>=2, even number)
+#define PWM_DMA_MAX_EDGES (4*N_PWM_CHANNELS*N_PWM_MAX_EDGES) // Number of pwm-channels * max number of edges per period (>=2, even number)
 volatile uint32_t pwm_dma_timer_buffer[PWM_DMA_MAX_EDGES] intoSRAM2;		/**< Buffer for the duration to the next pulse*/
 volatile uint16_t pwm_dma_GPIOs_buffer[PWM_DMA_MAX_EDGES] intoSRAM2;			/**< Buffer for a frame */
 //pwm_dma_GPIOs_buffer pwm_dma_frame_buffer
@@ -530,7 +544,8 @@ void pwm_dma_init_3(void) // mit 2 timern und DMA1 + DMA2
     // NOTE: It's required that preload be enabled on the timer channel CCR register. This is currently enabled in the
     // ChibiOS driver code, so we don't have to do anything special to the timer. If we did, we'd have to start the timer,
     // disable counting, enable the channel, and then make whatever configuration changes we need.
-    adcStartConversion(&ADCD1, &adc_commutate_group, commutatesamples, 2*ADC_FRT_DEFAULT_PERIOD_CYCLES);
+    //adcStartConversion(&ADCD1, &adc_commutate_group, commutatesamples, 4*ADC_FRT_DEFAULT_PERIOD_CYCLES);
+    adcStartConversion(&ADCD1, &adc_commutate_group, commutatesamples, ADC_COMMUTATE_BUF_DEPTH);
 
     // Start Slave-Timer Tim 1
     pwmStart(&PWMD1, &pwm_dma_config);

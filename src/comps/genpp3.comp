@@ -1,5 +1,8 @@
 HAL_COMP(genpp3); // Generate pulse pattern (3-phase)
 
+HAL_PIN(adc_frt_period_cycles) = ADC_FRT_DEFAULT_PERIOD_CYCLES;
+MEM(uint16_t adc_frt_period_cycles_uint = ADC_FRT_DEFAULT_PERIOD_CYCLES);
+
 //sdu sdv sdw input
 HAL_PIN(sdu) = 0.0;
 HAL_PIN(sdv) = 0.0;
@@ -42,7 +45,7 @@ FRT(
 //endfor
    step_pwmdma_state_ptr();
 
-   next_pwmdma_state_ptr->adc_frt_period_cycles = ADC_FRT_DEFAULT_PERIOD_CYCLES ;	// next_ADC_FRT_PERIOD_CYCLES wurde ggf vorher neu berechnet:
+   next_pwmdma_state_ptr->adc_frt_period_cycles = adc_frt_period_cycles_uint; //ADC_FRT_DEFAULT_PERIOD_CYCLES ;	// next_ADC_FRT_PERIOD_CYCLES wurde ggf vorher neu berechnet:
    //actual_pwmdma_state_ptr->adc_frt_period_cycles = ADC_FRT_DEFAULT_PERIOD_CYCLES; 	// Dito
    //uint16_t actual_PWM_FRT_PERIOD_CYCLES = actual_pwmdma_state_ptr->adc_frt_period_cycles * ADC_PWM_DIVIDER;
    uint16_t next_PWM_FRT_PERIOD_CYCLES = next_pwmdma_state_ptr->adc_frt_period_cycles * ADC_PWM_DIVIDER;
@@ -118,6 +121,7 @@ FRT(
 
 RT(
   en = (int)PIN(enable);
+  adc_frt_period_cycles_uint = (uint16_t)PIN(adc_frt_period_cycles);
 );
 
 ENDCOMP;
