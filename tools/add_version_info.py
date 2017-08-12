@@ -179,8 +179,8 @@ def patch_elf():
 
     dprint("\nSaving \"%s\"..." % args.target)
 
-    with open(args.target, "wb") as file:
-        file.write(elf_data)
+    #with open(args.target, "wb") as file:
+    #    file.write(elf_data)
 
 
 if __name__ == '__main__':

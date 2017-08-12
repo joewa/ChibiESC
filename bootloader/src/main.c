@@ -19,29 +19,29 @@
 */
 
 #include "stm32f4xx_conf.h"
-//#include "version.h"
+#include "version.h"
 
 #if __GNUC__ < 5
-   #error gcc to old (< 5.0)
+	#error gcc to old (< 5.0)
 #endif
 
-//#if defined(BOARD_LOOONG_STRIP) || defined(BOARD_DRCHIBI_DISCO) || defined(BOARD_VESC)
-#define APP_START 0x08010000
-//#define APP_END   0x080FFFFF /* end of 1MB flash (STM32F405RG, STM32F407VG) */
-//#endif
-//#if defined(BOARD_NUCLEO_F446)
-//#define APP_START 0x0800C000
-//#define APP_END   0x0807FFFF /* end of 512kB flash (STM32F446RE) */
-//#endif
+#if defined(BOARD_LOOONG_STRIP) || defined(BOARD_DRCHIBI_DISCO) || defined(BOARD_VESC)
+	#define APP_START 0x08010000
+	#define APP_END   0x080FFFFF /* end of 1MB flash (STM32F405RG, STM32F407VG) */
+#endif
+#if defined(BOARD_NUCLEO_F446)
+	#define APP_START 0x08010000
+	#define APP_END   0x0807FFFF /* end of 512kB flash (STM32F446RE) */
+#endif
 
-//#define APP_RANGE_VALID(a, s) (!(((a) | (s)) & 3) && (a) >= APP_START && ((a) + (s)) <= APP_END)
-//#define VERSION_INFO_OFFSET 0x188
-//static volatile const struct version_info *app_info = (void*)(APP_START + VERSION_INFO_OFFSET);
+#define APP_RANGE_VALID(a, s) (!(((a) | (s)) & 3) && (a) >= APP_START && ((a) + (s)) <= APP_END)
+#define VERSION_INFO_OFFSET 0x188
+static volatile const struct version_info *app_info = (void*)(APP_START + VERSION_INFO_OFFSET);
 
-/*static int app_ok(void)
+static int app_ok(void)
 {
     if (!APP_RANGE_VALID(APP_START, app_info->image_size)) {
-        return 0;
+        return 1;
     }
     CRC_ResetDR();
     uint32_t crc = CRC_CalcBlockCRC((uint32_t *) APP_START, app_info->image_size / 4);
@@ -51,7 +51,7 @@
     }
 
     return 1;
-}*/
+}
 
 int main(void)
 {
@@ -69,14 +69,14 @@ int main(void)
    RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA, DISABLE);
 
    void (*SysMemBootJump)(void);
-   //if ( (*((unsigned long *)0x2001C000) == 0xDEADBEEF) || pin || !app_ok()) {//Memory map, datasheet
-   if ( (*((unsigned long *)0x2001C000) == 0xDEADBEEF) || pin ) {//Memory map, datasheet
+   if ( (*((unsigned long *)0x2001C000) == 0xDEADBEEF) || pin || !app_ok()) { // SRAM2 begins at 0x2001C000
+   //if ( (*((unsigned long *)0x2001C000) == 0xDEADBEEF) || pin ) {//Memory map, datasheet
       *((unsigned long *)0x2001C000) =  0xCAFEFEED; //Reset bootloader trigger
-      __set_MSP(0x20001000);
+      __set_MSP(0x20001000); // WHERE DOES THIS ADDRESS COME FROM??
       //Point the PC to the System Memory reset vector (+4)
       //AN2606
       //Table 64. Bootloader device-dependent parameters
-      SysMemBootJump = (void (*)(void)) (*((uint32_t *) 0x1FFF0004)); // address of the built-in bootloader
+      SysMemBootJump = (void (*)(void)) (*((uint32_t *) 0x1FFF0004)); // address of the built-in bootloader firmware
       SysMemBootJump();
       while (1);
    } else {

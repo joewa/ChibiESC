@@ -42,10 +42,10 @@ _Min_Stack_Size = 0x400; /* required amount of stack */
 /* Specify the memory areas */
 MEMORY
 {
-  FLASH   (rx)    : ORIGIN = 0x08000000, LENGTH = 16K
-  PARAM0 (rx)     : ORIGIN = 0x08004000, LENGTH = 16K
-  PARAM1 (rx)     : ORIGIN = 0x08008000, LENGTH = 16K
-  APP  (rx)       : ORIGIN = 0x0800C000, LENGTH = 464K /* 976K for F407, but not relevant here */
+  FLASH   (rx)    : ORIGIN = 0x08000000, LENGTH = 32K
+  PARAM0 (rx)     : ORIGIN = 0x08008000, LENGTH = 16K
+  PARAM1 (rx)     : ORIGIN = 0x0800C000, LENGTH = 16K
+  APP  (rx)       : ORIGIN = 0x08010000, LENGTH = 448K /* 960K for F407, but not relevant here */
   RAM (xrw)       : ORIGIN = 0x20000000, LENGTH = 128K /* 192K for F407, but not relevant here */
   MEMORY_B1 (rx)  : ORIGIN = 0x60000000, LENGTH = 0K
 }

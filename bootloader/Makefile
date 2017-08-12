@@ -1,13 +1,13 @@
 #CHIBIESC_BOARD = LOOONG_STRIP
-#CHIBIESC_BOARD = DRCHIBI_DISCO
-CHIBIESC_BOARD = NUCLEO_F446
+CHIBIESC_BOARD = DRCHIBI_DISCO
+#CHIBIESC_BOARD = NUCLEO_F446
 #CHIBIESC_BOARD = VESC
 
 # Optimization level, can be [0, 1, 2, 3, s].
 #     0 = turn off optimization. s = optimize for size.
 #
 #OPT = -O1 -flto
-OPT = -O2         # for debugging
+OPT = -Og         # for debugging
 
 # Object files directory
 # Warning: this will be removed by make clean!
@@ -56,6 +56,20 @@ SOURCES += bootloader/src/startup_stm32f40_41xxx.s
 CPPFLAGS += -DSTM32F40_41xxx
 CPPFLAGS += -DHSE_VALUE=8000000
 LDSCRIPT = bootloader/stm32_flash.ld
+
+# Define linker script file here
+ifeq ($(CHIBIESC_BOARD),LOOONG_STRIP) 
+	CPPFLAGS += -DBOARD_LOOONG_STRIP
+endif
+ifeq ($(CHIBIESC_BOARD),DRCHIBI_DISCO) 
+	CPPFLAGS += -DBOARD_DRCHIBI_DISCO
+endif
+ifeq ($(CHIBIESC_BOARD),NUCLEO_F446) 
+	CPPFLAGS += -DBOARD_NUCLEO_F446
+endif
+ifeq ($(CHIBIESC_BOARD),VESC) 
+	CPPFLAGS += -DBOARD_VESC
+endif
 
 #============================================================================
 OBJECTS += $(addprefix $(OBJDIR)/,$(addsuffix .o,$(basename $(SOURCES))))

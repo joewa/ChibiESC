@@ -29,6 +29,8 @@
 #include "misc.h"
 #include "bal_interface.h"
 
+#include "version.h"
+
 /*
  * BEGIN Thread timing and clock configuration
  */
@@ -312,7 +314,7 @@ static THD_FUNCTION(ThreadNRT, arg) {
   PIN(nrt_period_time) = ((float)nrt_Period) / hal_get_systick_freq();
   while (true) {
 	  if(nrt_blink_count-- <= 0) {
-		  nrt_blink_count = 1000;
+		  nrt_blink_count = 200;
 		  //palTogglePad(BANK_LED_RED, PIN_LED_RED);
 		  palTogglePad(BANK_LED_GREEN, PIN_LED_GREEN);
 	  }

@@ -20,10 +20,10 @@
  */
 MEMORY
 {
-    flash0  : org = 0x08000000, len = 16k		/* Sector 0 (16kB) */
-    flash1  : org = 0x00004000, len = 16k		/* Sector 1 (16kB) */
-    flash2  : org = 0x00008000, len = 16k		/* Sector 2 (16kB) */
-    flash3  : org = 0x0000C000, len = 464k		/* Sector 3 (16kB) + Sector 4 (64kB) + Sector 5-7 (3*128kB) */
+    flash0  : org = 0x08000000, len = 32k		/* Sector 0+1 (2*16kB) */
+    flash1  : org = 0x00008000, len = 16k		/* Sector 2 (16kB) */
+    flash2  : org = 0x0000C000, len = 16k		/* Sector 3 (16kB) */
+    flash3  : org = 0x00010000, len = 448k		/* Sector 4 (64kB) + Sector 5-7 (3*128kB) */
     flash4  : org = 0x00000000, len = 0
     flash5  : org = 0x00000000, len = 0
     flash6  : org = 0x00000000, len = 0

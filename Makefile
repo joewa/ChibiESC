@@ -10,7 +10,7 @@ CHIBIESC_BOARD = DRCHIBI_DISCO
 
 # Compiler options here.
 ifeq ($(USE_OPT),)
-  USE_OPT = -O2 -ggdb -fomit-frame-pointer -falign-functions=16 -lm
+  USE_OPT = -Og -ggdb -fomit-frame-pointer -falign-functions=16 -lm
 endif
 
 # C specific options here (added to USE_OPT).
@@ -147,7 +147,8 @@ CSRC = $(STARTUPSRC) \
        src/scanf.c \
        src/misc.c \
        src/stm32f4xx_flash.c \
-       src/eeprom.c
+       src/eeprom.c \
+       src/version.c
 
        
        #subsystems/pprzlink/src/pprz_transport.c \
@@ -285,6 +286,12 @@ boot_flash: boot
 
 boot_btflash: boot
 	$(MAKE) -f bootloader/Makefile btflash
+
+boot_all: boot_flash all
+
+POST_MAKE_ALL_RULE_HOOK:
+	@echo Post-processing: $(BUILDDIR)/$(PROJECT).elf
+	tools/add_version_info.py $(BUILDDIR)/$(PROJECT).elf
 
 RULESPATH = $(CHIBIOS)/os/common/startup/ARMCMx/compilers/GCC
 include $(RULESPATH)/rules.mk
