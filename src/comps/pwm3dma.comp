@@ -137,12 +137,18 @@ FRT(
 	  //palTogglePad(BANK_PWM_F, PIN_PWM_F);
 	  sortpp();
   } else if(en == YES && bal_ext.frt_extended_state == FRT_WAITFOR_TIMEOUT) {	// Enable operation: FRT-Thread will be invoked by ADC-callback
+	  palSetPad(BANK_ENABLE_A, PIN_ENABLE_A); // TODO: Hier nur zum Test. Spaeter auch mit DMA erzeugen!
+	  palSetPad(BANK_ENABLE_B, PIN_ENABLE_B); // TODO: Hier nur zum Test. Spaeter auch mit DMA erzeugen!
+	  palSetPad(BANK_ENABLE_C, PIN_ENABLE_C); // TODO: Hier nur zum Test. Spaeter auch mit DMA erzeugen!
 	  bal_ext.frt_extended_state = FRT_WAITFOR_REMOTE; // Das Setzen und Ruecksetzen vielleicht lieber in einer speicher-comp machen? Diese kriegt die niedrigeste prio
 	  pwm_dma_init_3();
 	  sortpp();
 	  //adcStartConversion(&ADCD1, &adc_commutate_group, commutatesamples, 2*ADC_FRT_DEFAULT_PERIOD_CYCLES);
 	  //pwm_dma_setvals(0, 0, (uint16_t)PIN(d), 0); TODO Hier Wert setzen!!
   } else if(en == NO && bal_ext.frt_extended_state == FRT_WAITFOR_REMOTE) {		// Disable
+	  palClearPad(BANK_ENABLE_A, PIN_ENABLE_A); // TODO: Hier nur zum Test. Spaeter auch mit DMA erzeugen!
+	  palClearPad(BANK_ENABLE_B, PIN_ENABLE_B); // TODO: Hier nur zum Test. Spaeter auch mit DMA erzeugen!
+	  palClearPad(BANK_ENABLE_C, PIN_ENABLE_C); // TODO: Hier nur zum Test. Spaeter auch mit DMA erzeugen!
 	  bal_ext.frt_extended_state = FRT_WAITFOR_TIMEOUT;
 	  pwm_dma_stop_3();
 	  //adcStopConversion(&ADCD1);

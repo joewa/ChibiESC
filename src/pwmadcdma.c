@@ -57,7 +57,9 @@
 
 /* --- PRIVATE CONSTANTS ---------------------------------------------------- */
 
-const uint16_t PIN_MASK[] = {1<<1, 1<<8, 1<<15};	// Pins von Phase 0..2 auf GPIO A
+//const uint16_t PIN_MASK[] = {1<<1, 1<<8, 1<<15};	// Pins von Phase 0..2 auf GPIO A
+const uint16_t PIN_MASK[] = {1U<<PIN_PWM_A, 1U<<PIN_PWM_B, 1U<<PIN_PWM_C};	// Pins von Phase 0..2 auf GPIO A
+//PIN_PWM_A,
 
 /**
  * @brief   Number of bit-periods to hold the data line low at the end of a frame
