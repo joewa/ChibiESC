@@ -1,8 +1,24 @@
-CHIBIESC_BOARD = LOOONG_STRIP_F4
-#CHIBIESC_BOARD = LOOONG_STRIP_F7
+#CHIBIESC_BOARD = LOOONG_STRIP_F4
+CHIBIESC_BOARD = LOOONG_STRIP_F7
 #CHIBIESC_BOARD = DRCHIBI_DISCO
 #CHIBIESC_BOARD = NUCLEO_F446
 #CHIBIESC_BOARD = VESC
+
+ifeq ($(CHIBIESC_BOARD),LOOONG_STRIP_F4)
+	MCU_FAMILY = F4
+endif
+ifeq ($(CHIBIESC_BOARD),LOOONG_STRIP_F7)
+	MCU_FAMILY = F7
+endif
+ifeq ($(CHIBIESC_BOARD),DRCHIBI_DISCO)
+	MCU_FAMILY = F4
+endif
+ifeq ($(CHIBIESC_BOARD),NUCLEO_F446)
+	MCU_FAMILY = F4
+endif
+ifeq ($(CHIBIESC_BOARD),VESC)
+	MCU_FAMILY = F4
+endif
 
 ##############################################################################
 # Build global options
@@ -95,11 +111,18 @@ PROJECT = chibiesc
 # Imported source files and paths
 CHIBIOS = ChibiOS
 # Startup files.
-include $(CHIBIOS)/os/common/startup/ARMCMx/compilers/GCC/mk/startup_stm32f4xx.mk
-# HAL-OSAL files (optional).
-include $(CHIBIOS)/os/hal/hal.mk
-include $(CHIBIOS)/os/hal/ports/STM32/STM32F4xx/platform.mk
-#include $(CHIBIOS)/os/hal/boards/ST_STM32F4_DISCOVERY/board.mk
+ifeq ($(MCU_FAMILY),F4)
+	include $(CHIBIOS)/os/common/startup/ARMCMx/compilers/GCC/mk/startup_stm32f4xx.mk
+	# HAL-OSAL files (optional).
+	include $(CHIBIOS)/os/hal/hal.mk
+	include $(CHIBIOS)/os/hal/ports/STM32/STM32F4xx/platform.mk
+endif
+ifeq ($(MCU_FAMILY),F7)
+	include $(CHIBIOS)/os/common/startup/ARMCMx/compilers/GCC/mk/startup_stm32f7xx.mk
+	# HAL-OSAL files (optional).
+	include $(CHIBIOS)/os/hal/hal.mk
+	include $(CHIBIOS)/os/hal/ports/STM32/STM32F7xx/platform.mk
+endif
 include board/board.mk
 include $(CHIBIOS)/os/hal/osal/rt/osal.mk
 # RTOS files (optional).
@@ -114,7 +137,7 @@ ifeq ($(CHIBIESC_BOARD),LOOONG_STRIP_F4)
 	USE_OPT += -DBOARD_LOOONG_STRIP_F4
 endif
 ifeq ($(CHIBIESC_BOARD),LOOONG_STRIP_F7) 
-	LDSCRIPT= bootloader/STM32F722xE_CCM.ld
+	LDSCRIPT= bootloader/STM32F722RE_test.ld
 	USE_OPT += -DBOARD_LOOONG_STRIP_F7
 endif
 ifeq ($(CHIBIESC_BOARD),DRCHIBI_DISCO) 
@@ -213,7 +236,12 @@ INCDIR = $(CHIBIOS)/os/license \
 # Compiler settings
 #
 
-MCU  = cortex-m4
+ifeq ($(MCU_FAMILY),F4)
+	MCU  = cortex-m4
+endif
+ifeq ($(MCU_FAMILY),F7)
+	MCU  = cortex-m7
+endif
 
 #TRGT = arm-elf-
 TRGT = arm-none-eabi-

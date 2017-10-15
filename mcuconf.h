@@ -31,7 +31,13 @@
  * 0...3        Lowest...Highest.
  */
 
+#if defined(BOARD_DRCHIBI_DISCO) || defined(BOARD_VESC) || defined(BOARD_LOOONG_STRIP_F4)
 #define STM32F4xx_MCUCONF
+#endif
+
+#if defined(BOARD_LOOONG_STRIP_F7)
+#define STM32F7xx_MCUCONF
+#endif
 
 /*
  * HAL driver system settings.
