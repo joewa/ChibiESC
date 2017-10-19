@@ -972,7 +972,7 @@
  * PA5  - PIN_VSENS_F               (analog input).
  * PA6  - PIN_CSENS_F               (analog input).
  * PA7  - PIN_CSENS_E               (analog input).
- * PA8  - PIN_PWM_C_HS/PIN_PWM_C    (alternate 1 (TIM1) push-pull output 50MHz).
+ * PA8  - PIN_PWM_C_HS/PIN_PWM_C    (output push-pull 50MHz). Obsolete: (alternate 1 (TIM1) push-pull output 50MHz).
  * PA9  - PIN_PWM_B_HS/PIN_PWM_B    (alternate 1 (TIM1) push-pull output 50MHz).
  * PA10 - PIN_PWM_A_HS/PIN_PWM_A    (alternate 1 (TIM1) push-pull output 50MHz).
  * PA11 - PIN_USB_DM                (alternate 10 (USB), controlled automatically).
@@ -982,16 +982,16 @@
  * PA15 - PIN_ZCD                   (output push-pull 50MHz).
  */
 #define VAL_GPIOA_MODER             (PIN_MODE_ANALOG(PIN_VSENS_C) |         \
-                                     PIN_MODE_ALTERNATE(PIN_PWM_F) |        \
+                                     PIN_MODE_OUTPUT(PIN_PWM_F) |        \
                                      PIN_MODE_ANALOG(PIN_VSENS_A) |         \
                                      PIN_MODE_ANALOG(PIN_VSENS_D) |         \
                                      PIN_MODE_ANALOG(PIN_VSENS_E) |         \
                                      PIN_MODE_ANALOG(PIN_VSENS_F) |         \
                                      PIN_MODE_ANALOG(PIN_CSENS_F) |         \
                                      PIN_MODE_ANALOG(PIN_CSENS_E) |         \
-                                     PIN_MODE_ALTERNATE(PIN_PWM_C_HS) |     \
-                                     PIN_MODE_ALTERNATE(PIN_PWM_B_HS) |     \
-                                     PIN_MODE_ALTERNATE(PIN_PWM_A_HS) |     \
+                                     PIN_MODE_OUTPUT(PIN_PWM_C) |     \
+                                     PIN_MODE_OUTPUT(PIN_PWM_B) |     \
+                                     PIN_MODE_OUTPUT(PIN_PWM_A) |     \
                                      PIN_MODE_ALTERNATE(PIN_USB_DM) |       \
                                      PIN_MODE_ALTERNATE(PIN_USB_DP) |       \
                                      PIN_MODE_ALTERNATE(PIN_SWDIO) |        \
@@ -1005,9 +1005,9 @@
                                      PIN_OTYPE_PUSHPULL(PIN_VSENS_F) |      \
                                      PIN_OTYPE_PUSHPULL(PIN_CSENS_F) |      \
                                      PIN_OTYPE_PUSHPULL(PIN_CSENS_E) |      \
-                                     PIN_OTYPE_PUSHPULL(PIN_PWM_C_HS) |     \
-                                     PIN_OTYPE_PUSHPULL(PIN_PWM_B_HS) |     \
-                                     PIN_OTYPE_PUSHPULL(PIN_PWM_A_HS) |     \
+                                     PIN_OTYPE_PUSHPULL(PIN_PWM_C) |     \
+                                     PIN_OTYPE_PUSHPULL(PIN_PWM_B) |     \
+                                     PIN_OTYPE_PUSHPULL(PIN_PWM_A) |     \
                                      PIN_OTYPE_PUSHPULL(PIN_USB_DM) |       \
                                      PIN_OTYPE_PUSHPULL(PIN_USB_DP) |       \
                                      PIN_OTYPE_PUSHPULL(PIN_SWDIO) |        \
@@ -1021,9 +1021,9 @@
                                      PIN_OSPEED_100M(PIN_VSENS_F) |         \
                                      PIN_OSPEED_100M(PIN_CSENS_F) |         \
                                      PIN_OSPEED_100M(PIN_CSENS_E) |         \
-                                     PIN_OSPEED_50M(PIN_PWM_C_HS) |         \
-                                     PIN_OSPEED_50M(PIN_PWM_B_HS) |         \
-                                     PIN_OSPEED_50M(PIN_PWM_A_HS) |         \
+                                     PIN_OSPEED_50M(PIN_PWM_C) |         \
+                                     PIN_OSPEED_50M(PIN_PWM_B) |         \
+                                     PIN_OSPEED_50M(PIN_PWM_A) |         \
                                      PIN_OSPEED_100M(PIN_USB_DM) |          \
                                      PIN_OSPEED_100M(PIN_USB_DP) |          \
                                      PIN_OSPEED_100M(PIN_SWDIO) |           \
@@ -1037,9 +1037,9 @@
                                      PIN_PUPDR_FLOATING(PIN_VSENS_F) |      \
                                      PIN_PUPDR_FLOATING(PIN_CSENS_F) |      \
                                      PIN_PUPDR_FLOATING(PIN_CSENS_E) |      \
-                                     PIN_PUPDR_FLOATING(PIN_PWM_C_HS) |     \
-                                     PIN_PUPDR_FLOATING(PIN_PWM_B_HS) |     \
-                                     PIN_PUPDR_FLOATING(PIN_PWM_A_HS) |     \
+                                     PIN_PUPDR_FLOATING(PIN_PWM_C) |     \
+                                     PIN_PUPDR_FLOATING(PIN_PWM_B) |     \
+                                     PIN_PUPDR_FLOATING(PIN_PWM_A) |     \
                                      PIN_PUPDR_FLOATING(PIN_USB_DM) |       \
                                      PIN_PUPDR_FLOATING(PIN_USB_DP) |       \
                                      PIN_PUPDR_FLOATING(PIN_SWDIO) |        \
@@ -1053,25 +1053,25 @@
                                      PIN_ODR_HIGH(PIN_VSENS_F) |            \
                                      PIN_ODR_HIGH(PIN_CSENS_F) |            \
                                      PIN_ODR_HIGH(PIN_CSENS_E) |            \
-                                     PIN_ODR_LOW(PIN_PWM_C_HS) |            \
-                                     PIN_ODR_LOW(PIN_PWM_B_HS) |            \
-                                     PIN_ODR_LOW(PIN_PWM_A_HS) |            \
+                                     PIN_ODR_LOW(PIN_PWM_C) |            \
+                                     PIN_ODR_LOW(PIN_PWM_B) |            \
+                                     PIN_ODR_LOW(PIN_PWM_A) |            \
                                      PIN_ODR_HIGH(PIN_USB_DM) |             \
                                      PIN_ODR_HIGH(PIN_USB_DP) |             \
                                      PIN_ODR_HIGH(PIN_SWDIO) |              \
                                      PIN_ODR_HIGH(PIN_SWDCLK) |             \
                                      PIN_ODR_LOW(PIN_ZCD))
 #define VAL_GPIOA_AFRL              (PIN_AFIO_AF(PIN_VSENS_C, 0) |          \
-                                     PIN_AFIO_AF(PIN_PWM_F, 1) |            \
+                                     PIN_AFIO_AF(PIN_PWM_F, 0) |            \
                                      PIN_AFIO_AF(PIN_VSENS_A, 0) |          \
                                      PIN_AFIO_AF(PIN_VSENS_D, 0) |          \
                                      PIN_AFIO_AF(PIN_VSENS_E, 0) |          \
                                      PIN_AFIO_AF(PIN_VSENS_F, 0) |          \
                                      PIN_AFIO_AF(PIN_CSENS_F, 0) |          \
                                      PIN_AFIO_AF(PIN_CSENS_E, 0))
-#define VAL_GPIOA_AFRH              (PIN_AFIO_AF(PIN_PWM_C_HS, 1) |         \
-                                     PIN_AFIO_AF(PIN_PWM_B_HS, 1) |         \
-                                     PIN_AFIO_AF(PIN_PWM_A_HS, 1) |         \
+#define VAL_GPIOA_AFRH              (PIN_AFIO_AF(PIN_PWM_C, 0) |         \
+                                     PIN_AFIO_AF(PIN_PWM_B, 0) |         \
+                                     PIN_AFIO_AF(PIN_PWM_A, 0) |         \
                                      PIN_AFIO_AF(PIN_USB_DM, 10) |          \
                                      PIN_AFIO_AF(PIN_USB_DP, 10) |          \
                                      PIN_AFIO_AF(PIN_SWDIO, 0) |            \
@@ -1108,8 +1108,8 @@
                                      PIN_MODE_ALTERNATE(PIN_I2C_SDA) |      \
                                      PIN_MODE_ALTERNATE(PIN_CAN_RX) |       \
                                      PIN_MODE_ALTERNATE(PIN_CAN_TX) |       \
-                                     PIN_MODE_ALTERNATE(PIN_PWM_E) |        \
-                                     PIN_MODE_ALTERNATE(PIN_PWM_D) |        \
+                                     PIN_MODE_OUTPUT(PIN_PWM_E) |        \
+                                     PIN_MODE_OUTPUT(PIN_PWM_D) |        \
                                      PIN_MODE_INPUT(PIN_THWN) |             \
 									 PIN_MODE_OUTPUT(PIN_ENABLE_C) |        \
 									 PIN_MODE_OUTPUT(PIN_ENABLE_B) |        \
@@ -1140,8 +1140,8 @@
 									 PIN_OSPEED_100M(PIN_I2C_SDA) |         \
                                      PIN_OSPEED_50M(PIN_CAN_RX) |           \
 									 PIN_OSPEED_50M(PIN_CAN_TX) |           \
-                                     PIN_OSPEED_100M(PIN_PWM_E) |           \
-									 PIN_OSPEED_100M(PIN_PWM_D) |           \
+                                     PIN_OSPEED_50M(PIN_PWM_E) |           \
+									 PIN_OSPEED_50M(PIN_PWM_D) |           \
                                      PIN_OSPEED_100M(PIN_THWN) |            \
                                      PIN_OSPEED_50M(PIN_ENABLE_C) |         \
 									 PIN_OSPEED_50M(PIN_ENABLE_B) |         \
@@ -1188,8 +1188,8 @@
                                      PIN_AFIO_AF(PIN_I2C_SDA, 4))
 #define VAL_GPIOB_AFRH              (PIN_AFIO_AF(PIN_CAN_RX, 9) |           \
                                      PIN_AFIO_AF(PIN_CAN_TX, 9) |           \
-                                     PIN_AFIO_AF(PIN_PWM_E, 1) |            \
-                                     PIN_AFIO_AF(PIN_PWM_D, 1) |            \
+                                     PIN_AFIO_AF(PIN_PWM_E, 0) |            \
+                                     PIN_AFIO_AF(PIN_PWM_D, 0) |            \
                                      PIN_AFIO_AF(PIN_THWN, 0) |             \
                                      PIN_AFIO_AF(PIN_ENABLE_C, 0) |         \
 									 PIN_AFIO_AF(PIN_ENABLE_B, 0) |         \
@@ -1901,14 +1901,14 @@
                                      PIN_ODR_HIGH(PIN_VSENS_F) |            \
                                      PIN_ODR_HIGH(PIN_CSENS_F) |            \
                                      PIN_ODR_HIGH(PIN_CSENS_E) |            \
-                                     PIN_ODR_HIGH(PIN_PWM_C) |                \
+                                     PIN_ODR_LOW(PIN_PWM_C) |                \
                                      PIN_ODR_HIGH(PIN_VBUS_FS) |            \
                                      PIN_ODR_HIGH(PIN_OTG_FS_ID) |          \
                                      PIN_ODR_HIGH(PIN_USB_DM) |             \
                                      PIN_ODR_HIGH(PIN_USB_DP) |             \
                                      PIN_ODR_HIGH(PIN_SWDIO) |              \
                                      PIN_ODR_HIGH(PIN_SWDCLK) |             \
-									 PIN_ODR_HIGH(PIN_PWM_B))
+									 PIN_ODR_LOW(PIN_PWM_B))
 #define VAL_GPIOA_AFRL              (PIN_AFIO_AF(PIN_VSENS_C, 0) |          \
                                      PIN_AFIO_AF(PIN_PWM_A, 0) |            \
                                      PIN_AFIO_AF(PIN_VSENS_A, 0) |          \
