@@ -567,12 +567,14 @@ void pwm_dma_init_3(void) // mit 2 timern und DMA1 + DMA2
 void pwm_dma_stop_3(void) {
 	if(pwm_dma_state == PWM_DMA_STOPPED) return;
 	pwm_dma_state = PWM_DMA_STOPPED;
-	pwmStop(&PWMDMA_PWMD); // Stop triggering DMA transfers
+	pwmStop(&PWMD2); // Stop triggering DMA transfers
+	pwmStop(&PWMD1);
 	dmaStreamDisable(XPWM_DMA_STREAM1);
 	dmaStreamRelease(XPWM_DMA_STREAM1);
 	dmaStreamDisable(XPWM_DMA_STREAM2);
 	dmaStreamRelease(XPWM_DMA_STREAM2);
 	adcStopConversion(&ADCD1);
+	//adcStop(&ADCD1);
 }
 
 void pwm_dma_stop_2(void) {
@@ -642,15 +644,16 @@ void sortpp() {  // Sortiere pulse-pattern. Erstmal fuer 3-Phasen, ist aber im P
 			pstate &= ~PIN_MASK[phaseID];			// Ruecksetzen von PIN_MASK[phaseID]
 		}
 		tick = ch_timer_buffer[phaseID][pptr[phaseID]];
-	    delta_tick = tick - last_stick;	// Das muss ins ARR-Register!! ACHTUNG: "-1" Damit in Sync mit ADC!!! Aber warum??
+		pptr[phaseID]++;				// Increment the array position pointer for phaseID
+	    delta_tick = tick - last_stick;	// Das muss ins ARR-Register!! ACHTUNG: "-1" Damit in Sync mit ADC!!!
 	    if (delta_tick > 20) {//Pulse, die nicht nur zum gleichen Zeitpunkt kommen sondern auch seeehr dicht hintereinander in einen DMA-Transfer packen.
 	    	actual_pulseID_written = (actual_pulseID_written + 1) % PWM_DMA_MAX_EDGES; // increment, Ja hier ist richtig. Spart ein +1 bei GPIO
 	    	delta_tick--;	// Damit PWM immer synchron mit FRT-Periode bleibt!
-	    	pwm_dma_timer_buffer[actual_pulseID_written] = delta_tick;
+	    	//last_stick++;
+	    	pwm_dma_timer_buffer[actual_pulseID_written] = delta_tick;  // tick - last_stick;
 	    	last_stick = tick;
 	    }
 	    pwm_dma_GPIOs_buffer[(actual_pulseID_written+3) % PWM_DMA_MAX_EDGES] = pstate;
-	    pptr[phaseID]++;
 	}
 
     // Noch einen DMA-Transfer ans Ende der FRT-Periode setzen:

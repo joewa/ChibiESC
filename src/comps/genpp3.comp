@@ -11,7 +11,7 @@ HAL_PIN(sdw) = 0.0;
 //modulation mode
 HAL_PIN(mode) = 2.0;
 // Number of pulse-periods in the next FRT-Cycle for each channel
-HAL_PIN(periods) = 2.0;
+HAL_PIN(periods) = 1.0;
 
 //HAL_PIN(hv_temp) = 0.0;
 

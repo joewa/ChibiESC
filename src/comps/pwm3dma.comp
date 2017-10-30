@@ -151,7 +151,6 @@ FRT(
 	  palClearPad(BANK_ENABLE_C, PIN_ENABLE_C); // TODO: Hier nur zum Test. Spaeter auch mit DMA erzeugen!
 	  bal_ext.frt_extended_state = FRT_WAITFOR_TIMEOUT;
 	  pwm_dma_stop_3();
-	  //adcStopConversion(&ADCD1);
   }
 );
 
