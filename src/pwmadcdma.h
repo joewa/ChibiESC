@@ -131,6 +131,7 @@ void pwm_dma_init_3(void);
 void pwm_dma_stop_3(void);
 void step_pwmdma_state_ptr();
 uint16_t get__next_pwmdma_state__adc_frt_period_cycles();
+//static int adcevaluate(void);
 
 
 #endif /* SRC_PWMADCDMA_H_ */

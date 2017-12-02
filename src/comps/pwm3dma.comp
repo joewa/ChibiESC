@@ -42,6 +42,7 @@ HAL_PIN(pos) = 0.0;
 HAL_PIN(error) = 0.0;
 HAL_PIN(cc);
 HAL_PIN(arr) = 5376;
+HAL_PIN(duty_sampled) = 0; // Sampled duty cycle - for testing...
 
 MEM(int en) = 0;
 MEM(volatile uint32_t reply_buf[NUM_OF_SAMPLES_S + 1]);
@@ -136,6 +137,7 @@ FRT(
 	    //commutate_6step_anti();
 	  //palTogglePad(BANK_PWM_F, PIN_PWM_F);
 	  sortpp();
+	  PIN(duty_sampled) = adcevaluate();
   } else if(en == YES && bal_ext.frt_extended_state == FRT_WAITFOR_TIMEOUT) {	// Enable operation: FRT-Thread will be invoked by ADC-callback
 	  palSetPad(BANK_ENABLE_A, PIN_ENABLE_A); // TODO: Hier nur zum Test. Spaeter auch mit DMA erzeugen!
 	  palSetPad(BANK_ENABLE_B, PIN_ENABLE_B); // TODO: Hier nur zum Test. Spaeter auch mit DMA erzeugen!

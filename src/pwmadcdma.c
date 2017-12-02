@@ -181,6 +181,9 @@ write/read to/from the other buffer).
 thread_reference_t adc_trp = NULL; // Declare static
 systime_t count_adc, count_frt;
 size_t nx = 0, ny = 0; int adc_blink_count = 1000;
+
+
+
 static void adccallback(ADCDriver *adcp, adcsample_t *buffer, size_t n) {
 
   (void)adcp;
@@ -237,11 +240,11 @@ ADCConversionGroup adc_commutate_group = { // TODO: Check if this is fine for F4
   NULL,
   0,                        // CR1
   ADC_CR2_CONT | ADC_CR2_EXTEN_RISING | PWM_DMA_ADC_CR2_EXTSEL_SRC,// | ADC_CR2_EXTSEL_3 | ADC_CR2_EXTSEL_2 | ADC_CR2_EXTSEL_0,//ADC_CR2_SWSTART,// Rising Edge: CR2 --> 1101: Timer 8 CC1 event EXTSEL und EXTEN!
-  ADC_SMPR1_SMP_AN12(ADC_SAMPLE_3), //| ADC_SMPR1_SMP_AN11(ADC_SAMPLE_3)
+  ADC_SMPR2_SMP_AN0(ADC_SAMPLE_3), //| ADC_SMPR1_SMP_AN11(ADC_SAMPLE_3)
   0,                        // SMPR2
   ADC_SQR1_NUM_CH(ADC_COMMUTATE_NUM_CHANNELS),
   0,
-  ADC_SQR3_SQ2_N(ADC_CHANNEL_IN12)   // | ADC_SQR3_SQ1_N(ADC_CHANNEL_IN11)
+  ADC_SQR3_SQ2_N(ADC_CHANNEL_IN0)   // | ADC_SQR3_SQ1_N(ADC_CHANNEL_IN11)
 };
 
 // DMA scheint Werte zu verlieren!
@@ -255,6 +258,25 @@ struct pwm_dma_s *actual2nd_pwmdma_state_ptr = pwmdma_state_array + 2;// Zahl vo
 struct pwm_dma_s *actual1st_pwmdma_state_ptr = pwmdma_state_array + 1;// Zahl von ADC-Zyklen von der Periode die gerade läuft
 struct pwm_dma_s *past_pwmdma_state_ptr = pwmdma_state_array;// Zahl von ADC-Zyklen von der Periode die fertig ist und ausgewertet werden kann
 uint16_t actual_pulseID_written=0;
+
+
+int adcevaluate(void) { // should be defined static but results in "undefided reference"
+	int ret = 0;
+	int temp = 0;
+	// Test: Duty-Cycle ermitteln durch zaehlen der aufeinander folgenden High-Samples...
+	for(int i=0; i < actual1st_pwmdma_state_ptr->adc_frt_period_cycles; i++) {//ADC_COMMUTATE_BUF_DEPTH results in FRT_TOO_LONG
+		if(commutatesamples[i] > 1500) {
+			temp++;
+		}
+		else {
+			if(ret < temp) {// ist das die hoechste Zahl aufeinander folgender High-Pulse?
+				ret = temp;
+			}
+			temp = 0;
+		}
+	}
+	return ret;
+}
 
 /*
 void pwm_dma_init(void)
@@ -595,7 +617,7 @@ uint16_t get__next_pwmdma_state__adc_frt_period_cycles() {
 	return next_pwmdma_state_ptr->adc_frt_period_cycles;
 }
 
-void step_pwmdma_state_ptr() { // Besser inline machen?
+inline void step_pwmdma_state_ptr() { // Besser inline machen?
 	struct pwm_dma_s *temp_pwmdma_state_ptr = past_pwmdma_state_ptr;
 	past_pwmdma_state_ptr = actual1st_pwmdma_state_ptr;
 	actual1st_pwmdma_state_ptr = actual2nd_pwmdma_state_ptr;
@@ -667,4 +689,5 @@ void sortpp() {  // Sortiere pulse-pattern. Erstmal fuer 3-Phasen, ist aber im P
     	debugcount = 0;// Breakpoint hier setzen um Arrays beim Start anzuschauen
     }
     debugcount++;
+    step_pwmdma_state_ptr();// TODO check initial
 }
